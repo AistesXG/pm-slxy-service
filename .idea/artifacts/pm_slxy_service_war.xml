@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pm-slxy-service:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="pm-slxy-service.war">
+      <element id="artifact" artifact-name="pm-slxy-service:war exploded" />
+    </root>
+  </artifact>
+</component>
