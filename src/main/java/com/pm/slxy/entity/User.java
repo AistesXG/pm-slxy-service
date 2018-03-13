@@ -49,7 +49,7 @@ public class User implements Serializable {
      */
     private String userIdcard;
     /**
-     * 身份
+     * 身份编号
      */
     private Integer userIdentity;
     /**
@@ -132,16 +132,16 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "TbUser{" +
-                ", userId=" + userId +
-                ", userName=" + userName +
-                ", userPassword=" + userPassword +
-                ", userSex=" + userSex +
-                ", userTelphone=" + userTelphone +
-                ", userAddress=" + userAddress +
-                ", userIdcard=" + userIdcard +
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userSex='" + userSex + '\'' +
+                ", userTelphone='" + userTelphone + '\'' +
+                ", userAddress='" + userAddress + '\'' +
+                ", userIdcard='" + userIdcard + '\'' +
                 ", userIdentity=" + userIdentity +
-                ", userRemarks=" + userRemarks +
-                "}";
+                ", userRemarks='" + userRemarks + '\'' +
+                '}';
     }
 }

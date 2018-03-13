@@ -19,7 +19,7 @@ public class GeneratorServiceEntity {
     public void generateCode() {
         String packageName = "com.pm.slxy";
         boolean serviceNameStartWithI = false;//user -> UserService, 设置成true: user -> IUserService
-        generateByTables(serviceNameStartWithI, packageName, "tb_user");
+        generateByTables(serviceNameStartWithI, packageName, "tb_identity");
     }
 
     private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {

@@ -35,7 +35,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login")
-    public ModelAndView Login(ModelAndView modelAndView, User user) {
+    public ModelAndView Login(ModelAndView modelAndView, User user) throws Exception {
         if (user != null) {
             List<User> users = userService.Login(user.getUserName(), user.getUserPassword());
             if (users != null) {

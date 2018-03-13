@@ -105,7 +105,7 @@
             <li class="active">
                 <a class="" href="/pages/index.jsp">
                     <i class="icon_house_alt"></i>
-                    <span>首页</span>
+                    <span>系统首页</span>
                 </a>
             </li>
             <li class="sub-menu">
@@ -217,5 +217,6 @@
 <script src="/resources/js/sparklines.js"></script>
 <script src="/resources/js/charts.js"></script>
 <script src="/resources/js/jquery.slimscroll.min.js"></script>
+
 </body>
 </html>

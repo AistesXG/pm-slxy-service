@@ -3,6 +3,8 @@ package com.pm.slxy.mapper;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.pm.slxy.entity.User;
 
+import java.util.List;
+
 /**
  * <p>
  * Mapper 接口
@@ -12,5 +14,5 @@ import com.pm.slxy.entity.User;
  * @since 2018-03-01
  */
 public interface UserMapper extends BaseMapper<User> {
-
 }
+
