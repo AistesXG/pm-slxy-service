@@ -48,6 +48,23 @@ public class UserController {
         return modelAndView;
     }
 
+    /**
+     * 查询所有用户
+     *
+     * @param modelAndView
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/userList")
+    public ModelAndView userList(ModelAndView modelAndView) throws Exception {
+        List<User> userList = userService.userList();
+        if (userList != null) {
+            modelAndView.setViewName("userList");
+            modelAndView.addObject("userList", userList);
+        }
+        return modelAndView;
+    }
+
 }
 
 

@@ -25,5 +25,9 @@ public interface UserService extends IService<User> {
      */
     List<User> Login(String userName, String userPassword);
 
-
+    /**
+     * 查询所有用户
+     * @return
+     */
+    List<User> userList();
 }

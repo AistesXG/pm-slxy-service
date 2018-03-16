@@ -49,14 +49,9 @@ public class User implements Serializable {
      */
     private String userIdcard;
     /**
-     * 身份编号
-     */
-    private Integer userIdentity;
-    /**
      * 备注
      */
     private String userRemarks;
-
 
     public Integer getUserId() {
         return userId;
@@ -114,13 +109,7 @@ public class User implements Serializable {
         this.userIdcard = userIdcard;
     }
 
-    public Integer getUserIdentity() {
-        return userIdentity;
-    }
 
-    public void setUserIdentity(Integer userIdentity) {
-        this.userIdentity = userIdentity;
-    }
 
     public String getUserRemarks() {
         return userRemarks;
@@ -140,7 +129,6 @@ public class User implements Serializable {
                 ", userTelphone='" + userTelphone + '\'' +
                 ", userAddress='" + userAddress + '\'' +
                 ", userIdcard='" + userIdcard + '\'' +
-                ", userIdentity=" + userIdentity +
                 ", userRemarks='" + userRemarks + '\'' +
                 '}';
     }

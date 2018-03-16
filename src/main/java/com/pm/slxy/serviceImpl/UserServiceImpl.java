@@ -1,6 +1,7 @@
 package com.pm.slxy.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.entity.User;
 import com.pm.slxy.mapper.UserMapper;
@@ -45,5 +46,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return null;
     }
+
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
+    @Override
+    public List<User> userList() {
+        List<User> userList = userMapper.selectList(new EntityWrapper<User>());
+        if(!CollectionUtils.isEmpty(userList)) {
+            return userList;
+        }
+        return null;
+    }
+
 
 }
