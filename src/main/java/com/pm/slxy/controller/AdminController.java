@@ -38,9 +38,9 @@ public class AdminController {
             List<Admin> admins = adminService.login(admin.getUser(), admin.getPass());
             modelAndView.addObject("admins", admins);
             if (admins.get(0).getType().equals("系统管理员")) {
-                modelAndView.setViewName("");
+                modelAndView.setViewName("systemAmdinPage");
             } else if (admins.get(0).getType().equals("普通管理员")) {
-                modelAndView.setViewName("");
+                modelAndView.setViewName("orarginPage");
             }
         }
         return modelAndView;
