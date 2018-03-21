@@ -7,6 +7,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>system admin page</h1>
+
 </body>
 </html>
