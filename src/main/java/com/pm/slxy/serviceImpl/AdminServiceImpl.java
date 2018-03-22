@@ -39,11 +39,25 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             admin.setUser(user);
             admin.setPass(pass);
             List<Admin> admins = adminMapper.selectList(new EntityWrapper<>(admin));
-            if(!CollectionUtils.isEmpty(admins)) {
-                if(admins.size() == 1) {
-                     return admins;
+            if (!CollectionUtils.isEmpty(admins)) {
+                if (admins.size() == 1) {
+                    return admins;
                 }
             }
+        }
+        return null;
+    }
+
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
+    @Override
+    public List<Admin> selectAdmins() {
+        List<Admin> admins = adminMapper.selectList(new EntityWrapper<Admin>());
+        if(!CollectionUtils.isEmpty(admins)) {
+            return admins;
         }
         return null;
     }

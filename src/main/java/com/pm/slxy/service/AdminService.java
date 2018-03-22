@@ -22,4 +22,11 @@ public interface AdminService extends IService<Admin> {
      * @return
      */
     List<Admin> login(String user, String pass);
+
+    /**
+     * 查询所有用户
+     *
+     * @return
+     */
+    List<Admin> selectAdmins();
 }

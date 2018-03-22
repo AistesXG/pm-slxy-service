@@ -105,7 +105,7 @@
         <div class="title">
             SXLY房产管理系统登录
         </div>
-        <form action="/admin/login" onsubmit="return check()" method="post">
+        <form action="/login" onsubmit="return check()" method="post">
             <div id="form_widget">
                 <br>
                 <input type="text" placeholder="请输入账号" id="box_name" class="txt" value="用户名" onfocus="this.value=''" onblur="if(this.value=='')this.value='用户名'" name="user"/>

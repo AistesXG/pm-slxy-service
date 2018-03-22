@@ -5,6 +5,7 @@ import com.pm.slxy.entity.Admin;
 import com.pm.slxy.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,22 +27,20 @@ public class AdminController {
     private AdminService adminService;
 
     /**
-     * 登录
+     * 查询用户列表
      *
-     * @param admin
+     * @param modelAndView
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/login")
-    public ModelAndView login(ModelAndView modelAndView, Admin admin) throws Exception {
-        if (admin != null) {
-            List<Admin> admins = adminService.login(admin.getUser(), admin.getPass());
-            modelAndView.addObject("admins", admins);
-            if (admins.get(0).getType().equals("系统管理员")) {
-                modelAndView.setViewName("index");
-            } else if (admins.get(0).getType().equals("普通管理员")) {
-                modelAndView.setViewName("orarginPage");
-            }
+    @RequestMapping(value = "adminList")
+    public ModelAndView selectUsers(ModelAndView modelAndView) throws Exception {
+        List<Admin> adminList = adminService.selectAdmins();
+        if (!CollectionUtils.isEmpty(adminList)) {
+            modelAndView.addObject("adminList", adminList);
+            modelAndView.setViewName("AdminDetails");
+        } else {
+            modelAndView.setViewName("404");
         }
         return modelAndView;
     }
