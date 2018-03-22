@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Title</title>
+    <title>用户信息</title>
 </head>
 <!-- DataTables CSS -->
 <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
@@ -47,7 +47,7 @@
                                id="dataTables-example">
                             <thead>
                             <tr>
-                                <th>选中</th>
+                                <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/></th>
                                 <th>序号</th>
                                 <th>用户名</th>
                                 <th>邮箱</th>
@@ -59,7 +59,7 @@
                             <tbody>
                             <c:forEach items="${adminList}" var="admin" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox" name="uid" id="uid" value="${admin.id}"></td>
                                     <td>${status.count}</td>
                                     <td>${admin.user}</td>
                                     <td>${admin.email}</td>
@@ -89,6 +89,22 @@
         $('#dataTables-example').DataTable({
             responsive: true
         });
+
+
     });
+    <!--全选和全不选-->
+    function checkt() {
+        var checkAll = document.getElementById("checkAll");
+        checkAll.value == 1 ? checkAll.value = 2 : checkAll.value = 1;
+        var uid = document.getElementsByName("uid");
+
+        for (var i = 0; i < uid.length; i++) {
+            if (checkAll.value == 1) {
+                uid[i].checked = false;//全不选
+            } else {
+                uid[i].checked = true;//全选
+            }
+        }
+    }
 </script>
 </html>

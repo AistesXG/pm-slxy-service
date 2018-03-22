@@ -76,7 +76,7 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="index.jsp"><i class="fa fa-dashboard fa-fw"></i>主页</a>
+                    <a href="/pages/index.jsp"><i class="fa fa-dashboard fa-fw"></i>主页</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>用户管理<span class="fa arrow"></span></a>
