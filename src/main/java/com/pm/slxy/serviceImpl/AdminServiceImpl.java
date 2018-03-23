@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,9 +58,29 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public List<Admin> selectAdmins() {
         List<Admin> admins = adminMapper.selectList(new EntityWrapper<Admin>());
-        if(!CollectionUtils.isEmpty(admins)) {
+        if (!CollectionUtils.isEmpty(admins)) {
             return admins;
         }
         return null;
     }
+
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    public int deleteAdminByIds(String ids) {
+        //将字符串转为字符串list集合
+        List<String> adminIds = Arrays.asList(ids.split(","));
+        int delete = adminMapper.deleteBatchIds(adminIds);
+        if (delete != 0) {
+            return delete;
+        }
+        return 0;
+    }
+
+
 }

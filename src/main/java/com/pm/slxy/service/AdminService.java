@@ -29,4 +29,9 @@ public interface AdminService extends IService<Admin> {
      * @return
      */
     List<Admin> selectAdmins();
+
+
+
+
+    int deleteAdminByIds(String ids);
 }

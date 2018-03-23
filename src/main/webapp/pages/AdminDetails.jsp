@@ -22,6 +22,13 @@
     table thead th {
         text-align: center;
     }
+
+    #deleteBtn{
+        float: right;
+        margin-right: 100px;
+        width: 70px;
+        height: 25px;
+    }
 </style>
 <body>
 <div id="wrapper">
@@ -39,7 +46,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已注册的用户
+                        已注册的用户 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"/>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -47,7 +54,8 @@
                                id="dataTables-example">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/></th>
+                                <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/>
+                                </th>
                                 <th>序号</th>
                                 <th>用户名</th>
                                 <th>邮箱</th>
@@ -92,6 +100,7 @@
 
 
     });
+
     <!--全选和全不选-->
     function checkt() {
         var checkAll = document.getElementById("checkAll");
@@ -104,6 +113,39 @@
             } else {
                 uid[i].checked = true;//全选
             }
+        }
+    }
+
+
+    <!--删除-->
+    function delAll() {
+        if(confirm("确定要删除所选的数据")) {
+            var ids = "";
+            $("input[name='uid']:checkbox:checked").each(function () {
+                if (ids.length == 0) {
+                    ids = $(this).val();
+                } else {
+                    ids += "," + $(this).val();
+                }
+            });
+            if (ids.length == 0) {
+                alert("请选择一条数据，才能进行批量接收！");
+                return;
+            }
+            $.ajax({
+                type: "get",
+                url: '/admin/deleteAdminByIds',
+                data: {ids: ids},
+                contentType: 'application/json',
+                dataType: "json",
+                success: function (data) {
+                    if (data == "ok") {
+                        window.location.href = "/admin/adminList";
+                    } else {
+                        alert(data);
+                    }
+                }
+            })
         }
     }
 </script>

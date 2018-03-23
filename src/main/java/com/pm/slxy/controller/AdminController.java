@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "adminList")
+    @RequestMapping(value = "/adminList")
     public ModelAndView selectUsers(ModelAndView modelAndView) throws Exception {
         List<Admin> adminList = adminService.selectAdmins();
         if (!CollectionUtils.isEmpty(adminList)) {
@@ -43,6 +44,25 @@ public class AdminController {
             modelAndView.setViewName("404");
         }
         return modelAndView;
+    }
+
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/deleteAdminByIds")
+    @ResponseBody
+    public String deleteAdminByIds(String ids) throws Exception {
+        int delete = adminService.deleteAdminByIds(ids);
+        if (delete != 0) {
+            return "ok";
+        } else {
+            return "error";
+        }
     }
 }
 
