@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/pages/index.jsp">SLXY 房产管理 V1.0.0</a>
+        <a class="navbar-brand" href="/WEB-INF/pages/index.jspndex.jsp">SLXY 房产管理 V1.0.0</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -52,7 +52,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="../login.jsp"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                <li><a href="../../login.jsp"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -76,7 +76,7 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/pages/index.jsp"><i class="fa fa-dashboard fa-fw"></i>主页</a>
+                    <a href="/jump/jumpHome"><i class="fa fa-dashboard fa-fw"></i>主页</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>用户管理<span class="fa arrow"></span></a>
@@ -85,7 +85,7 @@
                             <a href="/admin/adminList">用户信息</a>
                         </li>
                         <li>
-                            <a href="morris.html">11111</a>
+                            <a href="/jump/jumpAddAdmin">添加用户</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

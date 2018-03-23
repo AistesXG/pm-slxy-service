@@ -31,7 +31,29 @@ public interface AdminService extends IService<Admin> {
     List<Admin> selectAdmins();
 
 
-
-
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
     int deleteAdminByIds(String ids);
+
+    /**
+     * 添加用户
+     *
+     * @param admin
+     * @return
+     */
+    int addAdmin(Admin admin);
+
+    /**
+     * 检测用户名
+     *
+     * @param user
+     * @return
+     */
+    boolean checkUser(String user);
+
+
 }

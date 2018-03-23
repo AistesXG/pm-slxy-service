@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,6 +82,41 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             return delete;
         }
         return 0;
+    }
+
+    /**
+     * 添加用户
+     *
+     * @param admin
+     * @return
+     */
+    @Override
+    public int addAdmin(Admin admin) {
+        if (!ObjectUtils.isEmpty(admin)) {
+            int add = adminMapper.insert(admin);
+            if (add != 0) {
+                return add;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * 检测用户名
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean checkUser(String user) {
+        if (StringUtils.isEmpty(user)){
+            return  false;
+        }
+        boolean checkUser = adminMapper.checkUser(user);
+        if (checkUser) {
+            return true;
+        }
+        return false;
     }
 
 

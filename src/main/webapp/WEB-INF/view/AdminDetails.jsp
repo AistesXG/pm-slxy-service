@@ -25,9 +25,13 @@
 
     #deleteBtn{
         float: right;
-        margin-right: 100px;
-        width: 70px;
-        height: 25px;
+        margin-right: 50px;
+        margin-top: -5px;
+        margin-left: 10px;
+    }
+    #addAdminBtn{
+        float: right;
+        margin-top: -5px;
     }
 </style>
 <body>
@@ -46,7 +50,8 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已注册的用户 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"/>
+                        已注册的用户 <input type="button" value="删除" id="deleteBtn" onclick="delAll()" class="btn btn-primary"/>
+                        <input type="button" value="添加" id="addAdminBtn" onclick="addAdminView()" class="btn btn-primary">
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -119,19 +124,20 @@
 
     <!--删除-->
     function delAll() {
-        if(confirm("确定要删除所选的数据")) {
-            var ids = "";
-            $("input[name='uid']:checkbox:checked").each(function () {
-                if (ids.length == 0) {
-                    ids = $(this).val();
-                } else {
-                    ids += "," + $(this).val();
-                }
-            });
+        var ids = "";
+        $("input[name='uid']:checkbox:checked").each(function () {
             if (ids.length == 0) {
-                alert("请选择一条数据，才能进行批量接收！");
-                return;
+                ids = $(this).val();
+            } else {
+                ids += "," + $(this).val();
             }
+        });
+        if (ids.length == 0) {
+            alert("请选择一条数据，才能进行批量接收！");
+            return;
+        }
+        if(confirm("确定要删除所选的数据")) {
+
             $.ajax({
                 type: "get",
                 url: '/admin/deleteAdminByIds',
@@ -147,6 +153,11 @@
                 }
             })
         }
+    }
+
+    <!--跳转到addAdmin页面-->
+    function addAdminView() {
+        window.location.href="/jump/jumpAddAdmin";
     }
 </script>
 </html>
