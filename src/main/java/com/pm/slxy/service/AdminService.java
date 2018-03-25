@@ -2,6 +2,7 @@ package com.pm.slxy.service;
 
 import com.pm.slxy.entity.Admin;
 import com.baomidou.mybatisplus.service.IService;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface AdminService extends IService<Admin> {
      *
      * @return
      */
-    List<Admin> selectAdmins();
+    ModelAndView selectAdmins(ModelAndView modelAndView);
 
 
     /**
@@ -37,7 +38,7 @@ public interface AdminService extends IService<Admin> {
      * @param ids
      * @return
      */
-    int deleteAdminByIds(String ids);
+    String deleteAdminByIds(String ids);
 
     /**
      * 添加用户
@@ -45,7 +46,7 @@ public interface AdminService extends IService<Admin> {
      * @param admin
      * @return
      */
-    int addAdmin(Admin admin);
+    String addAdmin(Admin admin);
 
     /**
      * 检测用户名
@@ -53,7 +54,21 @@ public interface AdminService extends IService<Admin> {
      * @param user
      * @return
      */
-    boolean checkUser(String user);
+    String checkUser(String user);
 
+    /**
+     * 修改用户信息
+     *
+     * @param admin
+     * @return
+     */
+    String updateAdmin(Admin admin);
 
+    /**
+     * 查找一个用户
+     *
+     * @param modelAndView
+     * @return
+     */
+    ModelAndView selectAdmin(ModelAndView modelAndView,int id);
 }

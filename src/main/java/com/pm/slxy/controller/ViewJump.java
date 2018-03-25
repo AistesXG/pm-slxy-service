@@ -36,4 +36,15 @@ public class ViewJump {
         return modelAndView;
     }
 
+    /**
+     * 跳转到修改页面
+     * @param modelAndView
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/jumpUpdateAdmin")
+    public ModelAndView jumpUpdateAdmin(ModelAndView modelAndView) throws Exception {
+        modelAndView.setViewName("updateAdmin");
+        return modelAndView;
+    }
 }

@@ -23,16 +23,24 @@
         text-align: center;
     }
 
-    #deleteBtn{
-        float: right;
-        margin-right: 50px;
-        margin-top: -5px;
-        margin-left: 10px;
-    }
-    #addAdminBtn{
+    #deleteBtn {
         float: right;
         margin-top: -5px;
+        margin-left: 5px;
     }
+
+    #addAdminBtn {
+        float: right;
+        margin-top: -5px;
+        margin-left: 5px;
+    }
+
+    #updateAdminBtn {
+        float: right;
+        margin-top: -5px;
+
+    }
+
 </style>
 <body>
 <div id="wrapper">
@@ -41,7 +49,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">用户信息</h1>
+                <h2 class="page-header">用户信息</h2>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -50,8 +58,12 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已注册的用户 <input type="button" value="删除" id="deleteBtn" onclick="delAll()" class="btn btn-primary"/>
-                        <input type="button" value="添加" id="addAdminBtn" onclick="addAdminView()" class="btn btn-primary">
+                        已注册的用户 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
+                                      class="btn btn-primary"/>
+                        <input type="button" value="添加" id="addAdminBtn" onclick="addAdminView()"
+                               class="btn btn-primary">
+                        <input type="button" value="修改" id="updateAdminBtn" onclick="updateAdminView()"
+                               class="btn btn-primary"/>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -120,24 +132,28 @@
             }
         }
     }
+function selectId() {
+    var ids = "";
+    $("input[name='uid']:checkbox:checked").each(function () {
+        if (ids.length == 0) {
+            ids = $(this).val();
+        } else {
+            ids += "," + $(this).val();
+        }
+    });
+    return ids;
 
+}
 
     <!--删除-->
     function delAll() {
-        var ids = "";
-        $("input[name='uid']:checkbox:checked").each(function () {
-            if (ids.length == 0) {
-                ids = $(this).val();
-            } else {
-                ids += "," + $(this).val();
-            }
-        });
+        var ids = selectId();
         if (ids.length == 0) {
-            alert("请选择一条数据，才能进行批量接收！");
-            return;
+            alert("请选择一条数据，才能进行删除！");
+            return "";
         }
-        if(confirm("确定要删除所选的数据")) {
-
+        var ids = selectId()
+        if (confirm("确定要删除所选的数据")) {
             $.ajax({
                 type: "get",
                 url: '/admin/deleteAdminByIds',
@@ -157,7 +173,20 @@
 
     <!--跳转到addAdmin页面-->
     function addAdminView() {
-        window.location.href="/jump/jumpAddAdmin";
+        window.location.href = "/jump/jumpAddAdmin";
+    }
+    <!--跳转到updateAdmin页面-->
+    function updateAdminView() {
+        var id = selectId();
+        if(id.length == 0){
+            alert("请选择一条数据,才能修改！");
+            return "" ;
+        }
+        if(id.length > 1){
+            alert("只能选择一条数据进行修改");
+            return "";
+        }
+        window.location.href="/admin/selectAdmin?id="+id;
     }
 </script>
 </html>

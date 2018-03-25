@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,12 +59,15 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @return
      */
     @Override
-    public List<Admin> selectAdmins() {
-        List<Admin> admins = adminMapper.selectList(new EntityWrapper<Admin>());
-        if (!CollectionUtils.isEmpty(admins)) {
-            return admins;
+    public ModelAndView selectAdmins(ModelAndView modelAndView) {
+        List<Admin> adminList = adminMapper.selectList(new EntityWrapper<Admin>());
+        if (!CollectionUtils.isEmpty(adminList)) {
+            modelAndView.addObject("adminList", adminList);
+            modelAndView.setViewName("AdminDetails");
+        } else {
+            modelAndView.setViewName("404");
         }
-        return null;
+        return modelAndView;
     }
 
 
@@ -74,14 +78,15 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @return
      */
     @Override
-    public int deleteAdminByIds(String ids) {
+    public String deleteAdminByIds(String ids) {
         //将字符串转为字符串list集合
         List<String> adminIds = Arrays.asList(ids.split(","));
         int delete = adminMapper.deleteBatchIds(adminIds);
         if (delete != 0) {
-            return delete;
+            return "ok";
+        } else {
+            return "error";
         }
-        return 0;
     }
 
     /**
@@ -91,14 +96,30 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @return
      */
     @Override
-    public int addAdmin(Admin admin) {
-        if (!ObjectUtils.isEmpty(admin)) {
-            int add = adminMapper.insert(admin);
-            if (add != 0) {
-                return add;
-            }
+    public String addAdmin(Admin admin) {
+        if (StringUtils.isEmpty(admin.getUser())) {
+            return "用户名有误！";
         }
-        return 0;
+        if (StringUtils.isEmpty(admin.getPass())) {
+            return "密码不能为空";
+        }
+        if (StringUtils.isEmpty(admin.getEmail())) {
+            return "邮箱不能为空";
+        }
+        if (StringUtils.isEmpty(admin.getPhone())) {
+            return "电话号码不能为空";
+        }
+        Admin user = new Admin();
+        user.setUser(admin.getUser());
+        Admin admin1 = this.selectOne(new EntityWrapper<>(user));
+        if (!ObjectUtils.isEmpty(admin1)) {
+            return "录入信息有误";
+        }
+        if (this.insert(admin)) {
+            return "ok";
+        } else {
+            return "error";
+        }
     }
 
     /**
@@ -108,16 +129,53 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @return
      */
     @Override
-    public boolean checkUser(String user) {
-        if (StringUtils.isEmpty(user)){
-            return  false;
+    public String checkUser(String user) {
+        if (StringUtils.isEmpty(user)) {
+            return "error";
         }
-        boolean checkUser = adminMapper.checkUser(user);
-        if (checkUser) {
-            return true;
+        Admin admin = new Admin();
+        admin.setUser(user);
+        List<Admin> admins = this.selectList(new EntityWrapper<>(admin));
+        if (CollectionUtils.isEmpty(admins)) {
+            return "ok";
+        } else {
+            return "error";
         }
-        return false;
     }
 
+
+    /**
+     * 更新用户信息
+     *
+     * @param admin
+     * @return
+     */
+    @Override
+    public String updateAdmin(Admin admin) {
+        if (this.updateById(admin)) {
+            return "ok";
+        } else {
+            return "error";
+        }
+    }
+
+    /**
+     * 查找一个用户
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    @Override
+    public ModelAndView selectAdmin(ModelAndView modelAndView, int id) {
+        Admin admin = adminMapper.selectById(id);
+        if (!ObjectUtils.isEmpty(admin)) {
+            modelAndView.addObject("admin", admin);
+            modelAndView.setViewName("updateAdmin");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
+    }
 
 }

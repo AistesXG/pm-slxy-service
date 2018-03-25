@@ -1,18 +1,13 @@
 package com.pm.slxy.controller;
 
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.pm.slxy.entity.Admin;
 import com.pm.slxy.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 /**
  * <p>
@@ -37,15 +32,8 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping(value = "/adminList")
-    public ModelAndView selectUsers(ModelAndView modelAndView) throws Exception {
-        List<Admin> adminList = adminService.selectAdmins();
-        if (!CollectionUtils.isEmpty(adminList)) {
-            modelAndView.addObject("adminList", adminList);
-            modelAndView.setViewName("AdminDetails");
-        } else {
-            modelAndView.setViewName("404");
-        }
-        return modelAndView;
+    public ModelAndView selectAdmins(ModelAndView modelAndView) throws Exception {
+        return adminService.selectAdmins(modelAndView);
     }
 
 
@@ -59,12 +47,7 @@ public class AdminController {
     @RequestMapping(value = "/deleteAdminByIds")
     @ResponseBody
     public String deleteAdminByIds(String ids) throws Exception {
-        int delete = adminService.deleteAdminByIds(ids);
-        if (delete != 0) {
-            return "ok";
-        } else {
-            return "error";
-        }
+        return adminService.deleteAdminByIds(ids);
     }
 
     /**
@@ -77,38 +60,34 @@ public class AdminController {
     @RequestMapping(value = "/addAdmin")
     @ResponseBody
     public String addAdmin(Admin admin) throws Exception {
-        int addAdmin = adminService.addAdmin(admin);
-        if (addAdmin != 0) {
-            return "ok";
-        } else {
-            return "error";
-        }
+        return adminService.addAdmin(admin);
     }
 
+
     /**
-     * 检测用户名是否存在
+     * 更新用户信息
      *
-     * @param user
+     * @param admin
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/checkUser")
+    @RequestMapping(value = "/updateAdmin")
     @ResponseBody
-    public String checkUser(String user) throws Exception {
-        if (StringUtils.isEmpty(user)){
-            return "error";
-        }
-        Admin admin = new Admin();
-        admin.setUser(user);
-
-        List<Admin> admins = adminService.selectList(new EntityWrapper<>(admin));
-        if (CollectionUtils.isEmpty(admins)) {
-            return "ok";
-        } else {
-            return "error";
-        }
-
+    public String updateAdmin(Admin admin) throws Exception {
+        return adminService.updateAdmin(admin);
     }
 
+    /**
+     * 查找一个用户
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectAdmin")
+    public ModelAndView selectAdmin(ModelAndView modelAndView, String id) throws Exception {
+        return adminService.selectAdmin(modelAndView, Integer.parseInt(id));
+    }
 }
 
