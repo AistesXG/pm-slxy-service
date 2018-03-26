@@ -79,10 +79,10 @@
                     <a href="/jump/jumpHome"><i class="fa fa-dashboard fa-fw"></i>主页</a>
                 </li>
                 <li>
-                    <a href="/admin/adminList"><i class="fa fa-bar-chart-o fa-fw"></i>用户管理<span class="fa arrow"></span></a>
+                    <a href="/admin/adminList"><i class="fa fa-wrench fa-fw"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                    <a href="/teacher/teacherList"><i class="fa fa-wrench fa-fw"></i>教师管理</a>
                 </li>
                 <li>
                     <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>

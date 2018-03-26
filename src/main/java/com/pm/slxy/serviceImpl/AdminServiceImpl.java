@@ -12,7 +12,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,12 +60,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public ModelAndView selectAdmins(ModelAndView modelAndView) {
         List<Admin> adminList = adminMapper.selectList(new EntityWrapper<Admin>());
-        if (!CollectionUtils.isEmpty(adminList)) {
-            modelAndView.addObject("adminList", adminList);
-            modelAndView.setViewName("AdminDetails");
-        } else {
-            modelAndView.setViewName("404");
-        }
+        modelAndView.addObject("adminList", adminList);
+        modelAndView.setViewName("admin/AdminDetails");
         return modelAndView;
     }
 
@@ -98,7 +93,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public String addAdmin(Admin admin) {
         if (StringUtils.isEmpty(admin.getUser())) {
-            return "用户名有误！";
+            return "用户名不能为空！";
         }
         if (StringUtils.isEmpty(admin.getPass())) {
             return "密码不能为空";
@@ -113,7 +108,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         user.setUser(admin.getUser());
         Admin admin1 = this.selectOne(new EntityWrapper<>(user));
         if (!ObjectUtils.isEmpty(admin1)) {
-            return "录入信息有误";
+            return "用户名已经存在";
         }
         if (this.insert(admin)) {
             return "ok";
@@ -171,7 +166,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         Admin admin = adminMapper.selectById(id);
         if (!ObjectUtils.isEmpty(admin)) {
             modelAndView.addObject("admin", admin);
-            modelAndView.setViewName("updateAdmin");
+            modelAndView.setViewName("admin/updateAdmin");
         } else {
             modelAndView.setViewName("404");
         }

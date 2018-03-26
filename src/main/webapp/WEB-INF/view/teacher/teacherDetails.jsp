@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户信息</title>
+    <title>教师信息</title>
 </head>
 <!-- DataTables CSS -->
 <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
@@ -29,27 +29,27 @@
         margin-left: 5px;
     }
 
-    #addAdminBtn {
-        float: right;
-        margin-top: -5px;
-        margin-left: 5px;
-    }
+    #addTeacherBtn {
+          float: right;
+          margin-top: -5px;
+          margin-left: 5px;
+      }
 
-    #updateAdminBtn {
-        float: right;
-        margin-top: -5px;
+     /* #updateAdminBtn {
+          float: right;
+          margin-top: -5px;
 
-    }
+      }*/
 
 </style>
 <body>
 <div id="wrapper">
     <!--引入公共页面-->
-    <jsp:include page="common.jsp"/>
+    <jsp:include page="../common.jsp"/>
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">用户信息</h2>
+                <h2 class="page-header">教师信息</h2>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -60,10 +60,8 @@
                     <div class="panel-heading">
                         已注册的用户 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
                                       class="btn btn-primary"/>
-                        <input type="button" value="添加" id="addAdminBtn" onclick="addAdminView()"
+                        <input type="button" value="添加" id="addTeacherBtn" onclick="addTeacherView()"
                                class="btn btn-primary">
-                        <input type="button" value="修改" id="updateAdminBtn" onclick="updateAdminView()"
-                               class="btn btn-primary"/>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -74,26 +72,39 @@
                                 <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/>
                                 </th>
                                 <th>序号</th>
-                                <th>用户名</th>
-                                <th>邮箱</th>
-                                <th>电话号码</th>
-                                <th>角色</th>
+                                <th>教师姓名</th>
+                                <th>教工编号</th>
+                                <th>性别</th>
+                                <th>身份证号码</th>
+                                <th>出生年月</th>
+                                <th>学历</th>
+                                <th>参加工作时间</th>
+                                <th>申请住房时间</th>
+                                <th>所在部门</th>
+                                <th>籍贯</th>
+                                <th>租房状态</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${adminList}" var="admin" varStatus="status">
+                            <c:forEach items="${teacherList}" var="teacher" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="uid" id="uid" value="${admin.id}"></td>
+                                    <td><input type="checkbox" name="tid" id="tid" value="${teacher.id}"></td>
                                     <td>${status.count}</td>
-                                    <td>${admin.user}</td>
-                                    <td>${admin.email}</td>
-                                    <td class="center">${admin.phone}</td>
-                                    <td class="center">${admin.type}</td>
+                                    <td>${teacher.teachername}</td>
+                                    <td>${teacher.teachernumber}</td>
+                                    <td>${teacher.teachersex}</td>
+                                    <td>${teacher.teacheridcard}</td>
+                                    <td>${teacher.teacherbirthdate}</td>
+                                    <td>${teacher.teachereducation}</td>
+                                    <td>${teacher.teacherstartwork}</td>
+                                    <td>${teacher.teacherhousingdate}</td>
+                                    <td>${teacher.teacherdepartment}</td>
+                                    <td>${teacher.teacherplaceorigin}</td>
+                                    <td>${teacher.teacherrentalstatus}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
-
                         </table>
                         <!-- /.table-responsive -->
                     </div>
@@ -115,35 +126,36 @@
             responsive: true
         });
 
-
     });
 
     <!--全选和全不选-->
     function checkt() {
         var checkAll = document.getElementById("checkAll");
         checkAll.value == 1 ? checkAll.value = 2 : checkAll.value = 1;
-        var uid = document.getElementsByName("uid");
+        var tid = document.getElementsByName("tid");
 
-        for (var i = 0; i < uid.length; i++) {
+        for (var i = 0; i < tid.length; i++) {
             if (checkAll.value == 1) {
-                uid[i].checked = false;//全不选
+                tid[i].checked = false;//全不选
             } else {
-                uid[i].checked = true;//全选
+                tid[i].checked = true;//全选
             }
         }
     }
-function selectId() {
-    var ids = "";
-    $("input[name='uid']:checkbox:checked").each(function () {
-        if (ids.length == 0) {
-            ids = $(this).val();
-        } else {
-            ids += "," + $(this).val();
-        }
-    });
-    return ids;
 
-}
+
+    function selectId() {
+        var ids = "";
+        $("input[name='tid']:checkbox:checked").each(function () {
+            if (ids.length == 0) {
+                ids = $(this).val();
+            } else {
+                ids += "," + $(this).val();
+            }
+        });
+        return ids;
+    }
+
 
     <!--删除-->
     function delAll() {
@@ -156,13 +168,13 @@ function selectId() {
         if (confirm("确定要删除所选的数据")) {
             $.ajax({
                 type: "get",
-                url: '/admin/deleteAdminByIds',
+                url: '/teacher/deleteTeacherByIds',
                 data: {ids: ids},
                 contentType: 'application/json',
                 dataType: "json",
                 success: function (data) {
                     if (data == "ok") {
-                        window.location.href = "/admin/adminList";
+                        window.location.href = "/teacher/teacherList";
                     } else {
                         alert(data);
                     }
@@ -171,22 +183,9 @@ function selectId() {
         }
     }
 
-    <!--跳转到addAdmin页面-->
-    function addAdminView() {
-        window.location.href = "/jump/jumpAddAdmin";
-    }
-    <!--跳转到updateAdmin页面-->
-    function updateAdminView() {
-        var id = selectId();
-        if(id.length == 0){
-            alert("请选择一条数据,才能修改！");
-            return "" ;
-        }
-        if(id.length > 1){
-            alert("只能选择一条数据进行修改");
-            return "";
-        }
-        window.location.href="/admin/selectAdmin?id="+id;
+    <!--跳转到addTeacherView页面-->
+    function addTeacherView() {
+        window.location.href = "/jump/jumpAddTeacher";
     }
 </script>
 </html>

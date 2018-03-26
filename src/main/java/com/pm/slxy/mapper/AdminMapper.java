@@ -12,10 +12,4 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2018-03-20
  */
 public interface AdminMapper extends BaseMapper<Admin> {
-    /**
-     * 检测用户名
-     * @param user
-     * @return
-     */
-    boolean checkUser(String user);
 }
