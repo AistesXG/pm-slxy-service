@@ -160,11 +160,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         Admin oldAdmin = this.selectById(admin.getId());
         if (admin.getUser().equals(oldAdmin.getUser())) {
             admin.setUser(oldAdmin.getUser());
-        }else {
+        } else {
             Admin admin1 = new Admin();
             admin1.setUser(admin.getUser());
             Admin admin2 = this.selectOne(new EntityWrapper<>(admin1));
-            if(admin2 != null) {
+            if (admin2 != null) {
                 return "用户名已经被使用了";
             }
         }

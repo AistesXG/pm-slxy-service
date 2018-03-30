@@ -70,5 +70,5 @@ public interface AdminService extends IService<Admin> {
      * @param modelAndView
      * @return
      */
-    ModelAndView selectAdmin(ModelAndView modelAndView,int id);
+    ModelAndView selectAdmin(ModelAndView modelAndView, int id);
 }
