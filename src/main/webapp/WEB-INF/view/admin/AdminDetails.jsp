@@ -114,8 +114,6 @@
         $('#dataTables-example').DataTable({
             responsive: true
         });
-
-
     });
 
     <!--全选和全不选-->

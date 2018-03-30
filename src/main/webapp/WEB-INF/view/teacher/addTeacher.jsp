@@ -32,53 +32,74 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">教师姓名:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                            <input type="text" name="teachername" class="form-control" id="teachername" value="" size="10">
-                            <span id="msg"></span>
+                                <input type="text" name="teachername" class="form-control" id="teachername" value=""
+                                       size="10">
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">教工编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                            <input type="text" name="teachernumber" class="form-control" value="" size="6">
+                                <input type="text" name="teachernumber" class="form-control" value="" size="6"
+                                       id="teachernumber">
+                                <span id="numberMsg"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">性别:<span class="must">*</span></label><div class="col-sm-9">
-                            <input type="radio" name="teachersex" checked="checked" value="男"/>男 &nbsp;
-                            <input type="radio" name="teachersex" value="女">女</div>
+                            <label class="col-sm-3 control-label">性别:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="radio" name="teachersex" checked="checked" value="男"/>男 &nbsp;
+                                <input type="radio" name="teachersex" value="女">女
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">身份证号:<span class="must">*</span></label><div class="col-sm-9">
-                            <input type="text" name="teacheridcard" class="form-control" value="" size="18"></div>
+                            <label class="col-sm-3 control-label">身份证号:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="teacheridcard" class="form-control" value="" size="18"
+                                       id="teacheridcard">
+                                <span id="idCardMsg"></span></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">出生年月:<span class="must">*</span></label><div class="col-sm-9">
-                            <input type="text" name="teacherbirthdate" class="form-control" value="" size="10"></div>
+                            <label class="col-sm-3 control-label">出生年月:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="teacherbirthdate" class="form-control" value="" size="10">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">学历:<span class="must">*</span></label><div class="col-sm-9">
-                            <input type="text" name="teachereducation" class="form-control" value="" size="18"></div>
+                            <label class="col-sm-3 control-label">学历:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="teachereducation" class="form-control" value="" size="18">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">参加工作时间:<span class="must">*</span></label><div class="col-sm-9">
-                            <input type="text" name="teacherstartwork" class="form-control" value="" size="10"></div>
+                            <label class="col-sm-3 control-label">参加工作时间:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="teacherstartwork" class="form-control" value="" size="10">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">申请住房日期:<span class="must">*</span></label><div class="col-sm-9">
-                            <input type="text" name="teacherhousingdate" class="form-control" value="" size="10"></div>
+                            <label class="col-sm-3 control-label">申请住房日期:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="teacherhousingdate" class="form-control" value="" size="10">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label><div class="col-sm-9">
-                            <input type="text" name="teacherdepartment" class="form-control" value="" size="30"></div>
+                            <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="teacherdepartment" class="form-control" value="" size="30">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">籍贯:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                            <input type="text" name="teacherplaceorigin" class="form-control" value="" size="30"></div>
+                                <input type="text" name="teacherplaceorigin" class="form-control" value="" size="30">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">租房状态:<span class="must">*</span></label><div class="col-sm-9">
-                            <input type="text" name="teacherrentalstatus" class="form-control" value="" size="4"></div>
+                            <label class="col-sm-3 control-label">租房状态:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="teacherrentalstatus" class="form-control" value="" size="4">
+                            </div>
                         </div>
 
                         <div class="form-group" style="text-align: center">
@@ -93,7 +114,6 @@
 </div>
 </body>
 <script type="text/javascript">
-    <!--添加用户-->
     function addTeacher() {
         $.ajax({
             type: "post",
@@ -111,28 +131,52 @@
         })
     }
 
-/*    <!--检测用户名是否可以使用-->
+    <!--检测教师编号是否可用是否可以使用-->
     $(function () {
-        $('#user').blur(function () {
-            var cuser = $('#user').val();
-            var msgObj = $('#msg');
-            if(cuser ==""){
-                msgObj.css("color","red").html("用户名不能为空")
-            }else{
+        $('#teachernumber').blur(function () {
+            var number = $('#teachernumber').val();
+            var msgObj = $('#numberMsg');
+            if (number == "") {
+                msgObj.css("color", "red").html("教工编号不能为空")
+            } else {
                 $.ajax({
                     type: "post",
                     dataType: "json",
-                    url: "/checkUser",
-                    data: {user: cuser},
+                    url: "/checkTeacherNum",
+                    data: {teachernumber: number},
                     success: function (data) {
                         if (data == "ok") {
-                            msgObj.css("color","red").html("用户名可以使用");
-                        }else{
-                            msgObj.css("color","red").html("用户名已经被注册");
+                            msgObj.css("color", "red").html("该编号可以使用");
+                        } else {
+                            msgObj.css("color", "red").html("该编号已经存在");
                         }
                     }
-                })}
+                })
+            }
         })
-    })*/
+
+        $('#teacheridcard').blur(function () {
+            var idCard = $('#teacheridcard').val();
+            var msgObj = $('#idCardMsg');
+            if (idCard == "") {
+                msgObj.css("color", "red").html("身份证号不能为空")
+            } else {
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "/checkTeacherIdCard",
+                    data: {teacheridcard: idCard},
+                    success: function (data) {
+                        if (data == "ok") {
+                            msgObj.css("color", "red").html("该身份证号可以使用");
+                        } else {
+                            msgObj.css("color", "red").html("该身份证号已经存在");
+                        }
+                    }
+                })
+            }
+        })
+
+    })
 </script>
 </html>

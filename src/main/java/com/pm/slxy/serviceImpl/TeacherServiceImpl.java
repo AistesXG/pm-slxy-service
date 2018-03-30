@@ -82,13 +82,6 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 || StringUtils.isEmpty(teacher.getTeacherstartwork())) {
             return "录入信息有误！";
         }
-        Teacher teacher1 = new Teacher();
-        teacher1.setTeachername(teacher.getTeachername());
-        Teacher teacher2 = this.selectOne(new EntityWrapper<>(teacher1));
-        if (!ObjectUtils.isEmpty(teacher2)) {
-            return "教师已经存在！";
-        }
-
         if (this.insert(teacher)) {
             return "ok";
         } else {
@@ -104,6 +97,19 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
      */
     @Override
     public String updateTeacher(Teacher teacher) {
+        if (StringUtils.isEmpty(teacher.getTeachername())
+                || StringUtils.isEmpty(teacher.getTeacherbirthdate())
+                || StringUtils.isEmpty(teacher.getTeacheridcard())
+                || StringUtils.isEmpty(teacher.getTeachernumber())
+                || StringUtils.isEmpty(teacher.getTeacherdepartment())
+                || StringUtils.isEmpty(teacher.getTeachereducation())
+                || StringUtils.isEmpty(teacher.getTeacherhousingdate())
+                || StringUtils.isEmpty(teacher.getTeacherplaceorigin())
+                || StringUtils.isEmpty(teacher.getTeacherrentalstatus())
+                || StringUtils.isEmpty(teacher.getTeachersex())
+                || StringUtils.isEmpty(teacher.getTeacherstartwork())) {
+            return "录入信息有误！";
+        }
         if (this.updateById(teacher)) {
             return "ok";
         } else {
@@ -128,5 +134,47 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             modelAndView.setViewName("404");
         }
         return modelAndView;
+    }
+
+    /**
+     * 检测更新或者添加的时候数据库中是否已经存在了教师的编号
+     *
+     * @param teachernumber
+     * @return
+     */
+    @Override
+    public String checkTeacherNum(String teachernumber) {
+        if (StringUtils.isEmpty(teachernumber)) {
+            return "error";
+        }
+        Teacher teacher = new Teacher();
+        teacher.setTeachernumber(teachernumber);
+        List<Teacher> teachers = teacherMapper.selectList(new EntityWrapper<>(teacher));
+        if (CollectionUtils.isEmpty(teachers)) {
+            return "ok";
+        } else {
+            return "error";
+        }
+    }
+
+    /**
+     * 检测更新或者添加的时候数据库中是否已经存在了教师的身份证号
+     *
+     * @param teacheridcard
+     * @return
+     */
+    @Override
+    public String checkTeacheridCard(String teacheridcard) {
+        if (StringUtils.isEmpty(teacheridcard)) {
+            return "error";
+        }
+        Teacher teacher = new Teacher();
+        teacher.setTeacheridcard(teacheridcard);
+        List<Teacher> teachers = teacherMapper.selectList(new EntityWrapper<>(teacher));
+        if (CollectionUtils.isEmpty(teachers)) {
+            return "ok";
+        } else {
+            return "error";
+        }
     }
 }

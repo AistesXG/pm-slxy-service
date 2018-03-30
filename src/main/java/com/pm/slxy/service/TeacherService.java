@@ -54,4 +54,20 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     ModelAndView selectTeacher(ModelAndView modelAndView, int id);
+
+    /**
+     * 检测教师的编号是否在数据库中已经存在
+     *
+     * @param teachernumber
+     * @return
+     */
+    String checkTeacherNum(String teachernumber);
+
+    /**
+     * 检测教师的编号是否在数据库中已经存在
+     *
+     * @param teacheridcard
+     * @return
+     */
+    String checkTeacheridCard(String teacheridcard);
 }
