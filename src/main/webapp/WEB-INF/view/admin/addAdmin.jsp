@@ -6,6 +6,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>添加用户</title>
 </head>
+<style type="text/css">
+    .must {
+        color: red;
+        font-size: 30px;
+        position: absolute;
+        top: 2px;
+    }
+</style>
 <body>
 <div id="wrapper">
     <!--引入公共页面-->
@@ -18,24 +26,32 @@
             <!-- /.col-lg-12 -->
             <div class="row">
                 <div class="col-lg-4 ">
-                    <form onsubmit="false" role="form" id="addForm">
+                    <form onsubmit="false" role="form" id="addForm" class="form-horizontal">
                         <br>
                         <div class="form-group">
-                            <label>用户名:</label>
-                            <input type="text" name="user" class="form-control" id="user" value="" size="20">
-                            <span id="msg"></span>
+                            <label class="col-sm-3 control-label">用户名:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="user" class="form-control" id="user" value="" size="20">
+                                <span id="msg"></span>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>密码:</label>
-                            <input type="password" name="pass" class="form-control" value="" size="20">
+                            <label class="col-sm-3 control-label">密码:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="password" name="pass" class="form-control" value="" size="20">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>email:</label>
-                            <input type="text" name="email" class="form-control" value="" size="50">
+                            <label class="col-sm-3 control-label">email:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="email" class="form-control" value="" size="50">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>电话号码:</label>
-                            <input type="text" name="phone" class="form-control" value="" size="11">
+                            <label class="col-sm-3 control-label">电话号码:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="phone" class="form-control" value="" size="11">
+                            </div>
                         </div>
                         <%-- <div class="form-group">
                              <label>角色:</label>
@@ -56,7 +72,6 @@
 </div>
 </body>
 <script type="text/javascript">
-    <!--添加用户-->
     function addAdmin() {
         $.ajax({
             type: "post",
@@ -70,7 +85,6 @@
                     alert(data);
                 }
             }
-
         })
     }
 
@@ -79,22 +93,23 @@
         $('#user').blur(function () {
             var cuser = $('#user').val();
             var msgObj = $('#msg');
-            if(cuser ==""){
-              msgObj.css("color","red").html("用户名不能为空")
-            }else{
-            $.ajax({
-                type: "post",
-                dataType: "json",
-                url: "/checkUser",
-                data: {user: cuser},
-                success: function (data) {
-                    if (data == "ok") {
-                        msgObj.css("color","red").html("用户名可以使用");
-                    }else{
-                        msgObj.css("color","red").html("用户名已经被注册");
+            if (cuser == "") {
+                msgObj.css("color", "red").html("用户名不能为空")
+            } else {
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "/checkUser",
+                    data: {user: cuser},
+                    success: function (data) {
+                        if (data == "ok") {
+                            msgObj.css("color", "red").html("用户名可以使用");
+                        } else {
+                            msgObj.css("color", "red").html("用户名已经被注册");
+                        }
                     }
-                }
-            })}
+                })
+            }
         })
     })
 </script>

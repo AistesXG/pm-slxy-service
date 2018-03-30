@@ -35,11 +35,11 @@
           margin-left: 5px;
       }
 
-     /* #updateAdminBtn {
+    #updateTeacherBtn {
           float: right;
           margin-top: -5px;
 
-      }*/
+    }
 
 </style>
 <body>
@@ -62,6 +62,8 @@
                                       class="btn btn-primary"/>
                         <input type="button" value="添加" id="addTeacherBtn" onclick="addTeacherView()"
                                class="btn btn-primary">
+                        <input type="button" value="修改" id="updateTeacherBtn" onclick="updateTeacherView()"
+                               class="btn btn-primary"/>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -186,6 +188,16 @@
     <!--跳转到addTeacherView页面-->
     function addTeacherView() {
         window.location.href = "/jump/jumpAddTeacher";
+    }
+
+    <!--跳转到updateAdmin页面-->
+    function updateTeacherView() {
+        var id = selectId();
+        if(id.length == 0){
+            alert("请选择一条数据,才能修改！");
+            return "" ;
+        }
+        window.location.href="/teacher/selectTeacher?id="+id;
     }
 </script>
 </html>

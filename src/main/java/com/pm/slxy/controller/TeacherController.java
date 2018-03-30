@@ -4,9 +4,8 @@ package com.pm.slxy.controller;
 import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -61,6 +60,32 @@ public class TeacherController {
     @ResponseBody
     public String addTeacher(Teacher teacher) throws Exception {
         return teacherService.addTeacher(teacher);
+    }
+
+    /**
+     * 更新教师信息
+     *
+     * @param teacher
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateTeacher")
+    @ResponseBody
+    public String updateTeacher(Teacher teacher) throws Exception {
+        return teacherService.updateTeacher(teacher);
+    }
+
+    /**
+     * 根据id查找一个教师信息
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectTeacher")
+    public ModelAndView selectTeacher(ModelAndView modelAndView, String id) throws Exception {
+        return teacherService.selectTeacher(modelAndView, Integer.parseInt(id));
     }
 }
 

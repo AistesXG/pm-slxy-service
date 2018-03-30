@@ -19,6 +19,7 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     ModelAndView selectTeachers(ModelAndView modelAndView);
+
     /**
      * 批量删除
      *
@@ -35,4 +36,22 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     String addTeacher(Teacher teacher);
+
+
+    /**
+     * 修改教师信息
+     *
+     * @param teacher
+     * @return
+     */
+    String updateTeacher(Teacher teacher);
+
+    /**
+     * 根据id来查找一个教师信息
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    ModelAndView selectTeacher(ModelAndView modelAndView, int id);
 }

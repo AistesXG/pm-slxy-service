@@ -7,6 +7,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>添加用户</title>
 </head>
+<style type="text/css">
+    .must {
+        color: red;
+        font-size: 30px;
+        position: absolute;
+        top: 2px;
+    }
+</style>
 <body>
 <div id="wrapper">
     <!--引入公共页面-->
@@ -19,53 +27,58 @@
             <!-- /.col-lg-12 -->
             <div class="row">
                 <div class="col-lg-4 ">
-                    <form onsubmit="false" role="form" id="addForm">
+                    <form onsubmit="false" role="form" id="addForm" class="form-horizontal">
                         <br>
                         <div class="form-group">
-                            <label>教师姓名:</label>
+                            <label class="col-sm-3 control-label">教师姓名:<span class="must">*</span></label>
+                            <div class="col-sm-9">
                             <input type="text" name="teachername" class="form-control" id="teachername" value="" size="10">
                             <span id="msg"></span>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>教工编号:</label>
+                            <label class="col-sm-3 control-label">教工编号:<span class="must">*</span></label>
+                            <div class="col-sm-9">
                             <input type="text" name="teachernumber" class="form-control" value="" size="6">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>性别:</label>
+                            <label class="col-sm-3 control-label">性别:<span class="must">*</span></label><div class="col-sm-9">
                             <input type="radio" name="teachersex" checked="checked" value="男"/>男 &nbsp;
-                            <input type="radio" name="teachersex" value="女">女
+                            <input type="radio" name="teachersex" value="女">女</div>
                         </div>
                         <div class="form-group">
-                            <label>身份证号:</label>
-                            <input type="text" name="teacheridcard" class="form-control" value="" size="18">
+                            <label class="col-sm-3 control-label">身份证号:<span class="must">*</span></label><div class="col-sm-9">
+                            <input type="text" name="teacheridcard" class="form-control" value="" size="18"></div>
                         </div>
                         <div class="form-group">
-                            <label>出生年月:</label>
-                            <input type="text" name="teacherbirthdate" class="form-control" value="" size="10">
+                            <label class="col-sm-3 control-label">出生年月:<span class="must">*</span></label><div class="col-sm-9">
+                            <input type="text" name="teacherbirthdate" class="form-control" value="" size="10"></div>
                         </div>
                         <div class="form-group">
-                            <label>学历:</label>
-                            <input type="text" name="teachereducation" class="form-control" value="" size="18">
+                            <label class="col-sm-3 control-label">学历:<span class="must">*</span></label><div class="col-sm-9">
+                            <input type="text" name="teachereducation" class="form-control" value="" size="18"></div>
                         </div>
                         <div class="form-group">
-                            <label>参加工作时间:</label>
-                            <input type="text" name="teacherstartwork" class="form-control" value="" size="10">
+                            <label class="col-sm-3 control-label">参加工作时间:<span class="must">*</span></label><div class="col-sm-9">
+                            <input type="text" name="teacherstartwork" class="form-control" value="" size="10"></div>
                         </div>
                         <div class="form-group">
-                            <label>申请住房日期:</label>
-                            <input type="text" name="teacherhousingdate" class="form-control" value="" size="10">
+                            <label class="col-sm-3 control-label">申请住房日期:<span class="must">*</span></label><div class="col-sm-9">
+                            <input type="text" name="teacherhousingdate" class="form-control" value="" size="10"></div>
                         </div>
                         <div class="form-group">
-                            <label>所在部门:</label>
-                            <input type="text" name="teacherdepartment" class="form-control" value="" size="30">
+                            <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label><div class="col-sm-9">
+                            <input type="text" name="teacherdepartment" class="form-control" value="" size="30"></div>
                         </div>
                         <div class="form-group">
-                            <label>籍贯:</label>
-                            <input type="text" name="teacherplaceorigin" class="form-control" value="" size="30">
+                            <label class="col-sm-3 control-label">籍贯:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                            <input type="text" name="teacherplaceorigin" class="form-control" value="" size="30"></div>
                         </div>
                         <div class="form-group">
-                            <label>租房状态:</label>
-                            <input type="text" name="teacherrentalstatus" class="form-control" value="" size="4">
+                            <label class="col-sm-3 control-label">租房状态:<span class="must">*</span></label><div class="col-sm-9">
+                            <input type="text" name="teacherrentalstatus" class="form-control" value="" size="4"></div>
                         </div>
 
                         <div class="form-group" style="text-align: center">

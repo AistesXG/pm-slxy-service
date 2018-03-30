@@ -95,4 +95,38 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             return "error";
         }
     }
+
+    /**
+     * 更新教师信息
+     *
+     * @param teacher
+     * @return
+     */
+    @Override
+    public String updateTeacher(Teacher teacher) {
+        if (this.updateById(teacher)) {
+            return "ok";
+        } else {
+            return "error";
+        }
+    }
+
+    /**
+     * 根据id来查找一个教师信息
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    @Override
+    public ModelAndView selectTeacher(ModelAndView modelAndView, int id) {
+        Teacher teacher = teacherMapper.selectById(id);
+        if (!ObjectUtils.isEmpty(teacher)) {
+            modelAndView.addObject("teacher", teacher);
+            modelAndView.setViewName("teacher/updateTeacher");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
+    }
 }

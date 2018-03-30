@@ -76,4 +76,17 @@ public class ViewJump {
         modelAndView.setViewName("404");
         return modelAndView;
     }
+
+    /**
+     * 跳转到修改页面
+     *
+     * @param modelAndView
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/jumpUpdateTeacher")
+    public ModelAndView jumpUpdateTeacher(ModelAndView modelAndView) throws Exception {
+        modelAndView.setViewName("teacher/updateTeacher");
+        return modelAndView;
+    }
 }
