@@ -41,13 +41,16 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">email:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="email" class="form-control" value="${admin.email}" size="50">
+                                <input type="text" name="email" class="form-control" value="${admin.email}" size="50" id="email">
+                                <span id="msgEmail"></span>
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">电话号码:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="phone" class="form-control" value="${admin.phone}" size="11">
+                                <input type="text" name="phone" class="form-control" value="${admin.phone}" size="11" id="phone">
+                                <span id="msgPhone"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -81,6 +84,19 @@
 <script type="text/javascript">
     <!--修改用户-->
     function updateAdmin() {
+        var regEmail = new RegExp("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+        var testEmail = regEmail.test($('#email').val());
+        var regPhone = new RegExp("^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$")
+        var testPhone = regPhone.test($('#phone').val());
+        if(!testEmail){
+            var msgEmail = $('#msgEmail');
+            msgEmail.css("color", "red").html("邮箱格式错误！")
+        }
+        if(!testPhone){
+            var msgPhone = $('#msgPhone');
+            msgPhone.css("color", "red").html("电话号码格式错误！")
+        }
+        if(testPhone && testEmail) {
         $.ajax({
             type: "post",
             dataType: "json",
@@ -95,8 +111,32 @@
             }
 
         })
+        }
     }
 
-
+    <!--检测用户名是否可以使用-->
+    $(function () {
+        $('#user').blur(function () {
+            var cuser = $('#user').val();
+            var msgObj = $('#msg');
+            if (cuser == "") {
+                msgObj.css("color", "red").html("用户名不能为空")
+            } else {
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "/checkUser",
+                    data: {user: cuser},
+                    success: function (data) {
+                        if (data == "ok") {
+                            msgObj.css("color", "red").html("用户名可以使用");
+                        } else {
+                            msgObj.css("color", "red").html("用户名已经被注册");
+                        }
+                    }
+                })
+            }
+        })
+    })
 </script>
 </html>

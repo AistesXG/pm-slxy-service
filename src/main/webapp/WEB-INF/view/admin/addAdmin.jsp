@@ -44,13 +44,15 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">email:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="email" class="form-control" value="" size="50">
+                                <input type="text" id="email" name="email" class="form-control" value="" size="50">
+                                <span id="msgEmail"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">电话号码:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="phone" class="form-control" value="" size="11">
+                                <input type="text" name="phone" class="form-control" value="" size="11" id="phone">
+                                <span id="msgPhone"></span>
                             </div>
                         </div>
                         <%-- <div class="form-group">
@@ -73,19 +75,33 @@
 </body>
 <script type="text/javascript">
     function addAdmin() {
-        $.ajax({
-            type: "post",
-            dataType: "json",
-            url: "/admin/addAdmin",
-            data: $('#addForm').serialize(),
-            success: function (data) {
-                if (data == "ok") {
-                    window.location.href = "/admin/adminList";
-                } else {
-                    alert(data);
+        var regEmail = new RegExp("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+        var testEmail = regEmail.test($('#email').val());
+        var regPhone = new RegExp("^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$")
+        var testPhone = regPhone.test($('#phone').val());
+        if(!testEmail){
+            var msgEmail = $('#msgEmail');
+            msgEmail.css("color", "red").html("邮箱格式错误！")
+        }
+        if(!testPhone){
+            var msgPhone = $('#msgPhone');
+            msgPhone.css("color", "red").html("电话号码格式错误！")
+        }
+        if(testEmail && testPhone){
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "/admin/addAdmin",
+                data: $('#addForm').serialize(),
+                success: function (data) {
+                    if (data == "ok") {
+                        window.location.href = "/admin/adminList";
+                    } else {
+                        alert(data);
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
     <!--检测用户名是否可以使用-->

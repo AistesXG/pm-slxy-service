@@ -147,6 +147,27 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      */
     @Override
     public String updateAdmin(Admin admin) {
+        if (StringUtils.isEmpty(admin.getUser())) {
+            return "用户名不能为空！";
+        }
+        if (StringUtils.isEmpty(admin.getEmail())) {
+            return "邮箱不能为空";
+        }
+        if (StringUtils.isEmpty(admin.getPhone())) {
+            return "电话号码不能为空";
+        }
+
+        Admin oldAdmin = this.selectById(admin.getId());
+        if (admin.getUser().equals(oldAdmin.getUser())) {
+            admin.setUser(oldAdmin.getUser());
+        }else {
+            Admin admin1 = new Admin();
+            admin1.setUser(admin.getUser());
+            Admin admin2 = this.selectOne(new EntityWrapper<>(admin1));
+            if(admin2 != null) {
+                return "用户名已经被使用了";
+            }
+        }
         if (this.updateById(admin)) {
             return "ok";
         } else {
