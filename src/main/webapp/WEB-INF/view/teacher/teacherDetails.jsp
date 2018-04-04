@@ -58,7 +58,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已注册的用户 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
+                        已添加的教师 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
                                       class="btn btn-primary"/>
                         <input type="button" value="添加" id="addTeacherBtn" onclick="addTeacherView()"
                                class="btn btn-primary">
@@ -91,7 +91,7 @@
                             <tbody>
                             <c:forEach items="${teacherList}" var="teacher" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="tid" id="tid" value="${teacher.id}"></td>
+                                    <td><input type="checkbox" name="tid" id="tid" value="${teacher.id}" style="margin-right: 8px; "></td>
                                     <td>${status.count}</td>
                                     <td>${teacher.teachername}</td>
                                     <td>${teacher.teachernumber}</td>

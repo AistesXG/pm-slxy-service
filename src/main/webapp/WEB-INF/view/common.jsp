@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/WEB-INF/pages/index.jspndex.jsp">SLXY 房产管理 V1.0.0</a>
+        <a class="navbar-brand" href="/jump/jumpHome">SLXY 房产管理 V1.0.0</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -52,7 +52,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="../../login.jsp"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                <li><a href="/jump/jumpLogin"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -76,16 +76,16 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/jump/jumpHome"><i class="fa fa-dashboard fa-fw"></i>主页</a>
+                    <a href="/jump/jumpHome"><i class="fa-dashboard fa-fw"></i>主页</a>
                 </li>
                 <li>
-                    <a href="/admin/adminList"><i class="fa fa-wrench fa-fw"></i>用户管理</a>
+                    <a href="/admin/adminList"><i class="fa-wrench fa-fw"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href="/teacher/teacherList"><i class="fa fa-wrench fa-fw"></i>教师管理</a>
+                    <a href="/teacher/teacherList"><i class="fa-wrench fa-fw"></i>教师管理</a>
                 </li>
                 <li>
-                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                    <a href="/housePub/houseList"><i class="fa-edit fa-fw"></i>房产管理</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>

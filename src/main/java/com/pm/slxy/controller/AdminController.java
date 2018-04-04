@@ -3,6 +3,8 @@ package com.pm.slxy.controller;
 
 import com.pm.slxy.entity.Admin;
 import com.pm.slxy.service.AdminService;
+import com.pm.slxy.utils.SysControllerFilter;
+import org.springframework.beans.factory.NamedBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,7 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping(value = "/adminList")
+    @SysControllerFilter(name = "adminList")
     public ModelAndView selectAdmins(ModelAndView modelAndView) throws Exception {
         return adminService.selectAdmins(modelAndView);
     }
@@ -45,6 +48,7 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping(value = "/deleteAdminByIds")
+    @SysControllerFilter(name= "deleteAdminByIds")
     @ResponseBody
     public String deleteAdminByIds(String ids) throws Exception {
         return adminService.deleteAdminByIds(ids);
@@ -58,6 +62,7 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping(value = "/addAdmin")
+    @SysControllerFilter(name = "/addAdmin")
     @ResponseBody
     public String addAdmin(Admin admin) throws Exception {
         return adminService.addAdmin(admin);
@@ -72,6 +77,7 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping(value = "/updateAdmin")
+    @SysControllerFilter(name = "/updateAdmin")
     @ResponseBody
     public String updateAdmin(Admin admin) throws Exception {
         return adminService.updateAdmin(admin);
@@ -86,6 +92,7 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping(value = "/selectAdmin")
+    @SysControllerFilter(name = "selectAdmin")
     public ModelAndView selectAdmin(ModelAndView modelAndView, String id) throws Exception {
         return adminService.selectAdmin(modelAndView, Integer.parseInt(id));
     }

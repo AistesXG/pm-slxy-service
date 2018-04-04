@@ -3,6 +3,7 @@ package com.pm.slxy.controller;
 
 import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.service.TeacherService;
+import com.pm.slxy.utils.SysControllerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class TeacherController {
      * @throws Exception
      */
     @RequestMapping(value = "/teacherList")
+    @SysControllerFilter(name = "teacherList")
     public ModelAndView selectTeacher(ModelAndView modelAndView) throws Exception {
         return teacherService.selectTeachers(modelAndView);
     }
@@ -44,6 +46,7 @@ public class TeacherController {
      * @throws Exception
      */
     @RequestMapping(value = "/deleteTeacherByIds")
+    @SysControllerFilter(name = "deleteTeacherByIds")
     @ResponseBody
     public String deleteTeacherByIds(String ids) throws Exception {
         return teacherService.deleteTeacherByIds(ids);
@@ -57,6 +60,7 @@ public class TeacherController {
      * @throws Exception
      */
     @RequestMapping(value = "/addTeacher")
+    @SysControllerFilter(name = "addTeacher")
     @ResponseBody
     public String addTeacher(Teacher teacher) throws Exception {
         return teacherService.addTeacher(teacher);
@@ -70,6 +74,7 @@ public class TeacherController {
      * @throws Exception
      */
     @RequestMapping(value = "/updateTeacher")
+    @SysControllerFilter(name = "updateTeacher")
     @ResponseBody
     public String updateTeacher(Teacher teacher) throws Exception {
         return teacherService.updateTeacher(teacher);
@@ -84,6 +89,7 @@ public class TeacherController {
      * @throws Exception
      */
     @RequestMapping(value = "/selectTeacher")
+    @SysControllerFilter(name = "selectTeacher")
     public ModelAndView selectTeacher(ModelAndView modelAndView, String id) throws Exception {
         return teacherService.selectTeacher(modelAndView, Integer.parseInt(id));
     }
