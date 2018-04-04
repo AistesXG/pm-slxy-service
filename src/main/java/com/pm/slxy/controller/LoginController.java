@@ -2,12 +2,10 @@ package com.pm.slxy.controller;
 
 import com.pm.slxy.entity.Admin;
 import com.pm.slxy.service.AdminService;
-import com.pm.slxy.utils.SysControllerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,8 +35,7 @@ public class LoginController {
             List<Admin> admins = adminService.login(admin.getUser(), admin.getPass());
             if (CollectionUtils.isEmpty(admins)) {
                 modelAndView.setViewName("redirect:/jump/jumpLogin");
-            }
-            else {
+            } else {
                 modelAndView.addObject("admins", admins.get(0));
                 if (admins.get(0).getType().equals("系统管理员")) {
                     modelAndView.setViewName("index");

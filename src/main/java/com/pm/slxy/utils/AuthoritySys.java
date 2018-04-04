@@ -9,6 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * controller注解
  * @author furg@senthink.com
  * @date 2018/4/4
  */

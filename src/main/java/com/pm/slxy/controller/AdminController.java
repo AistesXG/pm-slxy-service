@@ -4,7 +4,6 @@ package com.pm.slxy.controller;
 import com.pm.slxy.entity.Admin;
 import com.pm.slxy.service.AdminService;
 import com.pm.slxy.utils.SysControllerFilter;
-import org.springframework.beans.factory.NamedBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +47,7 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping(value = "/deleteAdminByIds")
-    @SysControllerFilter(name= "deleteAdminByIds")
+    @SysControllerFilter(name = "deleteAdminByIds")
     @ResponseBody
     public String deleteAdminByIds(String ids) throws Exception {
         return adminService.deleteAdminByIds(ids);

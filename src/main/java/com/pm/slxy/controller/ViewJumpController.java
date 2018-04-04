@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.annotation.Retention;
-
 /**
  * @author furg@senthink.com
  * @date 2018/3/23
@@ -27,6 +25,7 @@ public class ViewJumpController {
         modelAndView.setViewName("../../login");
         return modelAndView;
     }
+
     /**
      * 跳转到添加管理员页面
      *
