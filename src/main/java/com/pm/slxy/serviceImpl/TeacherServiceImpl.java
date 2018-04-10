@@ -80,7 +80,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 || StringUtils.isEmpty(teacher.getTeacherrentalstatus())
                 || StringUtils.isEmpty(teacher.getTeachersex())
                 || StringUtils.isEmpty(teacher.getTeacherstartwork())) {
-            return "录入信息有误！";
+            return "输入的信息不能为空！";
         }
         if (this.insert(teacher)) {
             return "ok";
@@ -108,7 +108,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 || StringUtils.isEmpty(teacher.getTeacherrentalstatus())
                 || StringUtils.isEmpty(teacher.getTeachersex())
                 || StringUtils.isEmpty(teacher.getTeacherstartwork())) {
-            return "录入信息有误！";
+            return "输入的信息不能为空！";
         }
         if (this.updateById(teacher)) {
             return "ok";

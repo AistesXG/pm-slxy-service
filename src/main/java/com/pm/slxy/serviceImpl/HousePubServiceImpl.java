@@ -7,8 +7,11 @@ import com.pm.slxy.service.HousePubService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,10 +35,92 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
      * @return
      */
     @Override
-    public ModelAndView selectHouses(ModelAndView modelAndView) {
+    public ModelAndView selectHousePubs(ModelAndView modelAndView) {
         List<HousePub> housePubList = housePubMapper.selectList(new EntityWrapper<HousePub>());
         modelAndView.addObject("housePubList", housePubList);
-        modelAndView.setViewName("/house/houseDetails");
+        modelAndView.setViewName("housePub/housePubDetails");
         return modelAndView;
+    }
+
+    /**
+     * 添加housePub
+     *
+     * @param housePub
+     * @return
+     */
+    @Override
+    public String addHousePub(HousePub housePub) {
+        if (StringUtils.isEmpty(housePub.getHousearea()) ||
+                StringUtils.isEmpty(housePub.getHousedepartment()) ||
+                StringUtils.isEmpty(housePub.getHousefloornumber()) ||
+                StringUtils.isEmpty(housePub.getHousenumber()) ||
+                StringUtils.isEmpty(housePub.getHousestatus()) ||
+                StringUtils.isEmpty(housePub.getHousetype())) {
+            return "输入的信息不能为空！";
+        }
+        if (this.insert(housePub)) {
+            return "ok";
+        } else {
+            return "error";
+        }
+    }
+
+    /**
+     * 删除housePub数据
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    public String deleteHousePubByIds(String ids) {
+        List<String> housePubs = Arrays.asList(ids.split(","));
+        int deleteHousePub = housePubMapper.deleteBatchIds(housePubs);
+        if (deleteHousePub != 0) {
+            return "ok";
+        } else {
+            return "error";
+        }
+    }
+
+    /**
+     * 根据id来查找一个房产的信息
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    @Override
+    public ModelAndView selectHousePubById(ModelAndView modelAndView, int id) {
+        HousePub housePub = housePubMapper.selectById(id);
+        if (!ObjectUtils.isEmpty(housePub)) {
+            modelAndView.addObject("housePub", housePub);
+            modelAndView.setViewName("housePub/updateHousePub");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * 更新房产信息
+     *
+     * @param housePub
+     * @return
+     */
+    @Override
+    public String updateHousePub(HousePub housePub) {
+        if (StringUtils.isEmpty(housePub.getHousearea()) ||
+                StringUtils.isEmpty(housePub.getHousedepartment()) ||
+                StringUtils.isEmpty(housePub.getHousefloornumber()) ||
+                StringUtils.isEmpty(housePub.getHousenumber()) ||
+                StringUtils.isEmpty(housePub.getHousestatus()) ||
+                StringUtils.isEmpty(housePub.getHousetype())) {
+            return "输入的信息不能为空！";
+        }
+        if (this.updateById(housePub)) {
+            return "ok";
+        } else {
+            return "error";
+        }
     }
 }

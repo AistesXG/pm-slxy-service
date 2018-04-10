@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -30,13 +31,14 @@ public class LoginController {
      * @throws Exception
      */
     @RequestMapping(value = "/login")
-    public ModelAndView login(ModelAndView modelAndView, Admin admin) throws Exception {
+    public ModelAndView login(ModelAndView modelAndView, Admin admin, HttpSession session) throws Exception {
         if (admin != null) {
             List<Admin> admins = adminService.login(admin.getUser(), admin.getPass());
             if (CollectionUtils.isEmpty(admins)) {
                 modelAndView.setViewName("redirect:/jump/jumpLogin");
             } else {
                 modelAndView.addObject("admins", admins.get(0));
+                session.setAttribute("admins", admins.get(0));
                 if (admins.get(0).getType().equals("系统管理员")) {
                     modelAndView.setViewName("index");
                 } else if (admins.get(0).getType().equals("普通管理员")) {

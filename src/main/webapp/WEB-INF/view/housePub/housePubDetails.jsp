@@ -28,13 +28,13 @@
             margin-left: 5px;
         }
 
-        #addAdminBtn {
+        #addHousePubBtn {
             float: right;
             margin-top: -5px;
             margin-left: 5px;
         }
 
-        #updateAdminBtn {
+        #updateHousePubBth {
             float: right;
             margin-top: -5px;
 
@@ -59,9 +59,9 @@
                     <div class="panel-heading">
                         已拥有的房屋 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
                                       class="btn btn-primary"/>
-                        <input type="button" value="添加" id="addAdminBtn" onclick="addHouseView()"
+                        <input type="button" value="添加" id="addHousePubBtn" onclick="addHousePubView()"
                                class="btn btn-primary">
-                        <input type="button" value="修改" id="updateAdminBtn" onclick="updateAdminView()"
+                        <input type="button" value="修改" id="updateHousePubBth" onclick="updateHousePubView()"
                                class="btn btn-primary"/>
                     </div>
                     <!-- /.panel-heading -->
@@ -137,11 +137,11 @@
     }
 
     <!--跳转到addAdmin页面-->
-    function addHouseView() {
-        window.location.href = "/jump/jumpAddHouse";
+    function addHousePubView() {
+        window.location.href = "/jump/jumpAddHousePub";
     }
 
-    /*  function selectId() {
+    function selectId() {
          var ids = "";
          $("input[name='uid']:checkbox:checked").each(function () {
              if (ids.length == 0) {
@@ -165,13 +165,13 @@
          if (confirm("确定要删除所选的数据")) {
              $.ajax({
                  type: "get",
-                 url: '/admin/deleteAdminByIds',
+                 url: '/housePub/deleteHousePub',
                  data: {ids: ids},
                  contentType: 'application/json',
                  dataType: "json",
                  success: function (data) {
                      if (data == "ok") {
-                         window.location.href = "/admin/adminList";
+                         window.location.href = "/housePub/housePubList";
                      } else {
                          alert(data);
                      }
@@ -182,13 +182,13 @@
 
 
      <!--跳转到updateAdmin页面-->
-     function updateAdminView() {
+     function updateHousePubView() {
          var id = selectId();
          if(id.length == 0){
              alert("请选择一条数据,才能修改！");
              return "" ;
          }
-         window.location.href="/admin/selectAdmin?id="+id;
-     }*/
+         window.location.href="/housePub/selectHousePubById?id="+id;
+     }
 </script>
 </html>

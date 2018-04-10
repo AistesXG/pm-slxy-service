@@ -117,10 +117,10 @@ public class ViewJumpController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/jumpAddHouse")
-    @SysControllerFilter(name = "jumpAddHouse")
+    @RequestMapping(value = "/jumpAddHousePub")
+    @SysControllerFilter(name = "jumpAddHousePub")
     public ModelAndView jumpAddHouse(ModelAndView modelAndView) throws Exception {
-        modelAndView.setViewName("/house/addHouse");
+        modelAndView.setViewName("housePub/addHousePub");
         return modelAndView;
     }
 }

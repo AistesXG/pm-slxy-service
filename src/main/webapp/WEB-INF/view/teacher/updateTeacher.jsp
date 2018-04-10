@@ -27,7 +27,7 @@
             <!-- /.col-lg-12 -->
             <div class="row">
                 <div class="col-lg-4 ">
-                    <form onsubmit="false" role="form" id="addForm" class="form-horizontal">
+                    <form onsubmit="false" role="form" id="updateForm" class="form-horizontal">
                         <br>
                         <input type="hidden" value="${teacher.id}" name="id">
                         <div class="form-group">
@@ -118,7 +118,7 @@
             type: "post",
             dataType: "json",
             url: "/teacher/updateTeacher",
-            data: $('#addForm').serialize(),
+            data: $('#updateForm').serialize(),
             success: function (data) {
                 if (data == "ok") {
                     window.location.href = "/teacher/teacherList";

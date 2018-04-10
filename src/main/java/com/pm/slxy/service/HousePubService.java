@@ -20,6 +20,38 @@ public interface HousePubService extends IService<HousePub> {
      * @param modelAndView
      * @return
      */
-    ModelAndView selectHouses(ModelAndView modelAndView);
+    ModelAndView selectHousePubs(ModelAndView modelAndView);
 
+
+    /**
+     * 添加房产信息
+     *
+     * @param housePub
+     * @return
+     */
+    String addHousePub(HousePub housePub);
+
+
+    /**
+     * 删除房产信息（支持批量删除和单个删除）
+     *
+     * @param ids
+     * @return
+     */
+    String deleteHousePubByIds(String ids);
+
+    /**
+     * 根据id来查找一个房产信息
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    ModelAndView selectHousePubById(ModelAndView modelAndView, int id);
+
+    /**
+     * 更新房产信息
+     * @param housePub
+     * @return
+     */
+    String updateHousePub(HousePub housePub);
 }

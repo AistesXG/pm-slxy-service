@@ -22,10 +22,6 @@
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 <!-- Navigation -->
@@ -66,12 +62,8 @@
             <ul class="nav" id="side-menu">
                 <li class="sidebar-search">
                     <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+
+
                     </div>
                     <!-- /input-group -->
                 </li>
@@ -85,7 +77,7 @@
                     <a href="/teacher/teacherList"><i class="fa-wrench fa-fw"></i>教师管理</a>
                 </li>
                 <li>
-                    <a href="/housePub/houseList"><i class="fa-edit fa-fw"></i>房产管理</a>
+                    <a href="/housePub/housePubList"><i class="fa-edit fa-fw"></i>房产管理</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
