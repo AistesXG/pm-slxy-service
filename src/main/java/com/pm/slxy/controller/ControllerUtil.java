@@ -1,6 +1,7 @@
 package com.pm.slxy.controller;
 
 import com.pm.slxy.service.AdminService;
+import com.pm.slxy.service.HousePubService;
 import com.pm.slxy.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,8 @@ public class ControllerUtil {
     private AdminService adminService;
     @Autowired
     private TeacherService teacherService;
-
+    @Autowired
+    private HousePubService housePubService;
     /**
      * 检测用户名是否存在
      *

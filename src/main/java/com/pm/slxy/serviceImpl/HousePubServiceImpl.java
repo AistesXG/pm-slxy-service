@@ -1,10 +1,10 @@
 package com.pm.slxy.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.entity.HousePub;
 import com.pm.slxy.mapper.HousePubMapper;
 import com.pm.slxy.service.HousePubService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -51,11 +51,10 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     @Override
     public String addHousePub(HousePub housePub) {
         if (StringUtils.isEmpty(housePub.getHousearea()) ||
-                StringUtils.isEmpty(housePub.getHousedepartment()) ||
                 StringUtils.isEmpty(housePub.getHousefloornumber()) ||
                 StringUtils.isEmpty(housePub.getHousenumber()) ||
-                StringUtils.isEmpty(housePub.getHousestatus()) ||
-                StringUtils.isEmpty(housePub.getHousetype())) {
+                StringUtils.isEmpty(housePub.getHousestatus())
+                ) {
             return "输入的信息不能为空！";
         }
         if (this.insert(housePub)) {
@@ -74,6 +73,10 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     @Override
     public String deleteHousePubByIds(String ids) {
         List<String> housePubs = Arrays.asList(ids.split(","));
+        List<HousePub> housePubList = housePubMapper.selectBatchIds(housePubs);
+        if (housePubList.get(0).getHousestatus().equals("已被使用")) {
+            return "您删除的房子已经租出去了";
+        }
         int deleteHousePub = housePubMapper.deleteBatchIds(housePubs);
         if (deleteHousePub != 0) {
             return "ok";
@@ -110,11 +113,10 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     @Override
     public String updateHousePub(HousePub housePub) {
         if (StringUtils.isEmpty(housePub.getHousearea()) ||
-                StringUtils.isEmpty(housePub.getHousedepartment()) ||
                 StringUtils.isEmpty(housePub.getHousefloornumber()) ||
                 StringUtils.isEmpty(housePub.getHousenumber()) ||
-                StringUtils.isEmpty(housePub.getHousestatus()) ||
-                StringUtils.isEmpty(housePub.getHousetype())) {
+                StringUtils.isEmpty(housePub.getHousestatus())
+                ) {
             return "输入的信息不能为空！";
         }
         if (this.updateById(housePub)) {
@@ -123,4 +125,5 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
             return "error";
         }
     }
+
 }

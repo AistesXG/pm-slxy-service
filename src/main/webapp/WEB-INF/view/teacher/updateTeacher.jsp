@@ -77,12 +77,12 @@
                                 <input type="text" name="teacherstartwork" class="form-control"
                                        value="${teacher.teacherstartwork}" size="10"></div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">申请住房日期:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <input type="text" name="teacherhousingdate" class="form-control"
-                                       value="${teacher.teacherhousingdate}" size="10"></div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">申请住房日期:</label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<input type="text" name="teacherhousingdate" class="form-control"--%>
+                                       <%--value="${teacher.teacherhousingdate}" size="10"></div>--%>
+                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label>
                             <div class="col-sm-9">

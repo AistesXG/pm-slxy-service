@@ -1,6 +1,9 @@
 package com.pm.slxy.controller;
 
+import com.pm.slxy.entity.HousePub;
+import com.pm.slxy.service.HousePubService;
 import com.pm.slxy.utils.SysControllerFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/jump")
 public class ViewJumpController {
+
+    @Autowired
+    private HousePubService housePubService;
 
     /**
      * 跳转到登录页面
@@ -121,6 +127,22 @@ public class ViewJumpController {
     @SysControllerFilter(name = "jumpAddHousePub")
     public ModelAndView jumpAddHouse(ModelAndView modelAndView) throws Exception {
         modelAndView.setViewName("housePub/addHousePub");
+        return modelAndView;
+    }
+
+    /**
+     * 跳转到租房页面
+     *
+     * @param modelAndView
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/jumpRentalHouse")
+    @SysControllerFilter(name = "jumpRentalHouse")
+    public ModelAndView jumpRentalHouse(ModelAndView modelAndView, String id) throws Exception {
+        HousePub housePub = housePubService.selectById(id);
+        modelAndView.addObject("housePub", housePub);
+        modelAndView.setViewName("house/rentalHouse");
         return modelAndView;
     }
 }

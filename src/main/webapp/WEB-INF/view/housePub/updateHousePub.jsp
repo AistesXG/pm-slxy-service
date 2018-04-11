@@ -52,27 +52,27 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">使用状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="housestatus" class="form-control" value="${housePub.housestatus}" size="4" id="housestatus">
+                                <input type="text" name="housestatus" class="form-control" value="${housePub.housestatus}" size="4" id="housestatus" readonly="readonly">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">使用类型:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <input type="text" name="housetype" class="form-control" value="${housePub.housetype}" size="20" id="housetype">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <input type="text" name="housedepartment" class="form-control" value="${housePub.housedepartment}" size="30" id="housedepartment">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <textarea cols="5" rows="5" name="houseremarks" class="form-control"  id="houseremarks">${housePub.houseremarks}</textarea>
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">使用类型:</label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<input type="text" name="housetype" class="form-control" value="${housePub.housetype}" size="20" id="housetype">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">使用部门:</label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<input type="text" name="housedepartment" class="form-control" value="${housePub.housedepartment}" size="30" id="housedepartment">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">备注:</label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<textarea cols="5" rows="5" name="houseremarks" class="form-control"  id="houseremarks">${housePub.houseremarks}</textarea>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group" style="text-align: center">
                             <input type="button" value="提交" class="btn btn-primary" onclick="updateHousePub()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">

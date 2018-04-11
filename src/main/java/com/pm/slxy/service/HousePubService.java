@@ -42,6 +42,7 @@ public interface HousePubService extends IService<HousePub> {
 
     /**
      * 根据id来查找一个房产信息
+     *
      * @param modelAndView
      * @param id
      * @return
@@ -50,8 +51,11 @@ public interface HousePubService extends IService<HousePub> {
 
     /**
      * 更新房产信息
+     *
      * @param housePub
      * @return
      */
     String updateHousePub(HousePub housePub);
+
+
 }

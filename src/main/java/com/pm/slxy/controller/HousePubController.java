@@ -57,5 +57,7 @@ public class HousePubController {
     public String updateHousePub(HousePub housePub) throws Exception {
         return housePubService.updateHousePub(housePub);
     }
+
+
 }
 

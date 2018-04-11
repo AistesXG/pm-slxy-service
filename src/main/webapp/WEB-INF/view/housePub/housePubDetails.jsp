@@ -80,6 +80,7 @@
                                 <th>使用类型</th>
                                 <th>使用部门</th>
                                 <th>备注</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
 
@@ -95,6 +96,7 @@
                                     <td class="center">${house.housetype}</td>
                                     <td class="center">${house.housedepartment}</td>
                                     <td class="center">${house.houseremarks}</td>
+                                    <td colspan="2"><button onclick="rentalHouse(${house.id})" class="btn btn-sm">租房</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="checkOut()" class="btn btn-sm">退房</button></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -190,5 +192,16 @@
          }
          window.location.href="/housePub/selectHousePubById?id="+id;
      }
+
+
+     <!--租房-->
+    function rentalHouse(id) {
+        window.location.href = "/jump/jumpRentalHouse?id="+id;
+    }
+
+    <!--退房-->
+    function checkOut() {
+
+    }
 </script>
 </html>
