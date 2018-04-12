@@ -103,7 +103,7 @@
                                     <td>${teacher.teacherhousingdate}</td>
                                     <td>${teacher.teacherdepartment}</td>
                                     <td>${teacher.teacherplaceorigin}</td>
-                                    <td>${teacher.teacherrentalstatus}</td>
+                                    <td style="color: red; font-weight: bolder">${teacher.teacherrentalstatus}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -196,6 +196,11 @@
         if(id.length == 0){
             alert("请选择一条数据,才能修改！");
             return "" ;
+        }
+        var str = id.split(",");
+        if (str.length >1) {
+            alert("一次只能选择一条数据修改!")
+            return "";
         }
         window.location.href="/teacher/selectTeacher?id="+id;
     }

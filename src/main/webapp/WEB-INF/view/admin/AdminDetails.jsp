@@ -181,6 +181,11 @@
             alert("请选择一条数据,才能修改！");
             return "" ;
         }
+        var str = id.split(",");
+        if (str.length >1) {
+            alert("一次只能选择一条数据修改!")
+            return "";
+        }
         window.location.href="/admin/selectAdmin?id="+id;
     }
 </script>

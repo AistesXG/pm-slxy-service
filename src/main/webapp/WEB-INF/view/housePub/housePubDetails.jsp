@@ -93,7 +93,7 @@
                                     <td>${house.housefloornumber}</td>
                                     <td>${house.housenumber}</td>
                                     <td>${house.housearea}</td>
-                                    <td class="center">${house.housestatus}</td>
+                                    <td class="center" style="color: red; font-weight: bolder">${house.housestatus}</td>
                                     <td class="center">${house.housetype}</td>
                                     <td class="center">${house.housedepartment}</td>
                                     <td class="center">${house.houseremarks}</td>
@@ -197,6 +197,11 @@
         var id = selectId();
         if (id.length == 0) {
             alert("请选择一条数据,才能修改！");
+            return "";
+        }
+        var str = id.split(",");
+        if (str.length >1) {
+            alert("一次只能选择一条数据修改!")
             return "";
         }
         window.location.href = "/housePub/selectHousePubById?id=" + id;
