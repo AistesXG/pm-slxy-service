@@ -1,6 +1,7 @@
 package com.pm.slxy.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.pm.slxy.Enum.AdminEnum;
 import com.pm.slxy.entity.Admin;
 import com.pm.slxy.mapper.AdminMapper;
 import com.pm.slxy.service.AdminService;
@@ -76,6 +77,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public String deleteAdminByIds(String ids) {
         //将字符串转为字符串list集合
         List<String> adminIds = Arrays.asList(ids.split(","));
+        List<Admin> adminList = adminMapper.selectBatchIds(adminIds);
+        if(adminList.get(0).getType().equals(AdminEnum.SYSTEM_ADMIN.getRole())) {
+            return "该用户是系统管理员，不能删除!";
+        }
         int delete = adminMapper.deleteBatchIds(adminIds);
         if (delete != 0) {
             return "ok";

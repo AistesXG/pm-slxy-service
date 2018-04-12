@@ -2,6 +2,7 @@ package com.pm.slxy.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.HousePub;
 import com.pm.slxy.mapper.HousePubMapper;
 import com.pm.slxy.service.HousePubService;
@@ -74,7 +75,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     public String deleteHousePubByIds(String ids) {
         List<String> housePubs = Arrays.asList(ids.split(","));
         List<HousePub> housePubList = housePubMapper.selectBatchIds(housePubs);
-        if (housePubList.get(0).getHousestatus().equals("已被使用")) {
+        if (housePubList.get(0).getHousestatus().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus())) {
             return "您删除的房子已经租出去了";
         }
         int deleteHousePub = housePubMapper.deleteBatchIds(housePubs);

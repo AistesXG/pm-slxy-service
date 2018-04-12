@@ -80,15 +80,15 @@
                     <a href="/housePub/housePubList"><i class="fa-edit fa-fw"></i>房产管理</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-wrench fa-fw"></i><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <a href="/houseRentingSituation/houseRentingHouseList"><i class="fa-wrench fa-fw"></i>租房管理</a>
+                   <%-- <ul class="nav nav-second-level">
                         <li>
-                            <a href="#"></a>
+                            <a href="#">租房</a>
                         </li>
                         <li>
-                            <a href="#"></a>
+                            <a href="#">退房</a>
                         </li>
-                    </ul>
+                    </ul>--%>
                     <!-- /.nav-second-level -->
                 </li>
                 <li>

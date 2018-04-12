@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">使用状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="housestatus" class="form-control" value="未使用" size="4" id="housestatus" readonly="readonly">
+                                <input type="text" name="housestatus" class="form-control" value="未租出" size="4" id="housestatus" readonly="readonly">
                             </div>
                         </div>
                         <%--<div class="form-group">--%>

@@ -1,5 +1,6 @@
 package com.pm.slxy.controller;
 
+import com.pm.slxy.Enum.AdminEnum;
 import com.pm.slxy.entity.Admin;
 import com.pm.slxy.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,9 @@ public class LoginController {
             } else {
                 modelAndView.addObject("admins", admins.get(0));
                 session.setAttribute("admins", admins.get(0));
-                if (admins.get(0).getType().equals("系统管理员")) {
+                if (admins.get(0).getType().equals(AdminEnum.SYSTEM_ADMIN.getRole())) {
                     modelAndView.setViewName("index");
-                } else if (admins.get(0).getType().equals("普通管理员")) {
+                } else if (admins.get(0).getType().equals(AdminEnum.ORDINARY_ADMIN.getRole())) {
                     modelAndView.setViewName("orarginPage");
                 }
             }

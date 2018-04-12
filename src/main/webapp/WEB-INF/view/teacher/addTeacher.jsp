@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">租房状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teacherrentalstatus" class="form-control" value="" size="4">
+                                <input type="text" name="teacherrentalstatus" class="form-control" value="未租房" size="4" readonly="readonly">
                             </div>
                         </div>
 
@@ -176,7 +176,6 @@
                 })
             }
         })
-
     })
 </script>
 </html>

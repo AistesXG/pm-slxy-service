@@ -121,8 +121,8 @@
                             </div>
                         </div>
                         <div class="form-group" style="text-align: center">
-                            <input type="button" value="提交" onclick="rental()" id="rental" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">
+                            <input type="button" value="提交" onclick="rental()" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="reset" value="重置" class="btn btn-primary">
                         </div>
                     </form>
                 </div>
@@ -134,14 +134,13 @@
 <script type="text/javascript">
     function rental() {
         $.ajax({
-            async: false,
             type: "post",
             dataType: "json",
             url: "/houseRentingSituation/rentalHouse",
             data: $('#addForm').serialize(),
             success: function (data) {
                 if (data == "ok") {
-                    window.location.href = "/teacher/teacherList";
+                    window.location.href = "/houseRentingSituation/houseRentingHouseList";
                 } else {
                     alert(data);
                 }

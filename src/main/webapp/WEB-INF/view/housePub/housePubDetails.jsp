@@ -87,7 +87,8 @@
                             <tbody>
                             <c:forEach items="${housePubList}" var="house" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="uid" id="uid" value="${house.id}" style="margin-right: 8px; "></td>
+                                    <td><input type="checkbox" name="hid" id="hid" value="${house.id}"
+                                               style="margin-right: 8px; "></td>
                                     <td>${status.count}</td>
                                     <td>${house.housefloornumber}</td>
                                     <td>${house.housenumber}</td>
@@ -96,7 +97,15 @@
                                     <td class="center">${house.housetype}</td>
                                     <td class="center">${house.housedepartment}</td>
                                     <td class="center">${house.houseremarks}</td>
-                                    <td colspan="2"><button onclick="rentalHouse(${house.id})" class="btn btn-sm">租房</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="checkOut()" class="btn btn-sm">退房</button></td>
+                                    <td colspan="2">
+                                        <c:if test="${house.housestatus eq '未租出'}">
+                                            <button onclick="rentalHouse(${house.id})" class="btn btn-sm">租房</button>
+                                        </c:if>
+                                        <c:if test="${house.housestatus eq '已租出'}">
+                                            <button onclick="checkOut()" class="btn btn-sm">退房</button>
+                                        </c:if>
+
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -123,17 +132,17 @@
         });
     });
 
-      <!--全选和全不选-->
+    <!--全选和全不选-->
     function checkt() {
         var checkAll = document.getElementById("checkAll");
         checkAll.value == 1 ? checkAll.value = 2 : checkAll.value = 1;
-        var uid = document.getElementsByName("uid");
+        var hid = document.getElementsByName("hid");
 
-        for (var i = 0; i < uid.length; i++) {
+        for (var i = 0; i < hid.length; i++) {
             if (checkAll.value == 1) {
-                uid[i].checked = false;//全不选
+                hid[i].checked = false;//全不选
             } else {
-                uid[i].checked = true;//全选
+                hid[i].checked = true;//全选
             }
         }
     }
@@ -144,64 +153,84 @@
     }
 
     function selectId() {
-         var ids = "";
-         $("input[name='uid']:checkbox:checked").each(function () {
-             if (ids.length == 0) {
-                 ids = $(this).val();
-             } else {
-                 ids += "," + $(this).val();
-             }
-         });
-         return ids;
+        var ids = "";
+        $("input[name='hid']:checkbox:checked").each(function () {
+            if (ids.length == 0) {
+                ids = $(this).val();
+            } else {
+                ids += "," + $(this).val();
+            }
+        });
+        return ids;
 
-     }
+    }
 
     <!--删除-->
-     function delAll() {
-         var ids = selectId();
-         if (ids.length == 0) {
-             alert("请选择一条数据，才能进行删除！");
-             return "";
-         }
-         var ids = selectId()
-         if (confirm("确定要删除所选的数据")) {
-             $.ajax({
-                 type: "get",
-                 url: '/housePub/deleteHousePub',
-                 data: {ids: ids},
-                 contentType: 'application/json',
-                 dataType: "json",
-                 success: function (data) {
-                     if (data == "ok") {
-                         window.location.href = "/housePub/housePubList";
-                     } else {
-                         alert(data);
-                     }
-                 }
-             })
-         }
-     }
+    function delAll() {
+        var ids = selectId();
+        if (ids.length == 0) {
+            alert("请选择一条数据，才能进行删除！");
+            return "";
+        }
+        var ids = selectId()
+        if (confirm("确定要删除所选的数据")) {
+            $.ajax({
+                type: "get",
+                url: '/housePub/deleteHousePub',
+                data: {ids: ids},
+                contentType: 'application/json',
+                dataType: "json",
+                success: function (data) {
+                    if (data == "ok") {
+                        window.location.href = "/housePub/housePubList";
+                    } else {
+                        alert(data);
+                    }
+                }
+            })
+        }
+    }
 
 
-     <!--跳转到updateAdmin页面-->
-     function updateHousePubView() {
-         var id = selectId();
-         if(id.length == 0){
-             alert("请选择一条数据,才能修改！");
-             return "" ;
-         }
-         window.location.href="/housePub/selectHousePubById?id="+id;
-     }
+    <!--跳转到updateAdmin页面-->
+    function updateHousePubView() {
+        var id = selectId();
+        if (id.length == 0) {
+            alert("请选择一条数据,才能修改！");
+            return "";
+        }
+        window.location.href = "/housePub/selectHousePubById?id=" + id;
+    }
 
 
-     <!--租房-->
+    <!--租房-->
     function rentalHouse(id) {
-        window.location.href = "/jump/jumpRentalHouse?id="+id;
+        window.location.href = "/jump/jumpRentalHouse?id=" + id;
     }
 
     <!--退房-->
     function checkOut() {
-
+        var id =  selectId();
+        if (id.length == 0) {
+            alert("请选择一条数据，才能进行退房！");
+            return "";
+        }
+        console.log(id)
+        if (confirm("确定要退房吗？")) {
+            $.ajax({
+                type: "post",
+                url: '/houseRentingSituation/retreatHouse',
+                data: {id: id},
+                dataType: "json",
+                success: function (data) {
+                    if (data == "ok") {
+                        window.location.href = "/housePub/housePubList";
+                    } else {
+                        alert(data);
+                    }
+                }
+            })
+        }
     }
 </script>
 </html>

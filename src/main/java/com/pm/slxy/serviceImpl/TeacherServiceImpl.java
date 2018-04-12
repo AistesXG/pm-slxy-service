@@ -1,6 +1,7 @@
 package com.pm.slxy.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.pm.slxy.Enum.TeacherRentalStatusEnum;
 import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.TeacherService;
@@ -53,6 +54,10 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     @Override
     public String deleteTeacherByIds(String ids) {
         List<String> teacherIds = Arrays.asList(ids.split(","));
+        List<Teacher> teacherList = teacherMapper.selectBatchIds(teacherIds);
+        if (teacherList.get(0).getTeacherrentalstatus().equals(TeacherRentalStatusEnum.ALREADY_RENTAL_HOUSE.getStatus())) {
+            return "该教师已经租房了，不能够直接删除";
+        }
         int deleteTeacher = teacherMapper.deleteBatchIds(teacherIds);
         if (deleteTeacher != 0) {
             return "ok";
