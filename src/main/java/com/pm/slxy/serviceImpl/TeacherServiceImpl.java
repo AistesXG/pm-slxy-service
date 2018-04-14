@@ -136,6 +136,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         Teacher teacher = teacherMapper.selectById(id);
         if (!ObjectUtils.isEmpty(teacher)) {
             modelAndView.addObject("teacher", teacher);
+            modelAndView.addObject("deptList", departmentMapper.selectList(new EntityWrapper<Department>()));
             modelAndView.setViewName("teacher/updateTeacher");
         } else {
             modelAndView.setViewName("404");

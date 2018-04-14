@@ -1,12 +1,19 @@
 package com.pm.slxy.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.pm.slxy.entity.Department;
 import com.pm.slxy.entity.HousePub;
+import com.pm.slxy.entity.Teacher;
+import com.pm.slxy.service.DepartmentService;
 import com.pm.slxy.service.HousePubService;
+import com.pm.slxy.service.TeacherService;
 import com.pm.slxy.utils.SysControllerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.jws.WebParam;
 
 /**
  * @author furg@senthink.com
@@ -18,6 +25,10 @@ public class ViewJumpController {
 
     @Autowired
     private HousePubService housePubService;
+    @Autowired
+    private DepartmentService departmentService;
+    @Autowired
+    private TeacherService teacherService;
 
     /**
      * 跳转到登录页面
@@ -61,20 +72,6 @@ public class ViewJumpController {
     }
 
     /**
-     * 跳转到修改管理员页面
-     *
-     * @param modelAndView
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/jumpUpdateAdmin")
-    @SysControllerFilter(name = "jumpUpdateAdmin")
-    public ModelAndView jumpUpdateAdmin(ModelAndView modelAndView) throws Exception {
-        modelAndView.setViewName("admin/updateAdmin");
-        return modelAndView;
-    }
-
-    /**
      * 跳转到教师添加页面
      *
      * @param modelAndView
@@ -84,6 +81,7 @@ public class ViewJumpController {
     @RequestMapping(value = "/jumpAddTeacher")
     @SysControllerFilter(name = "jumpAddTeacher")
     public ModelAndView jumpAddTeacher(ModelAndView modelAndView) throws Exception {
+        modelAndView.addObject("depList", departmentService.selectList(new EntityWrapper<Department>()));
         modelAndView.setViewName("teacher/addTeacher");
         return modelAndView;
     }
@@ -99,20 +97,6 @@ public class ViewJumpController {
     @SysControllerFilter(name = "jump404")
     public ModelAndView jump404(ModelAndView modelAndView) throws Exception {
         modelAndView.setViewName("404");
-        return modelAndView;
-    }
-
-    /**
-     * 跳转到修改教师页面
-     *
-     * @param modelAndView
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/jumpUpdateTeacher")
-    @SysControllerFilter(name = "jumpUpdateTeacher")
-    public ModelAndView jumpUpdateTeacher(ModelAndView modelAndView) throws Exception {
-        modelAndView.setViewName("teacher/updateTeacher");
         return modelAndView;
     }
 
@@ -145,4 +129,22 @@ public class ViewJumpController {
         modelAndView.setViewName("house/rentalHouse");
         return modelAndView;
     }
+
+    /**
+     * 跳转到教师的详情页
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/jumpOneTeacher")
+    @SysControllerFilter(name = "jumpOneTeacher")
+    public ModelAndView jumpOneTeacher(ModelAndView modelAndView, String id) throws Exception {
+        Teacher teacher = teacherService.selectById(id);
+        modelAndView.addObject("teacher", teacher);
+        modelAndView.setViewName("teacher/oneTeacher");
+        return modelAndView;
+    }
+
 }

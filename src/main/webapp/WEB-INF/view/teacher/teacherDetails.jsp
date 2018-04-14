@@ -77,14 +77,12 @@
                                 <th>教师姓名</th>
                                 <th>教工编号</th>
                                 <th>性别</th>
-                                <th>身份证号码</th>
                                 <th>出生年月</th>
                                 <th>学历</th>
                                 <th>参加工作时间</th>
-                                <th>申请住房时间</th>
                                 <th>所在部门</th>
-                                <th>籍贯</th>
                                 <th>租房状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
 
@@ -96,14 +94,12 @@
                                     <td>${teacher.teachername}</td>
                                     <td>${teacher.teachernumber}</td>
                                     <td>${teacher.teachersex}</td>
-                                    <td>${teacher.teacheridcard}</td>
                                     <td>${teacher.teacherbirthdate}</td>
                                     <td>${teacher.teachereducation}</td>
                                     <td>${teacher.teacherstartwork}</td>
-                                    <td>${teacher.teacherhousingdate}</td>
                                     <td>${teacher.teacherdepartment}</td>
-                                    <td>${teacher.teacherplaceorigin}</td>
                                     <td style="color: red; font-weight: bolder">${teacher.teacherrentalstatus}</td>
+                                    <td class="center"><button onclick="display(${teacher.id})" class="btn btn-sm">查看</button></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -203,6 +199,11 @@
             return "";
         }
         window.location.href="/teacher/selectTeacher?id="+id;
+    }
+
+    <!--详情页-->
+    function display(id) {
+        window.location.href = "/jump/jumpOneTeacher?id="+id;
     }
 </script>
 </html>
