@@ -2,7 +2,9 @@ package com.pm.slxy.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.pm.slxy.Enum.TeacherRentalStatusEnum;
+import com.pm.slxy.entity.Department;
 import com.pm.slxy.entity.Teacher;
+import com.pm.slxy.mapper.DepartmentMapper;
 import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.TeacherService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -30,6 +32,8 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
 
     @Autowired
     private TeacherMapper teacherMapper;
+    @Autowired
+    private DepartmentMapper departmentMapper;
 
     /**
      * 查找所有教师信息

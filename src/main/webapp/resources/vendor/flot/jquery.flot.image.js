@@ -1,4 +1,4 @@
-/* Flot plugin for plotting images.
+/* Flot plugin for plotting img.
 
 Copyright (c) 2007-2014 IOLA and Ole Laursen.
 Licensed under the MIT license.
@@ -8,25 +8,25 @@ The data syntax is [ [ image, x1, y1, x2, y2 ], ... ] where (x1, y1) and
 in the plot. Image must be a fully loaded Javascript image (you can make one
 with new Image()). If the image is not complete, it's skipped when plotting.
 
-There are two helpers included for retrieving images. The easiest work the way
-that you put in URLs instead of images in the data, like this:
+There are two helpers included for retrieving img. The easiest work the way
+that you put in URLs instead of img in the data, like this:
 
 	[ "myimage.png", 0, 0, 10, 10 ]
 
 Then call $.plot.image.loadData( data, options, callback ) where data and
-options are the same as you pass in to $.plot. This loads the images, replaces
-the URLs in the data with the corresponding images and calls "callback" when
-all images are loaded (or failed loading). In the callback, you can then call
+options are the same as you pass in to $.plot. This loads the img, replaces
+the URLs in the data with the corresponding img and calls "callback" when
+all img are loaded (or failed loading). In the callback, you can then call
 $.plot with the data set. See the included example.
 
 A more low-level helper, $.plot.image.load(urls, callback) is also included.
 Given a list of URLs, it calls callback with an object mapping from URL to
-Image object when all images are loaded or have failed loading.
+Image object when all img are loaded or have failed loading.
 
 The plugin supports these options:
 
 	series: {
-		images: {
+		img: {
 			show: boolean
 			anchor: "corner" or "center"
 			alpha: [ 0, 1 ]
@@ -37,17 +37,17 @@ They can be specified for a specific series:
 
 	$.plot( $("#placeholder"), [{
 		data: [ ... ],
-		images: { ... }
+		img: { ... }
 	])
 
 Note that because the data format is different from usual data points, you
-can't use images with anything else in a specific data series.
+can't use img with anything else in a specific data series.
 
 Setting "anchor" to "center" causes the pixels in the image to be anchored at
 the corner pixel centers inside of at the pixel corners, effectively letting
 half a pixel stick out to each side in the plot.
 
-A possible future direction could be support for tiling for large images (like
+A possible future direction could be support for tiling for large img (like
 Google Maps).
 
 */
@@ -55,7 +55,7 @@ Google Maps).
 (function ($) {
     var options = {
         series: {
-            images: {
+            img: {
                 show: false,
                 alpha: 1,
                 anchor: "corner" // or "center"
@@ -65,13 +65,13 @@ Google Maps).
 
     $.plot.image = {};
 
-    $.plot.image.loadDataImages = function (series, options, callback) {
+    $.plot.image.loadDataimg = function (series, options, callback) {
         var urls = [], points = [];
 
-        var defaultShow = options.series.images.show;
+        var defaultShow = options.series.img.show;
         
         $.each(series, function (i, s) {
-            if (!(defaultShow || s.images.show))
+            if (!(defaultShow || s.img.show))
                 return;
             
             if (s.data)
@@ -85,11 +85,11 @@ Google Maps).
             });
         });
 
-        $.plot.image.load(urls, function (loadedImages) {
+        $.plot.image.load(urls, function (loadedimg) {
             $.each(points, function (i, p) {
                 var url = p[0];
-                if (loadedImages[url])
-                    p[0] = loadedImages[url];
+                if (loadedimg[url])
+                    p[0] = loadedimg[url];
             });
 
             callback();
@@ -118,7 +118,7 @@ Google Maps).
     function drawSeries(plot, ctx, series) {
         var plotOffset = plot.getPlotOffset();
         
-        if (!series.images || !series.images.show)
+        if (!series.img || !series.img.show)
             return;
         
         var points = series.datapoints.points,
@@ -150,7 +150,7 @@ Google Maps).
             
             // if the anchor is at the center of the pixel, expand the 
             // image by 1/2 pixel in each direction
-            if (series.images.anchor == "center") {
+            if (series.img.anchor == "center") {
                 tmp = 0.5 * (x2-x1) / (img.width - 1);
                 x1 -= tmp;
                 x2 += tmp;
@@ -204,7 +204,7 @@ Google Maps).
             }
 
             tmp = ctx.globalAlpha;
-            ctx.globalAlpha *= series.images.alpha;
+            ctx.globalAlpha *= series.img.alpha;
             ctx.drawImage(img,
                           sx1, sy1, sx2 - sx1, sy2 - sy1,
                           x1 + plotOffset.left, y1 + plotOffset.top,
@@ -214,7 +214,7 @@ Google Maps).
     }
 
     function processRawData(plot, series, data, datapoints) {
-        if (!series.images.show)
+        if (!series.img.show)
             return;
 
         // format is Image, x1, y1, x2, y2 (opposite corners)

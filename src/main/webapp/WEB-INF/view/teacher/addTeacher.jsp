@@ -86,7 +86,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teacherdepartment" class="form-control" value="" size="30">
+                                <input type="text" name="teacherdepartment" class="form-control" value="" size="30" >
                             </div>
                         </div>
                         <div class="form-group">

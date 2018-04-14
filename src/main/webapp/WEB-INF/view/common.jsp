@@ -8,6 +8,9 @@
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Bootstrap validator  CSS -->
+    <link href="/resources/dist/css/bootstrapValidator.min.css" rel="stylesheet">
+
     <!-- MetisMenu CSS -->
     <link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
@@ -146,6 +149,9 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!--Bootstrap validator JavaScript-->
+<script src="/resources/dist/js/bootstrapValidator.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="/resources/vendor/metisMenu/metisMenu.min.js"></script>

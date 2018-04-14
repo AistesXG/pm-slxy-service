@@ -26,7 +26,7 @@
             <!-- /.col-lg-12 -->
             <div class="row">
                 <div class="col-lg-4 ">
-                    <form onsubmit="false" role="form" id="addForm" class="form-horizontal">
+                    <form onsubmit="false" role="form" id="addForm" class="form-horizontal" action="/admin/addAdmin">
                         <br>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">用户名:<span class="must">*</span></label>
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">密码:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="password" name="pass" class="form-control" value="" size="20">
+                                <input type="password" name="pass" class="form-control" value="" size="22">
                             </div>
                         </div>
                         <div class="form-group">
@@ -63,7 +63,7 @@
                              </select>
                          </div>--%>
                         <div class="form-group" style="text-align: center">
-                            <input type="button" value="提交" class="btn btn-primary" onclick="addAdmin()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">
                         </div>
                     </form>
@@ -74,25 +74,104 @@
 </div>
 </body>
 <script type="text/javascript">
-    function addAdmin() {
-        var regEmail = new RegExp("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
-        var testEmail = regEmail.test($('#email').val());
-        var regPhone = new RegExp("^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$")
-        var testPhone = regPhone.test($('#phone').val());
-        if(!testEmail){
-            var msgEmail = $('#msgEmail');
-            msgEmail.css("color", "red").html("邮箱格式错误！")
-        }
-        if(!testPhone){
-            var msgPhone = $('#msgPhone');
-            msgPhone.css("color", "red").html("电话号码格式错误！")
-        }
-        if(testEmail && testPhone){
+     <!--检测用户名是否可以使用-->
+     $(function () {
+         $('#user').blur(function () {
+             var cuser = $('#user').val();
+             var msgObj = $('#msg');
+                 $.ajax({
+                     type: "post",
+                     dataType: "json",
+                     url: "/checkUser",
+                     data: {user: cuser},
+                     success: function (data) {
+                         if (data == "ok") {
+                             msgObj.css("color", "red").html("用户名可以注册");
+                         } else {
+                             msgObj.css("color", "red").html("用户名已经被注册");
+                         }
+                     }
+                 })
+         })
+     })
+
+
+
+    $(document).ready(function () {
+        $('#addForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    user: {
+                        message: 'This user is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '用户名不能为空'
+                            },
+                            stringLength: {
+                                min: 4,
+                                max: 10,
+                                message: '用户名必须在4到10个字符之间'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_]+$/,
+                                message: '用户名只能包含大写、小写、数字和下划线'
+                            }
+                        }
+                    },
+                    pass: {
+                        message: '密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 21,
+                                message: '密码必须在6到21个字符之间'
+                            },
+                            regexp: {
+                                regexp: '^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$',
+                                message: '密码必须要包含数字和大小写字母'
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '邮箱不能为空'
+                            },
+                            emailAddress: {
+                                message: '邮箱格式有误'
+                            }
+                        }
+                    },
+                    phone: {
+                        validators: {
+                            notEmpty: {
+                                message: '电话号码不能为空'
+                            },
+                            regexp: {
+                                regexp: '^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$',
+                                message: '必须是13 14 15 18 开头的11位数字'
+                            }
+                        }
+                    }
+                }
+            }).on('success.form.bv', function (e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var bv =  $form.data('bootstrapValidator');
             $.ajax({
-                type: "post",
-                dataType: "json",
-                url: "/admin/addAdmin",
-                data: $('#addForm').serialize(),
+                type: 'post',
+                dataType: 'json',
+                url: $form.attr('action'),
+                data: $form.serialize(),
                 success: function (data) {
                     if (data == "ok") {
                         window.location.href = "/admin/adminList";
@@ -101,32 +180,9 @@
                     }
                 }
             })
-        }
-    }
-
-    <!--检测用户名是否可以使用-->
-    $(function () {
-        $('#user').blur(function () {
-            var cuser = $('#user').val();
-            var msgObj = $('#msg');
-            if (cuser == "") {
-                msgObj.css("color", "red").html("用户名不能为空")
-            } else {
-                $.ajax({
-                    type: "post",
-                    dataType: "json",
-                    url: "/checkUser",
-                    data: {user: cuser},
-                    success: function (data) {
-                        if (data == "ok") {
-                            msgObj.css("color", "red").html("用户名可以使用");
-                        } else {
-                            msgObj.css("color", "red").html("用户名已经被注册");
-                        }
-                    }
-                })
-            }
         })
     })
+
+
 </script>
 </html>
