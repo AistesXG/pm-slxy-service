@@ -10,13 +10,13 @@
     <!--引入日历插件js-->
     <script type="text/javascript" src="/resources/js/laydate.js"></script>
     <!-- Bootstrap validator  CSS -->
-    <link href="/resources/dist/css/bootstrapValidator.min.css" rel="stylesheet">
+    <link href="/resources/css/bootstrapValidator.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/resources/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="/resources/vendor/morrisjs/morris.css" rel="stylesheet">
@@ -152,7 +152,7 @@
 <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!--Bootstrap validator JavaScript-->
-<script src="/resources/dist/js/bootstrapValidator.min.js"></script>
+<script src="/resources/js/bootstrapValidator.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="/resources/vendor/metisMenu/metisMenu.min.js"></script>
@@ -163,6 +163,6 @@
 <script src="/resources/data/morris-data.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/resources/dist/js/sb-admin-2.js"></script>
+<script src="/resources/js/sb-admin-2.js"></script>
 
 </html>
