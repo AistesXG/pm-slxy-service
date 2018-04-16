@@ -80,7 +80,6 @@
                                 <th>使用类型</th>
                                 <th>使用部门</th>
                                 <th>备注</th>
-                                <th>操作</th>
                             </tr>
                             </thead>
 
@@ -90,22 +89,13 @@
                                     <td><input type="checkbox" name="hid" id="hid" value="${house.id}"
                                                style="margin-right: 8px; "></td>
                                     <td>${status.count}</td>
-                                    <td>${house.housefloornumber}</td>
-                                    <td>${house.housenumber}</td>
-                                    <td>${house.housearea}</td>
-                                    <td class="center" style="color: red; font-weight: bolder">${house.housestatus}</td>
-                                    <td class="center">${house.housetype}</td>
-                                    <td class="center">${house.housedepartment}</td>
-                                    <td class="center">${house.houseremarks}</td>
-                                    <td colspan="2">
-                                        <c:if test="${house.housestatus eq '未租出'}">
-                                            <button onclick="rentalHouse(${house.id})" class="btn btn-sm">租房</button>
-                                        </c:if>
-                                        <c:if test="${house.housestatus eq '已租出'}">
-                                            <button onclick="checkOut()" class="btn btn-sm">退房</button>
-                                        </c:if>
-
-                                    </td>
+                                    <td>${house.fjlh}</td>
+                                    <td>${house.fjbh}</td>
+                                    <td>${house.fjmj}</td>
+                                    <td class="center" style="color: red; font-weight: bolder">${house.fjsyzt}</td>
+                                    <td class="center">${house.fjsylx}</td>
+                                    <td class="center">${house.fjsybm}</td>
+                                    <td class="center">${house.fjbz}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -207,35 +197,5 @@
         window.location.href = "/housePub/selectHousePubById?id=" + id;
     }
 
-
-    <!--租房-->
-    function rentalHouse(id) {
-        window.location.href = "/jump/jumpRentalHouse?id=" + id;
-    }
-
-    <!--退房-->
-    function checkOut() {
-        var id =  selectId();
-        if (id.length == 0) {
-            alert("请选择一条数据，才能进行退房！");
-            return "";
-        }
-        console.log(id)
-        if (confirm("确定要退房吗？")) {
-            $.ajax({
-                type: "post",
-                url: '/houseRentingSituation/retreatHouse',
-                data: {id: id},
-                dataType: "json",
-                success: function (data) {
-                    if (data == "ok") {
-                        window.location.href = "/housePub/housePubList";
-                    } else {
-                        alert(data);
-                    }
-                }
-            })
-        }
-    }
 </script>
 </html>

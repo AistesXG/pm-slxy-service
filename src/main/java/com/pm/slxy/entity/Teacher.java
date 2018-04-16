@@ -10,7 +10,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author 付荣刚123
- * @since 2018-03-26
+ * @since 2018-04-16
  */
 public class Teacher implements Serializable {
 
@@ -21,47 +21,47 @@ public class Teacher implements Serializable {
     /**
      * 教师姓名
      */
-    private String teachername;
+    private String xm;
     /**
      * 教工编号
      */
-    private String teachernumber;
+    private String jggh;
     /**
      * 性别
      */
-    private String teachersex;
+    private String xb;
     /**
      * 身份证号码
      */
-    private String teacheridcard;
+    private String sfzh;
     /**
      * 出生年月
      */
-    private String teacherbirthdate;
+    private String csrq;
     /**
      * 学历
      */
-    private String teachereducation;
+    private String xl;
     /**
      * 参加工作时间
      */
-    private String teacherstartwork;
+    private String cjgzrq;
     /**
      * 申请住房日期
      */
-    private String teacherhousingdate;
+    private String sqzfrq;
     /**
      * 所在部门
      */
-    private String teacherdepartment;
+    private String szbm;
     /**
      * 籍贯
      */
-    private String teacherplaceorigin;
+    private String jg;
     /**
      * 租房状态
      */
-    private String teacherrentalstatus;
+    private String zfzt;
 
 
     public Integer getId() {
@@ -72,109 +72,109 @@ public class Teacher implements Serializable {
         this.id = id;
     }
 
-    public String getTeachername() {
-        return teachername;
+    public String getXm() {
+        return xm;
     }
 
-    public void setTeachername(String teachername) {
-        this.teachername = teachername;
+    public void setXm(String xm) {
+        this.xm = xm;
     }
 
-    public String getTeachernumber() {
-        return teachernumber;
+    public String getJggh() {
+        return jggh;
     }
 
-    public void setTeachernumber(String teachernumber) {
-        this.teachernumber = teachernumber;
+    public void setJggh(String jggh) {
+        this.jggh = jggh;
     }
 
-    public String getTeachersex() {
-        return teachersex;
+    public String getXb() {
+        return xb;
     }
 
-    public void setTeachersex(String teachersex) {
-        this.teachersex = teachersex;
+    public void setXb(String xb) {
+        this.xb = xb;
     }
 
-    public String getTeacheridcard() {
-        return teacheridcard;
+    public String getSfzh() {
+        return sfzh;
     }
 
-    public void setTeacheridcard(String teacheridcard) {
-        this.teacheridcard = teacheridcard;
+    public void setSfzh(String sfzh) {
+        this.sfzh = sfzh;
     }
 
-    public String getTeacherbirthdate() {
-        return teacherbirthdate;
+    public String getCsrq() {
+        return csrq;
     }
 
-    public void setTeacherbirthdate(String teacherbirthdate) {
-        this.teacherbirthdate = teacherbirthdate;
+    public void setCsrq(String csrq) {
+        this.csrq = csrq;
     }
 
-    public String getTeachereducation() {
-        return teachereducation;
+    public String getXl() {
+        return xl;
     }
 
-    public void setTeachereducation(String teachereducation) {
-        this.teachereducation = teachereducation;
+    public void setXl(String xl) {
+        this.xl = xl;
     }
 
-    public String getTeacherstartwork() {
-        return teacherstartwork;
+    public String getCjgzrq() {
+        return cjgzrq;
     }
 
-    public void setTeacherstartwork(String teacherstartwork) {
-        this.teacherstartwork = teacherstartwork;
+    public void setCjgzrq(String cjgzrq) {
+        this.cjgzrq = cjgzrq;
     }
 
-    public String getTeacherhousingdate() {
-        return teacherhousingdate;
+    public String getSqzfrq() {
+        return sqzfrq;
     }
 
-    public void setTeacherhousingdate(String teacherhousingdate) {
-        this.teacherhousingdate = teacherhousingdate;
+    public void setSqzfrq(String sqzfrq) {
+        this.sqzfrq = sqzfrq;
     }
 
-    public String getTeacherdepartment() {
-        return teacherdepartment;
+    public String getSzbm() {
+        return szbm;
     }
 
-    public void setTeacherdepartment(String teacherdepartment) {
-        this.teacherdepartment = teacherdepartment;
+    public void setSzbm(String szbm) {
+        this.szbm = szbm;
     }
 
-    public String getTeacherplaceorigin() {
-        return teacherplaceorigin;
+    public String getJg() {
+        return jg;
     }
 
-    public void setTeacherplaceorigin(String teacherplaceorigin) {
-        this.teacherplaceorigin = teacherplaceorigin;
+    public void setJg(String jg) {
+        this.jg = jg;
     }
 
-    public String getTeacherrentalstatus() {
-        return teacherrentalstatus;
+    public String getZfzt() {
+        return zfzt;
     }
 
-    public void setTeacherrentalstatus(String teacherrentalstatus) {
-        this.teacherrentalstatus = teacherrentalstatus;
+    public void setZfzt(String zfzt) {
+        this.zfzt = zfzt;
     }
 
     @Override
     public String toString() {
         return "Teacher{" +
         ", id=" + id +
-        ", teachername=" + teachername +
-        ", teachernumber=" + teachernumber +
-        ", teachersex=" + teachersex +
-        ", teacheridcard=" + teacheridcard +
-        ", teacherbirthdate=" + teacherbirthdate +
-        ", teachereducation=" + teachereducation +
-        ", teacherstartwork=" + teacherstartwork +
-        ", teacherhousingdate=" + teacherhousingdate +
-        ", teacherdepartment=" + teacherdepartment +
-        ", teacherplaceorigin=" + teacherplaceorigin +
-        ", teacherrentalstatus=" + teacherrentalstatus +
+        ", xm=" + xm +
+        ", jggh=" + jggh +
+        ", xb=" + xb +
+        ", sfzh=" + sfzh +
+        ", csrq=" + csrq +
+        ", xl=" + xl +
+        ", cjgzrq=" + cjgzrq +
+        ", sqzfrq=" + sqzfrq +
+        ", szbm=" + szbm +
+        ", jg=" + jg +
+        ", zfzt=" + zfzt +
         "}";
     }
 }

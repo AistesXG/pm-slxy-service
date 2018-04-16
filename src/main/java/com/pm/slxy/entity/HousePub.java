@@ -10,7 +10,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author 付荣刚123
- * @since 2018-04-03
+ * @since 2018-04-16
  */
 public class HousePub implements Serializable {
 
@@ -21,31 +21,31 @@ public class HousePub implements Serializable {
     /**
      * 公用房所在楼号
      */
-    private String housefloornumber;
+    private String fjlh;
     /**
      * 公用房编号
      */
-    private String housenumber;
+    private String fjbh;
     /**
      * 公用房面积
      */
-    private Float housearea;
+    private Float fjmj;
     /**
      * 公用房使用状态
      */
-    private String housestatus;
+    private String fjsyzt;
     /**
      * 公用房使用类型
      */
-    private String housetype;
+    private String fjsylx;
     /**
      * 房间使用部门
      */
-    private String housedepartment;
+    private String fjsybm;
     /**
      * 公用房备注
      */
-    private String houseremarks;
+    private String fjbz;
 
 
     public Integer getId() {
@@ -56,73 +56,73 @@ public class HousePub implements Serializable {
         this.id = id;
     }
 
-    public String getHousefloornumber() {
-        return housefloornumber;
+    public String getFjlh() {
+        return fjlh;
     }
 
-    public void setHousefloornumber(String housefloornumber) {
-        this.housefloornumber = housefloornumber;
+    public void setFjlh(String fjlh) {
+        this.fjlh = fjlh;
     }
 
-    public String getHousenumber() {
-        return housenumber;
+    public String getFjbh() {
+        return fjbh;
     }
 
-    public void setHousenumber(String housenumber) {
-        this.housenumber = housenumber;
+    public void setFjbh(String fjbh) {
+        this.fjbh = fjbh;
     }
 
-    public Float getHousearea() {
-        return housearea;
+    public Float getFjmj() {
+        return fjmj;
     }
 
-    public void setHousearea(Float housearea) {
-        this.housearea = housearea;
+    public void setFjmj(Float fjmj) {
+        this.fjmj = fjmj;
     }
 
-    public String getHousestatus() {
-        return housestatus;
+    public String getFjsyzt() {
+        return fjsyzt;
     }
 
-    public void setHousestatus(String housestatus) {
-        this.housestatus = housestatus;
+    public void setFjsyzt(String fjsyzt) {
+        this.fjsyzt = fjsyzt;
     }
 
-    public String getHousetype() {
-        return housetype;
+    public String getFjsylx() {
+        return fjsylx;
     }
 
-    public void setHousetype(String housetype) {
-        this.housetype = housetype;
+    public void setFjsylx(String fjsylx) {
+        this.fjsylx = fjsylx;
     }
 
-    public String getHousedepartment() {
-        return housedepartment;
+    public String getFjsybm() {
+        return fjsybm;
     }
 
-    public void setHousedepartment(String housedepartment) {
-        this.housedepartment = housedepartment;
+    public void setFjsybm(String fjsybm) {
+        this.fjsybm = fjsybm;
     }
 
-    public String getHouseremarks() {
-        return houseremarks;
+    public String getFjbz() {
+        return fjbz;
     }
 
-    public void setHouseremarks(String houseremarks) {
-        this.houseremarks = houseremarks;
+    public void setFjbz(String fjbz) {
+        this.fjbz = fjbz;
     }
 
     @Override
     public String toString() {
         return "HousePub{" +
         ", id=" + id +
-        ", housefloornumber=" + housefloornumber +
-        ", housenumber=" + housenumber +
-        ", housearea=" + housearea +
-        ", housestatus=" + housestatus +
-        ", housetype=" + housetype +
-        ", housedepartment=" + housedepartment +
-        ", houseremarks=" + houseremarks +
+        ", fjlh=" + fjlh +
+        ", fjbh=" + fjbh +
+        ", fjmj=" + fjmj +
+        ", fjsyzt=" + fjsyzt +
+        ", fjsylx=" + fjsylx +
+        ", fjsybm=" + fjsybm +
+        ", fjbz=" + fjbz +
         "}";
     }
 }

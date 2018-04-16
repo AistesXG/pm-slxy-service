@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Title</title>
+    <title>添加房屋信息</title>
 </head>
 <style type="text/css">
     .must {
@@ -31,46 +31,46 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">楼号:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="housefloornumber" class="form-control" id="housefloornumber" value="" size="10">
+                                <input type="text" name="fjlh" class="form-control" id="fjlh" value="" size="10">
                                 <span id="msg"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="housenumber" class="form-control" value="" size="20">
+                                <input type="text" name="fjbh" class="form-control" value="" size="20">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">面积:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" id="housearea" name="housearea" class="form-control" value="" size="8">
+                                <input type="text" id="fjmj" name="fjmj" class="form-control" value="" size="8">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">使用状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="housestatus" class="form-control" value="未租出" size="4" id="housestatus" readonly="readonly">
+                                <input type="text" name="fjsyzt" class="form-control" value="未租出" size="4" id="fjsyzt" readonly="readonly">
                             </div>
                         </div>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">使用类型:</label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<input type="text" name="housetype" class="form-control" value="" size="20" id="housetype">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">使用部门:</label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<input type="text" name="housedepartment" class="form-control" value="" size="30" id="housedepartment">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">备注:</label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<textarea cols="5" rows="5" name="houseremarks" class="form-control"  id="houseremarks"></textarea>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label">使用类型:</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="fjsylx" class="form-control" value="" size="20" id="fjsylx">
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">使用部门:</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="fjsybm" class="form-control" value="" size="30" id="fjsybm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注:</label>
+                            <div class="col-sm-9">
+                                <textarea cols="5" rows="5" name="fjbz" class="form-control"  id="fjbz"></textarea>
+                            </div>
+                        </div>
                         <div class="form-group" style="text-align: center">
                             <input type="button" value="提交" class="btn btn-primary" onclick="addHousePub()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">
@@ -94,7 +94,6 @@
                 if (data == "ok") {
                     console.log(data)
                     window.location.href = "/housePub/housePubList";
-
                 } else {
                     alert(data);
                 }

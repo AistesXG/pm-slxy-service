@@ -51,10 +51,12 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
      */
     @Override
     public String addHousePub(HousePub housePub) {
-        if (StringUtils.isEmpty(housePub.getHousearea()) ||
-                StringUtils.isEmpty(housePub.getHousefloornumber()) ||
-                StringUtils.isEmpty(housePub.getHousenumber()) ||
-                StringUtils.isEmpty(housePub.getHousestatus())
+        if (StringUtils.isEmpty(housePub.getFjbh()) ||
+                StringUtils.isEmpty(housePub.getFjlh()) ||
+                StringUtils.isEmpty(housePub.getFjmj()) ||
+                StringUtils.isEmpty(housePub.getFjsybm())||
+                StringUtils.isEmpty(housePub.getFjsylx()) ||
+                StringUtils.isEmpty(housePub.getFjsyzt())
                 ) {
             return "输入的信息不能为空！";
         }
@@ -75,7 +77,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     public String deleteHousePubByIds(String ids) {
         List<String> housePubs = Arrays.asList(ids.split(","));
         List<HousePub> housePubList = housePubMapper.selectBatchIds(housePubs);
-        if (housePubList.get(0).getHousestatus().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus())) {
+        if (housePubList.get(0).getFjsyzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus())) {
             return "您删除的房子已经租出去了";
         }
         int deleteHousePub = housePubMapper.deleteBatchIds(housePubs);
@@ -113,10 +115,12 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
      */
     @Override
     public String updateHousePub(HousePub housePub) {
-        if (StringUtils.isEmpty(housePub.getHousearea()) ||
-                StringUtils.isEmpty(housePub.getHousefloornumber()) ||
-                StringUtils.isEmpty(housePub.getHousenumber()) ||
-                StringUtils.isEmpty(housePub.getHousestatus())
+        if (StringUtils.isEmpty(housePub.getFjbh()) ||
+                StringUtils.isEmpty(housePub.getFjlh()) ||
+                StringUtils.isEmpty(housePub.getFjmj()) ||
+                StringUtils.isEmpty(housePub.getFjsybm())||
+                StringUtils.isEmpty(housePub.getFjsylx()) ||
+                StringUtils.isEmpty(housePub.getFjsyzt())
                 ) {
             return "输入的信息不能为空！";
         }

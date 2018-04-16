@@ -34,7 +34,7 @@
                             <label class="col-sm-3 control-label">教师姓名:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teachername" class="form-control" id="teachername"
-                                       value="${teacher.teachername}" size="10" readonly="readonly">
+                                       value="${teacher.xm}" size="10" readonly="readonly">
                                 <span id="msg"></span>
                             </div>
                         </div>
@@ -42,44 +42,44 @@
                             <label class="col-sm-3 control-label">教工编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teachernumber" class="form-control"
-                                       value="${teacher.teachernumber}" size="6" readonly="readonly"></div>
+                                       value="${teacher.jggh}" size="6" readonly="readonly"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">性别:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teachersex" class="form-control"
-                                value="${teacher.teachersex}" size="2" readonly="readonly">
+                                value="${teacher.xb}" size="2" readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">身份证号:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teacheridcard" class="form-control"
-                                       value="${teacher.teacheridcard}" size="18" readonly="readonly"></div>
+                                       value="${teacher.sfzh}" size="18" readonly="readonly"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">出生年月:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teacherbirthdate" class="form-control"
-                                       value="${teacher.teacherbirthdate}" size="10" readonly="readonly"></div>
+                                       value="${teacher.csrq}" size="10" readonly="readonly"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">学历:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teachereducation" class="form-control"
-                                       value="${teacher.teachereducation}" size="18" readonly="readonly"></div>
+                                       value="${teacher.xl}" size="18" readonly="readonly"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">参加工作时间:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teacherstartwork" class="form-control"
-                                       value="${teacher.teacherstartwork}" size="10" readonly="readonly"></div>
+                                       value="${teacher.cjgzrq}" size="10" readonly="readonly"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">申请住房日期:</label>
                             <div class="col-sm-9">
                                 <input type="text" name="teacherhousingdate" class="form-control"
-                                       value="${teacher.teacherhousingdate}" size="10" readonly="readonly"></div>
+                                       value="${teacher.sqzfrq}" size="10" readonly="readonly"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label>
@@ -89,20 +89,20 @@
                                 <%--<option value="${teacher.teacherdepartment}" readonly="readonly">${teacher.teacherdepartment}</option>--%>
                                 <%--</select>--%>
                                 <input type="text" name="teacherdepartment" class="form-control"
-                                       value="${teacher.teacherdepartment}" size="30" readonly="readonly">
+                                       value="${teacher.szbm}" size="30" readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">籍贯:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teacherplaceorigin" class="form-control"
-                                       value="${teacher.teacherplaceorigin}" size="30" readonly="readonly"></div>
+                                       value="${teacher.jg}" size="30" readonly="readonly"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">租房状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="teacherrentalstatus" class="form-control"
-                                       value="${teacher.teacherrentalstatus}" size="4" readonly="readonly"></div>
+                                       value="${teacher.zfzt}" size="4" readonly="readonly"></div>
                         </div>
                     </form>
 

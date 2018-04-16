@@ -91,14 +91,14 @@
                                 <tr class="gradeU">
                                     <td><input type="checkbox" name="tid" id="tid" value="${teacher.id}" style="margin-right: 8px; "></td>
                                     <td>${status.count}</td>
-                                    <td>${teacher.teachername}</td>
-                                    <td>${teacher.teachernumber}</td>
-                                    <td>${teacher.teachersex}</td>
-                                    <td>${teacher.teacherbirthdate}</td>
-                                    <td>${teacher.teachereducation}</td>
-                                    <td>${teacher.teacherstartwork}</td>
-                                    <td>${teacher.teacherdepartment}</td>
-                                    <td style="color: red; font-weight: bolder">${teacher.teacherrentalstatus}</td>
+                                    <td>${teacher.xm}</td>
+                                    <td>${teacher.jggh}</td>
+                                    <td>${teacher.xb}</td>
+                                    <td>${teacher.csrq}</td>
+                                    <td>${teacher.xl}</td>
+                                    <td>${teacher.cjgzrq}</td>
+                                    <td>${teacher.szbm}</td>
+                                    <td style="color: red; font-weight: bolder">${teacher.zfzt}</td>
                                     <td class="center"><button onclick="display(${teacher.id})" class="btn btn-sm">查看</button></td>
                                 </tr>
                             </c:forEach>

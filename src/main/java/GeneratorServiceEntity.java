@@ -19,13 +19,13 @@ public class GeneratorServiceEntity {
     public void generateCode() {
         String packageName = "com.pm.slxy";
         boolean serviceNameStartWithI = false;//user -> UserService, 设置成true: user -> IUserService
-        generateByTables(serviceNameStartWithI, packageName, "department");
+        generateByTables(serviceNameStartWithI, packageName, "house_pub");
     }
 
     private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
 
         GlobalConfig config = new GlobalConfig();
-        String dbUrl = "jdbc:mysql://localhost:3306/pm";
+        String dbUrl = "jdbc:mysql://localhost:3306/fcgl";
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)

@@ -1,19 +1,12 @@
 package com.pm.slxy.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.pm.slxy.entity.Department;
-import com.pm.slxy.entity.HousePub;
 import com.pm.slxy.entity.Teacher;
-import com.pm.slxy.service.DepartmentService;
-import com.pm.slxy.service.HousePubService;
 import com.pm.slxy.service.TeacherService;
 import com.pm.slxy.utils.SysControllerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.jws.WebParam;
 
 /**
  * @author furg@senthink.com
@@ -23,10 +16,7 @@ import javax.jws.WebParam;
 @RequestMapping(value = "/jump")
 public class ViewJumpController {
 
-    @Autowired
-    private HousePubService housePubService;
-    @Autowired
-    private DepartmentService departmentService;
+
     @Autowired
     private TeacherService teacherService;
 
@@ -81,7 +71,7 @@ public class ViewJumpController {
     @RequestMapping(value = "/jumpAddTeacher")
     @SysControllerFilter(name = "jumpAddTeacher")
     public ModelAndView jumpAddTeacher(ModelAndView modelAndView) throws Exception {
-        modelAndView.addObject("depList", departmentService.selectList(new EntityWrapper<Department>()));
+     //   modelAndView.addObject("depList", departmentService.selectList(new EntityWrapper<Department>()));
         modelAndView.setViewName("teacher/addTeacher");
         return modelAndView;
     }
@@ -114,21 +104,7 @@ public class ViewJumpController {
         return modelAndView;
     }
 
-    /**
-     * 跳转到租房页面
-     *
-     * @param modelAndView
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/jumpRentalHouse")
-    @SysControllerFilter(name = "jumpRentalHouse")
-    public ModelAndView jumpRentalHouse(ModelAndView modelAndView, String id) throws Exception {
-        HousePub housePub = housePubService.selectById(id);
-        modelAndView.addObject("housePub", housePub);
-        modelAndView.setViewName("house/rentalHouse");
-        return modelAndView;
-    }
+
 
     /**
      * 跳转到教师的详情页

@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">教师姓名:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teachername" class="form-control" id="teachername" value=""
+                                <input type="text" name="xm" class="form-control" id="xm" value=""
                                        size="10">
 
                             </div>
@@ -40,71 +40,65 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">教工编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teachernumber" class="form-control" value="" size="6"
-                                       id="teachernumber">
+                                <input type="text" name="jggh" class="form-control" value="" size="6"
+                                       id="jggh">
                                 <span id="numberMsg"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">性别:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="radio" name="teachersex" checked="checked" value="男"/>男 &nbsp;
-                                <input type="radio" name="teachersex" value="女">女
+                                <input type="radio" name="xb" checked="checked" value="男"/>男 &nbsp;
+                                <input type="radio" name="xb" value="女">女
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">身份证号:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teacheridcard" class="form-control" value="" size="18"
-                                       id="teacheridcard">
+                                <input type="text" name="sfzh" class="form-control" value="" size="18"
+                                       id="sfzh">
                                 <span id="idCardMsg"></span></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">出生年月:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teacherbirthdate" class="form-control" value="" size="10">
+                                <input type="text" name="csrq" class="form-control" value="" size="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">学历:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teachereducation" class="form-control" value="" size="18">
+                                <input type="text" name="xl" class="form-control" value="" size="18">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">参加工作时间:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teacherstartwork" class="form-control" value="" size="10">
+                                <input type="text" name="cjgzrq" class="form-control" value="" size="10">
                             </div>
                         </div>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">申请住房日期:</label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<input type="text" name="teacherhousingdate" class="form-control" value="" size="10">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <select name="teacherdepartment"  class="form-control">
-                                    <option value="">---请选择部门---</option>
-                                    <c:forEach items="${depList}" var="dept">
-                                        <option value="${dept.departmentName}">${dept.departmentName}</option>
-                                    </c:forEach>
-                                </select>
-                                <%--<input type="text" name="teacherdepartment" class="form-control" value="" size="30" >--%>
+                                <%--<select name="teacherdepartment"  class="form-control">--%>
+                                    <%--<option value="">---请选择部门---</option>--%>
+                                    <%--<c:forEach items="${depList}" var="dept">--%>
+                                        <%--<option value="${dept.departmentName}">${dept.departmentName}</option>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                                <input type="text" name="szbm" class="form-control" value="" size="30" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">籍贯:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teacherplaceorigin" class="form-control" value="" size="30">
+                                <input type="text" name="jg" class="form-control" value="" size="30">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">租房状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="teacherrentalstatus" class="form-control" value="未租房" size="4" readonly="readonly">
+                                <input type="text" name="zfzt" class="form-control" value="未租房" size="4" readonly="readonly">
                             </div>
                         </div>
 
@@ -139,17 +133,17 @@
 
     <!--检测教师编号是否可用是否可以使用-->
     $(function () {
-        $('#teachernumber').blur(function () {
-            var number = $('#teachernumber').val();
+        $('#jggh').blur(function () {
+            var jggh = $('#jggh').val();
             var msgObj = $('#numberMsg');
-            if (number == "") {
+            if (jggh == "") {
                 msgObj.css("color", "red").html("教工编号不能为空")
             } else {
                 $.ajax({
                     type: "post",
                     dataType: "json",
                     url: "/checkTeacherNum",
-                    data: {teachernumber: number},
+                    data: {jggh: jggh},
                     success: function (data) {
                         if (data == "ok") {
                             msgObj.css("color", "red").html("该编号可以使用");
@@ -161,17 +155,17 @@
             }
         })
 
-        $('#teacheridcard').blur(function () {
-            var idCard = $('#teacheridcard').val();
+        $('#sfzh').blur(function () {
+            var sfzh = $('#sfzh').val();
             var msgObj = $('#idCardMsg');
-            if (idCard == "") {
+            if (sfzh == "") {
                 msgObj.css("color", "red").html("身份证号不能为空")
             } else {
                 $.ajax({
                     type: "post",
                     dataType: "json",
                     url: "/checkTeacherIdCard",
-                    data: {teacheridcard: idCard},
+                    data: {sfzh: sfzh},
                     success: function (data) {
                         if (data == "ok") {
                             msgObj.css("color", "red").html("该身份证号可以使用");

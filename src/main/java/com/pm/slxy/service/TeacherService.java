@@ -58,16 +58,16 @@ public interface TeacherService extends IService<Teacher> {
     /**
      * 检测教师的编号是否在数据库中已经存在
      *
-     * @param teachernumber
+     * @param jggh
      * @return
      */
-    String checkTeacherNum(String teachernumber);
+    String checkTeacherNum(String jggh);
 
     /**
      * 检测教师的编号是否在数据库中已经存在
      *
-     * @param teacheridcard
+     * @param sfzh
      * @return
      */
-    String checkTeacheridCard(String teacheridcard);
+    String checkTeacheridCard(String sfzh);
 }

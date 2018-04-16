@@ -1,13 +1,12 @@
 package com.pm.slxy.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.TeacherRentalStatusEnum;
-import com.pm.slxy.entity.Department;
 import com.pm.slxy.entity.Teacher;
-import com.pm.slxy.mapper.DepartmentMapper;
 import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.TeacherService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.pm.slxy.utils.JodaTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -32,8 +31,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
 
     @Autowired
     private TeacherMapper teacherMapper;
-    @Autowired
-    private DepartmentMapper departmentMapper;
+
 
     /**
      * 查找所有教师信息
@@ -59,7 +57,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     public String deleteTeacherByIds(String ids) {
         List<String> teacherIds = Arrays.asList(ids.split(","));
         List<Teacher> teacherList = teacherMapper.selectBatchIds(teacherIds);
-        if (teacherList.get(0).getTeacherrentalstatus().equals(TeacherRentalStatusEnum.ALREADY_RENTAL_HOUSE.getStatus())) {
+        if (teacherList.get(0).getZfzt().equals(TeacherRentalStatusEnum.ALREADY_RENTAL_HOUSE.getStatus())) {
             return "该教师已经租房了，不能够直接删除";
         }
         int deleteTeacher = teacherMapper.deleteBatchIds(teacherIds);
@@ -78,18 +76,19 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
      */
     @Override
     public String addTeacher(Teacher teacher) {
-        if (StringUtils.isEmpty(teacher.getTeachername())
-                || StringUtils.isEmpty(teacher.getTeacherbirthdate())
-                || StringUtils.isEmpty(teacher.getTeacheridcard())
-                || StringUtils.isEmpty(teacher.getTeachernumber())
-                || StringUtils.isEmpty(teacher.getTeacherdepartment())
-                || StringUtils.isEmpty(teacher.getTeachereducation())
-                || StringUtils.isEmpty(teacher.getTeacherplaceorigin())
-                || StringUtils.isEmpty(teacher.getTeacherrentalstatus())
-                || StringUtils.isEmpty(teacher.getTeachersex())
-                || StringUtils.isEmpty(teacher.getTeacherstartwork())) {
+        if (StringUtils.isEmpty(teacher.getXm())
+                || StringUtils.isEmpty(teacher.getCjgzrq())
+                || StringUtils.isEmpty(teacher.getCsrq())
+                || StringUtils.isEmpty(teacher.getJg())
+                || StringUtils.isEmpty(teacher.getJggh())
+                || StringUtils.isEmpty(teacher.getSzbm())
+                || StringUtils.isEmpty(teacher.getZfzt())
+                || StringUtils.isEmpty(teacher.getXb())
+                || StringUtils.isEmpty(teacher.getXl())
+                || StringUtils.isEmpty(teacher.getSfzh())) {
             return "输入的信息不能为空！";
         }
+        teacher.setSqzfrq(JodaTimeUtils.formatDateNow());
         if (this.insert(teacher)) {
             return "ok";
         } else {
@@ -105,18 +104,19 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
      */
     @Override
     public String updateTeacher(Teacher teacher) {
-        if (StringUtils.isEmpty(teacher.getTeachername())
-                || StringUtils.isEmpty(teacher.getTeacherbirthdate())
-                || StringUtils.isEmpty(teacher.getTeacheridcard())
-                || StringUtils.isEmpty(teacher.getTeachernumber())
-                || StringUtils.isEmpty(teacher.getTeacherdepartment())
-                || StringUtils.isEmpty(teacher.getTeachereducation())
-                || StringUtils.isEmpty(teacher.getTeacherplaceorigin())
-                || StringUtils.isEmpty(teacher.getTeacherrentalstatus())
-                || StringUtils.isEmpty(teacher.getTeachersex())
-                || StringUtils.isEmpty(teacher.getTeacherstartwork())) {
+        if (StringUtils.isEmpty(teacher.getXm())
+                || StringUtils.isEmpty(teacher.getCjgzrq())
+                || StringUtils.isEmpty(teacher.getCsrq())
+                || StringUtils.isEmpty(teacher.getJg())
+                || StringUtils.isEmpty(teacher.getJggh())
+                || StringUtils.isEmpty(teacher.getSzbm())
+                || StringUtils.isEmpty(teacher.getZfzt())
+                || StringUtils.isEmpty(teacher.getXb())
+                || StringUtils.isEmpty(teacher.getXl())
+                || StringUtils.isEmpty(teacher.getSfzh())) {
             return "输入的信息不能为空！";
         }
+        teacher.setSqzfrq(JodaTimeUtils.formatDateNow());
         if (this.updateById(teacher)) {
             return "ok";
         } else {
@@ -136,7 +136,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         Teacher teacher = teacherMapper.selectById(id);
         if (!ObjectUtils.isEmpty(teacher)) {
             modelAndView.addObject("teacher", teacher);
-            modelAndView.addObject("deptList", departmentMapper.selectList(new EntityWrapper<Department>()));
+ //           modelAndView.addObject("deptList", departmentMapper.selectList(new EntityWrapper<Department>()));
             modelAndView.setViewName("teacher/updateTeacher");
         } else {
             modelAndView.setViewName("404");
@@ -147,16 +147,16 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     /**
      * 检测更新或者添加的时候数据库中是否已经存在了教师的编号
      *
-     * @param teachernumber
+     * @param jggh
      * @return
      */
     @Override
-    public String checkTeacherNum(String teachernumber) {
-        if (StringUtils.isEmpty(teachernumber)) {
+    public String checkTeacherNum(String jggh) {
+        if (StringUtils.isEmpty(jggh)) {
             return "error";
         }
         Teacher teacher = new Teacher();
-        teacher.setTeachernumber(teachernumber);
+        teacher.setJggh(jggh);
         List<Teacher> teachers = teacherMapper.selectList(new EntityWrapper<>(teacher));
         if (CollectionUtils.isEmpty(teachers)) {
             return "ok";
@@ -168,16 +168,16 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     /**
      * 检测更新或者添加的时候数据库中是否已经存在了教师的身份证号
      *
-     * @param teacheridcard
+     * @param sfzh
      * @return
      */
     @Override
-    public String checkTeacheridCard(String teacheridcard) {
-        if (StringUtils.isEmpty(teacheridcard)) {
+    public String checkTeacheridCard(String sfzh) {
+        if (StringUtils.isEmpty(sfzh)) {
             return "error";
         }
         Teacher teacher = new Teacher();
-        teacher.setTeacheridcard(teacheridcard);
+        teacher.setSfzh(sfzh);
         List<Teacher> teachers = teacherMapper.selectList(new EntityWrapper<>(teacher));
         if (CollectionUtils.isEmpty(teachers)) {
             return "ok";

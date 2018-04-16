@@ -86,7 +86,7 @@
                      data: {user: cuser},
                      success: function (data) {
                          if (data == "ok") {
-                             msgObj.css("color", "red").html("用户名可以注册");
+                             $('#msg').css('display','none');
                          } else {
                              msgObj.css("color", "red").html("用户名已经被注册");
                          }

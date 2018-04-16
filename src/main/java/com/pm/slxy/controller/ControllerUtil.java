@@ -36,26 +36,26 @@ public class ControllerUtil {
     /**
      * 检测更新或者添加的时候数据库中是否已经存在了教师的编号和身份证号
      *
-     * @param teachernumber
+     * @param jggh
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/checkTeacherNum")
     @ResponseBody
-    public String checkTeacherNum(String teachernumber) throws Exception {
-        return teacherService.checkTeacherNum(teachernumber);
+    public String checkTeacherNum(String jggh) throws Exception {
+        return teacherService.checkTeacherNum(jggh);
     }
 
     /**
      * 检测更新或者添加的时候数据库中是否已经存在了教师的编号和身份证号
      *
-     * @param teacheridcard
+     * @param shzh
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/checkTeacherIdCard")
     @ResponseBody
-    public String checkTeacherIdCard(String teacheridcard) throws Exception {
-        return teacherService.checkTeacheridCard(teacheridcard);
+    public String checkTeacherIdCard(String shzh) throws Exception {
+        return teacherService.checkTeacheridCard(shzh);
     }
 }
