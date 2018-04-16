@@ -46,7 +46,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的房屋
+                        已租房屋的信息
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

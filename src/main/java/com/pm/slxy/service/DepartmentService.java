@@ -17,4 +17,5 @@ import java.util.List;
 public interface DepartmentService extends IService<Department> {
 
 
+
 }
