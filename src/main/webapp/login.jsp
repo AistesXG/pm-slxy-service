@@ -18,7 +18,7 @@ pageEncoding="utf-8" %>
 	<div class="main-agileinfo">
 		<h2>现在登录</h2>
 		<form action="/login" method="post">
-			<input type="text" name="user" class="name" placeholder="Usename" required="">
+			<input type="text" name="user" class="name" placeholder="Username" required="">
 			<input type="password" name="pass" class="password" placeholder="Password" required="">
 			<ul>
 				<li>

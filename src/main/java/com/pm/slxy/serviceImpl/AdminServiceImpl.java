@@ -1,5 +1,7 @@
 package com.pm.slxy.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.pm.slxy.Enum.AdminEnum;
 import com.pm.slxy.entity.Admin;
@@ -14,7 +16,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -129,20 +133,21 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @return
      */
     @Override
-    public String checkUser(String user) {
-        if (StringUtils.isEmpty(user)) {
-            return "error";
-        }
+    public Map<String, Boolean> checkUser(String user) {
+        boolean result = true;
         Admin admin = new Admin();
         admin.setUser(user);
-        List<Admin> admins = this.selectList(new EntityWrapper<>(admin));
-        if (CollectionUtils.isEmpty(admins)) {
-            return "ok";
-        } else {
-            return "error";
+        List<Admin> admins = adminMapper.selectList(new EntityWrapper<>(admin));
+        for (Admin admin1 : admins) {
+            if (admin1.getUser().equals(user)) {
+                result = false;
+                break;
+            }
         }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        return map;
     }
-
 
     /**
      * 更新用户信息

@@ -7,7 +7,8 @@
     <title>Title</title>
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <!--引入日历插件js-->
+    <script type="text/javascript" src="/resources/js/laydate.js"></script>
     <!-- Bootstrap validator  CSS -->
     <link href="/resources/dist/css/bootstrapValidator.min.css" rel="stylesheet">
 

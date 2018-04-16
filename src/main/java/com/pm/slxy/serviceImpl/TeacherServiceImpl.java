@@ -9,13 +9,14 @@ import com.pm.slxy.service.TeacherService;
 import com.pm.slxy.utils.JodaTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -116,6 +117,28 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 || StringUtils.isEmpty(teacher.getSfzh())) {
             return "输入的信息不能为空！";
         }
+
+        Teacher oldTeacher = this.selectById(teacher.getId());
+        if (teacher.getSfzh().equals(oldTeacher.getSfzh())) {
+            teacher.setSfzh(oldTeacher.getSfzh());
+        }
+        if (teacher.getJggh().equals(oldTeacher.getJggh())){
+            teacher.setJggh(oldTeacher.getJggh());
+        }
+        else {
+            Teacher teacher1 = new Teacher();
+            teacher1.setJggh(teacher.getJggh());
+            Teacher teacher2 = this.selectOne(new EntityWrapper<>(teacher1));
+            Teacher teacher3 = new Teacher();
+            teacher3.setSfzh(teacher.getSfzh());
+            Teacher teacher4 = this.selectOne(new EntityWrapper<>(teacher3));
+            if (teacher2 != null) {
+                return "教工编号已经被使用了";
+            }
+            if (teacher4 != null) {
+                return "身份证号已经被使用了";
+            }
+        }
         teacher.setSqzfrq(JodaTimeUtils.formatDateNow());
         if (this.updateById(teacher)) {
             return "ok";
@@ -136,7 +159,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         Teacher teacher = teacherMapper.selectById(id);
         if (!ObjectUtils.isEmpty(teacher)) {
             modelAndView.addObject("teacher", teacher);
- //           modelAndView.addObject("deptList", departmentMapper.selectList(new EntityWrapper<Department>()));
+            //           modelAndView.addObject("deptList", departmentMapper.selectList(new EntityWrapper<Department>()));
             modelAndView.setViewName("teacher/updateTeacher");
         } else {
             modelAndView.setViewName("404");
@@ -151,18 +174,20 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
      * @return
      */
     @Override
-    public String checkTeacherNum(String jggh) {
-        if (StringUtils.isEmpty(jggh)) {
-            return "error";
-        }
+    public Map<String, Boolean> checkTeacherNum(String jggh) {
+        boolean result = true;
         Teacher teacher = new Teacher();
         teacher.setJggh(jggh);
         List<Teacher> teachers = teacherMapper.selectList(new EntityWrapper<>(teacher));
-        if (CollectionUtils.isEmpty(teachers)) {
-            return "ok";
-        } else {
-            return "error";
+        for (Teacher teacher1 : teachers) {
+            if (teacher1.getJggh().equals(jggh)) {
+                result = false;
+                break;
+            }
         }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        return map;
     }
 
     /**
@@ -172,17 +197,19 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
      * @return
      */
     @Override
-    public String checkTeacheridCard(String sfzh) {
-        if (StringUtils.isEmpty(sfzh)) {
-            return "error";
-        }
+    public Map<String, Boolean> checkTeacherIdCard(String sfzh) {
+        boolean result = true;
         Teacher teacher = new Teacher();
         teacher.setSfzh(sfzh);
         List<Teacher> teachers = teacherMapper.selectList(new EntityWrapper<>(teacher));
-        if (CollectionUtils.isEmpty(teachers)) {
-            return "ok";
-        } else {
-            return "error";
+        for (Teacher teacher1 : teachers) {
+            if (teacher1.getSfzh().equals(sfzh)) {
+                result = false;
+                break;
+            }
         }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        return map;
     }
 }

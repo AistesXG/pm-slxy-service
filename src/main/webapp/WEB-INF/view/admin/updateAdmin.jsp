@@ -82,26 +82,6 @@
 </div>
 </body>
 <script type="text/javascript">
-    <!--检测用户名是否可以使用-->
-    $(function () {
-        $('#user').blur(function () {
-            var cuser = $('#user').val();
-            var msgObj = $('#msg');
-            $.ajax({
-                type: "post",
-                dataType: "json",
-                url: "/checkUser",
-                data: {user: cuser},
-                success: function (data) {
-                    if (data == "ok") {
-                        $('#msg').css('display','none');
-                    } else {
-                        msgObj.css("color", "red").html("用户名已经被注册");
-                    }
-                }
-            })
-        })
-    })
 
     $(document).ready(function () {
         $('#updateForm')
@@ -114,6 +94,7 @@
                 },
                 fields: {
                     user: {
+                        threshold :  4,
                         message: 'This user is not valid',
                         validators: {
                             notEmpty: {

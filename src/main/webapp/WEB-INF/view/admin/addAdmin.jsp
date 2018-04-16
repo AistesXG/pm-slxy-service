@@ -74,29 +74,6 @@
 </div>
 </body>
 <script type="text/javascript">
-     <!--检测用户名是否可以使用-->
-     $(function () {
-         $('#user').blur(function () {
-             var cuser = $('#user').val();
-             var msgObj = $('#msg');
-                 $.ajax({
-                     type: "post",
-                     dataType: "json",
-                     url: "/checkUser",
-                     data: {user: cuser},
-                     success: function (data) {
-                         if (data == "ok") {
-                             $('#msg').css('display','none');
-                         } else {
-                             msgObj.css("color", "red").html("用户名已经被注册");
-                         }
-                     }
-                 })
-         })
-     })
-
-
-
     $(document).ready(function () {
         $('#addForm')
             .bootstrapValidator({
@@ -108,6 +85,7 @@
                 },
                 fields: {
                     user: {
+                        threshold :  4,
                         message: 'This user is not valid',
                         validators: {
                             notEmpty: {
@@ -117,6 +95,12 @@
                                 min: 4,
                                 max: 10,
                                 message: '用户名必须在4到10个字符之间'
+                            },
+                            remote:{
+                                type:'POST',
+                                url:'/checkUser',
+                                message:'用户已存在',
+                                delay:1000
                             },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_]+$/,

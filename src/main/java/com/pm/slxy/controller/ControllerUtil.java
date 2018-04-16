@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
+
 /**
  * @author furg@senthink.com
  * @date 2018/3/22
@@ -20,42 +22,25 @@ public class ControllerUtil {
     private TeacherService teacherService;
     @Autowired
     private HousePubService housePubService;
-    /**
-     * 检测用户名是否存在
-     *
-     * @param user
-     * @return
-     * @throws Exception
-     */
+
+
     @RequestMapping(value = "/checkUser")
     @ResponseBody
-    public String checkUser(String user) throws Exception {
+    public Map<String, Boolean> checkUser(String user) throws Exception {
         return adminService.checkUser(user);
     }
 
-    /**
-     * 检测更新或者添加的时候数据库中是否已经存在了教师的编号和身份证号
-     *
-     * @param jggh
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/checkTeacherNum")
     @ResponseBody
-    public String checkTeacherNum(String jggh) throws Exception {
+    public Map<String, Boolean> checkTeacherNum(String jggh) throws Exception {
         return teacherService.checkTeacherNum(jggh);
     }
 
-    /**
-     * 检测更新或者添加的时候数据库中是否已经存在了教师的编号和身份证号
-     *
-     * @param shzh
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/checkTeacherIdCard")
     @ResponseBody
-    public String checkTeacherIdCard(String shzh) throws Exception {
-        return teacherService.checkTeacheridCard(shzh);
+    public Map<String, Boolean> checkTeacherIdCard(String sfzh) throws Exception {
+        return teacherService.checkTeacherIdCard(sfzh);
     }
 }

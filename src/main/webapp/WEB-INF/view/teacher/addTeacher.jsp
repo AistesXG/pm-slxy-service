@@ -5,6 +5,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <script src="/resources/laydate/laydate.js"></script>
     <title>添加用户</title>
 </head>
 <style type="text/css">
@@ -27,7 +29,7 @@
             <!-- /.col-lg-12 -->
             <div class="row">
                 <div class="col-lg-4 ">
-                    <form onsubmit="false" role="form" id="addForm" class="form-horizontal">
+                    <form onsubmit="false" role="form" id="addForm" class="form-horizontal" action="/teacher/addTeacher">
                         <br>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">教师姓名:<span class="must">*</span></label>
@@ -42,7 +44,6 @@
                             <div class="col-sm-9">
                                 <input type="text" name="jggh" class="form-control" value="" size="6"
                                        id="jggh">
-                                <span id="numberMsg"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -57,12 +58,13 @@
                             <div class="col-sm-9">
                                 <input type="text" name="sfzh" class="form-control" value="" size="18"
                                        id="sfzh">
-                                <span id="idCardMsg"></span></div>
+
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">出生年月:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="csrq" class="form-control" value="" size="10">
+                                <input type="text" name="csrq" class="form-control laydate-icon" value="" size="10" id="csrq" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -74,7 +76,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">参加工作时间:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="cjgzrq" class="form-control" value="" size="10">
+                                <input type="text"  name="cjgzrq" class="form-control laydate-icon" value="" size="10" id="cjgzrq" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -103,7 +105,7 @@
                         </div>
 
                         <div class="form-group" style="text-align: center">
-                            <input type="button" value="提交" class="btn btn-primary" onclick="addTeacher()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">
                         </div>
                     </form>
@@ -114,68 +116,115 @@
 </div>
 </body>
 <script type="text/javascript">
-    function addTeacher() {
-        $.ajax({
-            type: "post",
-            dataType: "json",
-            url: "/teacher/addTeacher",
-            data: $('#addForm').serialize(),
-            success: function (data) {
-                if (data == "ok") {
-                    window.location.href = "/teacher/teacherList";
-                } else {
-                    alert(data);
+
+
+    $(document).ready(function () {
+        $('#addForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    xm: {
+                        message: 'This user is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '教师姓名不能为空'
+                            },
+                            stringLength: {
+                                max: 10,
+                                message: '行名不能超过10个字符'
+                            },
+                            regexp: {
+                                regexp: /^[\u4E00-\u9FA5A-Za-z]+$/,
+                                message: '姓名只能是英文和中文'
+                            }
+                        }
+                    },
+                    jggh: {
+                        validators: {
+                            notEmpty: {
+                                message: '教工编号不能为空'
+                            },
+                            stringLength: {
+                                max:6,
+                                message: '教工编号最大为6位'
+                            },
+                            remote:{
+                                type:'POST',
+                                url:'/checkTeacherNum',
+                                message:'教师编号已经存在',
+                                delay:1000
+                            }
+                        }
+                    },
+                    sfzh: {
+                        validators: {
+                            notEmpty: {
+                                message: '身份证号不能为空'
+                            },
+                            stringLength: {
+                                max:18,
+                                message:'身份证号最少18位'
+                            },
+                            remote:{
+                                type:'POST',
+                                url:'/checkTeacherIdCard',
+                                message:'身份证号已经存在',
+                                delay:1000
+                            }
+                        }
+                    },
+                    xl: {
+                        validators: {
+                            notEmpty: {
+                                message: '学历不能为空'
+                            },
+                        }
+                    },
+                    szbm:{
+                        validators:{
+                            notEmpty:{
+                                message:'所在部门不能为空'
+                            }
+                        }
+                    },
+                    jg:{
+                        validators:{
+                            notEmpty:{
+                                message:'籍贯不能为空'
+                            }
+                        }
+                    }
                 }
-            }
-
-        })
-    }
-
-    <!--检测教师编号是否可用是否可以使用-->
-    $(function () {
-        $('#jggh').blur(function () {
-            var jggh = $('#jggh').val();
-            var msgObj = $('#numberMsg');
-            if (jggh == "") {
-                msgObj.css("color", "red").html("教工编号不能为空")
-            } else {
-                $.ajax({
-                    type: "post",
-                    dataType: "json",
-                    url: "/checkTeacherNum",
-                    data: {jggh: jggh},
-                    success: function (data) {
-                        if (data == "ok") {
-                            msgObj.css("color", "red").html("该编号可以使用");
-                        } else {
-                            msgObj.css("color", "red").html("该编号已经存在");
-                        }
+            }).on('success.form.bv', function (e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var bv =  $form.data('bootstrapValidator');
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                success: function (data) {
+                    if (data == "ok") {
+                        window.location.href = "/teacher/teacherList";
+                    } else {
+                        alert(data);
                     }
-                })
-            }
-        })
-
-        $('#sfzh').blur(function () {
-            var sfzh = $('#sfzh').val();
-            var msgObj = $('#idCardMsg');
-            if (sfzh == "") {
-                msgObj.css("color", "red").html("身份证号不能为空")
-            } else {
-                $.ajax({
-                    type: "post",
-                    dataType: "json",
-                    url: "/checkTeacherIdCard",
-                    data: {sfzh: sfzh},
-                    success: function (data) {
-                        if (data == "ok") {
-                            msgObj.css("color", "red").html("该身份证号可以使用");
-                        } else {
-                            msgObj.css("color", "red").html("该身份证号已经存在");
-                        }
-                    }
-                })
-            }
+                }
+            })
         })
     })
+
+
+    !function(){
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#csrq'});//绑定出生年月元素
+        laydate({elem:'#cjgzrq'});//绑定参加工作时间
+    }();
 </script>
 </html>

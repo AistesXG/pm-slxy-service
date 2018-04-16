@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.service.IService;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -54,7 +55,7 @@ public interface AdminService extends IService<Admin> {
      * @param user
      * @return
      */
-    String checkUser(String user);
+    Map<String, Boolean> checkUser(String user);
 
     /**
      * 修改用户信息

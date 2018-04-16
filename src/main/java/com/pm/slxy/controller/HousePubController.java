@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 付荣刚123
@@ -32,7 +32,7 @@ public class HousePubController {
     }
 
     @RequestMapping(value = "/addHousePub")
-    @SysControllerFilter(name ="addHousePub")
+    @SysControllerFilter(name = "addHousePub")
     @ResponseBody
     public String addHousePub(HousePub housePub) throws Exception {
         return housePubService.addHousePub(housePub);
@@ -46,7 +46,7 @@ public class HousePubController {
     }
 
     @RequestMapping(value = "/selectHousePubById")
-    @SysControllerFilter(name= "selectHousePubById")
+    @SysControllerFilter(name = "selectHousePubById")
     public ModelAndView selectHousePubById(ModelAndView modelAndView, String id) throws Exception {
         return housePubService.selectHousePubById(modelAndView, Integer.parseInt(id));
     }

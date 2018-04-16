@@ -25,13 +25,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    /**
-     * 查询用户列表
-     *
-     * @param modelAndView
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/adminList")
     @SysControllerFilter(name = "adminList")
     public ModelAndView selectAdmins(ModelAndView modelAndView) throws Exception {
@@ -39,13 +33,6 @@ public class AdminController {
     }
 
 
-    /**
-     * 批量删除+单个删除
-     *
-     * @param ids
-     * @return
-     * @throws Exception
-     */
     @RequestMapping(value = "/deleteAdminByIds")
     @SysControllerFilter(name = "deleteAdminByIds")
     @ResponseBody
@@ -53,13 +40,7 @@ public class AdminController {
         return adminService.deleteAdminByIds(ids);
     }
 
-    /**
-     * 添加用户
-     *
-     * @param admin
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/addAdmin")
     @SysControllerFilter(name = "/addAdmin")
     @ResponseBody
@@ -68,13 +49,6 @@ public class AdminController {
     }
 
 
-    /**
-     * 更新用户信息
-     *
-     * @param admin
-     * @return
-     * @throws Exception
-     */
     @RequestMapping(value = "/updateAdmin")
     @SysControllerFilter(name = "/updateAdmin")
     @ResponseBody
@@ -82,14 +56,7 @@ public class AdminController {
         return adminService.updateAdmin(admin);
     }
 
-    /**
-     * 查找一个用户
-     *
-     * @param modelAndView
-     * @param id
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/selectAdmin")
     @SysControllerFilter(name = "selectAdmin")
     public ModelAndView selectAdmin(ModelAndView modelAndView, String id) throws Exception {

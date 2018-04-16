@@ -25,26 +25,14 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-    /**
-     * 查找所有教师信息
-     *
-     * @param modelAndView
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/teacherList")
     @SysControllerFilter(name = "teacherList")
     public ModelAndView selectTeacher(ModelAndView modelAndView) throws Exception {
         return teacherService.selectTeachers(modelAndView);
     }
 
-    /**
-     * 批量删除+单个删除
-     *
-     * @param ids
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/deleteTeacherByIds")
     @SysControllerFilter(name = "deleteTeacherByIds")
     @ResponseBody
@@ -52,13 +40,7 @@ public class TeacherController {
         return teacherService.deleteTeacherByIds(ids);
     }
 
-    /**
-     * 添加教师信息
-     *
-     * @param teacher
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/addTeacher")
     @SysControllerFilter(name = "addTeacher")
     @ResponseBody
@@ -66,13 +48,7 @@ public class TeacherController {
         return teacherService.addTeacher(teacher);
     }
 
-    /**
-     * 更新教师信息
-     *
-     * @param teacher
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/updateTeacher")
     @SysControllerFilter(name = "updateTeacher")
     @ResponseBody
@@ -80,14 +56,7 @@ public class TeacherController {
         return teacherService.updateTeacher(teacher);
     }
 
-    /**
-     * 根据id查找一个教师信息
-     *
-     * @param modelAndView
-     * @param id
-     * @return
-     * @throws Exception
-     */
+
     @RequestMapping(value = "/selectTeacher")
     @SysControllerFilter(name = "selectTeacher")
     public ModelAndView selectTeacher(ModelAndView modelAndView, String id) throws Exception {
