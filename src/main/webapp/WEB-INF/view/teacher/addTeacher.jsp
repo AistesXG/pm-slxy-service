@@ -70,7 +70,13 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">学历:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="xl" class="form-control" value="" size="18">
+                                <select name="xl" class="form-control">
+                                    <option value="">---请选择学历---</option>
+                                    <option value="本科">本科</option>
+                                    <option value="硕士">硕士</option>
+                                    <option value="博士">博士</option>
+                                </select>
+                                <%--<input type="text" name="xl" class="form-control" value="" size="18">--%>
                             </div>
                         </div>
                         <div class="form-group">
@@ -82,12 +88,6 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <%--<select name="teacherdepartment"  class="form-control">--%>
-                                    <%--<option value="">---请选择部门---</option>--%>
-                                    <%--<c:forEach items="${depList}" var="dept">--%>
-                                        <%--<option value="${dept.departmentName}">${dept.departmentName}</option>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
                                 <input type="text" name="szbm" class="form-control" value="" size="30" >
                             </div>
                         </div>
@@ -97,13 +97,6 @@
                                 <input type="text" name="jg" class="form-control" value="" size="30">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">租房状态:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <input type="text" name="zfzt" class="form-control" value="未租房" size="4" readonly="readonly">
-                            </div>
-                        </div>
-
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">

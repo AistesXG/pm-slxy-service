@@ -67,24 +67,43 @@
                             <label class="col-sm-3 control-label">出生年月:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="csrq" class="form-control laydate-icon"
-                                       value="${teacher.csrq}" size="10"  id="csrq" readonly></div>
+                                       value="${teacher.csrq}" size="10" id="csrq" readonly></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">学历:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="xl" class="form-control"
-                                       value="${teacher.xl}" size="18"></div>
+                                <select name="xl" class="form-control">
+                                    <c:choose>
+                                        <c:when test="${teacher.xl == '本科'}">
+                                            <option value="本科" selected>本科</option>
+                                            <option value="硕士">硕士</option>
+                                            <option value="博士">博士</option>
+                                        </c:when>
+                                        <c:when test="${teacher.xl == '硕士'}">
+                                            <option value="本科">本科</option>
+                                            <option value="硕士" selected>硕士</option>
+                                            <option value="博士">博士</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="本科">本科</option>
+                                            <option value="硕士">硕士</option>
+                                            <option value="博士" selected>博士</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </select>
+                                <%--<input type="text" name="xl" class="form-control"--%>
+                            </div>
                         </div>
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">参加工作时间:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" name="cjgzrq" class="form-control laydate-icon"
-                                       value="${teacher.cjgzrq}" size="10" id="cjgzrq"  readonly></div>
+                                       value="${teacher.cjgzrq}" size="10" id="cjgzrq" readonly></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label>
                             <div class="col-sm-9">
-
                                 <select name="szbm" class="form-control">
                                     <option value="${teacher.szbm}">${teacher.szbm}</option>
                                     <%--<c:forEach items="${deptList}" var="dept">--%>
@@ -210,10 +229,10 @@
         })
     })
 
-    !function(){
+    !function () {
         laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
         laydate({elem: '#csrq'});//绑定出生年月元素
-        laydate({elem:'#cjgzrq'});//绑定参加工作时间
+        laydate({elem: '#cjgzrq'});//绑定参加工作时间
     }();
 </script>
 </html>

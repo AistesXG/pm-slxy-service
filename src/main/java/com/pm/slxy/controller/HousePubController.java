@@ -58,6 +58,11 @@ public class HousePubController {
         return housePubService.updateHousePub(housePub);
     }
 
-
+    @RequestMapping(value = "/selectHousePubDetailById")
+    @SysControllerFilter(name = "selectHousePubDetailById")
+    @ResponseBody
+    public String selectHousePubDetailById(String id) throws Exception {
+        return housePubService.selectHousePubDetailById(Integer.parseInt(id));
+    }
 }
 

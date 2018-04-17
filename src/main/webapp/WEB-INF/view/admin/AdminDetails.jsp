@@ -84,7 +84,7 @@
                             <tbody>
                             <c:forEach items="${adminList}" var="admin" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="uid" id="uid" value="${admin.id}" style="margin-right: 8px; "></td>
+                                    <td><input type="checkbox" name="uid" id="uid" value="${admin.id}"></td>
                                     <td>${status.count}</td>
                                     <td>${admin.user}</td>
                                     <td>${admin.email}</td>
@@ -188,5 +188,6 @@
         }
         window.location.href="/admin/selectAdmin?id="+id;
     }
+
 </script>
 </html>

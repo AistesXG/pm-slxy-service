@@ -1,6 +1,9 @@
 package com.pm.slxy.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.pm.slxy.entity.HousePub;
 import com.pm.slxy.entity.Teacher;
+import com.pm.slxy.service.HousePubService;
 import com.pm.slxy.service.TeacherService;
 import com.pm.slxy.utils.SysControllerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,8 @@ public class ViewJumpController {
 
     @Autowired
     private TeacherService teacherService;
-
+    @Autowired
+    private HousePubService housePubService;
     /**
      * 跳转到登录页面
      *
@@ -119,6 +123,21 @@ public class ViewJumpController {
         Teacher teacher = teacherService.selectById(id);
         modelAndView.addObject("teacher", teacher);
         modelAndView.setViewName("teacher/oneTeacher");
+        return modelAndView;
+    }
+
+    /**
+     * 跳转到房屋的操作页面
+     *
+     * @param modelAndView
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/jumpHousePubDetailOperate")
+    @SysControllerFilter(name = "jumpHousePubDetailOperate")
+    public ModelAndView jumpHouseDetailOperate(ModelAndView modelAndView) throws Exception {
+        modelAndView.addObject("housePubList", housePubService.selectList(new EntityWrapper<HousePub>()));
+        modelAndView.setViewName("housePub/housePubDetailOperate");
         return modelAndView;
     }
 

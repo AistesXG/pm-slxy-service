@@ -1,5 +1,6 @@
 package com.pm.slxy.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.pm.slxy.entity.Admin;
 import com.baomidou.mybatisplus.service.IService;
 import org.springframework.web.servlet.ModelAndView;
@@ -72,4 +73,6 @@ public interface AdminService extends IService<Admin> {
      * @return
      */
     ModelAndView selectAdmin(ModelAndView modelAndView, int id);
+
+
 }

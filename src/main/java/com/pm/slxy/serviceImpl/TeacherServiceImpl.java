@@ -77,6 +77,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
      */
     @Override
     public String addTeacher(Teacher teacher) {
+        teacher.setZfzt(TeacherRentalStatusEnum.NOT_RENTAL_HOUSE.getStatus());
         if (StringUtils.isEmpty(teacher.getXm())
                 || StringUtils.isEmpty(teacher.getCjgzrq())
                 || StringUtils.isEmpty(teacher.getCsrq())

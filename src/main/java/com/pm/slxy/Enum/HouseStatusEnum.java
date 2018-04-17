@@ -5,8 +5,8 @@ package com.pm.slxy.Enum;
  * @date 2018/4/12
  */
 public enum HouseStatusEnum {
-    NOT_RENTAL("未租出"),
-    ALREADY_RENTAL("已租出");
+    NOT_RENTAL("未租"),
+    ALREADY_RENTAL("已租");
 
     private String status;
 

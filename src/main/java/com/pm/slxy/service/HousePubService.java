@@ -57,5 +57,12 @@ public interface HousePubService extends IService<HousePub> {
      */
     String updateHousePub(HousePub housePub);
 
+    /**
+     * 在房屋的图片详情页面点击一个图片显示的数据
+     *
+     * @param id
+     * @return
+     */
+    String selectHousePubDetailById(int id);
 
 }

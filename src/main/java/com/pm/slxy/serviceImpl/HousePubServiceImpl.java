@@ -1,5 +1,6 @@
 package com.pm.slxy.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.HouseStatusEnum;
@@ -51,10 +52,11 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
      */
     @Override
     public String addHousePub(HousePub housePub) {
+        housePub.setFjsyzt(HouseStatusEnum.NOT_RENTAL.getStatus());
         if (StringUtils.isEmpty(housePub.getFjbh()) ||
                 StringUtils.isEmpty(housePub.getFjlh()) ||
                 StringUtils.isEmpty(housePub.getFjmj()) ||
-                StringUtils.isEmpty(housePub.getFjsybm())||
+                StringUtils.isEmpty(housePub.getFjsybm()) ||
                 StringUtils.isEmpty(housePub.getFjsylx()) ||
                 StringUtils.isEmpty(housePub.getFjsyzt())
                 ) {
@@ -107,6 +109,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         return modelAndView;
     }
 
+
     /**
      * 更新房产信息
      *
@@ -118,7 +121,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         if (StringUtils.isEmpty(housePub.getFjbh()) ||
                 StringUtils.isEmpty(housePub.getFjlh()) ||
                 StringUtils.isEmpty(housePub.getFjmj()) ||
-                StringUtils.isEmpty(housePub.getFjsybm())||
+                StringUtils.isEmpty(housePub.getFjsybm()) ||
                 StringUtils.isEmpty(housePub.getFjsylx()) ||
                 StringUtils.isEmpty(housePub.getFjsyzt())
                 ) {
@@ -131,4 +134,19 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         }
     }
 
+    /**
+     * 在房屋的图片详情页面点击一个图片显示的数据
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public String selectHousePubDetailById(int id) {
+        HousePub housePubDetail = housePubMapper.selectById(id);
+        if (!ObjectUtils.isEmpty(housePubDetail)) {
+            return JSON.toJSONString(housePubDetail);
+        } else {
+            return "error";
+        }
+    }
 }

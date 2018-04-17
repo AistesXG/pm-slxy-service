@@ -84,18 +84,18 @@
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${housePubList}" var="house" varStatus="status">
+                            <c:forEach items="${housePubList}" var="housePub" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="hid" id="hid" value="${house.id}"
+                                    <td><input type="checkbox" name="hid" id="hid" value="${housePub.id}"
                                                style="margin-right: 8px; "></td>
                                     <td>${status.count}</td>
-                                    <td>${house.fjlh}</td>
-                                    <td>${house.fjbh}</td>
-                                    <td>${house.fjmj}</td>
-                                    <td class="center" style="color: red; font-weight: bolder">${house.fjsyzt}</td>
-                                    <td class="center">${house.fjsylx}</td>
-                                    <td class="center">${house.fjsybm}</td>
-                                    <td class="center">${house.fjbz}</td>
+                                    <td>${housePub.fjlh}</td>
+                                    <td>${housePub.fjbh}</td>
+                                    <td>${housePub.fjmj}</td>
+                                    <td class="center" style="color: red; font-weight: bolder">${housePub.fjsyzt}</td>
+                                    <td class="center">${housePub.fjsylx}</td>
+                                    <td class="center">${housePub.fjsybm}</td>
+                                    <td class="center">${housePub.fjbz}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>

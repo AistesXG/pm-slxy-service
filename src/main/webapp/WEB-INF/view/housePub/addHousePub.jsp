@@ -48,15 +48,19 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">使用状态:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <input type="text" name="fjsyzt" class="form-control" value="未租出" size="4" id="fjsyzt" readonly="readonly">
-                            </div>
-                        </div>
-                        <div class="form-group">
                         <label class="col-sm-3 control-label">使用类型:</label>
                         <div class="col-sm-9">
-                            <input type="text" name="fjsylx" class="form-control" value="" size="20" id="fjsylx">
+                            <select name="fjsylx" class="form-control">
+                                <option value="">---请选择房间类型---</option>
+                                <option value="保障期单间">保障期单间</option>
+                                <option value="保障期单元房">保障期单元房</option>
+                                <option value="延长期单间">延长期单间</option>
+                                <option value="延长期单元房">延长期单元房</option>
+                                <option value="超限期单间">超限期单间</option>
+                                <option value="超限期单元房">超限期单元房</option>
+                                <option value="特殊房间">特殊房间</option>
+                            </select>
+                            <%--<input type="text" name="fjsylx" class="form-control" value="" size="20" id="fjsylx">--%>
                         </div>
                     </div>
                         <div class="form-group">
