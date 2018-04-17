@@ -201,6 +201,4 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
         return modelAndView;
     }
-
-
 }

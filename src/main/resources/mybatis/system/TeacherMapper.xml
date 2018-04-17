@@ -2,5 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pm.slxy.mapper.TeacherMapper">
 
-
+    <!--通用结果查询列-->
+    <resultMap id="selectTeacherResultMap" type="com.pm.slxy.entity.Teacher">
+        <id column="id" property="id"/>
+        <result column="xm" property="xm"/>
+        <result column="jggh" property="jggh"/>
+        <result column="xb" property="xb"/>
+        <result column="sfzh" property="sfzh"/>
+        <result column="xl" property="xl"/>
+        <result column="cjgzrq" property="cjgzrq"/>
+        <result column="sqzfrq" property="sqzfrq"/>
+        <result column="szbm" property="szbm"/>
+        <result column="jg" property="jg"/>
+        <result column="zfzt" property="zfzt"/>
+    </resultMap>
+    <select id="selectDepartment" resultType="String">
+        SELECT szbm FROM teacher GROUP BY szbm
+    </select>
 </mapper>

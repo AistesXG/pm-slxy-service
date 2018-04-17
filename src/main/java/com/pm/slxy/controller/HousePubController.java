@@ -64,5 +64,6 @@ public class HousePubController {
     public String selectHousePubDetailById(String id) throws Exception {
         return housePubService.selectHousePubDetailById(Integer.parseInt(id));
     }
+
 }
 

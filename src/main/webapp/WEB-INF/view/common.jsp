@@ -18,9 +18,6 @@
     <!-- Custom CSS -->
     <link href="/resources/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="/resources/vendor/morrisjs/morris.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -88,6 +85,14 @@
                         </li>
                         <li>
                             <a href="/jump/jumpHousePubDetailOperate">房屋的图片样式详情</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-edit fa-fw"></i>教师用房管理</a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/house/houseList">公用房管理</a>
                         </li>
                     </ul>
                 </li>
@@ -167,8 +172,6 @@
 
 <!-- Morris Charts JavaScript -->
 <script src="/resources/vendor/raphael/raphael.min.js"></script>
-<script src="/resources/vendor/morrisjs/morris.min.js"></script>
-<script src="/resources/data/morris-data.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="/resources/js/sb-admin-2.js"></script>

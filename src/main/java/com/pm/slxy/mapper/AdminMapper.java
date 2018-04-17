@@ -1,10 +1,7 @@
 package com.pm.slxy.mapper;
 
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.pm.slxy.entity.Admin;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-
-import java.util.List;
+import com.pm.slxy.entity.Admin;
 
 /**
  * <p>

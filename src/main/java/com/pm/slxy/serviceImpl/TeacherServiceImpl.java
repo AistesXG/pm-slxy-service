@@ -1,5 +1,6 @@
 package com.pm.slxy.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.TeacherRentalStatusEnum;
@@ -9,6 +10,7 @@ import com.pm.slxy.service.TeacherService;
 import com.pm.slxy.utils.JodaTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -123,10 +125,9 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         if (teacher.getSfzh().equals(oldTeacher.getSfzh())) {
             teacher.setSfzh(oldTeacher.getSfzh());
         }
-        if (teacher.getJggh().equals(oldTeacher.getJggh())){
+        if (teacher.getJggh().equals(oldTeacher.getJggh())) {
             teacher.setJggh(oldTeacher.getJggh());
-        }
-        else {
+        } else {
             Teacher teacher1 = new Teacher();
             teacher1.setJggh(teacher.getJggh());
             Teacher teacher2 = this.selectOne(new EntityWrapper<>(teacher1));
@@ -212,5 +213,37 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         Map<String, Boolean> map = new HashMap<>();
         map.put("valid", result);
         return map;
+    }
+
+    /**
+     * 查找所有部门
+     *
+     * @return
+     */
+    @Override
+    public List<String> selectDepartment() {
+        List<String> departments = teacherMapper.selectDepartment();
+        if (!CollectionUtils.isEmpty(departments)) {
+            return departments;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 根据id查看一个教师的详情
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public String selectTeacherById(int id) {
+        Teacher teacher = teacherMapper.selectById(id);
+        if (!ObjectUtils.isEmpty(teacher)) {
+            return JSON.toJSONString(teacher);
+        }
+        else{
+            return "error";
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.pm.slxy.entity.Teacher;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -72,4 +73,19 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     Map<String, Boolean> checkTeacherIdCard(String sfzh);
+
+    /**
+     * 查找所有部门
+     *
+     * @return
+     */
+    List<String> selectDepartment();
+
+    /**
+     * 根据id来查找一个教师的详情
+     *
+     * @param id
+     * @return
+     */
+    String selectTeacherById(int id);
 }

@@ -23,20 +23,17 @@ public class ControllerUtil {
     @Autowired
     private HousePubService housePubService;
 
-
     @RequestMapping(value = "/checkUser")
     @ResponseBody
     public Map<String, Boolean> checkUser(String user) throws Exception {
         return adminService.checkUser(user);
     }
 
-
     @RequestMapping(value = "/checkTeacherNum")
     @ResponseBody
     public Map<String, Boolean> checkTeacherNum(String jggh) throws Exception {
         return teacherService.checkTeacherNum(jggh);
     }
-
 
     @RequestMapping(value = "/checkTeacherIdCard")
     @ResponseBody

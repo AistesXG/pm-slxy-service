@@ -25,13 +25,11 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-
     @RequestMapping(value = "/adminList")
     @SysControllerFilter(name = "adminList")
     public ModelAndView selectAdmins(ModelAndView modelAndView) throws Exception {
         return adminService.selectAdmins(modelAndView);
     }
-
 
     @RequestMapping(value = "/deleteAdminByIds")
     @SysControllerFilter(name = "deleteAdminByIds")
@@ -40,7 +38,6 @@ public class AdminController {
         return adminService.deleteAdminByIds(ids);
     }
 
-
     @RequestMapping(value = "/addAdmin")
     @SysControllerFilter(name = "/addAdmin")
     @ResponseBody
@@ -48,14 +45,12 @@ public class AdminController {
         return adminService.addAdmin(admin);
     }
 
-
     @RequestMapping(value = "/updateAdmin")
     @SysControllerFilter(name = "/updateAdmin")
     @ResponseBody
     public String updateAdmin(Admin admin) throws Exception {
         return adminService.updateAdmin(admin);
     }
-
 
     @RequestMapping(value = "/selectAdmin")
     @SysControllerFilter(name = "selectAdmin")

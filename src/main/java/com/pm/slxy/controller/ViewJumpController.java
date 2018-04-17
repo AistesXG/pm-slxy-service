@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 /**
  * @author furg@senthink.com
  * @date 2018/3/23
@@ -24,6 +26,7 @@ public class ViewJumpController {
     private TeacherService teacherService;
     @Autowired
     private HousePubService housePubService;
+
     /**
      * 跳转到登录页面
      *
@@ -75,7 +78,6 @@ public class ViewJumpController {
     @RequestMapping(value = "/jumpAddTeacher")
     @SysControllerFilter(name = "jumpAddTeacher")
     public ModelAndView jumpAddTeacher(ModelAndView modelAndView) throws Exception {
-        //   modelAndView.addObject("depList", departmentService.selectList(new EntityWrapper<Department>()));
         modelAndView.setViewName("teacher/addTeacher");
         return modelAndView;
     }
@@ -104,10 +106,11 @@ public class ViewJumpController {
     @RequestMapping(value = "/jumpAddHousePub")
     @SysControllerFilter(name = "jumpAddHousePub")
     public ModelAndView jumpAddHouse(ModelAndView modelAndView) throws Exception {
+        List<String> departments = teacherService.selectDepartment();
+        modelAndView.addObject("departments", departments);
         modelAndView.setViewName("housePub/addHousePub");
         return modelAndView;
     }
-
 
     /**
      * 跳转到教师的详情页

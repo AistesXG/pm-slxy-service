@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,7 +27,7 @@
             <!-- /.col-lg-12 -->
             <div class="row">
                 <div class="col-lg-4 ">
-                    <form onsubmit="false" role="form" id="updateForm" class="form-horizontal">
+                    <form onsubmit="false" role="form" id="updateForm" class="form-horizontal" action="/housePub/updateHousePub">
                         <br>
 
                         <input type="hidden" value="${housePub.id}" name="id">
@@ -74,7 +75,18 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">使用部门:</label>
                             <div class="col-sm-9">
-                                <input type="text" name="fjsybm" class="form-control" value="${housePub.fjsybm}" size="30" id="fjsybm">
+                                <select name="fjsybm" class="form-control" id="fjsybm">
+                                    <c:set value="${housePub.fjsybm}" var='deptName'/>
+                                    <c:forEach items="${departments}" var="dept">
+                                        <c:if test="${dept eq deptName}">
+                                            <option value="${dept}" selected>${dept}</option>
+                                        </c:if>
+                                        <c:if test="${dept != depeName}">
+                                            <option value="${dept}">${dept}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+                                <%--<input type="text" name="fjsybm" class="form-control" value="${housePub.fjsybm}" size="30" id="fjsybm">--%>
                             </div>
                         </div>
                         <div class="form-group">
@@ -84,7 +96,7 @@
                             </div>
                         </div>
                         <div class="form-group" style="text-align: center">
-                            <input type="button" value="提交" class="btn btn-primary" onclick="updateHousePub()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">
                         </div>
                     </form>
@@ -96,21 +108,70 @@
 </body>
 
 <script type="text/javascript">
-    function updateHousePub() {
-        $.ajax({
-            type: "post",
-            dataType: "json",
-            url: "/housePub/updateHousePub",
-            data: $('#updateForm').serialize(),
-            success: function (data) {
-                if (data == "ok") {
-                    console.log(data)
-                    window.location.href = "/housePub/housePubList";
-                } else {
-                    alert(data);
+    $(document).ready(function () {
+        $('#updateForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    fjlh: {
+                        threshold: 4,
+                        message: 'This user is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '房间楼号不能为空'
+                            },
+                            stringLength: {
+                                max: 10,
+                                message: '最长为10个字符'
+                            }
+                        }
+                    },
+                    fjbh: {
+                        validators: {
+                            notEmpty: {
+                                message: '房间编号不能为空'
+                            },
+                            stringLength: {
+                                max: 20,
+                                message: '最大为20个字符'
+                            }
+                        }
+                    },
+                    fjmj: {
+                        validators: {
+                            notEmpty: {
+                                message: '房间面积不能为空',
+                            },
+                            stringLength: {
+                                max: 8,
+                                message: '最大为8个字符'
+                            }
+                        }
+                    }
                 }
-            }
+            }).on('success.form.bv', function (e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var bv = $form.data('bootstrapValidator');
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                success: function (data) {
+                    if (data == "ok") {
+                        window.location.href = "/housePub/housePubList";
+                    } else {
+                        alert(data);
+                    }
+                }
+            })
         })
-    }
+    })
 </script>
 </html>

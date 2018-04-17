@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.HousePub;
 import com.pm.slxy.mapper.HousePubMapper;
+import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.HousePubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,9 +31,11 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
 
     @Autowired
     private HousePubMapper housePubMapper;
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     /**
-     * 查找房产信息
+     * 查找公用房房产信息
      *
      * @param modelAndView
      * @return
@@ -45,7 +49,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     }
 
     /**
-     * 添加housePub
+     * 添加公用房housePub
      *
      * @param housePub
      * @return
@@ -70,7 +74,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     }
 
     /**
-     * 删除housePub数据
+     * 删除公用房housePub数据
      *
      * @param ids
      * @return
@@ -91,7 +95,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     }
 
     /**
-     * 根据id来查找一个房产的信息
+     * 根据id来查找一个公用房房产的信息
      *
      * @param modelAndView
      * @param id
@@ -103,6 +107,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         if (!ObjectUtils.isEmpty(housePub)) {
             modelAndView.addObject("housePub", housePub);
             modelAndView.setViewName("housePub/updateHousePub");
+            modelAndView.addObject("departments",teacherMapper.selectDepartment());
         } else {
             modelAndView.setViewName("404");
         }
@@ -111,7 +116,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
 
 
     /**
-     * 更新房产信息
+     * 更新公用房房产信息
      *
      * @param housePub
      * @return
@@ -135,7 +140,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     }
 
     /**
-     * 在房屋的图片详情页面点击一个图片显示的数据
+     * 在公用房房屋的图片详情页面点击一个图片显示的数据
      *
      * @param id
      * @return
@@ -149,4 +154,5 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
             return "error";
         }
     }
+
 }

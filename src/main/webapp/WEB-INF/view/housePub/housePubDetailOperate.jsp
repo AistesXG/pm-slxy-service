@@ -57,7 +57,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的房屋 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
+                        已拥有的房屋 <span style="color: red;">红色的表示已经租出的 灰色的表示未租出的 </span><input type="button" value="删除" id="deleteBtn" onclick="delAll()"
                                       class="btn btn-primary"/>
                         <input type="button" value="添加" id="addHousePubBtn" onclick="addHousePubView()"
                                class="btn btn-primary">
@@ -78,13 +78,13 @@
                                     <c:choose>
                                         <c:when test="${housePub.fjsyzt == '未租'}">
                                             <button class="btn btn-info housePubDetail"
-                                                    onclick="housePubDetail(${housePub.id})" type="button"><img
+                                                    onclick="housePubDetail(${housePub.id})" ><img
                                                     src="/resources/img/fwhb.jpg"></button><br>
                                             ${housePub.fjbh}
                                         </c:when>
                                         <c:otherwise>
                                             <button class="btn btn-info housePubDetail"
-                                                    onclick="housePubDetail(${housePub.id})" type="button"><img
+                                                    onclick="housePubDetail(${housePub.id})"><img
                                                     src="/resources/img/fw.jpg"></button><br>
                                             ${housePub.fjbh}
                                         </c:otherwise>

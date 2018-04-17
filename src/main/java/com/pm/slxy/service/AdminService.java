@@ -1,8 +1,7 @@
 package com.pm.slxy.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.pm.slxy.entity.Admin;
 import com.baomidou.mybatisplus.service.IService;
+import com.pm.slxy.entity.Admin;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;

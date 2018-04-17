@@ -113,6 +113,98 @@
         </div>
     </div>
 </div>
+
+<div class="modal" id="content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">教师详情</h4>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="false" role="form" class="form-horizontal">
+                    <br>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">教师姓名:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="xm" class="form-control" id="xm"
+                                   value="" size="10" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">教工编号:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="jggh" class="form-control"
+                                   value="" size="6" readonly="readonly" id="jggh"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">性别:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="xb" class="form-control"
+                                   value="" size="2" readonly="readonly" id="xb">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">身份证号:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="sfzh" class="form-control"
+                                   value="" size="18" readonly="readonly" id="sfzh"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">出生年月:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="csrq" class="form-control"
+                                   value="" size="10" readonly="readonly" id="csrq"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">学历:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="xl" class="form-control"
+                                   value="" size="18" readonly="readonly" id="xl"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">参加工作时间:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="cjgzrq" class="form-control"
+                                   value="" size="10" readonly="readonly" id="cjgzrq"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">申请住房日期:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="sqzfrq" class="form-control"
+                                   value="" size="10" readonly="readonly" id="sqzfrq"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">所在部门:</label>
+                        <div class="col-sm-7">
+
+                            <input type="text" name="szbm" class="form-control"
+                                   value="" size="30" readonly="readonly" id="szbm">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">籍贯:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="jg" class="form-control"
+                                   value="" size="30" readonly="readonly" id="jg"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">租房状态:<span class="must">*</span></label>
+                        <div class="col-sm-7">
+                            <input type="text" name="zfzt" class="form-control"
+                                   value="" size="4" readonly="readonly" id="zfzt"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <!-- DataTables JavaScript -->
 <script src="/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
@@ -201,9 +293,33 @@
         window.location.href="/teacher/selectTeacher?id="+id;
     }
 
-    <!--详情页-->
-    function display(id) {
-        window.location.href = "/jump/jumpOneTeacher?id="+id;
+
+
+    <!--给input赋值-->
+    function display(teacherId) {
+        var $content = $('#content');
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/teacher/selectTeacherById",
+            data: {"id": teacherId},
+            success: function (data) {
+                var object = $.parseJSON(data);
+                $("input[id=xm]").val(object.xm);
+                $("input[id=xb]").val(object.xb);
+                $("input[id=jggh]").val(object.jggh);
+                $("input[id=sfzh]").val(object.sfzh);
+                $("input[id=csrq]").val(object.csrq);
+                $("input[id=xl]").val(object.xl);
+                $("input[id=cjgzrq]").val(object.cjgzrq);
+                $("input[id=sqzfrq]").val(object.sqzfrq);
+                $("input[id=szbm]").val(object.szbm);
+                $("input[id=jg]").val(object.jg);
+                $("input[id=xl]").val(object.xl);
+                $("input[id=zfzt]").val(object.zfzt);
+            }
+        });
+        $content.modal({backdrop: 'static'});
     }
 </script>
 </html>

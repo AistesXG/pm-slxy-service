@@ -25,13 +25,11 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-
     @RequestMapping(value = "/teacherList")
     @SysControllerFilter(name = "teacherList")
     public ModelAndView selectTeacher(ModelAndView modelAndView) throws Exception {
         return teacherService.selectTeachers(modelAndView);
     }
-
 
     @RequestMapping(value = "/deleteTeacherByIds")
     @SysControllerFilter(name = "deleteTeacherByIds")
@@ -40,14 +38,12 @@ public class TeacherController {
         return teacherService.deleteTeacherByIds(ids);
     }
 
-
     @RequestMapping(value = "/addTeacher")
     @SysControllerFilter(name = "addTeacher")
     @ResponseBody
     public String addTeacher(Teacher teacher) throws Exception {
         return teacherService.addTeacher(teacher);
     }
-
 
     @RequestMapping(value = "/updateTeacher")
     @SysControllerFilter(name = "updateTeacher")
@@ -56,11 +52,17 @@ public class TeacherController {
         return teacherService.updateTeacher(teacher);
     }
 
-
     @RequestMapping(value = "/selectTeacher")
     @SysControllerFilter(name = "selectTeacher")
     public ModelAndView selectTeacher(ModelAndView modelAndView, String id) throws Exception {
         return teacherService.selectTeacher(modelAndView, Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "/selectTeacherById")
+    @SysControllerFilter(name = "selectTeacherById")
+    @ResponseBody
+    public String selectTeacherById(String id) throws Exception {
+        return teacherService.selectTeacherById(Integer.parseInt(id));
     }
 }
 
