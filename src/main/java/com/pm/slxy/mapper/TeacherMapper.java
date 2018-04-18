@@ -20,4 +20,5 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
      * @return
      */
     List<String> selectDepartment();
+
 }

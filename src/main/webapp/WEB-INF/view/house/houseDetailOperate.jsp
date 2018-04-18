@@ -55,14 +55,16 @@
                                     <c:choose>
                                         <c:when test="${house.zzzt == '未租'}">
                                             <button class="btn btn-info housePubDetail"
-                                                    onclick="housePubDetail(${house.id})" ><img
-                                                    src="/resources/img/fwhb.jpg"></button><br>
+                                                    onclick="housePubDetail(${house.id})"><img
+                                                    src="/resources/img/fwhb.jpg"></button>
+                                            <br>
                                             ${house.fjbh}
                                         </c:when>
                                         <c:otherwise>
                                             <button class="btn btn-info housePubDetail"
                                                     onclick="housePubDetail(${house.id})"><img
-                                                    src="/resources/img/fw.jpg"></button><br>
+                                                    src="/resources/img/fw.jpg"></button>
+                                            <br>
                                             ${house.fjbh}
                                         </c:otherwise>
                                     </c:choose>
@@ -100,44 +102,45 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">租住者姓名:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="zzzxm" class="form-control" id="zzzxm" value="" size="10">
+                            <input type="text" name="zzzxm" class="form-control" id="zzzxm" value="" size="10" readonly>
                             <span id="msg"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">租住者所在部门:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="zzzszbm" class="form-control" id="zzzszbm" value="" size="10">
+                            <input type="text" name="zzzszbm" class="form-control" id="zzzszbm" value="" size="10"
+                                   readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">房间编号:</label>
                         <div class="col-sm-7">
-                            <input type="text" id="fjbh" name="fjbh" class="form-control" value="" size="20">
+                            <input type="text" id="fjbh" name="fjbh" class="form-control" value="" size="20" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">房间楼号:</label>
                         <div class="col-sm-7">
-                            <input type="text" id="fjlh" name="fjlh" class="form-control" value="" size="20">
+                            <input type="text" id="fjlh" name="fjlh" class="form-control" value="" size="20" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">房间面积:</label>
                         <div class="col-sm-7">
-                            <input type="text" id="fjmj" name="fjmj" class="form-control" value="">
+                            <input type="text" id="fjmj" name="fjmj" class="form-control" value="" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">租住状态:</label>
                         <div class="col-sm-7">
-                            <input type="text" id="zzzt" name="zzzt" class="form-control" value="" size="4">
+                            <input type="text" id="zzzt" name="zzzt" class="form-control" value="" size="4" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">房间备注:</label>
                         <div class="col-sm-7">
-                            <textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz"></textarea>
+                            <textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz" readonly></textarea>
                         </div>
                     </div>
                 </form>

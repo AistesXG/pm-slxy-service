@@ -64,5 +64,6 @@ public class TeacherController {
     public String selectTeacherById(String id) throws Exception {
         return teacherService.selectTeacherById(Integer.parseInt(id));
     }
+
 }
 

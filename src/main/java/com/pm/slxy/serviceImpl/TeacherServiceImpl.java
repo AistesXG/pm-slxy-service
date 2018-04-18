@@ -15,10 +15,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -161,7 +158,6 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         Teacher teacher = teacherMapper.selectById(id);
         if (!ObjectUtils.isEmpty(teacher)) {
             modelAndView.addObject("teacher", teacher);
-            //           modelAndView.addObject("deptList", departmentMapper.selectList(new EntityWrapper<Department>()));
             modelAndView.setViewName("teacher/updateTeacher");
         } else {
             modelAndView.setViewName("404");
@@ -241,8 +237,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         Teacher teacher = teacherMapper.selectById(id);
         if (!ObjectUtils.isEmpty(teacher)) {
             return JSON.toJSONString(teacher);
-        }
-        else{
+        } else {
             return "error";
         }
     }

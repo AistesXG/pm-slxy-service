@@ -67,12 +67,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">租住状态:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <input type="text" id="zzzt" name="zzzt" class="form-control" value="" size="4">
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label">房间备注:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz"></textarea>
