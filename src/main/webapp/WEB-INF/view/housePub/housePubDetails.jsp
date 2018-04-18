@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>房屋详情</title>
+    <title>公用房屋详情</title>
     <!-- DataTables CSS -->
     <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
@@ -48,7 +48,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">房屋信息</h2>
+                <h2 class="page-header">公用房屋信息</h2>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -137,7 +137,7 @@
         }
     }
 
-    <!--跳转到addAdmin页面-->
+    <!--跳转到addHousePubView页面-->
     function addHousePubView() {
         window.location.href = "/jump/jumpAddHousePub";
     }
@@ -182,7 +182,7 @@
     }
 
 
-    <!--跳转到updateAdmin页面-->
+    <!--跳转到updateHousePubView页面-->
     function updateHousePubView() {
         var id = selectId();
         if (id.length == 0) {

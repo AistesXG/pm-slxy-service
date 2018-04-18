@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>修改公用房屋信息</title>
+    <title>修改教师房屋信息</title>
 </head>
 <style type="text/css">
     .must {
@@ -22,81 +22,67 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">修改公用房屋信息</h1>
+                <h1 class="page-header">修改教师房屋信息</h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="row">
                 <div class="col-lg-4 ">
-                    <form onsubmit="false" role="form" id="updateForm" class="form-horizontal"
-                          action="/housePub/updateHousePub">
+                    <form onsubmit="false" role="form" id="addForm" class="form-horizontal"
+                          action="/house/updateHouse">
                         <br>
-
-                        <input type="hidden" value="${housePub.id}" name="id">
+                        <input type="hidden" name="id" value="${house.id}">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">楼号:<span class="must">*</span></label>
+                            <label class="col-sm-3 control-label">租住者姓名:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="fjlh" class="form-control" id="fjlh" value="${housePub.fjlh}"
-                                       size="10">
+                                <input type="text" name="zzzxm" class="form-control" id="zzzxm" value="${house.zzzxm}" size="10">
                                 <span id="msg"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">编号:<span class="must">*</span></label>
+                            <label class="col-sm-3 control-label">租住者所在部门:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="fjbh" class="form-control" value="${housePub.fjbh}" size="20">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">面积:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <input type="text" id="fjmj" name="fjmj" class="form-control" value="${housePub.fjmj}"
-                                       size="8">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">使用状态:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <input type="text" name="fjsyzt" class="form-control" value="${housePub.fjsyzt}"
-                                       size="4" id="fjsyzt" readonly="readonly">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">使用类型:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <select name="fjsylx" class="form-control">
-                                    <option value="${housePub.fjsylx}">${housePub.fjsylx}</option>
-                                    <option value="保障期单间">保障期单间</option>
-                                    <option value="保障期单元房">保障期单元房</option>
-                                    <option value="延长期单间">延长期单间</option>
-                                    <option value="延长期单元房">延长期单元房</option>
-                                    <option value="超限期单间">超限期单间</option>
-                                    <option value="超限期单元房">超限期单元房</option>
-                                    <option value="特殊房间">特殊房间</option>
-                                </select>
-                                <%--<input type="text" name="fjsylx" class="form-control" value="${housePub.fjsylx}" size="20" id="fjsylx">--%>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <select name="fjsybm" class="form-control" id="fjsybm">
-                                    <c:set value="${housePub.fjsybm}" var='deptName'/>
+                                <select name="zzzszbm" class="form-control" id="zzzszbm">
+                                    <c:set value="${house.zzzszbm}" var='deptName'/>
                                     <c:forEach items="${departments}" var="dept">
                                         <c:if test="${dept eq deptName}">
-                                        <option value="${dept}" selected>${dept}</option>
+                                            <option value="${dept}" selected>${dept}</option>
                                         </c:if>
                                         <c:if test="${dept != depeName}">
-                                        <option value="${dept}">${dept}</option>
+                                            <option value="${dept}">${dept}</option>
                                         </c:if>
                                     </c:forEach>
                                 </select>
+
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
+                            <label class="col-sm-3 control-label">房间编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <textarea cols="5" rows="5" name="fjbz" class="form-control"
-                                          id="fjbz">${housePub.fjbz}</textarea>
+                                <input type="text" id="fjbh" name="fjbh" class="form-control" value="${house.fjbh}" size="20">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">房间楼号:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" id="fjlh" name="fjlh" class="form-control" value="${house.fjlh}" size="20">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">房间面积:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" id="fjmj" name="fjmj" class="form-control" value="${house.fjmj}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">租住状态:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" id="zzzt" name="zzzt" class="form-control" value="${house.zzzt}" size="4" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">房间备注:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz">${house.fjbz}</textarea>
                             </div>
                         </div>
                         <div class="form-group" style="text-align: center">
@@ -113,7 +99,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#updateForm')
+        $('#addForm')
             .bootstrapValidator({
                 message: 'This value is not valid',
                 feedbackIcons: {
@@ -122,12 +108,11 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields: {
-                    fjlh: {
-                        threshold: 4,
-                        message: 'This fjlh is not valid',
+                    zzzxm: {
+                        message: 'This user is not valid',
                         validators: {
                             notEmpty: {
-                                message: '房间楼号不能为空'
+                                message: '租住者姓名不能为空'
                             },
                             stringLength: {
                                 max: 10,
@@ -139,6 +124,17 @@
                         validators: {
                             notEmpty: {
                                 message: '房间编号不能为空'
+                            },
+                            stringLength: {
+                                max: 20,
+                                message: '最大为20个字符'
+                            }
+                        }
+                    },
+                    fjlh: {
+                        validators: {
+                            notEmpty: {
+                                message: '房间楼号不能为空'
                             },
                             stringLength: {
                                 max: 20,
@@ -169,7 +165,7 @@
                 data: $form.serialize(),
                 success: function (data) {
                     if (data == "ok") {
-                        window.location.href = "/housePub/housePubList";
+                        window.location.href = "/house/houseList";
                     } else {
                         alert(data);
                     }
@@ -177,5 +173,5 @@
             })
         })
     })
+
 </script>
-</html>

@@ -278,7 +278,7 @@
         window.location.href = "/jump/jumpAddTeacher";
     }
 
-    <!--跳转到updateAdmin页面-->
+    <!--跳转到updateTeacherView页面-->
     function updateTeacherView() {
         var id = selectId();
         if(id.length == 0){

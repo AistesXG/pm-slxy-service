@@ -134,9 +134,9 @@
         }
     }
 
-    <!--跳转到addAdmin页面-->
+    <!--跳转到addHouseView页面-->
     function addHouseView() {
-        window.location.href = "/jump/jumpAddHousePub";
+        window.location.href = "/jump/jumpAddHouse";
     }
 
     function selectId() {
@@ -163,13 +163,13 @@
         if (confirm("确定要删除所选的数据")) {
             $.ajax({
                 type: "get",
-                url: '/housePub/deleteHousePub',
+                url: '/house/deleteHouse',
                 data: {ids: ids},
                 contentType: 'application/json',
                 dataType: "json",
                 success: function (data) {
                     if (data == "ok") {
-                        window.location.href = "/housePub/housePubList";
+                        window.location.href = "/house/houseList";
                     } else {
                         alert(data);
                     }
@@ -178,7 +178,7 @@
         }
     }
 
-    <!--跳转到updateAdmin页面-->
+    <!--跳转到updateHouseView页面-->
     function updateHouseView() {
         var id = selectId();
         if (id.length == 0) {
@@ -190,7 +190,7 @@
             alert("一次只能选择一条数据修改!")
             return "";
         }
-        window.location.href = "/housePub/selectHousePubById?id=" + id;
+        window.location.href = "/house/selectHouseById?id=" + id;
     }
 
 </script>

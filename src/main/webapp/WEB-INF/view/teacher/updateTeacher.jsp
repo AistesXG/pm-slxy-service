@@ -183,7 +183,7 @@
                             },
                             stringLength: {
                                 max: 18,
-                                message: '身份证号最少18位'
+                                message: '身份证号最大18位'
                             }
                         }
                     },

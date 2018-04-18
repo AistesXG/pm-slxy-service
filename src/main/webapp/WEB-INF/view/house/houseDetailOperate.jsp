@@ -46,24 +46,24 @@
                         <table width="100%" class="table table-striped  table-hover"
                                id="dataTables-example">
                             <tbody>
-                            <c:forEach items="${housePubList}" var="housePub" varStatus="status">
+                            <c:forEach items="${houseList}" var="house" varStatus="status">
                                 <c:if test="${(status.index + 1) % 10 == 1}">
                                     <tr class="gradeU">
                                 </c:if>
-                                <input type="hidden" name="id" id="houseId" value="${housePub.id}">
+                                <input type="hidden" name="id" id="houseId" value="${house.id}">
                                 <td>
                                     <c:choose>
-                                        <c:when test="${housePub.fjsyzt == '未租'}">
+                                        <c:when test="${house.zzzt == '未租'}">
                                             <button class="btn btn-info housePubDetail"
-                                                    onclick="housePubDetail(${housePub.id})" ><img
+                                                    onclick="housePubDetail(${house.id})" ><img
                                                     src="/resources/img/fwhb.jpg"></button><br>
-                                            ${housePub.fjbh}
+                                            ${house.fjbh}
                                         </c:when>
                                         <c:otherwise>
                                             <button class="btn btn-info housePubDetail"
-                                                    onclick="housePubDetail(${housePub.id})"><img
+                                                    onclick="housePubDetail(${house.id})"><img
                                                     src="/resources/img/fw.jpg"></button><br>
-                                            ${housePub.fjbh}
+                                            ${house.fjbh}
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -98,53 +98,46 @@
                 <form onsubmit="false" role="form" class="form-horizontal">
                     <br>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">楼号:</label>
+                        <label class="col-sm-3 control-label">租住者姓名:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="fjlh" class="form-control" id="fjlh" value=""
-                                   size="10" readonly>
+                            <input type="text" name="zzzxm" class="form-control" id="zzzxm" value="" size="10">
                             <span id="msg"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">编号:</label>
+                        <label class="col-sm-3 control-label">租住者所在部门:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="fjbh" id="fjbh" class="form-control" value=""
-                                   size="20" readonly>
+                            <input type="text" name="zzzszbm" class="form-control" id="zzzszbm" value="" size="10">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">面积:</label>
+                        <label class="col-sm-3 control-label">房间编号:</label>
                         <div class="col-sm-7">
-                            <input type="text" id="fjmj" name="fjmj" class="form-control" value=""
-                                   size="8" readonly>
+                            <input type="text" id="fjbh" name="fjbh" class="form-control" value="" size="20">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">使用状态:</label>
+                        <label class="col-sm-3 control-label">房间楼号:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="fjsyzt" class="form-control" value=""
-                                   size="4" id="fjsyzt" readonly>
+                            <input type="text" id="fjlh" name="fjlh" class="form-control" value="" size="20">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">使用类型:</label>
+                        <label class="col-sm-3 control-label">房间面积:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="fjsylx" class="form-control" value=""
-                                   size="20" id="fjsylx" readonly>
+                            <input type="text" id="fjmj" name="fjmj" class="form-control" value="">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">使用部门:</label>
+                        <label class="col-sm-3 control-label">租住状态:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="fjsybm" class="form-control" value=""
-                                   size="30" id="fjsybm" readonly>
+                            <input type="text" id="zzzt" name="zzzt" class="form-control" value="" size="4">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">备注:</label>
+                        <label class="col-sm-3 control-label">房间备注:</label>
                         <div class="col-sm-7">
-                    <textarea cols="5" rows="5" name="fjbz" class="form-control"
-                              id="fjbz" readonly></textarea>
+                            <textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz"></textarea>
                         </div>
                     </div>
                 </form>
@@ -168,7 +161,7 @@
         $.ajax({
             type: "post",
             dataType: "json",
-            url: "/housePub/selectHousePubDetailById",
+            url: "/house/selectHouseDetailById",
             data: {"id": houseId},
             success: function (data) {
                 var object = $.parseJSON(data);
@@ -176,9 +169,9 @@
                 $("input[id=fjbh]").val(object.fjbh);
                 $("textarea[id=fjbz]").val(object.fjbz);
                 $("input[id=fjmj]").val(object.fjmj);
-                $("input[id=fjsybm]").val(object.fjsybm);
-                $("input[id=fjsylx]").val(object.fjsylx);
-                $("input[id=fjsyzt]").val(object.fjsyzt);
+                $("input[id=zzzxm]").val(object.zzzxm);
+                $("input[id=zzzszbm]").val(object.zzzszbm);
+                $("input[id=zzzt]").val(object.zzzt);
             }
         });
         $content.modal({backdrop: 'static'});

@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>添加房屋信息</title>
+    <title>添加公用房屋信息</title>
 </head>
 <style type="text/css">
     .must {
@@ -22,7 +22,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">添加房屋信息</h1>
+                <h1 class="page-header">添加公用房屋信息</h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="row">
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">使用类型:</label>
+                            <label class="col-sm-3 control-label">使用类型:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <select name="fjsylx" class="form-control">
                                     <option value="">---请选择房间类型---</option>
@@ -62,11 +62,10 @@
                                     <option value="超限期单元房">超限期单元房</option>
                                     <option value="特殊房间">特殊房间</option>
                                 </select>
-                                <%--<input type="text" name="fjsylx" class="form-control" value="" size="20" id="fjsylx">--%>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">使用部门:</label>
+                            <label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <select name="fjsybm" class="form-control" id="fjsybm">
                                     <option value="">---请选择部门---</option>
@@ -77,7 +76,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">备注:</label>
+                            <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz"></textarea>
                             </div>
@@ -107,7 +106,7 @@
                 fields: {
                     fjlh: {
                         threshold: 4,
-                        message: 'This user is not valid',
+                        message: 'This fjlh is not valid',
                         validators: {
                             notEmpty: {
                                 message: '房间楼号不能为空'
