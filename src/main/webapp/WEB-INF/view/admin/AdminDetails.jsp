@@ -35,11 +35,6 @@
         margin-left: 5px;
     }
 
-    #updateAdminBtn {
-        float: right;
-        margin-top: -5px;
-
-    }
 
 </style>
 <body>
@@ -58,12 +53,14 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已注册的用户 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
-                                      class="btn btn-primary"/>
-                        <input type="button" value="添加" id="addAdminBtn" onclick="addAdminView()"
-                               class="btn btn-primary">
-                        <input type="button" value="修改" id="updateAdminBtn" onclick="updateAdminView()"
-                               class="btn btn-primary"/>
+                        已注册的用户
+                        <button type="button" id="deleteBtn" onclick="delAll()"
+                                class="btn btn-primary">批量删除
+                        </button>
+                        <button type="button" id="addAdminBtn" onclick="window.location.href = '/jump/jumpAddAdmin'"
+                                class="btn btn-primary">添加用户
+                        </button>
+
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -78,18 +75,27 @@
                                 <th>邮箱</th>
                                 <th>电话号码</th>
                                 <th>角色</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             <c:forEach items="${adminList}" var="admin" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="uid" id="uid" value="${admin.id}" style="margin-right: 8px;"></td>
+                                    <td><input type="checkbox" name="uid" id="uid" value="${admin.id}"
+                                               style="margin-right: 8px;"></td>
                                     <td>${status.count}</td>
                                     <td>${admin.user}</td>
                                     <td>${admin.email}</td>
                                     <td class="center">${admin.phone}</td>
                                     <td class="center">${admin.type}</td>
+                                    <td class="center">
+                                        <button type="button" id="updateAdminBtn"
+                                                onclick="window.location.href='/admin/selectAdmin?id='+${admin.id}"
+                                                class="btn btn-sm">编辑
+                                        </button>
+
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -168,25 +174,6 @@
                 }
             })
         }
-    }
-
-    <!--跳转到addAdmin页面-->
-    function addAdminView() {
-        window.location.href = "/jump/jumpAddAdmin";
-    }
-    <!--跳转到updateAdmin页面-->
-    function updateAdminView() {
-        var id = selectId();
-        if(id.length == 0){
-            alert("请选择一条数据,才能修改！");
-            return "" ;
-        }
-        var str = id.split(",");
-        if (str.length >1) {
-            alert("一次只能选择一条数据修改!")
-            return "";
-        }
-        window.location.href="/admin/selectAdmin?id="+id;
     }
 
 </script>

@@ -27,7 +27,8 @@
             <!-- /.col-lg-12 -->
             <div class="row">
                 <div class="col-lg-4 ">
-                    <form onsubmit="false" role="form" id="updateForm" class=form-horizontal action="/admin/updateAdmin">
+                    <form onsubmit="false" role="form" id="updateForm" class=form-horizontal
+                          action="/admin/updateAdmin">
                         <br>
                         <input type="hidden" name="id" value="${admin.id}">
                         <div class="form-group">
@@ -41,7 +42,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">email:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="email" class="form-control" value="${admin.email}" size="50" id="email">
+                                <input type="text" name="email" class="form-control" value="${admin.email}" size="50"
+                                       id="email">
                                 <span id="msgEmail"></span>
 
                             </div>
@@ -49,7 +51,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">电话号码:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="phone" class="form-control" value="${admin.phone}" size="11" id="phone">
+                                <input type="text" name="phone" class="form-control" value="${admin.phone}" size="11"
+                                       id="phone">
                                 <span id="msgPhone"></span>
                             </div>
                         </div>
@@ -71,8 +74,8 @@
                             </div>
                         </div>
                         <div class="form-group" style="text-align: center">
-                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">
+                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
                         </div>
                     </form>
                 </div>
@@ -94,7 +97,7 @@
                 },
                 fields: {
                     user: {
-                        threshold :  4,
+                        threshold: 4,
                         message: 'This user is not valid',
                         validators: {
                             notEmpty: {
@@ -153,7 +156,7 @@
             }).on('success.form.bv', function (e) {
             e.preventDefault();
             var $form = $(e.target);
-            var bv =  $form.data('bootstrapValidator');
+            var bv = $form.data('bootstrapValidator');
             $.ajax({
                 type: 'post',
                 dataType: 'json',

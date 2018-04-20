@@ -38,23 +38,23 @@
                                 <span id="msg"></span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">租住者所在部门:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <select name="zzzszbm" class="form-control" id="zzzszbm">
-                                    <c:set value="${house.zzzszbm}" var='deptName'/>
-                                    <c:forEach items="${departments}" var="dept">
-                                        <c:if test="${dept eq deptName}">
-                                            <option value="${dept}" selected>${dept}</option>
-                                        </c:if>
-                                        <c:if test="${dept != depeName}">
-                                            <option value="${dept}">${dept}</option>
-                                        </c:if>
-                                    </c:forEach>
-                                </select>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">租住者所在部门:<span class="must">*</span></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<select name="zzzszbm" class="form-control" id="zzzszbm">--%>
+                                    <%--<c:set value="${house.zzzszbm}" var='deptName'/>--%>
+                                    <%--<c:forEach items="${departments}" var="dept">--%>
+                                        <%--<c:if test="${dept eq deptName}">--%>
+                                            <%--<option value="${dept}" selected>${dept}</option>--%>
+                                        <%--</c:if>--%>
+                                        <%--<c:if test="${dept != deptName}">--%>
+                                            <%--<option value="${dept}">${dept}</option>--%>
+                                        <%--</c:if>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
 
-                            </div>
-                        </div>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">房间编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
@@ -86,8 +86,8 @@
                             </div>
                         </div>
                         <div class="form-group" style="text-align: center">
-                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">
+                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
                         </div>
                     </form>
                 </div>

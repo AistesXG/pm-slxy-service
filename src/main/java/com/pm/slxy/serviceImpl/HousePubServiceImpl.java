@@ -10,7 +10,6 @@ import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.HousePubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,7 +59,6 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         if (StringUtils.isEmpty(housePub.getFjbh()) ||
                 StringUtils.isEmpty(housePub.getFjlh()) ||
                 StringUtils.isEmpty(housePub.getFjmj()) ||
-                StringUtils.isEmpty(housePub.getFjsybm()) ||
                 StringUtils.isEmpty(housePub.getFjsylx()) ||
                 StringUtils.isEmpty(housePub.getFjsyzt())
                 ) {
@@ -126,7 +124,6 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         if (StringUtils.isEmpty(housePub.getFjbh()) ||
                 StringUtils.isEmpty(housePub.getFjlh()) ||
                 StringUtils.isEmpty(housePub.getFjmj()) ||
-                StringUtils.isEmpty(housePub.getFjsybm()) ||
                 StringUtils.isEmpty(housePub.getFjsylx()) ||
                 StringUtils.isEmpty(housePub.getFjsyzt())
                 ) {

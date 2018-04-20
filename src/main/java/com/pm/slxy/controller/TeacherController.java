@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Map;
+
 /**
  * <p>
  * 前端控制器
@@ -63,6 +65,13 @@ public class TeacherController {
     @ResponseBody
     public String selectTeacherById(String id) throws Exception {
         return teacherService.selectTeacherById(Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "/exportTeacherToExcel")
+    @SysControllerFilter(name = "exportTeacherToExcel")
+    @ResponseBody
+    public Map<String, String> exportTeacherToExcel(String ids) throws Exception {
+        return teacherService.exportTeacherToExcel(ids);
     }
 
 }

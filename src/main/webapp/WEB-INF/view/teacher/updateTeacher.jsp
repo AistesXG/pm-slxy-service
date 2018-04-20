@@ -105,10 +105,15 @@
                             <label class="col-sm-3 control-label">所在部门:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <select name="szbm" class="form-control">
-                                    <option value="${teacher.szbm}">${teacher.szbm}</option>
-                                    <%--<c:forEach items="${deptList}" var="dept">--%>
-                                    <%--<option value="${dept.departmentName}">${dept.departmentName}</option>--%>
-                                    <%--</c:forEach>--%>
+                                    <c:set value="${teacher.szbm}" var='deptName'/>
+                                    <c:forEach items="${departments}" var="dept">
+                                        <c:if test="${dept eq deptName}">
+                                            <option value="${dept}" selected>${dept}</option>
+                                        </c:if>
+                                        <c:if test="${dept != deptName}">
+                                            <option value="${dept}">${dept}</option>
+                                        </c:if>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -125,8 +130,8 @@
                                        value="${teacher.zfzt}" size="4" readonly="readonly"></div>
                         </div>
                         <div class="form-group" style="text-align: center">
-                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">
+                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
                         </div>
 
                     </form>

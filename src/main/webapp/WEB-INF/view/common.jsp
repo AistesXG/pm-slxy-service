@@ -69,16 +69,16 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/jump/jumpHome"><i class="fa-dashboard fa-fw"></i>主页</a>
+                    <a href="/jump/jumpHome"><i class="fa fa-dashboard fa-fw"></i>主页</a>
                 </li>
                 <li>
-                    <a href="/admin/adminList"><i class="fa-wrench fa-fw"></i>用户管理</a>
+                    <a href="/admin/adminList"><i class="fa fa-wrench fa-fw"></i>用户管理</a>
                 </li>
                 <li>
-                    <a href="/teacher/teacherList"><i class="fa-wrench fa-fw"></i>教师管理</a>
+                    <a href="/teacher/teacherList"><i class="fa fa-wrench fa-fw"></i>教师管理</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-edit fa-fw"></i>公用房管理</a>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>公用房管理</a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="/housePub/housePubList">公用房信息管理</a>
@@ -89,7 +89,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-edit fa-fw"></i>教师用房管理</a>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i>教师用房管理</a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="/house/houseList">教师用房信息管理</a>
@@ -100,7 +100,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-wrench fa-fw"></i>租房管理</a>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i>租房管理</a>
                    <ul class="nav nav-second-level">
                         <li>
                             <a href="#">租房</a>
@@ -112,7 +112,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                    <a href="#"><i class=" fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="#">Second Level Item</a>

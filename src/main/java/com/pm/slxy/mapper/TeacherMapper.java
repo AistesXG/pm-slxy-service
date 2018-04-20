@@ -1,7 +1,7 @@
 package com.pm.slxy.mapper;
 
-import com.pm.slxy.entity.Teacher;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.pm.slxy.entity.Teacher;
 
 import java.util.List;
 

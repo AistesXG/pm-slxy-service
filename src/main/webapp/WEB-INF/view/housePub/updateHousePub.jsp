@@ -14,6 +14,9 @@
         position: absolute;
         top: 2px;
     }
+    .color{
+        color: red;
+    }
 </style>
 <body>
 <div id="wrapper">
@@ -65,33 +68,33 @@
                             <div class="col-sm-9">
                                 <select name="fjsylx" class="form-control">
                                     <option value="${housePub.fjsylx}">${housePub.fjsylx}</option>
-                                    <option value="保障期单间">保障期单间</option>
-                                    <option value="保障期单元房">保障期单元房</option>
-                                    <option value="延长期单间">延长期单间</option>
-                                    <option value="延长期单元房">延长期单元房</option>
-                                    <option value="超限期单间">超限期单间</option>
-                                    <option value="超限期单元房">超限期单元房</option>
-                                    <option value="特殊房间">特殊房间</option>
+                                    <option value="保障期单间" class="color">保障期单间</option>
+                                    <option value="保障期单元房" class="color">保障期单元房</option>
+                                    <option value="延长期单间" class="color">延长期单间</option>
+                                    <option value="延长期单元房" class="color">延长期单元房</option>
+                                    <option value="超限期单间" class="color">超限期单间</option>
+                                    <option value="超限期单元房" class="color">超限期单元房</option>
+                                    <option value="特殊房间" class="color">特殊房间</option>
                                 </select>
                                 <%--<input type="text" name="fjsylx" class="form-control" value="${housePub.fjsylx}" size="20" id="fjsylx">--%>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <select name="fjsybm" class="form-control" id="fjsybm">
-                                    <c:set value="${housePub.fjsybm}" var='deptName'/>
-                                    <c:forEach items="${departments}" var="dept">
-                                        <c:if test="${dept eq deptName}">
-                                        <option value="${dept}" selected>${dept}</option>
-                                        </c:if>
-                                        <c:if test="${dept != depeName}">
-                                        <option value="${dept}">${dept}</option>
-                                        </c:if>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<select name="fjsybm" class="form-control" id="fjsybm">--%>
+                                    <%--<c:set value="${housePub.fjsybm}" var='deptName'/>--%>
+                                    <%--<c:forEach items="${departments}" var="dept">--%>
+                                        <%--<c:if test="${dept eq deptName}">--%>
+                                            <%--<option value="${dept}" selected>${dept}</option>--%>
+                                        <%--</c:if>--%>
+                                        <%--<c:if test="${dept != deptName}">--%>
+                                            <%--<option value="${dept}">${dept}</option>--%>
+                                        <%--</c:if>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
                             <div class="col-sm-9">
@@ -100,8 +103,10 @@
                             </div>
                         </div>
                         <div class="form-group" style="text-align: center">
-                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">
+                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+                                type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回
+                        </button>
                         </div>
                     </form>
                 </div>
@@ -154,6 +159,13 @@
                             stringLength: {
                                 max: 8,
                                 message: '最大为8个字符'
+                            }
+                        }
+                    },
+                    fjsylx:{
+                        validators:{
+                            notEmpty:{
+                                message:'房间使用类型不能为空'
                             }
                         }
                     }

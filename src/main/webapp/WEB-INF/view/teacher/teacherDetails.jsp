@@ -23,6 +23,18 @@
         text-align: center;
     }
 
+    #importTeacher {
+        float: right;
+        margin-top: -5px;
+        margin-left: 5px;
+    }
+
+    #exportTeacher {
+        float: right;
+        margin-top: -5px;
+        margin-left: 5px;
+    }
+
     #deleteBtn {
         float: right;
         margin-top: -5px;
@@ -30,16 +42,11 @@
     }
 
     #addTeacherBtn {
-          float: right;
-          margin-top: -5px;
-          margin-left: 5px;
-      }
-
-    #updateTeacherBtn {
-          float: right;
-          margin-top: -5px;
-
+        float: right;
+        margin-top: -5px;
+        margin-left: 5px;
     }
+
 
 </style>
 <body>
@@ -59,12 +66,20 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         已添加的教师
-                        <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
-                                      class="btn btn-primary"/>
-                        <input type="button" value="添加" id="addTeacherBtn" onclick="addTeacherView()"
-                               class="btn btn-primary">
-                        <input type="button" value="修改" id="updateTeacherBtn" onclick="updateTeacherView()"
-                               class="btn btn-primary"/>
+                        <button type="button" id="importTeacher" onclick="displayEITeacher()"
+                                class="btn btn-primary">
+                            批量导入
+                        </button>
+                        <button type="button" id="exportTeacher" onclick="exportTeacher()"
+                                class="btn btn-primary">批量导出
+                        </button>
+                        <button type="button" value="删除" id="deleteBtn" onclick="delAll()"
+                                class="btn btn-primary">批量删除
+                        </button>
+                        <button type="button" value="添加" id="addTeacherBtn" onclick="window.location.href = '/jump/jumpAddTeacher'"
+                                class="btn btn-primary">添加教师
+                        </button>
+
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -90,7 +105,8 @@
                             <tbody>
                             <c:forEach items="${teacherList}" var="teacher" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="tid" id="tid" value="${teacher.id}" style="margin-right: 8px; "></td>
+                                    <td><input type="checkbox" name="tid" id="tid" value="${teacher.id}"
+                                               style="margin-right: 8px; "></td>
                                     <td>${status.count}</td>
                                     <td>${teacher.xm}</td>
                                     <td>${teacher.jggh}</td>
@@ -100,7 +116,12 @@
                                     <td>${teacher.cjgzrq}</td>
                                     <td>${teacher.szbm}</td>
                                     <td style="color: red; font-weight: bolder">${teacher.zfzt}</td>
-                                    <td class="center"><button onclick="display(${teacher.id})" class="btn btn-sm">查看</button></td>
+                                    <td class="center" colspan="2">
+                                        <button onclick="display(${teacher.id})" class="btn btn-sm">查看</button>
+                                        <button onclick="window.location.href = '/teacher/selectTeacher?id=' + '${teacher.id}'"
+                                                class="btn btn-sm">编辑
+                                        </button>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -206,6 +227,25 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal" id="import" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="width:auto;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">教师详情</h4>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <button type="button" class="btn btn-info btn-primary" onclick="window.open('../../resources/temp/Teachers.xlsx')">没有模板</button>
+                <button type="button" class="btn btn-info btn-primary" onclick="importTeacher()">已有模板</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <!-- DataTables JavaScript -->
 <script src="/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
@@ -274,28 +314,8 @@
         }
     }
 
-    <!--跳转到addTeacherView页面-->
-    function addTeacherView() {
-        window.location.href = "/jump/jumpAddTeacher";
-    }
 
-    <!--跳转到updateTeacherView页面-->
-    function updateTeacherView() {
-        var id = selectId();
-        if(id.length == 0){
-            alert("请选择一条数据,才能修改！");
-            return "" ;
-        }
-        var str = id.split(",");
-        if (str.length >1) {
-            alert("一次只能选择一条数据修改!")
-            return "";
-        }
-        window.location.href="/teacher/selectTeacher?id="+id;
-    }
-
-
-
+    <!--显示教师信息的弹窗-->
     <!--给input赋值-->
     function display(teacherId) {
         var $content = $('#content');
@@ -321,6 +341,34 @@
             }
         });
         $content.modal({backdrop: 'static'});
+    }
+
+    <!--显示导入弹窗-->
+    function displayEITeacher() {
+        var $import = $('#import');
+        $import.modal({backdrop: 'static'});
+    }
+
+    <!--导出教师信息-->
+    function exportTeacher() {
+        var ids = selectId();
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/teacher/exportTeacherToExcel",
+            data: {ids: ids},
+            success: function (data) {
+                console.log(data)
+                alert("导出成功!")
+            },
+            error: function () {
+                alert("导出失败!");
+            }
+        })
+    }
+
+    function importTeacher() {
+
     }
 </script>
 </html>

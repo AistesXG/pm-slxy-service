@@ -34,11 +34,6 @@
             margin-left: 5px;
         }
 
-        #updateHousePubBth {
-            float: right;
-            margin-top: -5px;
-
-        }
 
     </style>
 <body>
@@ -57,12 +52,11 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的房屋 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
-                                      class="btn btn-primary"/>
-                        <input type="button" value="添加" id="addHousePubBtn" onclick="addHousePubView()"
-                               class="btn btn-primary">
-                        <input type="button" value="修改" id="updateHousePubBth" onclick="updateHousePubView()"
-                               class="btn btn-primary"/>
+                        已拥有的房屋 <button type="button"  id="deleteBtn" onclick="delAll()"
+                                       class="btn btn-primary">批量删除</button>
+                        <button type="button"  id="addHousePubBtn" onclick="window.location.href = '/jump/jumpAddHousePub'"
+                                class="btn btn-primary">添加房屋</button>
+
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -80,6 +74,7 @@
                                 <th>使用类型</th>
                                 <th>使用部门</th>
                                 <th>备注</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
 
@@ -96,6 +91,10 @@
                                     <td class="center">${housePub.fjsylx}</td>
                                     <td class="center">${housePub.fjsybm}</td>
                                     <td class="center">${housePub.fjbz}</td>
+                                    <td class="center">
+                                        <button type="button"  onclick=" window.location.href = '/housePub/selectHousePubById?id=' + '${housePub.id}'"
+                                                class="btn btn-sm">编辑</button>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -137,11 +136,6 @@
         }
     }
 
-    <!--跳转到addHousePubView页面-->
-    function addHousePubView() {
-        window.location.href = "/jump/jumpAddHousePub";
-    }
-
     function selectId() {
         var ids = "";
         $("input[name='hid']:checkbox:checked").each(function () {
@@ -179,22 +173,6 @@
                 }
             })
         }
-    }
-
-
-    <!--跳转到updateHousePubView页面-->
-    function updateHousePubView() {
-        var id = selectId();
-        if (id.length == 0) {
-            alert("请选择一条数据,才能修改！");
-            return "";
-        }
-        var str = id.split(",");
-        if (str.length >1) {
-            alert("一次只能选择一条数据修改!")
-            return "";
-        }
-        window.location.href = "/housePub/selectHousePubById?id=" + id;
     }
 
 </script>

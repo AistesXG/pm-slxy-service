@@ -7,6 +7,7 @@ import com.pm.slxy.Enum.TeacherRentalStatusEnum;
 import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.TeacherService;
+import com.pm.slxy.utils.ExcelExportUtils;
 import com.pm.slxy.utils.JodaTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,10 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -159,6 +163,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         if (!ObjectUtils.isEmpty(teacher)) {
             modelAndView.addObject("teacher", teacher);
             modelAndView.setViewName("teacher/updateTeacher");
+            modelAndView.addObject("departments", teacherMapper.selectDepartment());
         } else {
             modelAndView.setViewName("404");
         }
@@ -240,5 +245,25 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         } else {
             return "error";
         }
+    }
+
+    /**
+     * 导出教师信息到Excel文件
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Map<String, String> exportTeacherToExcel(String ids) throws Exception {
+        List<Teacher> list;
+        if (!StringUtils.isEmpty(ids)) {
+            list = teacherMapper.selectBatchIds(Arrays.asList(ids.split(",")));
+        } else {
+            list = teacherMapper.selectList(new EntityWrapper<Teacher>());
+        }
+        String fileName = ExcelExportUtils.exportTeacherToExcel("C:\\Users\\lenovo\\Desktop", list);
+        Map<String, String> map = new HashMap<>();
+        map.put("fileName", fileName);
+        return map;
     }
 }

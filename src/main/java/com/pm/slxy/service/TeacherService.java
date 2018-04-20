@@ -88,4 +88,12 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     String selectTeacherById(int id);
+
+    /**
+     * 导出教师信息到Excel文件
+     *
+     * @return
+     */
+    Map<String, String> exportTeacherToExcel(String ids) throws Exception;
+
 }

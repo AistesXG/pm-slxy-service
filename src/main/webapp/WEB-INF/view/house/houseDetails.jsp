@@ -31,12 +31,6 @@
             margin-left: 5px;
         }
 
-        #updateHouseBth {
-            float: right;
-            margin-top: -5px;
-
-        }
-
     </style>
 <body>
 <div id="wrapper">
@@ -54,12 +48,11 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的房屋 <input type="button" value="删除" id="deleteBtn" onclick="delAll()"
-                                      class="btn btn-primary"/>
-                        <input type="button" value="添加" id="addHouseBtn" onclick="addHouseView()"
-                               class="btn btn-primary">
-                        <input type="button" value="修改" id="updateHouseBth" onclick="updateHouseView()"
-                               class="btn btn-primary"/>
+                        已拥有的房屋 <button type="button" id="deleteBtn" onclick="delAll()"
+                                      class="btn btn-primary">批量删除</button>
+                        <button type="button"  id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
+                                class="btn btn-primary">添加房屋</button>
+
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -77,6 +70,7 @@
                                 <th>房间面积</th>
                                 <th>租住状态</th>
                                 <th>房间备注</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
 
@@ -93,6 +87,10 @@
                                     <td class="center">${house.fjmj}</td>
                                     <td class="center" style="color: red; font-weight: bolder">${house.zzzt}</td>
                                     <td class="center">${house.fjbz}</td>
+                                    <td>
+                                        <button type="button"   onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
+                                                class="btn btn-sm">编辑</button>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -136,7 +134,7 @@
 
     <!--跳转到addHouseView页面-->
     function addHouseView() {
-        window.location.href = "/jump/jumpAddHouse";
+       ;
     }
 
     function selectId() {
@@ -177,20 +175,4 @@
             })
         }
     }
-
-    <!--跳转到updateHouseView页面-->
-    function updateHouseView() {
-        var id = selectId();
-        if (id.length == 0) {
-            alert("请选择一条数据,才能修改！");
-            return "";
-        }
-        var str = id.split(",");
-        if (str.length >1) {
-            alert("一次只能选择一条数据修改!")
-            return "";
-        }
-        window.location.href = "/house/selectHouseById?id=" + id;
-    }
-
 </script>

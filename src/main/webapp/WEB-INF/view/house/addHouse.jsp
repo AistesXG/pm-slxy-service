@@ -37,17 +37,17 @@
                                 <span id="msg"></span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">租住者所在部门:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <select name="zzzsybm" class="form-control" id="fjsybm">
-                                    <option value="">---请选择部门---</option>
-                                    <c:forEach items="${departments}" var="dept">
-                                        <option value="${dept}">${dept}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">租住者所在部门:<span class="must">*</span></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<select name="zzzsybm" class="form-control" id="fjsybm">--%>
+                                    <%--<option value="">---请选择部门---</option>--%>
+                                    <%--<c:forEach items="${departments}" var="dept">--%>
+                                        <%--<option value="${dept}">${dept}</option>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">房间编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
@@ -73,8 +73,8 @@
                             </div>
                         </div>
                         <div class="form-group" style="text-align: center">
-                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">
+                            <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
                         </div>
                     </form>
                 </div>
