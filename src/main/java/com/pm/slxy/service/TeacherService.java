@@ -2,6 +2,7 @@ package com.pm.slxy.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.pm.slxy.entity.Teacher;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -95,5 +96,14 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     Map<String, String> exportTeacherToExcel(String ids) throws Exception;
+
+
+    /**
+     * 导入教师信息
+     * @param modelAndView
+     * @param file
+     * @return
+     */
+    ModelAndView importExcelTeacher(ModelAndView modelAndView, MultipartFile file);
 
 }

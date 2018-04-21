@@ -233,15 +233,22 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content" style="width:auto;">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <li class="fa fa-remove"></li>
                 </button>
-                <h4 class="modal-title">教师详情</h4>
+                <h5 class="modal-title">Excel文件上传</h5>
             </div>
-            <div class="modal-body" style="text-align: center">
-                <button type="button" class="btn btn-info btn-primary" onclick="window.open('../../resources/temp/Teachers.xlsx')">没有模板</button>
-                <button type="button" class="btn btn-info btn-primary" onclick="importTeacher()">已有模板</button>
+            <div class="modal-body">
+                <form id="importFile" name="importFile" class="form-horizontal" method="post"
+                      enctype="multipart/form-data" action="/teacher/importExcelTeacher">
+                    <div class="box-body">
+                        <div>
+                            <label class="control-label">请选择要导入的Excel文件：</label>
+                            <input id="excelFile" name="excelFile" class="file-loading" type="file"  accept=".xls,.xlsx">
+                            <input type="submit" value="提交">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -251,6 +258,7 @@
 <script src="/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="/resources/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
 <script src="/resources/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<script src="/resources/js/ajaxfileupload.js"></script>
 <script>
     $(document).ready(function () {
         $('#dataTables-example').DataTable({
@@ -367,8 +375,5 @@
         })
     }
 
-    function importTeacher() {
-
-    }
 </script>
 </html>
