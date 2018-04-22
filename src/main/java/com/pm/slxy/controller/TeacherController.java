@@ -67,18 +67,5 @@ public class TeacherController {
     public String selectTeacherById(String id) throws Exception {
         return teacherService.selectTeacherById(Integer.parseInt(id));
     }
-
-    @RequestMapping(value = "/exportTeacherToExcel")
-    @SysControllerFilter(name = "exportTeacherToExcel")
-    @ResponseBody
-    public Map<String, String> exportTeacherToExcel(String ids) throws Exception {
-        return teacherService.exportTeacherToExcel(ids);
-    }
-
-    @RequestMapping(value = "/importExcelTeacher")
-    @SysControllerFilter(name = "importExcelTeacher")
-    public ModelAndView importExcelTeacher(ModelAndView modelAndView,MultipartFile file) throws Exception {
-        return teacherService.importExcelTeacher(modelAndView,file);
-    }
 }
 

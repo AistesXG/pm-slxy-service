@@ -3,27 +3,22 @@ package com.pm.slxy.serviceImpl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.Enum.TeacherRentalStatusEnum;
 import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.TeacherService;
-import com.pm.slxy.utils.ExcelExportUtils;
-import com.pm.slxy.utils.ExcelUtils;
 import com.pm.slxy.utils.JodaTimeUtils;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -249,103 +244,5 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         } else {
             return "error";
         }
-    }
-
-    /**
-     * 导出教师信息到Excel文件
-     *
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public Map<String, String> exportTeacherToExcel(String ids) throws Exception {
-        List<Teacher> list;
-        if (!StringUtils.isEmpty(ids)) {
-            list = teacherMapper.selectBatchIds(Arrays.asList(ids.split(",")));
-        } else {
-            list = teacherMapper.selectList(new EntityWrapper<Teacher>());
-        }
-        String fileName = ExcelExportUtils.exportTeacherToExcel("C:\\Users\\lenovo\\Desktop", list);
-        Map<String, String> map = new HashMap<>();
-        map.put("fileName", fileName);
-        return map;
-    }
-
-    /**
-     * 导入教师信息
-     *
-     * @param modelAndView
-     * @param file
-     * @return
-     */
-    @Override
-    public ModelAndView importExcelTeacher(ModelAndView modelAndView, MultipartFile file) {
-        Workbook workbook;
-        Sheet sheet;
-        List<Teacher> teacherList = null;
-        try {
-            workbook = ExcelUtils.buildWorkbook(file);
-            sheet = workbook.getSheetAt(0);
-
-            int initialCapacity = sheet.getLastRowNum() + 1;
-            teacherList = new ArrayList<>(initialCapacity);
-            for (int i = sheet.getFirstRowNum() + 1; i <= sheet.getLastRowNum(); i++) {
-                Row row = sheet.getRow(i);
-                //忽略空行
-                if (ExcelUtils.blankRow(row)) {
-                    continue;
-                }
-                //检查必填关键字
-                if (ExcelUtils.anyCellBlank(row.getCell(0), row.getCell(1), row.getCell(2),
-                        row.getCell(3), row.getCell(4), row.getCell(5), row.getCell(6), row.getCell(7),
-                        row.getCell(8), row.getCell(9))) {
-                    throw new NullPointerException();
-                }
-
-                Teacher teacher = new Teacher();
-                row.getCell(0).setCellType(CellType.STRING);
-                teacher.setXm(row.getCell(0).getStringCellValue());
-
-                row.getCell(1).setCellType(CellType.STRING);
-                teacher.setJggh(row.getCell(1).getStringCellValue());
-
-
-                row.getCell(2).setCellType(CellType.STRING);
-                teacher.setXb(row.getCell(2).getStringCellValue());
-
-                row.getCell(3).setCellType(CellType.STRING);
-                teacher.setSfzh(row.getCell(3).getStringCellValue());
-
-                row.getCell(4).setCellType(CellType.STRING);
-                teacher.setCsrq(row.getCell(4).getStringCellValue());
-
-                row.getCell(5).setCellType(CellType.STRING);
-                teacher.setXl(row.getCell(5).getStringCellValue());
-
-                row.getCell(6).setCellType(CellType.STRING);
-                teacher.setCjgzrq(row.getCell(6).getStringCellValue());
-
-                row.getCell(7).setCellType(CellType.STRING);
-                teacher.setSqzfrq(row.getCell(7).getStringCellValue());
-
-                row.getCell(8).setCellType(CellType.STRING);
-                teacher.setSzbm(row.getCell(8).getStringCellValue());
-
-                row.getCell(9).setCellType(CellType.STRING);
-                teacher.setJg(row.getCell(9).getStringCellValue());
-
-                row.getCell(10).setCellType(CellType.STRING);
-                teacher.setZfzt(HouseStatusEnum.NOT_RENTAL.getStatus());
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (this.insertBatch(teacherList)) {
-            modelAndView.setViewName("/teacher/teacherDetails");
-        } else {
-            modelAndView.setViewName("404");
-        }
-        return modelAndView;
     }
 }
