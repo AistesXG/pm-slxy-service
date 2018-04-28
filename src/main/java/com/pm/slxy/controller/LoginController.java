@@ -40,11 +40,7 @@ public class LoginController {
             } else {
                 modelAndView.addObject("admins", admins.get(0));
                 session.setAttribute("admins", admins.get(0));
-                if (admins.get(0).getType().equals(AdminEnum.SYSTEM_ADMIN.getRole())) {
-                    modelAndView.setViewName("index");
-                } else if (admins.get(0).getType().equals(AdminEnum.ORDINARY_ADMIN.getRole())) {
-                    modelAndView.setViewName("orarginPage");
-                }
+                modelAndView.setViewName("index");
             }
         }
         return modelAndView;

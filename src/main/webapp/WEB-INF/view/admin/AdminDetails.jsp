@@ -54,13 +54,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         已注册的用户
+                        <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                         <button type="button" id="deleteBtn" onclick="delAll()"
                                 class="btn btn-primary">批量删除
                         </button>
                         <button type="button" id="addAdminBtn" onclick="window.location.href = '/jump/jumpAddAdmin'"
                                 class="btn btn-primary">添加用户
                         </button>
-
+                        </c:if>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -75,7 +76,9 @@
                                 <th>邮箱</th>
                                 <th>电话号码</th>
                                 <th>角色</th>
+                                <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                 <th>操作</th>
+                                </c:if>
                             </tr>
                             </thead>
 
@@ -89,6 +92,7 @@
                                     <td>${admin.email}</td>
                                     <td class="center">${admin.phone}</td>
                                     <td class="center">${admin.type}</td>
+                                    <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                     <td class="center">
                                         <button type="button" id="updateAdminBtn"
                                                 onclick="window.location.href='/admin/selectAdmin?id='+${admin.id}"
@@ -96,6 +100,7 @@
                                         </button>
 
                                     </td>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
                             </tbody>

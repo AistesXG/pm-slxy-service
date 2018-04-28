@@ -66,20 +66,22 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         已添加的教师
-                        <button type="button" id="importTeacher" onclick="displayEITeacher()"
-                                class="btn btn-primary">
-                            批量导入
-                        </button>
-                        <button type="button" id="exportTeacher" onclick="exportTeacher()"
-                                class="btn btn-primary">批量导出
-                        </button>
-                        <button type="button" value="删除" id="deleteBtn" onclick="delAll()"
-                                class="btn btn-primary">批量删除
-                        </button>
-                        <button type="button" value="添加" id="addTeacherBtn" onclick="window.location.href = '/jump/jumpAddTeacher'"
-                                class="btn btn-primary">添加教师
-                        </button>
-
+                        <c:if test="${sessionScope.admins.type eq '系统管理员'}">
+                            <button type="button" id="importTeacher" onclick="displayEITeacher()"
+                                    class="btn btn-primary">
+                                批量导入
+                            </button>
+                            <button type="button" id="exportTeacher" onclick="exportTeacher()"
+                                    class="btn btn-primary">批量导出
+                            </button>
+                            <button type="button" value="删除" id="deleteBtn" onclick="delAll()"
+                                    class="btn btn-primary">批量删除
+                            </button>
+                            <button type="button" value="添加" id="addTeacherBtn"
+                                    onclick="window.location.href = '/jump/jumpAddTeacher'"
+                                    class="btn btn-primary">添加教师
+                            </button>
+                        </c:if>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -118,9 +120,11 @@
                                     <td style="color: red; font-weight: bolder">${teacher.zfzt}</td>
                                     <td class="center" colspan="2">
                                         <button onclick="display(${teacher.id})" class="btn btn-sm">查看</button>
+                                        <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                         <button onclick="window.location.href = '/teacher/selectTeacher?id=' + '${teacher.id}'"
                                                 class="btn btn-sm">编辑
                                         </button>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -244,7 +248,7 @@
                     <div class="box-body">
                         <div>
                             <label class="control-label">请选择要导入的Excel文件：</label>
-                            <input id="excelFile" name="excelFile" class="file-loading" type="file"  accept=".xls,.xlsx">
+                            <input id="excelFile" name="excelFile" class="file-loading" type="file" accept=".xls,.xlsx">
                             <input type="submit" value="提交">
                         </div>
                     </div>

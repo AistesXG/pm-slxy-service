@@ -78,6 +78,9 @@
                     <a href="/teacher/teacherList"><i class="fa fa-wrench fa-fw"></i>教师管理</a>
                 </li>
                 <li>
+                    <a href="/zjhsbz/housePriceList"><i class="fa fa-wrench fa-fw"></i>房屋价格管理</a>
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i>公用房管理</a>
                     <ul class="nav nav-second-level">
                         <li>
