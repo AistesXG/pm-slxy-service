@@ -69,8 +69,10 @@
                                id="dataTables-example">
                             <thead>
                             <tr>
+                                <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                 <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/>
                                 </th>
+                                </c:if>
                                 <th>序号</th>
                                 <th>用户名</th>
                                 <th>邮箱</th>
@@ -85,8 +87,10 @@
                             <tbody>
                             <c:forEach items="${adminList}" var="admin" varStatus="status">
                                 <tr class="gradeU">
+                                    <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                     <td><input type="checkbox" name="uid" id="uid" value="${admin.id}"
                                                style="margin-right: 8px;"></td>
+                                    </c:if>
                                     <td>${status.count}</td>
                                     <td>${admin.user}</td>
                                     <td>${admin.email}</td>

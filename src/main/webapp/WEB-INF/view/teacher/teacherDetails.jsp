@@ -89,8 +89,10 @@
                                id="dataTables-example">
                             <thead>
                             <tr>
+                                <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                 <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/>
                                 </th>
+                                </c:if>
                                 <th>序号</th>
                                 <th>教师姓名</th>
                                 <th>教工编号</th>
@@ -107,8 +109,9 @@
                             <tbody>
                             <c:forEach items="${teacherList}" var="teacher" varStatus="status">
                                 <tr class="gradeU">
+                                    <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                     <td><input type="checkbox" name="tid" id="tid" value="${teacher.id}"
-                                               style="margin-right: 8px; "></td>
+                                               style="margin-right: 8px; "></td></c:if>
                                     <td>${status.count}</td>
                                     <td>${teacher.xm}</td>
                                     <td>${teacher.jggh}</td>
@@ -121,9 +124,9 @@
                                     <td class="center" colspan="2">
                                         <button onclick="display(${teacher.id})" class="btn btn-sm">查看</button>
                                         <c:if test="${sessionScope.admins.type eq '系统管理员'}">
-                                        <button onclick="window.location.href = '/teacher/selectTeacher?id=' + '${teacher.id}'"
-                                                class="btn btn-sm">编辑
-                                        </button>
+                                            <button onclick="window.location.href = '/teacher/selectTeacher?id=' + '${teacher.id}'"
+                                                    class="btn btn-sm">编辑
+                                            </button>
                                         </c:if>
                                     </td>
                                 </tr>
