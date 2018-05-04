@@ -64,17 +64,17 @@
                                 </select>
                             </div>
                         </div>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<select name="fjsybm" class="form-control" id="fjsybm">--%>
-                                    <%--<option value="">---请选择部门---</option>--%>
-                                    <%--<c:forEach items="${departments}" var="dept">--%>
-                                        <%--<option value="${dept}">${dept}</option>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <select name="fjsybm" class="form-control" id="fjsybm">
+                                    <option value="">---请选择部门---</option>
+                                    <c:forEach items="${departments}" var="dept">
+                                        <option value="${dept}">${dept}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
                             <div class="col-sm-9">

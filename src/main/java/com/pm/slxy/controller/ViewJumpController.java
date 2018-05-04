@@ -81,6 +81,8 @@ public class ViewJumpController {
     @RequestMapping(value = "/jumpAddTeacher")
     @SysControllerFilter(name = "jumpAddTeacher")
     public ModelAndView jumpAddTeacher(ModelAndView modelAndView) throws Exception {
+        List<String> departments = teacherService.selectDepartment();
+        modelAndView.addObject("departments", departments);
         modelAndView.setViewName("teacher/addTeacher");
         return modelAndView;
     }

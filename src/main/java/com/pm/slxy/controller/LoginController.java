@@ -1,6 +1,5 @@
 package com.pm.slxy.controller;
 
-import com.pm.slxy.Enum.AdminEnum;
 import com.pm.slxy.entity.Admin;
 import com.pm.slxy.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;

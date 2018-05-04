@@ -189,6 +189,10 @@
                             stringLength: {
                                 max: 18,
                                 message: '身份证号最大18位'
+                            },
+                            regexp: {
+                                regexp:/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+                                message:'身份证号码格式不正确'
                             }
                         }
                     },
