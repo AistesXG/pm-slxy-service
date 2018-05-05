@@ -42,6 +42,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">确认密码:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="password" name="repass" class="form-control" value="" size="22">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">email:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" id="email" name="email" class="form-control" value="" size="50">
@@ -64,7 +70,9 @@
                          </div>--%>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
+                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+                                type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回
+                        </button>
                         </div>
                     </form>
                 </div>
@@ -85,7 +93,7 @@
                 },
                 fields: {
                     user: {
-                        threshold :  4,
+                        threshold: 4,
                         message: 'This user is not valid',
                         validators: {
                             notEmpty: {
@@ -96,11 +104,11 @@
                                 max: 10,
                                 message: '用户名必须在4到10个字符之间'
                             },
-                            remote:{
-                                type:'POST',
-                                url:'/checkUser',
-                                message:'用户已存在',
-                                delay:1000
+                            remote: {
+                                type: 'POST',
+                                url: '/checkUser',
+                                message: '用户已存在',
+                                delay: 1000
                             },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_]+$/,
@@ -109,6 +117,27 @@
                         }
                     },
                     pass: {
+
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 21,
+                                message: '密码必须在6到21个字符之间'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'user',//需要进行比较的input name值
+                                message: '不能和用户名相同'
+                            },
+                            regexp: {
+                                regexp: '^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$',
+                                message: '密码必须要包含数字和大小写字母'
+                            }
+                        }
+                    },
+                    repass: {
                         message: '密码无效',
                         validators: {
                             notEmpty: {
@@ -119,7 +148,15 @@
                                 max: 21,
                                 message: '密码必须在6到21个字符之间'
                             },
-                            regexp: {
+                            identical: {//相同
+                                field: 'pass',
+                                message: '两次密码不一致'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'user',
+                                message: '不能和用户名相同'
+                            },
+                            regexp: {//匹配规则
                                 regexp: '^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$',
                                 message: '密码必须要包含数字和大小写字母'
                             }
@@ -150,7 +187,7 @@
             }).on('success.form.bv', function (e) {
             e.preventDefault();
             var $form = $(e.target);
-            var bv =  $form.data('bootstrapValidator');
+            var bv = $form.data('bootstrapValidator');
             $.ajax({
                 type: 'post',
                 dataType: 'json',

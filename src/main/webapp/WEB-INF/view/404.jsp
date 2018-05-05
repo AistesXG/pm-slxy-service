@@ -4,9 +4,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Title</title>
+    <title>404页面</title>
 </head>
 <body>
-<h1>页面找不到</h1>
+<h1 align="center" style="margin-top: 100px;color: red;">不好意思，您要找的页面丢失了</h1>
 </body>
 </html>

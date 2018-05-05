@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -63,9 +60,20 @@ public class TeacherController {
 
     @RequestMapping(value = "/selectTeacherById")
     @SysControllerFilter(name = "selectTeacherById")
-    @ResponseBody
-    public String selectTeacherById(String id) throws Exception {
-        return teacherService.selectTeacherById(Integer.parseInt(id));
+    public ModelAndView selectTeacherById(ModelAndView modelAndView, String id) throws Exception {
+        return teacherService.selectTeacherById(modelAndView, Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "/selectTeacherByDept")
+    @SysControllerFilter(name = "selectTeacherDept")
+    public ModelAndView selectTeacherByDept(ModelAndView modelAndView, String szbm) throws Exception {
+        return teacherService.selectTeacherByDept(modelAndView, szbm);
+    }
+
+    @RequestMapping(value = "/selectTeacherByStatus")
+    @SysControllerFilter(name = "selectTeacherByStatus")
+    public ModelAndView selectTeacherByStatus(ModelAndView modelAndView, String zfzt) throws Exception {
+        return teacherService.selectTeacherByStatus(modelAndView, zfzt);
     }
 }
 

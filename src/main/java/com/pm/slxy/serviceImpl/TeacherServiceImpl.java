@@ -1,6 +1,5 @@
 package com.pm.slxy.serviceImpl;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.TeacherRentalStatusEnum;
@@ -46,7 +45,8 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     public ModelAndView selectTeachers(ModelAndView modelAndView) {
         List<Teacher> teacherList = teacherMapper.selectList(new EntityWrapper<Teacher>());
         modelAndView.addObject("teacherList", teacherList);
-        modelAndView.setViewName("/teacher/teacherDetails");
+        modelAndView.addObject("departments", this.selectDepartment());
+        modelAndView.setViewName("teacher/teacherList");
         return modelAndView;
     }
 
@@ -237,12 +237,61 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
      * @return
      */
     @Override
-    public String selectTeacherById(int id) {
+    public ModelAndView selectTeacherById(ModelAndView modelAndView, int id) {
         Teacher teacher = teacherMapper.selectById(id);
         if (!ObjectUtils.isEmpty(teacher)) {
-            return JSON.toJSONString(teacher);
+            modelAndView.addObject("teacher", teacher);
+            modelAndView.setViewName("/teacher/teacherDetails");
         } else {
-            return "error";
+            modelAndView.setViewName("404");
         }
+        return modelAndView;
+    }
+
+    /**
+     * 根据部门搜索教师信息
+     *
+     * @param szbm
+     * @return
+     */
+    @Override
+    public ModelAndView selectTeacherByDept(ModelAndView modelAndView, String szbm) {
+        Teacher teacher = new Teacher();
+        teacher.setSzbm(szbm);
+
+        return getModelAndView(modelAndView, teacher);
+    }
+
+    /**
+     * 根据教师租住状态查找教师信息
+     *
+     * @param modelAndView
+     * @param zfzt
+     * @return
+     */
+    @Override
+    public ModelAndView selectTeacherByStatus(ModelAndView modelAndView, String zfzt) {
+        Teacher teacher = new Teacher();
+        teacher.setZfzt(zfzt);
+        return getModelAndView(modelAndView, teacher);
+    }
+
+    /**
+     * 根据字段查找教师信息的方法
+     *
+     * @param modelAndView
+     * @param teacher
+     * @return
+     */
+    private ModelAndView getModelAndView(ModelAndView modelAndView, Teacher teacher) {
+        List<Teacher> teacherList = teacherMapper.selectList(new EntityWrapper<>(teacher));
+        if (!CollectionUtils.isEmpty(teacherList)) {
+            modelAndView.addObject("departments", this.selectDepartment());
+            modelAndView.addObject("teacherList", teacherList);
+            modelAndView.setViewName("teacher/teacherList");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
     }
 }

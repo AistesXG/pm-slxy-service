@@ -37,6 +37,4 @@ public class ControllerUtil {
     public Map<String, Boolean> checkTeacherIdCard(String sfzh) throws Exception {
         return teacherService.checkTeacherIdCard(sfzh);
     }
-
-
 }

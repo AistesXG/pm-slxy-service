@@ -2,7 +2,6 @@ package com.pm.slxy.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.pm.slxy.entity.Teacher;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -88,5 +87,23 @@ public interface TeacherService extends IService<Teacher> {
      * @param id
      * @return
      */
-    String selectTeacherById(int id);
+    ModelAndView selectTeacherById(ModelAndView modelAndView, int id);
+
+    /**
+     * 根据所在部门搜索教师信息
+     *
+     * @param szbm
+     * @return
+     */
+    ModelAndView selectTeacherByDept(ModelAndView modelAndView, String szbm);
+
+    /**
+     * 根据租房状态来搜素教师信息
+     *
+     * @param modelAndView
+     * @param zfzt
+     * @return
+     */
+    ModelAndView selectTeacherByStatus(ModelAndView modelAndView, String zfzt);
+
 }
