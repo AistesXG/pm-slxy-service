@@ -64,5 +64,11 @@ public class HouseController {
     public String selectHouseDetailById(String id) throws Exception {
         return houseService.selectHouseDetailById(Integer.parseInt(id));
     }
+
+    @RequestMapping(value = "/selectHouseByStatus")
+    @SysControllerFilter(name = "selectHouseByStatus")
+    public ModelAndView selectHouseByStatus(ModelAndView modelAndView, String zzzt) throws Exception {
+        return houseService.selectHouseByStatus(modelAndView, zzzt);
+    }
 }
 

@@ -10,6 +10,7 @@ import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.HousePubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -105,7 +106,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         if (!ObjectUtils.isEmpty(housePub)) {
             modelAndView.addObject("housePub", housePub);
             modelAndView.setViewName("housePub/updateHousePub");
-            modelAndView.addObject("departments",teacherMapper.selectDepartment());
+            modelAndView.addObject("departments", teacherMapper.selectDepartment());
         } else {
             modelAndView.setViewName("404");
         }
@@ -150,6 +151,28 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         } else {
             return "error";
         }
+    }
+
+    /**
+     * 按照租住状态查找公用房屋的信息
+     *
+     * @param modelAndView
+     * @param fjsyzt
+     * @return
+     */
+    @Override
+    public ModelAndView selectHousePubByStatus(ModelAndView modelAndView, String fjsyzt) {
+        HousePub housePub = new HousePub();
+        housePub.setFjsyzt(fjsyzt);
+        List<HousePub> housePubList = housePubMapper.selectList(new EntityWrapper<>(housePub));
+        if (!CollectionUtils.isEmpty(housePubList)) {
+            modelAndView.addObject("housePubList", housePubList);
+            modelAndView.setViewName("housePub/housePubDetails");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
+
     }
 
 }

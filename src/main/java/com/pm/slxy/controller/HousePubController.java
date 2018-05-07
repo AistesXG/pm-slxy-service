@@ -65,5 +65,11 @@ public class HousePubController {
         return housePubService.selectHousePubDetailById(Integer.parseInt(id));
     }
 
+    @RequestMapping(value = "/selectHousePubByStatus")
+    @SysControllerFilter(name = "selectHousePubByStatus")
+    public ModelAndView selectHousePubByStatus(ModelAndView modelAndView, String fjsyzt) {
+        return housePubService.selectHousePubByStatus(modelAndView, fjsyzt);
+    }
+
 }
 

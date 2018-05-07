@@ -48,10 +48,21 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的教师租房房屋 <button type="button" id="deleteBtn" onclick="delAll()"
-                                      class="btn btn-primary">批量删除</button>
-                        <button type="button"  id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
-                                class="btn btn-primary">添加房屋</button>
+                        已拥有的教师租房房屋
+                        <select name="zzzt" class="form-control-static" id="zzzt">
+                        <option value="0"></option>
+                        <option value="未租">未租</option>
+                        <option value="已租">已租</option>
+                    </select>
+                        <button type="button" id="selectHouseByStatus" onclick="selectHouseByStatus()"
+                                class="btn btn-primary">按租住状态搜索
+                        </button>
+                        <button type="button" id="deleteBtn" onclick="delAll()"
+                                class="btn btn-primary">批量删除
+                        </button>
+                        <button type="button" id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
+                                class="btn btn-primary">添加房屋
+                        </button>
 
                     </div>
                     <!-- /.panel-heading -->
@@ -83,20 +94,25 @@
                                     <td>${house.zzzxm}</td>
                                     <td>${house.zzzszbm}</td>
                                     <td>${house.fjbh}</td>
-                                    <td class="center" >${house.fjlh}</td>
+                                    <td class="center">${house.fjlh}</td>
                                     <td class="center">${house.fjmj}</td>
                                     <td class="center" style="color: red; font-weight: bolder">${house.zzzt}</td>
                                     <td class="center">${house.fjbz}</td>
-                                    <td align="right">
+                                    <td>
                                         <c:if test="${house.zzzt == '未租'}">
-                                            <button type="button" class="btn btn-sm" onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">申请</button>
+                                            <button type="button" class="btn btn-sm"
+                                                    onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
+                                                申请
+                                            </button>
                                         </c:if>
                                         <c:if test="${house.zzzt == '已租'}">
                                             <button type="button" class="btn btn-sm">续租</button>
                                             <button type="button" class="btn btn-sm">退房</button>
                                         </c:if>
-                                        <button type="button"  onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
-                                                class="btn btn-sm">编辑</button>
+                                        <button type="button"
+                                                onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
+                                                class="btn btn-sm">编辑
+                                        </button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -138,11 +154,6 @@
         }
     }
 
-    <!--跳转到addHouseView页面-->
-    function addHouseView() {
-       ;
-    }
-
     function selectId() {
         var ids = "";
         $("input[name='hid']:checkbox:checked").each(function () {
@@ -179,6 +190,16 @@
                     }
                 }
             })
+        }
+    }
+
+    <!--按照租房状态来查找教师租房的房屋信息-->
+    function selectHouseByStatus() {
+        var zzzt = $('#zzzt').val();
+        if (zzzt == "0") {
+            window.location.href = "/house/houseList";
+        } else {
+            window.location.href = "/house/selectHouseByStatus?zzzt=" + zzzt;
         }
     }
 </script>

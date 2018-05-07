@@ -52,7 +52,16 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的公用房屋 <button type="button"  id="deleteBtn" onclick="delAll()"
+                        已拥有的公用房屋
+                        <select name="fjsyzt" class="form-control-static" id="fjsyzt">
+                            <option value="0"></option>
+                            <option value="未租">未租</option>
+                            <option value="已租">已租</option>
+                        </select>
+                        <button type="button" id="selectHousePubByStatus" onclick="selectHousePubByStatus()"
+                                class="btn btn-primary">按租住状态搜索
+                        </button>
+                        <button type="button"  id="deleteBtn" onclick="delAll()"
                                        class="btn btn-primary">批量删除</button>
                         <button type="button"  id="addHousePubBtn" onclick="window.location.href = '/jump/jumpAddHousePub'"
                                 class="btn btn-primary">添加房屋</button>
@@ -179,6 +188,15 @@
                     }
                 }
             })
+        }
+    }
+    <!--按照租房状态来查找教师租房的房屋信息-->
+    function selectHousePubByStatus() {
+        var fjsyzt = $('#fjsyzt').val();
+        if (fjsyzt == "0") {
+            window.location.href = "/housePub/housePubList";
+        } else {
+            window.location.href = "/housePub/selectHousePubByStatus?fjsyzt=" + fjsyzt;
         }
     }
 </script>

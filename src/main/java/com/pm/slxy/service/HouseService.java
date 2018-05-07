@@ -71,4 +71,13 @@ public interface HouseService extends IService<House> {
      * @return
      */
     Map<String, Boolean> checkHouseBh(String fjbh);
+
+    /**
+     * 按照租住状态查找教师租房的房屋信息
+     *
+     * @param modelAndView
+     * @param zzzt
+     * @return
+     */
+    ModelAndView selectHouseByStatus(ModelAndView modelAndView, String zzzt);
 }

@@ -65,4 +65,12 @@ public interface HousePubService extends IService<HousePub> {
      */
     String selectHousePubDetailById(int id);
 
+    /**
+     * 按照租住状态查找教师租房的房屋信息
+     *
+     * @param modelAndView
+     * @param zzzt
+     * @return
+     */
+    ModelAndView selectHousePubByStatus(ModelAndView modelAndView, String fjsyzt);
 }

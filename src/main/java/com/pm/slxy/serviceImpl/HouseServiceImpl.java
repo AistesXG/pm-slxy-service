@@ -12,6 +12,7 @@ import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -194,5 +195,27 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         Map<String, Boolean> map = new HashMap<>();
         map.put("valid", result);
         return map;
+    }
+
+    /**
+     * 按照租住状态查找教师租房的房屋信息
+     *
+     * @param modelAndView
+     * @param zzzt
+     * @return
+     */
+    @Override
+    public ModelAndView selectHouseByStatus(ModelAndView modelAndView, String zzzt) {
+        House house = new House();
+        house.setZzzt(zzzt);
+        List<House> houseList = houseMapper.selectList(new EntityWrapper<>(house));
+        if (!CollectionUtils.isEmpty(houseList)) {
+            modelAndView.addObject("houseList", houseList);
+            modelAndView.setViewName("house/houseDetails");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
+
     }
 }
