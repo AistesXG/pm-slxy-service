@@ -95,13 +95,13 @@
                                 <%--</select>--%>
                             <%--</div>--%>
                         <%--</div>--%>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <textarea cols="5" rows="5" name="fjbz" class="form-control"
-                                          id="fjbz">${housePub.fjbz}</textarea>
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">备注:<span class="must">*</span></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<textarea cols="5" rows="5" name="fjbz" class="form-control"--%>
+                                          <%--id="fjbz">${housePub.fjbz}</textarea>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button

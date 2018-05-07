@@ -39,7 +39,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的房屋 <span style="color: red;">红色的表示已经租出的 灰色的表示未租出的 </span>
+                        已拥有的公用房屋 <span style="color: red;">红色的表示已经租出的 灰色的表示未租出的 </span>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -98,6 +98,7 @@
                 <form onsubmit="false" role="form" class="form-horizontal">
                     <br>
                     <div class="form-group">
+                        <input type="hidden" id="housePubId" name="id">
                         <label class="col-sm-3 control-label">楼号:</label>
                         <div class="col-sm-7">
                             <input type="text" name="fjlh" class="form-control" id="fjlh" value=""
@@ -172,6 +173,7 @@
             data: {"id": houseId},
             success: function (data) {
                 var object = $.parseJSON(data);
+                $("input[id=housePubId]").val(object.id);
                 $("input[id=fjlh]").val(object.fjlh);
                 $("input[id=fjbh]").val(object.fjbh);
                 $("textarea[id=fjbz]").val(object.fjbz);
@@ -183,5 +185,6 @@
         });
         $content.modal({backdrop: 'static'});
     }
+
 </script>
 </html>

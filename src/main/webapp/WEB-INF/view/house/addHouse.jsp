@@ -37,17 +37,6 @@
                                 <span id="msg"></span>
                             </div>
                         </div>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">租住者所在部门:<span class="must">*</span></label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<select name="zzzsybm" class="form-control" id="fjsybm">--%>
-                                    <%--<option value="">---请选择部门---</option>--%>
-                                    <%--<c:forEach items="${departments}" var="dept">--%>
-                                        <%--<option value="${dept}">${dept}</option>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">房间编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
@@ -66,12 +55,12 @@
                                 <input type="text" id="fjmj" name="fjmj" class="form-control" value="">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">房间备注:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz"></textarea>
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">房间备注:<span class="must">*</span></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz"></textarea>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
@@ -115,6 +104,12 @@
                             stringLength: {
                                 max: 20,
                                 message: '最大为20个字符'
+                            },
+                            remote: {
+                                type: 'POST',
+                                url: '/checkHouseBh',
+                                message: '房间编号重复',
+                                delay: 1000
                             }
                         }
                     },

@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <script src="/resources/laydate/laydate.js"></script>
+    <script src="/resources/js/laydate.js"></script>
     <title>添加教师</title>
 </head>
 <style type="text/css">

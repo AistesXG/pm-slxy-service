@@ -1,5 +1,7 @@
 package com.pm.slxy.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.deserializer.CollectionResolveFieldDeserializer;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.TeacherRentalStatusEnum;
@@ -258,7 +260,6 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     public ModelAndView selectTeacherByDept(ModelAndView modelAndView, String szbm) {
         Teacher teacher = new Teacher();
         teacher.setSzbm(szbm);
-
         return getModelAndView(modelAndView, teacher);
     }
 
@@ -274,6 +275,21 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         Teacher teacher = new Teacher();
         teacher.setZfzt(zfzt);
         return getModelAndView(modelAndView, teacher);
+    }
+
+    /**
+     * 查找教师部门教师姓名
+     *
+     * @param szbm
+     * @return
+     */
+    @Override
+    public String selectTeacherXmByDept(String szbm) {
+        List<String> xmList = teacherMapper.selectTeacherXmByDept(szbm);
+        if(!CollectionUtils.isEmpty(xmList)) {
+            return JSON.toJSONString(xmList);
+        }
+        return null;
     }
 
     /**

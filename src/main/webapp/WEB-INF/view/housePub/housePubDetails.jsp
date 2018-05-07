@@ -52,7 +52,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的房屋 <button type="button"  id="deleteBtn" onclick="delAll()"
+                        已拥有的公用房屋 <button type="button"  id="deleteBtn" onclick="delAll()"
                                        class="btn btn-primary">批量删除</button>
                         <button type="button"  id="addHousePubBtn" onclick="window.location.href = '/jump/jumpAddHousePub'"
                                 class="btn btn-primary">添加房屋</button>
@@ -82,7 +82,7 @@
                             <c:forEach items="${housePubList}" var="housePub" varStatus="status">
                                 <tr class="gradeU">
                                     <td><input type="checkbox" name="hid" id="hid" value="${housePub.id}"
-                                               style="margin-right: 8px; "></td>
+                                               style="margin-right: 8px"></td>
                                     <td>${status.count}</td>
                                     <td>${housePub.fjlh}</td>
                                     <td>${housePub.fjbh}</td>
@@ -91,7 +91,14 @@
                                     <td class="center">${housePub.fjsylx}</td>
                                     <td class="center">${housePub.fjsybm}</td>
                                     <td class="center">${housePub.fjbz}</td>
-                                    <td class="center">
+                                    <td align="right">
+                                        <c:if test="${housePub.fjsyzt == '未租'}">
+                                            <button type="button" class="btn btn-sm" onclick="window.location.href='/houseCzqk/selectHousePubToCzqkById?id=' + '${housePub.id}'">申请</button>
+                                        </c:if>
+                                        <c:if test="${housePub.fjsyzt == '已租'}">
+                                            <button type="button" class="btn btn-sm">续租</button>
+                                            <button type="button" class="btn btn-sm">退房</button>
+                                        </c:if>
                                         <button type="button"  onclick=" window.location.href = '/housePub/selectHousePubById?id=' + '${housePub.id}'"
                                                 class="btn btn-sm">编辑</button>
                                     </td>
@@ -174,6 +181,5 @@
             })
         }
     }
-
 </script>
 </html>

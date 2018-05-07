@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>公用房屋详情</title>
+    <title>教师租房房屋详情</title>
     <!-- DataTables CSS -->
     <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
@@ -30,7 +30,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">公用房屋信息</h2>
+                <h2 class="page-header">教师租房房屋详情</h2>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -39,7 +39,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的房屋 <span style="color: red;">红色的表示已经租出的 灰色的表示未租出的 </span>
+                        已拥有教师租房房屋 <span style="color: red;">红色的表示已经租出的 灰色的表示未租出的 </span>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

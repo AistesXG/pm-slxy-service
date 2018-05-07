@@ -50,20 +50,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">使用类型:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <select name="fjsylx" class="form-control">
-                                    <option value="">---请选择房间类型---</option>
-                                    <option value="保障期单间">保障期单间</option>
-                                    <option value="保障期单元房">保障期单元房</option>
-                                    <option value="延长期单间">延长期单间</option>
-                                    <option value="延长期单元房">延长期单元房</option>
-                                    <option value="超限期单间">超限期单间</option>
-                                    <option value="超限期单元房">超限期单元房</option>
-                                    <option value="特殊房间">特殊房间</option>
-                                </select>
-                            </div>
+                        <label class="col-sm-3 control-label">使用类型:<span class="must">*</span></label>
+                        <div class="col-sm-9">
+                            <select name="fjsylx" class="form-control">
+                                <option value="">---请选择房间类型---</option>
+                                <option value="保障期单间">保障期单间</option>
+                                <option value="保障期单元房">保障期单元房</option>
+                                <option value="延长期单间">延长期单间</option>
+                                <option value="延长期单元房">延长期单元房</option>
+                                <option value="超限期单间">超限期单间</option>
+                                <option value="超限期单元房">超限期单元房</option>
+                                <option value="特殊房间">特殊房间</option>
+                            </select>
                         </div>
+                    </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>
                             <div class="col-sm-9">
@@ -75,12 +75,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
-                            <div class="col-sm-9">
-                                <textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz"></textarea>
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">备注:<span class="must">*</span></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz"></textarea>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
@@ -105,7 +105,6 @@
                 },
                 fields: {
                     fjlh: {
-                        threshold: 4,
                         message: 'This fjlh is not valid',
                         validators: {
                             notEmpty: {

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.service.IService;
 import com.pm.slxy.entity.House;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Map;
+
 /**
  * <p>
  * 服务类
@@ -62,4 +64,11 @@ public interface HouseService extends IService<House> {
      */
     String selectHouseDetailById(int id);
 
+    /**
+     * 检查房间编号是否存在
+     *
+     * @param fjbh
+     * @return
+     */
+    Map<String, Boolean> checkHouseBh(String fjbh);
 }

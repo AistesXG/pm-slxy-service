@@ -106,4 +106,11 @@ public interface TeacherService extends IService<Teacher> {
      */
     ModelAndView selectTeacherByStatus(ModelAndView modelAndView, String zfzt);
 
+    /**
+     * 根据教师部门查找教师的姓名
+     *
+     * @param szbm
+     * @return
+     */
+    String selectTeacherXmByDept(String szbm);
 }

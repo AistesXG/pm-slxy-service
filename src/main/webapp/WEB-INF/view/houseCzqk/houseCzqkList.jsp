@@ -5,11 +5,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>教师租房房屋详情</title>
+    <title>住房情况详情</title>
     <!-- DataTables CSS -->
     <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
     <!-- DataTables Responsive CSS -->
     <link href="/resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+
     <style>
         table {
             text-align: center;
@@ -21,15 +24,10 @@
 
         #deleteBtn {
             float: right;
-            margin-top: -5px;
+            margin-top: -3px;
             margin-left: 5px;
         }
 
-        #addHouseBtn {
-            float: right;
-            margin-top: -5px;
-            margin-left: 5px;
-        }
 
     </style>
 <body>
@@ -39,7 +37,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">教师租房房屋详情</h2>
+                <h2 class="page-header">住房情况详情</h2>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -48,11 +46,8 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的教师租房房屋 <button type="button" id="deleteBtn" onclick="delAll()"
-                                      class="btn btn-primary">批量删除</button>
-                        <button type="button"  id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
-                                class="btn btn-primary">添加房屋</button>
-
+                        已租住的信息 <button type="button"  id="deleteBtn" onclick="delAll()"
+                                       class="btn btn-primary">批量删除</button>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -63,41 +58,43 @@
                                 <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/>
                                 </th>
                                 <th>序号</th>
-                                <th>租住者姓名</th>
-                                <th>租住者所在部门</th>
                                 <th>房间楼号</th>
                                 <th>房间编号</th>
+                                <th>申请租住日期</th>
+                                <th>租住年限</th>
+                                <th>租住到期日期</th>
+                                <th>房间租住类型</th>
                                 <th>房间面积</th>
-                                <th>租住状态</th>
-                                <th>房间备注</th>
-                                <th>操作</th>
+                                <th>特殊租住房间系数</th>
+                                <th>是否属于双职工只租住一个房子</th>
+                                <th>是否超限期带小孩</th>
+                                <th>租住教师所在部门</th>
+                                <th>租住教师姓名</th>
+                                <th>备注说明</th>
+                                <th>教师房屋警告日期</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${houseList}" var="house" varStatus="status">
+                            <c:forEach items="${houseCzqkList}" var="houseCzqk" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="hid" id="hid" value="${house.id}"
+                                    <td><input type="checkbox" name="hid" id="hid" value="${houseCzqk.id}"
                                                style="margin-right: 8px; "></td>
                                     <td>${status.count}</td>
-                                    <td>${house.zzzxm}</td>
-                                    <td>${house.zzzszbm}</td>
-                                    <td>${house.fjbh}</td>
-                                    <td class="center" >${house.fjlh}</td>
-                                    <td class="center">${house.fjmj}</td>
-                                    <td class="center" style="color: red; font-weight: bolder">${house.zzzt}</td>
-                                    <td class="center">${house.fjbz}</td>
-                                    <td align="right">
-                                        <c:if test="${house.zzzt == '未租'}">
-                                            <button type="button" class="btn btn-sm" onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">申请</button>
-                                        </c:if>
-                                        <c:if test="${house.zzzt == '已租'}">
-                                            <button type="button" class="btn btn-sm">续租</button>
-                                            <button type="button" class="btn btn-sm">退房</button>
-                                        </c:if>
-                                        <button type="button"  onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
-                                                class="btn btn-sm">编辑</button>
-                                    </td>
+                                    <td>${houseCzqk.fjlh}</td>
+                                    <td>${houseCzqk.fjbh}</td>
+                                    <td>${houseCzqk.sqzzrq}</td>
+                                    <td>${houseCzqk.zznx}</td>
+                                    <td>${houseCzqk.zzdqrq}</td>
+                                    <td>${houseCzqk.fjzzlx}</td>
+                                    <td>${houseCzqk.fjmj}</td>
+                                    <td>${houseCzqk.tszzxs}</td>
+                                    <td>${houseCzqk.sfszg}</td>
+                                    <td>${houseCzqk.sfcxqdxh}</td>
+                                    <td>${houseCzqk.zzjsszbm}</td>
+                                    <td>${houseCzqk.zzjsxm}</td>
+                                    <td>${houseCzqk.bzsm}</td>
+                                    <td>${houseCzqk.jscjgzrq}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -138,11 +135,6 @@
         }
     }
 
-    <!--跳转到addHouseView页面-->
-    function addHouseView() {
-       ;
-    }
-
     function selectId() {
         var ids = "";
         $("input[name='hid']:checkbox:checked").each(function () {
@@ -167,13 +159,13 @@
         if (confirm("确定要删除所选的数据")) {
             $.ajax({
                 type: "get",
-                url: '/house/deleteHouse',
+                url: '',
                 data: {ids: ids},
                 contentType: 'application/json',
                 dataType: "json",
                 success: function (data) {
                     if (data == "ok") {
-                        window.location.href = "/house/houseList";
+                        window.location.href = "/houseCzqk/selectHouseCzqk";
                     } else {
                         alert(data);
                     }
@@ -181,4 +173,6 @@
             })
         }
     }
+
 </script>
+</html>

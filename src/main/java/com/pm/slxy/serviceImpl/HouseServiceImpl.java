@@ -15,7 +15,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -146,5 +148,28 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         } else {
             return "error";
         }
+    }
+
+    /**
+     * 添加房屋的时候检测房间编号是否已经存在
+     *
+     * @param fjbh
+     * @return
+     */
+    @Override
+    public Map<String, Boolean> checkHouseBh(String fjbh) {
+        boolean result = true;
+        House house = new House();
+        house.setFjbh(fjbh);
+        List<House> houses = houseMapper.selectList(new EntityWrapper<>(house));
+        for (House house1 : houses) {
+            if (house1.getFjbh().equals(fjbh)) {
+                result = false;
+                break;
+            }
+        }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        return map;
     }
 }

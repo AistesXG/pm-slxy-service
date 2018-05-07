@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 前端控制器
@@ -74,6 +77,13 @@ public class TeacherController {
     @SysControllerFilter(name = "selectTeacherByStatus")
     public ModelAndView selectTeacherByStatus(ModelAndView modelAndView, String zfzt) throws Exception {
         return teacherService.selectTeacherByStatus(modelAndView, zfzt);
+    }
+
+    @RequestMapping(value = "/selectTeacherXmByDept",produces = "application/json;charset=utf-8")
+    @SysControllerFilter(name = "selectTeacherXmByDept")
+    @ResponseBody
+    public String selectTeacherXmByDept(String szbm) throws Exception {
+        return teacherService.selectTeacherXmByDept(szbm);
     }
 }
 
