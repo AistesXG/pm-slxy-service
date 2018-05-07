@@ -101,6 +101,8 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
                 return "房间编号已经被使用了!";
             }
         }
+        //如果租住状态为已租的话，更新租住情况列表中的数据
+        if(house.getZzzt().equals("已租")) {
         //更新房屋租出情况表中对应的数据
         HouseCzqk houseCzqk = new HouseCzqk();
         houseCzqk.setFjbh(oldHouse.getFjbh());
@@ -108,10 +110,10 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         houseCzqk1.setFjlh(house.getFjlh());
         houseCzqk1.setFjbh(house.getFjbh());
         houseCzqk1.setFjmj(house.getFjmj());
-        if (houseCzqkMapper.updateById(houseCzqk1) != 0) {
-            if (this.updateById(house)) {
+        houseCzqkMapper.updateById(houseCzqk1);
+        }
+        if (this.updateById(house)) {
                 return "ok";
-            }
         }
         return "error";
     }

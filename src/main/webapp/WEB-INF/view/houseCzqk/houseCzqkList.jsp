@@ -23,11 +23,7 @@
             text-align: center;
         }
 
-        #deleteBtn {
-            float: right;
-            margin-top: -3px;
-            margin-left: 5px;
-        }
+
 
 
     </style>
@@ -47,8 +43,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已租住的信息 <button type="button"  id="deleteBtn" onclick="delAll()"
-                                       class="btn btn-primary">批量删除</button>
+                        已租住的信息
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -56,8 +51,7 @@
                                id="dataTables-example">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/>
-                                </th>
+
                                 <th>序号</th>
                                 <th>房间楼号</th>
                                 <th>房间编号</th>
@@ -79,8 +73,6 @@
                             <tbody>
                             <c:forEach items="${houseCzqkList}" var="houseCzqk" varStatus="status">
                                 <tr class="gradeU">
-                                    <td><input type="checkbox" name="hid" id="hid" value="${houseCzqk.id}"
-                                               style="margin-right: 8px; "></td>
                                     <td>${status.count}</td>
                                     <td>${houseCzqk.fjlh}</td>
                                     <td>${houseCzqk.fjbh}</td>
@@ -120,60 +112,5 @@
             responsive: true
         });
     });
-
-    <!--全选和全不选-->
-    function checkt() {
-        var checkAll = document.getElementById("checkAll");
-        checkAll.value == 1 ? checkAll.value = 2 : checkAll.value = 1;
-        var hid = document.getElementsByName("hid");
-
-        for (var i = 0; i < hid.length; i++) {
-            if (checkAll.value == 1) {
-                hid[i].checked = false;//全不选
-            } else {
-                hid[i].checked = true;//全选
-            }
-        }
-    }
-
-    function selectId() {
-        var ids = "";
-        $("input[name='hid']:checkbox:checked").each(function () {
-            if (ids.length == 0) {
-                ids = $(this).val();
-            } else {
-                ids += "," + $(this).val();
-            }
-        });
-        return ids;
-
-    }
-
-    <!--删除-->
-    function delAll() {
-        var ids = selectId();
-        if (ids.length == 0) {
-            alert("请选择一条数据，才能进行删除！");
-            return "";
-        }
-        var ids = selectId()
-        if (confirm("确定要删除所选的数据")) {
-            $.ajax({
-                type: "get",
-                url: '',
-                data: {ids: ids},
-                contentType: 'application/json',
-                dataType: "json",
-                success: function (data) {
-                    if (data == "ok") {
-                        window.location.href = "/houseCzqk/selectHouseCzqk";
-                    } else {
-                        alert(data);
-                    }
-                }
-            })
-        }
-    }
-
 </script>
 </html>

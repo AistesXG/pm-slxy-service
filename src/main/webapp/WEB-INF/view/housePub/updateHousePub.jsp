@@ -162,13 +162,6 @@
                                 message: '最大为8个字符'
                             }
                         }
-                    },
-                    fjsylx:{
-                        validators:{
-                            notEmpty:{
-                                message:'房间使用类型不能为空'
-                            }
-                        }
                     }
                 }
             }).on('success.form.bv', function (e) {

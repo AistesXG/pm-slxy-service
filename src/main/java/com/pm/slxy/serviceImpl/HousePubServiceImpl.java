@@ -60,7 +60,6 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         if (StringUtils.isEmpty(housePub.getFjbh()) ||
                 StringUtils.isEmpty(housePub.getFjlh()) ||
                 StringUtils.isEmpty(housePub.getFjmj()) ||
-                StringUtils.isEmpty(housePub.getFjsylx()) ||
                 StringUtils.isEmpty(housePub.getFjsyzt())
                 ) {
             return "输入的信息不能为空！";
@@ -125,7 +124,6 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         if (StringUtils.isEmpty(housePub.getFjbh()) ||
                 StringUtils.isEmpty(housePub.getFjlh()) ||
                 StringUtils.isEmpty(housePub.getFjmj()) ||
-                StringUtils.isEmpty(housePub.getFjsylx()) ||
                 StringUtils.isEmpty(housePub.getFjsyzt())
                 ) {
             return "输入的信息不能为空！";
