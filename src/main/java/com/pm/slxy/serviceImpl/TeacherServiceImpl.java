@@ -94,7 +94,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 || StringUtils.isEmpty(teacher.getSfzh())) {
             return "输入的信息不能为空！";
         }
-        teacher.setSqzfrq(JodaTimeUtils.formatDateNow());
+        teacher.setSqzfrq("0000-00-00");
         if (this.insert(teacher)) {
             return "ok";
         } else {
@@ -143,7 +143,11 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 return "身份证号已经被使用了";
             }
         }
-        teacher.setSqzfrq(JodaTimeUtils.formatDateNow());
+        if (oldTeacher.getZfzt().equals("未租")) {
+            teacher.setSqzfrq("0000-00-00");
+        } else {
+            teacher.setSqzfrq(oldTeacher.getSqzfrq());
+        }
         if (this.updateById(teacher)) {
             return "ok";
         } else {
@@ -286,7 +290,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     @Override
     public String selectTeacherXmByDept(String szbm) {
         List<String> xmList = teacherMapper.selectTeacherXmByDept(szbm);
-        if(!CollectionUtils.isEmpty(xmList)) {
+        if (!CollectionUtils.isEmpty(xmList)) {
             return JSON.toJSONString(xmList);
         }
         return null;

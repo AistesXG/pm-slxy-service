@@ -124,6 +124,7 @@
                                 <th>出生年月</th>
                                 <th>学历</th>
                                 <th>参加工作时间</th>
+                                <th>申请租房日期</th>
                                 <th>所在部门</th>
                                 <th>租房状态</th>
                                 <th>操作</th>
@@ -144,6 +145,7 @@
                                     <td>${teacher.csrq}</td>
                                     <td>${teacher.xl}</td>
                                     <td>${teacher.cjgzrq}</td>
+                                    <td>${teacher.sqzfrq}</td>
                                     <td>${teacher.szbm}</td>
                                     <td style="color: red; font-weight: bolder">${teacher.zfzt}</td>
                                     <td class="center" colspan="2">

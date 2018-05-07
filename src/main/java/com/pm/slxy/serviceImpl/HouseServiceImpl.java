@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.House;
+import com.pm.slxy.entity.HouseCzqk;
+import com.pm.slxy.mapper.HouseCzqkMapper;
 import com.pm.slxy.mapper.HouseMapper;
 import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.HouseService;
@@ -34,6 +36,8 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     private HouseMapper houseMapper;
     @Autowired
     private TeacherMapper teacherMapper;
+    @Autowired
+    private HouseCzqkMapper houseCzqkMapper;
 
     /**
      * 查找教师用房的房产信息
@@ -85,11 +89,30 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
                 || StringUtils.isEmpty(house.getFjmj())) {
             return "输入的信息不能为空！";
         }
-        if (this.updateById(house)) {
-            return "ok";
+        House oldHouse = this.selectById(house.getId());
+        if (house.getFjbh().equals(oldHouse.getFjbh())) {
+            house.setFjbh(oldHouse.getFjbh());
         } else {
-            return "error";
+            House house1 = new House();
+            house1.setFjbh(house.getFjbh());
+            House house2 = this.selectOne(new EntityWrapper<>(house1));
+            if (house2 != null) {
+                return "房间编号已经被使用了!";
+            }
         }
+        //更新房屋租出情况表中对应的数据
+        HouseCzqk houseCzqk = new HouseCzqk();
+        houseCzqk.setFjbh(oldHouse.getFjbh());
+        HouseCzqk houseCzqk1 = houseCzqkMapper.selectOne(houseCzqk);
+        houseCzqk1.setFjlh(house.getFjlh());
+        houseCzqk1.setFjbh(house.getFjbh());
+        houseCzqk1.setFjmj(house.getFjmj());
+        if (houseCzqkMapper.updateById(houseCzqk1) != 0) {
+            if (this.updateById(house)) {
+                return "ok";
+            }
+        }
+        return "error";
     }
 
     /**

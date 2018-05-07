@@ -70,6 +70,12 @@
                                        value="${teacher.cjgzrq}" size="10" id="cjgzrq" readonly="readonly"></div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">申请住房日期:</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="cjgzrq" class="form-control"
+                                       value="${teacher.sqzfrq}" size="10" id="sqzfrq" readonly="readonly"></div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">所在部门:</label>
                             <div class="col-sm-9">
                                 <input type="text" name="szbm" class="form-control"
