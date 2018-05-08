@@ -61,9 +61,14 @@
                             <label class="col-sm-3 control-label">使用状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <select name="fjsyzt" id="fjsyzt" class="form-control">
-                                    <option value="${housePub.fjsyzt}">${housePub.fjsyzt}</option>
-                                    <option value="空闲">空闲</option>
+                                    <c:if test="${housePub.fjsyzt == '空闲'}">
+                                    <option value="空闲" selected>空闲</option>
                                     <option value="在用">在用</option>
+                                    </c:if>
+                                    <c:if test="${housePub.fjsyzt == '在用'}">
+                                        <option value="空闲" >空闲</option>
+                                        <option value="在用" selected>在用</option>
+                                    </c:if>
                                 </select>
                             </div>
                         </div>
@@ -71,10 +76,21 @@
                             <label class="col-sm-3 control-label">使用类型:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <select name="fjsylx" class="form-control">
-                                    <option value="${housePub.fjsylx}">${housePub.fjsylx}</option>
-                                    <option value="普通教室">普通教室</option>
-                                    <option value="办公室">办公室</option>
-                                    <option value="库房">库房</option>
+                                        <c:if test="${housePub.fjsylx == '普通教室'}">
+                                            <option value="普通教室" selected>普通教室</option>
+                                            <option value="办公室" >办公室</option>
+                                            <option value="库房" >库房</option>
+                                        </c:if>
+                                        <c:if test="${housePub.fjsylx == '办公室'}">
+                                            <option value="普通教室" >普通教室</option>
+                                            <option value="办公室" selected>办公室</option>
+                                            <option value="库房" >库房</option>
+                                        </c:if>
+                                        <c:if test="${housePub.fjsylx == '库房'}">
+                                            <option value="普通教室" >普通教室</option>
+                                            <option value="办公室" >办公室</option>
+                                            <option value="库房" selected>库房</option>
+                                        </c:if>
                                 </select>
                             </div>
                         </div>
