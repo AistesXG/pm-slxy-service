@@ -3,7 +3,7 @@ package com.pm.slxy.serviceImpl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.pm.slxy.Enum.HouseStatusEnum;
+import com.pm.slxy.Enum.HousePubStatusEnum;
 import com.pm.slxy.entity.HousePub;
 import com.pm.slxy.mapper.HousePubMapper;
 import com.pm.slxy.mapper.TeacherMapper;
@@ -16,7 +16,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -56,7 +58,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
      */
     @Override
     public String addHousePub(HousePub housePub) {
-        housePub.setFjsyzt(HouseStatusEnum.NOT_RENTAL.getStatus());
+        housePub.setFjsyzt(HousePubStatusEnum.FREE.getStatus());
         if (StringUtils.isEmpty(housePub.getFjbh()) ||
                 StringUtils.isEmpty(housePub.getFjlh()) ||
                 StringUtils.isEmpty(housePub.getFjmj()) ||
@@ -81,8 +83,8 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     public String deleteHousePubByIds(String ids) {
         List<String> housePubs = Arrays.asList(ids.split(","));
         List<HousePub> housePubList = housePubMapper.selectBatchIds(housePubs);
-        if (housePubList.get(0).getFjsyzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus())) {
-            return "您删除的房子已经租出去了";
+        if (housePubList.get(0).getFjsyzt().equals(HousePubStatusEnum.IN_USE.getStatus())) {
+            return "您删除的房子正在使用";
         }
         int deleteHousePub = housePubMapper.deleteBatchIds(housePubs);
         if (deleteHousePub != 0) {
@@ -170,7 +172,29 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
             modelAndView.setViewName("404");
         }
         return modelAndView;
+    }
 
+    /**
+     * 检测房间编号是否在数据库中已经存在了
+     *
+     * @param fjbh
+     * @return
+     */
+    @Override
+    public Map<String, Boolean> checkHousePubBh(String fjbh) {
+        boolean result = true;
+        HousePub housePub = new HousePub();
+        housePub.setFjbh(fjbh);
+        List<HousePub> housePubs = housePubMapper.selectList(new EntityWrapper<>(housePub));
+        for (HousePub housePub1 : housePubs) {
+            if (housePub1.getFjbh().equals(fjbh)) {
+                result = false;
+                break;
+            }
+        }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        return map;
     }
 
 }

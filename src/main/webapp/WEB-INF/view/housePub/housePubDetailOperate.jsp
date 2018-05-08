@@ -54,7 +54,7 @@
                                 <input type="hidden" name="id" id="houseId" value="${housePub.id}">
                                 <td>
                                     <c:choose>
-                                        <c:when test="${housePub.fjsyzt == '未租'}">
+                                        <c:when test="${housePub.fjsyzt == '空闲'}">
                                             <button class="btn btn-info housePubDetail"
                                                     onclick="housePubDetail(${housePub.id})" ><img
                                                     src="/resources/img/fwhb.jpg"></button><br>

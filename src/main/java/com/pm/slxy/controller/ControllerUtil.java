@@ -1,6 +1,7 @@
 package com.pm.slxy.controller;
 
 import com.pm.slxy.service.AdminService;
+import com.pm.slxy.service.HousePubService;
 import com.pm.slxy.service.HouseService;
 import com.pm.slxy.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class ControllerUtil {
     private TeacherService teacherService;
     @Autowired
     private HouseService houseService;
+    @Autowired
+    private HousePubService housePubService;
 
     @RequestMapping(value = "/checkUser")
     @ResponseBody
@@ -45,5 +48,11 @@ public class ControllerUtil {
     @ResponseBody
     public Map<String, Boolean> checkHouseBh(String fjbh) throws Exception {
         return houseService.checkHouseBh(fjbh);
+    }
+
+    @RequestMapping(value = "/checkHousePubBh")
+    @ResponseBody
+    public Map<String, Boolean> checkHousePubBh(String fjbh) throws Exception {
+        return housePubService.checkHousePubBh(fjbh);
     }
 }

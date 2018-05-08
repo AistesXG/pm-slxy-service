@@ -4,6 +4,8 @@ import com.pm.slxy.entity.HousePub;
 import com.baomidou.mybatisplus.service.IService;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Map;
+
 /**
  * <p>
  * 房产信息服务类
@@ -69,8 +71,16 @@ public interface HousePubService extends IService<HousePub> {
      * 按照租住状态查找教师租房的房屋信息
      *
      * @param modelAndView
-     * @param zzzt
+     * @param fjsyzt
      * @return
      */
     ModelAndView selectHousePubByStatus(ModelAndView modelAndView, String fjsyzt);
+
+    /**
+     * 检查房间编号是否存在
+     *
+     * @param fjbh
+     * @return
+     */
+    Map<String, Boolean> checkHousePubBh(String fjbh);
 }

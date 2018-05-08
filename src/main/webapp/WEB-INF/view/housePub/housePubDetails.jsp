@@ -56,8 +56,8 @@
                         已拥有的公用房屋
                         <select name="fjsyzt" class="form-control-static" id="fjsyzt">
                             <option value="0"></option>
-                            <option value="未租">未租</option>
-                            <option value="已租">已租</option>
+                            <option value="空闲">空闲</option>
+                            <option value="在用">在用</option>
                         </select>
                         <button type="button" id="selectHousePubByStatus" onclick="selectHousePubByStatus()"
                                 class="btn btn-primary">按租住状态搜索
@@ -101,14 +101,7 @@
                                     <td class="center">${housePub.fjsylx}</td>
                                     <td class="center">${housePub.fjsybm}</td>
                                     <td class="center">${housePub.fjbz}</td>
-                                    <td align="right">
-                                        <c:if test="${housePub.fjsyzt == '未租'}">
-                                            <button type="button" class="btn btn-sm" onclick="window.location.href='/houseCzqk/selectHousePubToCzqkById?id=' + '${housePub.id}'">申请</button>
-                                        </c:if>
-                                        <c:if test="${housePub.fjsyzt == '已租'}">
-                                            <button type="button" class="btn btn-sm">续租</button>
-                                            <button type="button" class="btn btn-sm">退房</button>
-                                        </c:if>
+                                    <td align="center">
                                         <button type="button"  onclick=" window.location.href = '/housePub/selectHousePubById?id=' + '${housePub.id}'"
                                                 class="btn btn-sm">编辑</button>
                                     </td>

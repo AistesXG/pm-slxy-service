@@ -111,8 +111,6 @@ public class ViewJumpController {
     @RequestMapping(value = "/jumpAddHousePub")
     @SysControllerFilter(name = "jumpAddHousePub")
     public ModelAndView jumpAddHousePub(ModelAndView modelAndView) throws Exception {
-        List<String> departments = teacherService.selectDepartment();
-        modelAndView.addObject("departments", departments);
         modelAndView.setViewName("housePub/addHousePub");
         return modelAndView;
     }
@@ -127,8 +125,6 @@ public class ViewJumpController {
     @RequestMapping(value = "/jumpAddHouse")
     @SysControllerFilter(name = "jumpAddHouse")
     public ModelAndView jumpAddHouse(ModelAndView modelAndView) throws Exception {
-        List<String> departments = teacherService.selectDepartment();
-        modelAndView.addObject("departments", departments);
         modelAndView.setViewName("house/addHouse");
         return modelAndView;
     }

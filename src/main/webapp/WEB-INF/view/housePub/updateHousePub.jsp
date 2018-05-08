@@ -60,8 +60,11 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">使用状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="fjsyzt" class="form-control" value="${housePub.fjsyzt}"
-                                       size="4" id="fjsyzt" readonly="readonly">
+                                <select name="fjsyzt" id="fjsyzt" class="form-control">
+                                    <option value="${housePub.fjsyzt}">${housePub.fjsyzt}</option>
+                                    <option value="空闲">空闲</option>
+                                    <option value="在用">在用</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -69,40 +72,35 @@
                             <div class="col-sm-9">
                                 <select name="fjsylx" class="form-control">
                                     <option value="${housePub.fjsylx}">${housePub.fjsylx}</option>
-                                    <option value="保障期单间" class="color">保障期单间</option>
-                                    <option value="保障期单元房" class="color">保障期单元房</option>
-                                    <option value="延长期单间" class="color">延长期单间</option>
-                                    <option value="延长期单元房" class="color">延长期单元房</option>
-                                    <option value="超限期单间" class="color">超限期单间</option>
-                                    <option value="超限期单元房" class="color">超限期单元房</option>
-                                    <option value="特殊房间" class="color">特殊房间</option>
+                                    <option value="普通教室">普通教室</option>
+                                    <option value="办公室">办公室</option>
+                                    <option value="库房">库房</option>
                                 </select>
-                                <%--<input type="text" name="fjsylx" class="form-control" value="${housePub.fjsylx}" size="20" id="fjsylx">--%>
                             </div>
                         </div>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<select name="fjsybm" class="form-control" id="fjsybm">--%>
-                                    <%--<c:set value="${housePub.fjsybm}" var='deptName'/>--%>
-                                    <%--<c:forEach items="${departments}" var="dept">--%>
-                                        <%--<c:if test="${dept eq deptName}">--%>
-                                            <%--<option value="${dept}" selected>${dept}</option>--%>
-                                        <%--</c:if>--%>
-                                        <%--<c:if test="${dept != deptName}">--%>
-                                            <%--<option value="${dept}">${dept}</option>--%>
-                                        <%--</c:if>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">备注:<span class="must">*</span></label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<textarea cols="5" rows="5" name="fjbz" class="form-control"--%>
-                                          <%--id="fjbz">${housePub.fjbz}</textarea>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <select name="fjsybm" class="form-control" id="fjsybm">
+                                    <c:set value="${housePub.fjsybm}" var='deptName'/>
+                                    <c:forEach items="${departments}" var="dept">
+                                        <c:if test="${dept eq deptName}">
+                                            <option value="${dept}" selected>${dept}</option>
+                                        </c:if>
+                                        <c:if test="${dept != deptName}">
+                                            <option value="${dept}">${dept}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <textarea cols="5" rows="5" name="fjbz" class="form-control"
+                                          id="fjbz">${housePub.fjbz}</textarea>
+                            </div>
+                        </div>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
