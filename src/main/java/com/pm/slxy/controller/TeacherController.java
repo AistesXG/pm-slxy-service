@@ -79,11 +79,18 @@ public class TeacherController {
         return teacherService.selectTeacherByStatus(modelAndView, zfzt);
     }
 
-    @RequestMapping(value = "/selectTeacherXmByDept",produces = "application/json;charset=utf-8")
-    @SysControllerFilter(name = "selectTeacherXmByDept")
+    @RequestMapping(value = "/selectTeacherZzjsbhByDept",produces = "application/json;charset=utf-8")
+    @SysControllerFilter(name = "selectTeacherZzjsbhByDept")
     @ResponseBody
     public String selectTeacherXmByDept(String szbm) throws Exception {
-        return teacherService.selectTeacherXmByDept(szbm);
+        return teacherService.selectTeacherZzjsbhByDept(szbm);
+    }
+
+    @RequestMapping(value = "/selectTeacherXmByJggh",produces = "application/json;charset=utf-8")
+    @SysControllerFilter(name = "selectTeacherXmByJggh")
+    @ResponseBody
+    public String selectTeacherXmByJggh(String jggh) throws Exception {
+        return teacherService.selectTeacherXmByJggh(jggh);
     }
 }
 

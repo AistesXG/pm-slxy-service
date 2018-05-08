@@ -140,7 +140,7 @@ public class ViewJumpController {
     @SysControllerFilter(name = "jumpHousePubDetailOperate")
     public ModelAndView jumpHousePubDetailOperate(ModelAndView modelAndView) throws Exception {
         modelAndView.addObject("housePubList", housePubService.selectList(new EntityWrapper<HousePub>()));
-        modelAndView.setViewName("housePub/housePubDetailOperate");
+        modelAndView.setViewName("housePub/housePubImgListOperate");
         return modelAndView;
     }
 
@@ -155,7 +155,7 @@ public class ViewJumpController {
     @SysControllerFilter(name = "jumpHouseDetailOperate")
     public ModelAndView jumpHouseDetailOperate(ModelAndView modelAndView) throws Exception {
         modelAndView.addObject("houseList", houseService.selectList(new EntityWrapper<House>()));
-        modelAndView.setViewName("house/houseDetailOperate");
+        modelAndView.setViewName("house/houseImgListOperate");
         return modelAndView;
     }
 

@@ -5,9 +5,8 @@ import com.pm.slxy.entity.HouseCzqk;
 import com.pm.slxy.service.HouseCzqkService;
 import com.pm.slxy.utils.SysControllerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,12 +31,6 @@ public class HouseCzqkController {
         return houseCzqkService.selectHouseCzqks(modelAndView);
     }
 
-    @RequestMapping(value = "/selectHousePubToCzqkById")
-    @SysControllerFilter(name = "selectHousePubToCzqkById")
-    public ModelAndView selectHousePubToCzqkById(ModelAndView modelAndView, String id) {
-        return houseCzqkService.selectHousePubToCzqkById(modelAndView, Integer.parseInt(id));
-    }
-
     @RequestMapping(value = "/selectHouseToCzqkById")
     @SysControllerFilter(name = "selectHouseToCzqkById")
     public ModelAndView selectHouseToCzqkById(ModelAndView modelAndView, String id) {
@@ -49,6 +42,12 @@ public class HouseCzqkController {
     @ResponseBody
     public String addHouseCzqk(HouseCzqk houseCzqk) throws Exception {
         return houseCzqkService.addHouseCzqk(houseCzqk);
+    }
+
+    @RequestMapping(value = "/selectHouseCzqkById")
+    @SysControllerFilter(name = "selectHouseCzqkById")
+    public ModelAndView selectHouseCzqkById(ModelAndView modelAndView, String id) throws Exception{
+        return houseCzqkService.selectHouseCzqkById(modelAndView,Integer.parseInt(id));
     }
 }
 

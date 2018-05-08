@@ -112,5 +112,13 @@ public interface TeacherService extends IService<Teacher> {
      * @param szbm
      * @return
      */
-    String selectTeacherXmByDept(String szbm);
+    String selectTeacherZzjsbhByDept(String szbm);
+
+    /**
+     * 根据教师编号查找教师的姓名
+     *
+     * @param jggh
+     * @return
+     */
+    String selectTeacherXmByJggh(String jggh);
 }

@@ -282,19 +282,49 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     }
 
     /**
-     * 查找教师部门教师姓名
+     * 根据教师所在部门查找教师的编号
      *
      * @param szbm
      * @return
      */
     @Override
-    public String selectTeacherXmByDept(String szbm) {
-        List<String> xmList = teacherMapper.selectTeacherXmByDept(szbm);
-        if (!CollectionUtils.isEmpty(xmList)) {
-            return JSON.toJSONString(xmList);
+    public String selectTeacherZzjsbhByDept(String szbm) {
+        List<String> jgghList = teacherMapper.selectTeacherZzjsbhByDept(szbm);
+        if (!CollectionUtils.isEmpty(jgghList)) {
+            return JSON.toJSONString(jgghList);
         }
-        return null;
+        return "error";
     }
+
+    /**
+     * 根据教师的编号查找教师的姓名
+     *
+     * @param jggh
+     * @return
+     */
+    @Override
+    public String selectTeacherXmByJggh(String jggh) {
+        String xm = teacherMapper.selectTeacherXmByJggh(jggh);
+        if (!StringUtils.isEmpty(xm)) {
+            return JSON.toJSONString(xm);
+        }
+        return "error";
+    }
+
+//    /**
+//     * 查找教师部门教师姓名
+//     *
+//     * @param szbm
+//     * @return
+//     */
+//    @Override
+//    public String selectTeacherXmByDept(String szbm) {
+//        List<String> xmList = teacherMapper.selectTeacherXmByDept(szbm);
+//        if (!CollectionUtils.isEmpty(xmList)) {
+//            return JSON.toJSONString(xmList);
+//        }
+//        return null;
+//    }
 
     /**
      * 根据字段查找教师信息的方法

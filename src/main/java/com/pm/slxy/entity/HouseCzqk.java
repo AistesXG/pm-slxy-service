@@ -1,17 +1,17 @@
 package com.pm.slxy.entity;
 
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableId;
 
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * <p>
  * </p>
  *
  * @author 付荣刚123
- * @since 2018-05-06
+ * @since 2018-05-08
  */
 public class HouseCzqk implements Serializable {
 
@@ -35,6 +35,10 @@ public class HouseCzqk implements Serializable {
      * 租住年限
      */
     private Integer zznx;
+    /**
+     * 审批状态
+     */
+    private String spzt;
     /**
      * 租住到期日期
      */
@@ -64,6 +68,10 @@ public class HouseCzqk implements Serializable {
      */
     private String zzjsszbm;
     /**
+     * 租住教师编号
+     */
+    private String zzjsbh;
+    /**
      * 租住教师姓名
      */
     private String zzjsxm;
@@ -71,6 +79,9 @@ public class HouseCzqk implements Serializable {
      * 备注说明
      */
     private String bzsm;
+    /**
+     * 教师参加工作日期
+     */
     private String jscjgzrq;
 
 
@@ -112,6 +123,14 @@ public class HouseCzqk implements Serializable {
 
     public void setZznx(Integer zznx) {
         this.zznx = zznx;
+    }
+
+    public String getSpzt() {
+        return spzt;
+    }
+
+    public void setSpzt(String spzt) {
+        this.spzt = spzt;
     }
 
     public String getZzdqrq() {
@@ -170,6 +189,14 @@ public class HouseCzqk implements Serializable {
         this.zzjsszbm = zzjsszbm;
     }
 
+    public String getZzjsbh() {
+        return zzjsbh;
+    }
+
+    public void setZzjsbh(String zzjsbh) {
+        this.zzjsbh = zzjsbh;
+    }
+
     public String getZzjsxm() {
         return zzjsxm;
     }
@@ -197,21 +224,23 @@ public class HouseCzqk implements Serializable {
     @Override
     public String toString() {
         return "HouseCzqk{" +
-        ", id=" + id +
-        ", fjlh=" + fjlh +
-        ", fjbh=" + fjbh +
-        ", sqzzrq=" + sqzzrq +
-        ", zznx=" + zznx +
-        ", zzdqrq=" + zzdqrq +
-        ", fjzzlx=" + fjzzlx +
-        ", fjmj=" + fjmj +
-        ", tszzxs=" + tszzxs +
-        ", sfszg=" + sfszg +
-        ", sfcxqdxh=" + sfcxqdxh +
-        ", zzjsszbm=" + zzjsszbm +
-        ", zzjsxm=" + zzjsxm +
-        ", bzsm=" + bzsm +
-        ", jscjgzrq=" + jscjgzrq +
-        "}";
+                ", id=" + id +
+                ", fjlh=" + fjlh +
+                ", fjbh=" + fjbh +
+                ", sqzzrq=" + sqzzrq +
+                ", zznx=" + zznx +
+                ", spzt=" + spzt +
+                ", zzdqrq=" + zzdqrq +
+                ", fjzzlx=" + fjzzlx +
+                ", fjmj=" + fjmj +
+                ", tszzxs=" + tszzxs +
+                ", sfszg=" + sfszg +
+                ", sfcxqdxh=" + sfcxqdxh +
+                ", zzjsszbm=" + zzjsszbm +
+                ", zzjsbh=" + zzjsbh +
+                ", zzjsxm=" + zzjsxm +
+                ", bzsm=" + bzsm +
+                ", jscjgzrq=" + jscjgzrq +
+                "}";
     }
 }

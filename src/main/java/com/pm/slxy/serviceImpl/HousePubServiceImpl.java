@@ -46,7 +46,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     public ModelAndView selectHousePubs(ModelAndView modelAndView) {
         List<HousePub> housePubList = housePubMapper.selectList(new EntityWrapper<HousePub>());
         modelAndView.addObject("housePubList", housePubList);
-        modelAndView.setViewName("housePub/housePubDetails");
+        modelAndView.setViewName("housePub/housePubList");
         return modelAndView;
     }
 
@@ -167,7 +167,7 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
         List<HousePub> housePubList = housePubMapper.selectList(new EntityWrapper<>(housePub));
         if (!CollectionUtils.isEmpty(housePubList)) {
             modelAndView.addObject("housePubList", housePubList);
-            modelAndView.setViewName("housePub/housePubDetails");
+            modelAndView.setViewName("housePub/housePubList");
         } else {
             modelAndView.setViewName("404");
         }

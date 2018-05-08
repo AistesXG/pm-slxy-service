@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="/resources/js/laydate.js"></script>
     <title>申请租房</title>
@@ -35,7 +35,8 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">房间楼号:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" name="fjlh" class="form-control" id="fjlh" value="${house.fjlh}" size="20">
+                                <input type="text" name="fjlh" class="form-control" id="fjlh" value="${house.fjlh}"
+                                       size="20">
                             </div>
                         </div>
                         <div class="form-group">
@@ -72,7 +73,8 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住到期日期:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" id="zzdqrq" name="zzdqrq" class="form-control laydate-icon" value="" readonly>
+                                <input type="text" id="zzdqrq" name="zzdqrq" class="form-control laydate-icon" value=""
+                                       readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -93,7 +95,8 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">房间面积:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" id="fjmj" name="fjmj" class="form-control" value="${house.fjmj}" size="20">
+                                <input type="text" id="fjmj" name="fjmj" class="form-control" value="${house.fjmj}"
+                                       size="20">
                             </div>
                         </div>
                         <div class="form-group">
@@ -119,8 +122,8 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师所在部门:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <select name="zzjsszbm" id="zzjsszbm" class="form-control" onchange="selectTeacherXmByDept()">
-                                    <option value="">---请选择部门---</option>
+                                <select name="zzjsszbm" id="zzjsszbm" class="form-control"
+                                        onchange="selectTeacherXmByDept()">
                                     <c:forEach items="${departments}" var="dept">
                                         <option value="${dept}">${dept}</option>
                                     </c:forEach>
@@ -128,9 +131,17 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-6 control-label">租住教师编号:<span class="must">*</span></label>
+                            <div class="col-sm-6">
+                                <select name="zzjsbh" id="zzjsbh" class="form-control" onchange="selectTeacherXmByJggh()">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师姓名:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <select name="zzjsxm" id="zzjsxm" class="form-control"></select>
+                                <select name="zzjsxm" id="zzjsxm" class="form-control">
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -140,7 +151,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-6 control-label">教师警告日期:<span class="must">*</span></label>
+                            <label class="col-sm-6 control-label">教师参加工作时间:<span class="must">*</span></label>
                             <div class="col-sm-6">
                                 <input type="text" id="jscjgzrq" name="jscjgzrq" class="form-control  laydate-icon"
                                        value="" size="8" readonly>
@@ -211,18 +222,35 @@
     function selectTeacherXmByDept() {
         var szbm = $('#zzjsszbm').val();
         $.ajax({
-            url: "/teacher/selectTeacherXmByDept",
+            url: "/teacher/selectTeacherZzjsbhByDept",
             type: "post",
             data: {"szbm": szbm},
             dataType: "json",
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
             success: function (data) {
                 var object = $.parseJSON(data)
-                $('#zzjsxm').html("");
+                $('#zzjsbh').html("");
                 var option = "";
                 for (var i = 0; i < object.length; i++) {
                     option += "<option value='" + object[i] + "'>" + object[i] + "</option>"
                 }
+                $('#zzjsbh').html(option);
+            }
+        })
+    }
+
+    function selectTeacherXmByJggh() {
+        var zzjsbh = $('#zzjsbh').val();
+        $.ajax({
+            url: "/teacher/selectTeacherXmByJggh",
+            type: "post",
+            data: {"jggh": zzjsbh},
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            success: function (data) {
+                var object = $.parseJSON(data)
+                $('#zzjsxm').html("");
+                var option = "<option value='" + object + "'>" + object + "</option>"
                 $('#zzjsxm').html(option);
             }
         })

@@ -56,17 +56,13 @@
                                 <th>房间楼号</th>
                                 <th>房间编号</th>
                                 <th>申请租住日期</th>
-                                <th>租住年限</th>
                                 <th>租住到期日期</th>
                                 <th>房间租住类型</th>
                                 <th>房间面积</th>
-                                <th>特殊租住房间系数</th>
-                                <th>是否属于双职工只租住一个房子</th>
-                                <th>是否超限期带小孩</th>
-                                <th>租住教师所在部门</th>
                                 <th>租住教师姓名</th>
-                                <th>备注说明</th>
-                                <th>教师房屋警告日期</th>
+                                <th>审批状态</th>
+                                <th>教师参加工作时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
 
@@ -77,17 +73,19 @@
                                     <td>${houseCzqk.fjlh}</td>
                                     <td>${houseCzqk.fjbh}</td>
                                     <td>${houseCzqk.sqzzrq}</td>
-                                    <td>${houseCzqk.zznx}</td>
                                     <td>${houseCzqk.zzdqrq}</td>
                                     <td>${houseCzqk.fjzzlx}</td>
                                     <td>${houseCzqk.fjmj}</td>
-                                    <td>${houseCzqk.tszzxs}</td>
-                                    <td>${houseCzqk.sfszg}</td>
-                                    <td>${houseCzqk.sfcxqdxh}</td>
-                                    <td>${houseCzqk.zzjsszbm}</td>
                                     <td>${houseCzqk.zzjsxm}</td>
-                                    <td>${houseCzqk.bzsm}</td>
+                                    <td style="color: red;font-weight: bolder">${houseCzqk.spzt}</td>
                                     <td>${houseCzqk.jscjgzrq}</td>
+                                    <td>
+                                        <button type="button" id="displayHouseCzqk" class="btn btn-sm" onclick="window.location.href = '/houseCzqk/selectHouseCzqkById?id=' + '${houseCzqk.id}'">查看</button>
+                                        <button type="button"  onclick="" id="applyPass"
+                                                class="btn btn-sm">审批</button>
+                                        <button type="button"  onclick="" id="applyNotPass"
+                                                class="btn btn-sm">不审批</button>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>

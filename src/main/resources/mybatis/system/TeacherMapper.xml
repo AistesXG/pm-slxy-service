@@ -19,7 +19,10 @@
     <select id="selectDepartment" resultType="String">
         SELECT szbm FROM teacher GROUP BY szbm
     </select>
-    <select id="selectTeacherXmByDept" resultType="String">
-        SELECT xm FROM  teacher WHERE szbm = #{szbm}
+    <select id="selectTeacherZzjsbhByDept" resultType="String">
+        SELECT jggh FROM  teacher WHERE szbm = #{szbm}
+    </select>
+    <select id="selectTeacherXmByJggh" resultType="String">
+        SELECT xm FROM teacher where jggh = #{jggh}
     </select>
 </mapper>

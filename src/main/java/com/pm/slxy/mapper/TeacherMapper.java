@@ -23,10 +23,18 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
     List<String> selectDepartment();
 
     /**
-     * 根据所在部门查找教师姓名
+     * 根据所在部门查找教师编号
      *
      * @param szbm
      * @return
      */
-    List<String> selectTeacherXmByDept(String szbm);
+    List<String> selectTeacherZzjsbhByDept(String szbm);
+
+    /**
+     * 根据所在部门查找教师编号
+     *
+     * @param jggh
+     * @return
+     */
+    String selectTeacherXmByJggh(String jggh);
 }

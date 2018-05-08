@@ -50,7 +50,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     public ModelAndView selectHouses(ModelAndView modelAndView) {
         List<House> houseList = houseMapper.selectList(new EntityWrapper<House>());
         modelAndView.addObject("houseList", houseList);
-        modelAndView.setViewName("house/houseDetails");
+        modelAndView.setViewName("house/houseList");
         return modelAndView;
     }
 
@@ -213,7 +213,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         List<House> houseList = houseMapper.selectList(new EntityWrapper<>(house));
         if (!CollectionUtils.isEmpty(houseList)) {
             modelAndView.addObject("houseList", houseList);
-            modelAndView.setViewName("house/houseDetails");
+            modelAndView.setViewName("house/houseList");
         } else {
             modelAndView.setViewName("404");
         }
