@@ -48,7 +48,7 @@
                                id="dataTables-example">
                             <tbody>
                             <c:forEach items="${housePubList}" var="housePub" varStatus="status">
-                                <c:if test="${(status.index + 1) % 10 == 1}">
+                                <c:if test="${(status.index + 1) % 9 == 1}">
                                     <tr class="gradeU">
                                 </c:if>
                                 <input type="hidden" name="id" id="houseId" value="${housePub.id}">
@@ -68,7 +68,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
-                                <c:if test="${(status.index + 1) % 10 == 0}">
+                                <c:if test="${(status.index + 1) % 9 == 0}">
                                     </tr>
                                 </c:if>
                             </c:forEach>

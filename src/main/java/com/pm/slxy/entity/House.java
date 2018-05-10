@@ -2,11 +2,12 @@ package com.pm.slxy.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * <p>
  * </p>
  *
  * @author 付荣刚123
@@ -46,7 +47,18 @@ public class House implements Serializable {
      * 房间备注
      */
     private String fjbz;
+    /**
+     * 该房屋是否被申请了
+     */
+    private String apply;
 
+    public String getApply() {
+        return apply;
+    }
+
+    public void setApply(String apply) {
+        this.apply = apply;
+    }
 
     public Integer getId() {
         return id;
@@ -115,14 +127,15 @@ public class House implements Serializable {
     @Override
     public String toString() {
         return "House{" +
-        ", id=" + id +
-        ", zzzxm=" + zzzxm +
-        ", zzzszbm=" + zzzszbm +
-        ", fjbh=" + fjbh +
-        ", fjlh=" + fjlh +
-        ", fjmj=" + fjmj +
-        ", zzzt=" + zzzt +
-        ", fjbz=" + fjbz +
-        "}";
+                ", id=" + id +
+                ", zzzxm=" + zzzxm +
+                ", zzzszbm=" + zzzszbm +
+                ", fjbh=" + fjbh +
+                ", fjlh=" + fjlh +
+                ", fjmj=" + fjmj +
+                ", zzzt=" + zzzt +
+                ", fjbz=" + fjbz +
+                ", apply=" + apply +
+                "}";
     }
 }

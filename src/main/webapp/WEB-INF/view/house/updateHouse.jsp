@@ -80,6 +80,12 @@
                                 <input type="text" id="zzzt" name="zzzt" class="form-control" value="${house.zzzt}" size="4" readonly>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">申请状态:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" id="apply" name="apply" class="form-control" value="${house.apply}" size="4" readonly>
+                            </div>
+                        </div>
                         <%--<div class="form-group">--%>
                             <%--<label class="col-sm-3 control-label">房间备注:<span class="must">*</span></label>--%>
                             <%--<div class="col-sm-9">--%>

@@ -3,6 +3,7 @@ package com.pm.slxy.serviceImpl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.pm.slxy.Enum.HouseApplyEnum;
 import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.House;
 import com.pm.slxy.entity.HouseCzqk;
@@ -63,6 +64,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     @Override
     public String addHouse(House house) {
         house.setZzzt(HouseStatusEnum.NOT_RENTAL.getStatus());
+        house.setApply(HouseApplyEnum.NOT_APPLY_ENUM.getStatus());
         if (StringUtils.isEmpty(house.getZzzxm())
                 || StringUtils.isEmpty(house.getFjbh())
                 || StringUtils.isEmpty(house.getFjlh())

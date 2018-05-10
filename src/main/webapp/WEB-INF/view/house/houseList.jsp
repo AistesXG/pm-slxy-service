@@ -81,6 +81,7 @@
                                 <th>房间编号</th>
                                 <th>房间面积</th>
                                 <th>租住状态</th>
+                                <th>申请状态</th>
                                 <th>房间备注</th>
                                 <th>操作</th>
                             </tr>
@@ -98,13 +99,16 @@
                                     <td class="center">${house.fjlh}</td>
                                     <td class="center">${house.fjmj}</td>
                                     <td class="center" style="color: red; font-weight: bolder">${house.zzzt}</td>
+                                    <td class="center" style="color: red; font-weight: bolder">${house.apply}</td>
                                     <td class="center">${house.fjbz}</td>
-                                    <td>
+                                    <td align="right">
                                         <c:if test="${house.zzzt == '未租'}">
+                                            <c:if test="${house.apply == '未被申请'}">
                                             <button type="button" class="btn btn-sm"
                                                     onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
                                                 申请
                                             </button>
+                                            </c:if>
                                         </c:if>
                                         <c:if test="${house.zzzt == '已租'}">
                                             <button type="button" class="btn btn-sm">续租</button>

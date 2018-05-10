@@ -106,18 +106,6 @@
                     <a href="/houseCzqk/HouseCzqkList"><i class="fa fa-wrench fa-fw"></i>住房情况管理</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i>租房管理</a>
-                   <ul class="nav nav-second-level">
-                        <li>
-                            <a href="#">租房</a>
-                        </li>
-                        <li>
-                            <a href="#">退房</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
                     <a href="#"><i class=" fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>

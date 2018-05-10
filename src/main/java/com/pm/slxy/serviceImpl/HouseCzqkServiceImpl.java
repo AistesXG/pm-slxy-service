@@ -2,6 +2,7 @@ package com.pm.slxy.serviceImpl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.pm.slxy.Enum.HouseApplyEnum;
 import com.pm.slxy.Enum.HouseCzqkStatusEnum;
 import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.House;
@@ -83,7 +84,10 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
         //将教师信息中的教师的参加工作时间添加到租住情况表中的教师参加工作时间
         houseCzqk.setJscjgzrq(teacher1.getCjgzrq());
 
-
+        House house = new House();
+        house.setFjbh(houseCzqk.getFjbh());
+        House house1 = houseMapper.selectOne(house);
+        house1.setApply(HouseApplyEnum.APPLY_ENUM.getStatus());
 //        //改变教师的申请住房日期和状态
 //        Teacher teacher = new Teacher();
 //        teacher.setXm(houseCzqk.getZzjsxm());
@@ -98,9 +102,10 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
 //        house1.setZzzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
 //        house1.setFjbz(houseCzqk.getBzsm());
 //      if (teacherMapper.updateById(teacher1) != 0 && houseMapper.updateById(house1) != 0) {
+        if(houseMapper.updateById(house1) != 0) {
             if (houseCzqkMapper.insert(houseCzqk) != 0) {
                 return "ok";
-
+            }
         }
 //     }
         return "error";
@@ -139,6 +144,7 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
         House house = new House();
         house.setFjbh(houseCzqk.getFjbh());
         House house1 = houseMapper.selectOne(house);
+        house1.setZzzszbm(houseCzqk.getZzjsszbm());
         house1.setZzzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
         house1.setFjbz(houseCzqk.getBzsm());
         //查找对应的教师信息并修改字段
