@@ -108,15 +108,15 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">是否属于双职工租住一个房子:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="radio" name="sfszg" checked="checked" value="是"/>是 &nbsp;
-                                <input type="radio" name="sfszg" value="否">否
+                                <input type="radio" name="sfszg" value="是"/>是 &nbsp;
+                                <input type="radio" name="sfszg" checked="checked" value="否">否
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">是否带小孩:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="radio" name="sfcxqdxh" checked="checked" value="是"/>是 &nbsp;
-                                <input type="radio" name="sfcxqdxh" value="否">否
+                                <input type="radio" name="sfcxqdxh" value="是"/>是 &nbsp;
+                                <input type="radio" name="sfcxqdxh" checked="checked" value="否">否
                             </div>
                         </div>
                         <div class="form-group">
@@ -133,7 +133,8 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师编号:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <select name="zzjsbh" id="zzjsbh" class="form-control" onchange="selectTeacherXmByJggh()">
+                                <select name="zzjsbh" id="zzjsbh" class="form-control"
+                                        onchange="selectTeacherXmByJggh()">
                                 </select>
                             </div>
                         </div>
@@ -151,11 +152,11 @@
                             </div>
                         </div>
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-6 control-label">教师参加工作时间:<span class="must">*</span></label>--%>
-                            <%--<div class="col-sm-6">--%>
-                                <%--<input type="text" id="jscjgzrq" name="jscjgzrq" class="form-control  laydate-icon"--%>
-                                       <%--value="" size="8" readonly>--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-6 control-label">教师参加工作时间:<span class="must">*</span></label>--%>
+                        <%--<div class="col-sm-6">--%>
+                        <%--<input type="text" id="jscjgzrq" name="jscjgzrq" class="form-control  laydate-icon"--%>
+                        <%--value="" size="8" readonly>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
