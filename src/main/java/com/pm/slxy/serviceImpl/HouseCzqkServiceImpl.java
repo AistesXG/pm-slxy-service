@@ -3,8 +3,10 @@ package com.pm.slxy.serviceImpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.HouseCzqkStatusEnum;
+import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.House;
 import com.pm.slxy.entity.HouseCzqk;
+import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.HouseCzqkMapper;
 import com.pm.slxy.mapper.HouseMapper;
 import com.pm.slxy.mapper.HousePubMapper;
@@ -75,6 +77,13 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
     @Override
     public String addHouseCzqk(HouseCzqk houseCzqk) {
         houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH_NOT_THROUGH.getStatus());
+        Teacher teacher = new Teacher();
+        teacher.setJggh(houseCzqk.getZzjsbh());
+        Teacher teacher1 = teacherMapper.selectOne(teacher);
+        //将教师信息中的教师的参加工作时间添加到租住情况表中的教师参加工作时间
+        houseCzqk.setJscjgzrq(teacher1.getCjgzrq());
+
+
 //        //改变教师的申请住房日期和状态
 //        Teacher teacher = new Teacher();
 //        teacher.setXm(houseCzqk.getZzjsxm());
@@ -89,8 +98,9 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
 //        house1.setZzzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
 //        house1.setFjbz(houseCzqk.getBzsm());
 //      if (teacherMapper.updateById(teacher1) != 0 && houseMapper.updateById(house1) != 0) {
-        if (houseCzqkMapper.insert(houseCzqk) != 0) {
-            return "ok";
+            if (houseCzqkMapper.insert(houseCzqk) != 0) {
+                return "ok";
+
         }
 //     }
         return "error";
@@ -113,5 +123,35 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
             modelAndView.setViewName("404");
         }
         return modelAndView;
+    }
+
+    /**
+     * 房屋审批通过
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public String applyThrough(int id) {
+        HouseCzqk houseCzqk = houseCzqkMapper.selectById(id);
+        houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus());
+        //查找对应的房屋信息并修改字段
+        House house = new House();
+        house.setFjbh(houseCzqk.getFjbh());
+        House house1 = houseMapper.selectOne(house);
+        house1.setZzzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
+        house1.setFjbz(houseCzqk.getBzsm());
+        //查找对应的教师信息并修改字段
+        Teacher teacher = new Teacher();
+        teacher.setJggh(houseCzqk.getZzjsbh());
+        Teacher teacher1 = teacherMapper.selectOne(teacher);
+        teacher1.setSqzfrq(houseCzqk.getSqzzrq());
+        teacher1.setZfzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
+        if (houseCzqkMapper.updateById(houseCzqk) != 0) {
+            if (houseMapper.updateById(house1) != 0 && teacherMapper.updateById(teacher1) != 0) {
+                return "ok";
+            }
+        }
+        return "error";
     }
 }

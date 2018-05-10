@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>住房情况详情</title>
     <!-- DataTables CSS -->
@@ -22,8 +22,6 @@
         table thead th {
             text-align: center;
         }
-
-
 
 
     </style>
@@ -80,11 +78,16 @@
                                     <td style="color: red;font-weight: bolder">${houseCzqk.spzt}</td>
                                     <td>${houseCzqk.jscjgzrq}</td>
                                     <td>
-                                        <button type="button" id="displayHouseCzqk" class="btn btn-sm" onclick="window.location.href = '/houseCzqk/selectHouseCzqkById?id=' + '${houseCzqk.id}'">查看</button>
-                                        <button type="button"  onclick="" id="applyPass"
-                                                class="btn btn-sm">审批</button>
-                                        <button type="button"  onclick="" id="applyNotPass"
-                                                class="btn btn-sm">不审批</button>
+                                        <button type="button" id="displayHouseCzqk" class="btn btn-sm"
+                                                onclick="window.location.href = '/houseCzqk/selectHouseCzqkById?id=' + '${houseCzqk.id}'">
+                                            查看
+                                        </button>
+                                        <button type="button"  id="applyPass"
+                                                class="btn btn-sm" onclick="applyThrough(${houseCzqk.id})">审批
+                                        </button>
+                                        <button type="button" onclick="" id="applyNotPass"
+                                                class="btn btn-sm" onclick="notApplyThrough()">不审批
+                                        </button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -110,5 +113,22 @@
             responsive: true
         });
     });
+
+    <!--审批通过-->
+    function applyThrough(houseCzqkId) {
+        $.ajax({
+            url: '/houseCzqk/applyThrough',
+            data: {id: houseCzqkId},
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                if (data == "ok") {
+                    window.location.href = "/houseCzqk/HouseCzqkList";
+                } else {
+                    alert(data);
+                }
+            }
+        })
+    }
 </script>
 </html>

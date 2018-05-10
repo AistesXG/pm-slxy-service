@@ -150,13 +150,13 @@
                                 <textarea cols="5" rows="5" name="bzsm" class="form-control" id="bzsm"></textarea>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-6 control-label">教师参加工作时间:<span class="must">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" id="jscjgzrq" name="jscjgzrq" class="form-control  laydate-icon"
-                                       value="" size="8" readonly>
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-6 control-label">教师参加工作时间:<span class="must">*</span></label>--%>
+                            <%--<div class="col-sm-6">--%>
+                                <%--<input type="text" id="jscjgzrq" name="jscjgzrq" class="form-control  laydate-icon"--%>
+                                       <%--value="" size="8" readonly>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                                 type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button

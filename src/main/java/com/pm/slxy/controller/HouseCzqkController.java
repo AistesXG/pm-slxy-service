@@ -49,5 +49,12 @@ public class HouseCzqkController {
     public ModelAndView selectHouseCzqkById(ModelAndView modelAndView, String id) throws Exception{
         return houseCzqkService.selectHouseCzqkById(modelAndView,Integer.parseInt(id));
     }
+
+    @RequestMapping(value = "/applyThrough")
+    @SysControllerFilter(name = "applyThrough")
+    @ResponseBody
+    public String applyThrough(String id) throws Exception {
+        return houseCzqkService.applyThrough(Integer.parseInt(id));
+    }
 }
 

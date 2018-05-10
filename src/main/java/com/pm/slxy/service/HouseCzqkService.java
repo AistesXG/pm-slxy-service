@@ -47,4 +47,12 @@ public interface HouseCzqkService extends IService<HouseCzqk> {
      * @return
      */
     ModelAndView selectHouseCzqkById(ModelAndView modelAndView, int id);
+
+    /**
+     * 审批通过
+     *
+     * @param id
+     * @return
+     */
+    String applyThrough(int id);
 }
