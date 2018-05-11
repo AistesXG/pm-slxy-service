@@ -104,7 +104,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
             }
         }
         //如果租住状态为已租的话，更新租住情况列表中的数据
-        if(house.getZzzt().equals("已租")) {
+        if(house.getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || house.getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus())) {
         //更新房屋租出情况表中对应的数据
         HouseCzqk houseCzqk = new HouseCzqk();
         houseCzqk.setFjbh(oldHouse.getFjbh());
@@ -151,9 +151,10 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     public String deleteHouseByIds(String ids) {
         List<String> houses = Arrays.asList(ids.split(","));
         List<House> houseList = houseMapper.selectBatchIds(houses);
-        if (houseList.get(0).getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus())) {
-            return "您删除的房子已经租出去了";
+        if (houseList.get(0).getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus())) {
+            return "您删除的房子已经租出去了或者被续租了";
         }
+
         int deleteHousePub = houseMapper.deleteBatchIds(houses);
         if (deleteHousePub != 0) {
             return "ok";
