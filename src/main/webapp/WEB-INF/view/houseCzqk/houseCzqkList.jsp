@@ -58,6 +58,7 @@
                                 <th>房间租住类型</th>
                                 <th>房间面积</th>
                                 <th>租住教师姓名</th>
+                                <th>租房标志</th>
                                 <th>审批状态</th>
                                 <th>教师参加工作时间</th>
                                 <th>操作</th>
@@ -75,6 +76,7 @@
                                     <td>${houseCzqk.fjzzlx}</td>
                                     <td>${houseCzqk.fjmj}</td>
                                     <td>${houseCzqk.zzjsxm}</td>
+                                    <td style="color: red;font-weight: bolder">${houseCzqk.zfxztfzt}</td>
                                     <td style="color: red;font-weight: bolder">${houseCzqk.spzt}</td>
                                     <td>${houseCzqk.jscjgzrq}</td>
                                     <td>
@@ -83,12 +85,23 @@
                                             查看
                                         </button>
                                         <c:if test="${houseCzqk.spzt == '审核不通过'}">
-                                        <button type="button"  id="applyPass"
-                                                class="btn btn-sm" onclick="applyThrough(${houseCzqk.id})">审批
-                                        </button>
-                                        <button type="button" onclick="" id="applyNotPass"
-                                                class="btn btn-sm" onclick="notApplyThrough()">不审批
-                                        </button>
+                                            <c:if test="${houseCzqk.zfxztfzt == '退房'}">
+                                                <button type="button"
+                                                        class="btn btn-sm"
+                                                        onclick="applyCheckOutHouse(${houseCzqk.id})">审批退房
+                                                </button>
+                                                <button type="button" onclick=""
+                                                        class="btn btn-sm" onclick="">不审批
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${houseCzqk.zfxztfzt == '租房' || houseCzqk.zfxztfzt == '续租'}">
+                                            <button type="button"
+                                                    class="btn btn-sm" onclick="applyThrough(${houseCzqk.id})">审批
+                                            </button>
+                                            <button type="button" onclick=""
+                                                    class="btn btn-sm" onclick="">不审批
+                                            </button>
+                                            </c:if>
                                         </c:if>
                                     </td>
                                 </tr>
@@ -116,7 +129,7 @@
         });
     });
 
-    <!--审批通过-->
+    <!--租房和续租审批通过-->
     function applyThrough(houseCzqkId) {
         $.ajax({
             url: '/houseCzqk/applyThrough',
@@ -125,12 +138,30 @@
             type: 'post',
             success: function (data) {
                 if (data == "ok") {
-                    window.location.href = "/houseCzqk/HouseCzqkList";
+                    window.location.href = "/houseCzqk/houseCzqkList";
                 } else {
                     alert(data);
                 }
             }
         })
     }
+
+    <!--退房审批通过-->
+    function applyCheckOutHouse(houseCzqkId) {
+        $.ajax({
+            url: '/houseCzqk/applyCheckOutHouse',
+            data: {id: houseCzqkId},
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                if (data == "ok") {
+                    window.location.href = "/houseCzqk/houseCzqkList";
+                } else {
+                    alert(data);
+                }
+            }
+        })
+    }
+
 </script>
 </html>

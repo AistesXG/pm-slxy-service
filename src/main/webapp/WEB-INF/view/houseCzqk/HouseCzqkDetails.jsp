@@ -124,6 +124,20 @@
                                        value="${houseCzqk.spzt}" size="8" readonly>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">租房续租退房状态:</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="zfxztfzt" name="zfxztfzt" class="form-control"
+                                       value="${houseCzqk.zfxztfzt}" size="10" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">是否续租:</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="sfxz" name="sfxz" class="form-control"
+                                       value="${houseCzqk.sfxz}" size="10" readonly>
+                            </div>
+                        </div>
                         <div class="form-group" style="text-align: center">
                             <button
                                     type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回

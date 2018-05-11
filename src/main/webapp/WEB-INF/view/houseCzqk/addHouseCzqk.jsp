@@ -203,7 +203,7 @@
                 data: $form.serialize(),
                 success: function (data) {
                     if (data == "ok") {
-                        window.location.href = "/houseCzqk/HouseCzqkList";
+                        window.location.href = "/houseCzqk/houseCzqkList";
                     } else {
                         alert(data);
                     }

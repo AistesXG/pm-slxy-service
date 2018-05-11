@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.HouseApplyEnum;
+import com.pm.slxy.Enum.HouseCzqkStatusEnum;
+import com.pm.slxy.Enum.HouseCzqkZXTHouseStatusEnum;
 import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.House;
 import com.pm.slxy.entity.HouseCzqk;
+import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.HouseCzqkMapper;
 import com.pm.slxy.mapper.HouseMapper;
 import com.pm.slxy.mapper.TeacherMapper;
@@ -104,18 +107,18 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
             }
         }
         //如果租住状态为已租的话，更新租住情况列表中的数据
-        if(house.getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || house.getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus())) {
-        //更新房屋租出情况表中对应的数据
-        HouseCzqk houseCzqk = new HouseCzqk();
-        houseCzqk.setFjbh(oldHouse.getFjbh());
-        HouseCzqk houseCzqk1 = houseCzqkMapper.selectOne(houseCzqk);
-        houseCzqk1.setFjlh(house.getFjlh());
-        houseCzqk1.setFjbh(house.getFjbh());
-        houseCzqk1.setFjmj(house.getFjmj());
-        houseCzqkMapper.updateById(houseCzqk1);
+        if (house.getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || house.getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus()) || house.getZzzt().equals(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus())) {
+            //更新房屋租出情况表中对应的数据
+            HouseCzqk houseCzqk = new HouseCzqk();
+            houseCzqk.setFjbh(oldHouse.getFjbh());
+            HouseCzqk houseCzqk1 = houseCzqkMapper.selectOne(houseCzqk);
+            houseCzqk1.setFjlh(house.getFjlh());
+            houseCzqk1.setFjbh(house.getFjbh());
+            houseCzqk1.setFjmj(house.getFjmj());
+            houseCzqkMapper.updateById(houseCzqk1);
         }
         if (this.updateById(house)) {
-                return "ok";
+            return "ok";
         }
         return "error";
     }
@@ -151,8 +154,8 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     public String deleteHouseByIds(String ids) {
         List<String> houses = Arrays.asList(ids.split(","));
         List<House> houseList = houseMapper.selectBatchIds(houses);
-        if (houseList.get(0).getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus())) {
-            return "您删除的房子已经租出去了或者被续租了";
+        if (houseList.get(0).getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus()) ||  houseList.get(0).getZzzt().equals(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus())) {
+            return "您删除的房子已经租出去了,申请退房或者被续租了";
         }
 
         int deleteHousePub = houseMapper.deleteBatchIds(houses);
@@ -222,5 +225,29 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         }
         return modelAndView;
 
+    }
+
+    /**
+     * 退房
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public String checkOutHouse(int id) {
+        House house = houseMapper.selectById(id);
+        house.setZzzt(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus());
+        //根据房间编号查找房间租住情况表中对应的信息
+        HouseCzqk houseCzqk = new HouseCzqk();
+        houseCzqk.setFjbh(house.getFjbh());
+        HouseCzqk houseCzqk1 = houseCzqkMapper.selectOne(houseCzqk);
+        houseCzqk1.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH_NOT_THROUGH.getStatus());
+        houseCzqk1.setZfxztfzt(HouseCzqkZXTHouseStatusEnum.TUI_FANG.getStatus());
+        if (houseMapper.updateById(house) != 0) {
+            if (houseCzqkMapper.updateById(houseCzqk1) != 0) {
+                return "ok";
+            }
+        }
+        return "error";
     }
 }

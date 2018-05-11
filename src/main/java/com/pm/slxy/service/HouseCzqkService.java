@@ -72,4 +72,12 @@ public interface HouseCzqkService extends IService<HouseCzqk> {
      * @return
      */
     String reletHouse(HouseCzqk houseCzqk);
+
+    /**
+     * 审批退房通过
+     *
+     * @param id
+     * @return
+     */
+    String applyCheckOutHouse(int id);
 }

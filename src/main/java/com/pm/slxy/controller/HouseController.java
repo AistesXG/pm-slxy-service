@@ -70,5 +70,12 @@ public class HouseController {
     public ModelAndView selectHouseByStatus(ModelAndView modelAndView, String zzzt) throws Exception {
         return houseService.selectHouseByStatus(modelAndView, zzzt);
     }
+
+    @RequestMapping(value = "/checkOutHouse")
+    @SysControllerFilter(name = "checkOutHouse")
+    @ResponseBody
+    public String checkOutHouse(String id) throws Exception {
+        return houseService.checkOutHouse(Integer.parseInt(id));
+    }
 }
 

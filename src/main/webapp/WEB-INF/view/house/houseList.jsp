@@ -112,7 +112,7 @@
                                         </c:if>
                                         <c:if test="${house.zzzt == '已租'}">
                                             <button type="button" class="btn btn-sm" onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">续租</button>
-                                            <button type="button" class="btn btn-sm">退房</button>
+                                            <button type="button" class="btn btn-sm" onclick="checkOutHouse(${house.id})">退房</button>
                                         </c:if>
                                         <button type="button"
                                                 onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
@@ -206,5 +206,22 @@
         } else {
             window.location.href = "/house/selectHouseByStatus?zzzt=" + zzzt;
         }
+    }
+
+    <!--退房-->
+    function checkOutHouse(houseId) {
+        $.ajax({
+            url:'/house/checkOutHouse',
+            data:{id:houseId},
+            dataType:'json',
+            type:'post',
+            success: function (data) {
+                if(data == "ok") {
+                    window.location.href = "/houseCzqk/houseCzqkList";
+                } else {
+                    alert(data);
+                }
+            }
+        })
     }
 </script>

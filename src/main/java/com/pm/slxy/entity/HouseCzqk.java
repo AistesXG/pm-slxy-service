@@ -83,8 +83,29 @@ public class HouseCzqk implements Serializable {
      * 教师参加工作日期
      */
     private String jscjgzrq;
+    /**
+     * 租房退房和续租的状态
+     */
+    private String zfxztfzt;
+    /**
+     * 是否续租
+     */
+    private String sfxz;
 
+    public String getSfxz() {
+        return sfxz;
+    }
 
+    public void setSfxz(String sfxz) {
+        this.sfxz = sfxz;
+    }
+    public String getZfxztfzt() {
+        return zfxztfzt;
+    }
+
+    public void setZfxztfzt(String zfxztfzt) {
+        this.zfxztfzt = zfxztfzt;
+    }
     public Integer getId() {
         return id;
     }
@@ -241,6 +262,8 @@ public class HouseCzqk implements Serializable {
                 ", zzjsxm=" + zzjsxm +
                 ", bzsm=" + bzsm +
                 ", jscjgzrq=" + jscjgzrq +
+                ", zfxztfzt=" + zfxztfzt +
+                ", sfxz=" + sfxz +
                 "}";
     }
 }

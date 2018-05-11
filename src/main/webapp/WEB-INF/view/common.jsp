@@ -103,7 +103,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/houseCzqk/HouseCzqkList"><i class="fa fa-wrench fa-fw"></i>住房情况管理</a>
+                    <a href="/houseCzqk/houseCzqkList"><i class="fa fa-wrench fa-fw"></i>住房情况管理</a>
                 </li>
                 <li>
                     <a href="#"><i class=" fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>

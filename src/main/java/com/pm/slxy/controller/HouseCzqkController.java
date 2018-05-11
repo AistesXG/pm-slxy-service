@@ -25,8 +25,8 @@ public class HouseCzqkController {
     @Autowired
     private HouseCzqkService houseCzqkService;
 
-    @RequestMapping(value = "/HouseCzqkList")
-    @SysControllerFilter(name = "HouseCzqkList")
+    @RequestMapping(value = "/houseCzqkList")
+    @SysControllerFilter(name = "houseCzqkList")
     public ModelAndView selectHouseCzqks(ModelAndView modelAndView) throws Exception {
         return houseCzqkService.selectHouseCzqks(modelAndView);
     }
@@ -68,6 +68,13 @@ public class HouseCzqkController {
     @ResponseBody
     public String reletHouse(HouseCzqk houseCzqk) throws Exception {
         return houseCzqkService.reletHouse(houseCzqk);
+    }
+
+    @RequestMapping(value = "/applyCheckOutHouse")
+    @SysControllerFilter(name = "applyCheckOutHouse")
+    @ResponseBody
+    public String applyCheckOutHouse(String id) throws Exception {
+        return  houseCzqkService.applyCheckOutHouse(Integer.parseInt(id));
     }
 }
 

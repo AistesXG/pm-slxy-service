@@ -80,4 +80,12 @@ public interface HouseService extends IService<House> {
      * @return
      */
     ModelAndView selectHouseByStatus(ModelAndView modelAndView, String zzzt);
+
+    /**
+     * 退房
+     *
+     * @param id
+     * @return
+     */
+    String checkOutHouse(int id);
 }
