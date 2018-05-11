@@ -82,7 +82,7 @@
                                                 onclick="window.location.href = '/houseCzqk/selectHouseCzqkById?id=' + '${houseCzqk.id}'">
                                             查看
                                         </button>
-                                        <c:if test="${houseCzqk.spzt == '审核未通过'}">
+                                        <c:if test="${houseCzqk.spzt == '审核不通过'}">
                                         <button type="button"  id="applyPass"
                                                 class="btn btn-sm" onclick="applyThrough(${houseCzqk.id})">审批
                                         </button>

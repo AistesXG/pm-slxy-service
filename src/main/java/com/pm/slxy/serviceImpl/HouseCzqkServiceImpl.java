@@ -102,7 +102,7 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
 //        house1.setZzzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
 //        house1.setFjbz(houseCzqk.getBzsm());
 //      if (teacherMapper.updateById(teacher1) != 0 && houseMapper.updateById(house1) != 0) {
-        if(houseMapper.updateById(house1) != 0) {
+        if (houseMapper.updateById(house1) != 0) {
             if (houseCzqkMapper.insert(houseCzqk) != 0) {
                 return "ok";
             }
@@ -155,6 +155,49 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
         teacher1.setZfzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
         if (houseCzqkMapper.updateById(houseCzqk) != 0) {
             if (houseMapper.updateById(house1) != 0 && teacherMapper.updateById(teacher1) != 0) {
+                return "ok";
+            }
+        }
+        return "error";
+    }
+
+    /**
+     * 根据fjbh来查找出来租房情况表中对应的房屋信息，然后进行续租
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    @Override
+    public ModelAndView selectHouseCzqkReletById(ModelAndView modelAndView, int id) {
+        House house = houseMapper.selectById(id);
+        HouseCzqk houseCzqk1 = new HouseCzqk();
+        houseCzqk1.setFjbh(house.getFjbh());
+        HouseCzqk houseCzqk = houseCzqkMapper.selectOne(houseCzqk1);
+        if (!ObjectUtils.isEmpty(houseCzqk)) {
+            modelAndView.addObject("houseCzqk", houseCzqk);
+            modelAndView.setViewName("/houseCzqk/reletHouse");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * 续租房屋
+     *
+     * @param houseCzqk
+     * @return
+     */
+    @Override
+    public String reletHouse(HouseCzqk houseCzqk) {
+        houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH_NOT_THROUGH.getStatus());
+        House house = new House();
+        house.setFjbh(houseCzqk.getFjbh());
+        House house1 = houseMapper.selectOne(house);
+        house1.setZzzt(HouseStatusEnum.APPLY_RENTAL.getStatus());
+        if (houseMapper.updateById(house1) != 0) {
+            if (houseCzqkMapper.updateById(houseCzqk) != 0) {
                 return "ok";
             }
         }

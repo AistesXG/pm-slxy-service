@@ -56,5 +56,18 @@ public class HouseCzqkController {
     public String applyThrough(String id) throws Exception {
         return houseCzqkService.applyThrough(Integer.parseInt(id));
     }
+
+    @RequestMapping(value = "/selectHouseCzqkReletById")
+    @SysControllerFilter(name = "selectHouseCzqkReletById")
+    public ModelAndView selectHouseCzqkReletById(ModelAndView modelAndView, String id) throws Exception{
+        return houseCzqkService.selectHouseCzqkReletById(modelAndView, Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "/reletHouse")
+    @SysControllerFilter(name = "reletHouse")
+    @ResponseBody
+    public String reletHouse(HouseCzqk houseCzqk) throws Exception {
+        return houseCzqkService.reletHouse(houseCzqk);
+    }
 }
 

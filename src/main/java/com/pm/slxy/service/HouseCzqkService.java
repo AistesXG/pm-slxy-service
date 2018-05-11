@@ -55,4 +55,21 @@ public interface HouseCzqkService extends IService<HouseCzqk> {
      * @return
      */
     String applyThrough(int id);
+
+    /**
+     * 根据房间编号查找出来租住情况中的对应的房间编号的信息
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    ModelAndView selectHouseCzqkReletById(ModelAndView modelAndView, int id);
+
+    /**
+     * 续租房屋
+     *
+     * @param houseCzqk
+     * @return
+     */
+    String reletHouse(HouseCzqk houseCzqk);
 }

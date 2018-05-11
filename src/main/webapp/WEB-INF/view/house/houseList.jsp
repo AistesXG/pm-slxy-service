@@ -95,7 +95,7 @@
                                     <td>${status.count}</td>
                                     <td>${house.zzzxm}</td>
                                     <td>${house.zzzszbm}</td>
-                                    <td>${house.fjbh}</td>
+                                    <td id="fjbh">${house.fjbh}</td>
                                     <td class="center">${house.fjlh}</td>
                                     <td class="center">${house.fjmj}</td>
                                     <td class="center" style="color: red; font-weight: bolder">${house.zzzt}</td>
@@ -111,7 +111,7 @@
                                             </c:if>
                                         </c:if>
                                         <c:if test="${house.zzzt == '已租'}">
-                                            <button type="button" class="btn btn-sm">续租</button>
+                                            <button type="button" class="btn btn-sm" onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">续租</button>
                                             <button type="button" class="btn btn-sm">退房</button>
                                         </c:if>
                                         <button type="button"
