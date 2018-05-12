@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>教师信息</title>
 </head>
@@ -51,6 +51,7 @@
     #searchTeacherByDept {
         margin-top: -3px;
     }
+
     #searchTeacherByStatus {
         margin-top: -3px;
     }
@@ -93,10 +94,11 @@
                         <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                             <button type="button" id="importTeacher" onclick="displayEITeacher()"
                                     class="btn btn-primary">
-                                批量导入
+                                导入
                             </button>
-                            <button type="button" id="exportTeacher" onclick="exportTeacher()"
-                                    class="btn btn-primary">批量导出
+                            <button type="button" id="exportTeacher"
+                                    onclick="window.location.href = '/teacher/exportTeacherToExcel'"
+                                    class="btn btn-primary">导出
                             </button>
                             <button type="button" value="删除" id="deleteBtn" onclick="delAll()"
                                     class="btn btn-primary">批量删除
@@ -187,10 +189,9 @@
                 <form id="importFile" name="importFile" class="form-horizontal" method="post"
                       enctype="multipart/form-data" action="/teacher/importExcelTeacher">
                     <div class="box-body">
-                        <div>
-                            <label class="control-label">请选择要导入的Excel文件：</label>
-                            <input id="excelFile" name="excelFile" class="file-loading" type="file" accept=".xls,.xlsx">
-                            <input type="submit" value="提交">
+                        <div class="form-group">
+                            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info">没有模板</button>
+                            <button type="button" class="btn btn-info" id="importExcelToTeacher">已有模板</button>
                         </div>
                     </div>
                 </form>
@@ -209,6 +210,13 @@
         $('#dataTables-example').DataTable({
             responsive: true
         });
+
+
+        $('#importExcelToTeacher').click(function () {
+            var html = "<input id=\"excelFile\" name=\"excelFile\" class=\"file-loading\" type=\"file\" accept=\".xls,.xlsx\">\n" +
+                "<input type=\"submit\" value=\"提交\" class=\"btn btn-info\">";
+            $('#importFile').append(html);
+        })
 
     });
 
@@ -269,17 +277,18 @@
 
     function selectTeacherByDept() {
         var szbm = $('#szbm').val();
-        if(szbm == "0"){
+        if (szbm == "0") {
             window.location.href = "/teacher/teacherList";
-        }else {
+        } else {
             window.location.href = "/teacher/selectTeacherByDept?szbm=" + szbm;
         }
     }
+
     function selectTeacherByStatus() {
         var zfzt = $('#zfzt').val();
-        if(zfzt == "0"){
+        if (zfzt == "0") {
             window.location.href = "/teacher/teacherList";
-        }else {
+        } else {
             window.location.href = "/teacher/selectTeacherByStatus?zfzt=" + zfzt;
         }
     }
@@ -290,23 +299,6 @@
         $import.modal({backdrop: 'static'});
     }
 
-    <!--导出教师信息-->
-    function exportTeacher() {
-        var ids = selectId();
-        $.ajax({
-            type: "post",
-            dataType: "json",
-            url: "/teacher/exportTeacherToExcel",
-            data: {ids: ids},
-            success: function (data) {
-                console.log(data)
-                alert("导出成功!")
-            },
-            error: function () {
-                alert("导出失败!");
-            }
-        })
-    }
 
 </script>
 </html>

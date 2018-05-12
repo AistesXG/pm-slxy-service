@@ -37,4 +37,11 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
      * @return
      */
     String selectTeacherXmByJggh(String jggh);
+
+    /**
+     * 查找所有的教工编号
+     *
+     * @return
+     */
+    List<String> selectJggh();
 }

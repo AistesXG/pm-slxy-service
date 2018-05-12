@@ -25,4 +25,7 @@
     <select id="selectTeacherXmByJggh" resultType="String">
         SELECT xm FROM teacher where jggh = #{jggh}
     </select>
+    <select id="selectJggh" resultType="String">
+        SELECT jggh FROM teacher
+    </select>
 </mapper>

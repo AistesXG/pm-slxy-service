@@ -2,8 +2,14 @@ package com.pm.slxy.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.pm.slxy.entity.Teacher;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.beans.IntrospectionException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -121,4 +127,32 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     String selectTeacherXmByJggh(String jggh);
+
+    /**
+     * 导出教师信息
+     *
+     * @return
+     * @throws InvocationTargetException
+     * @throws ClassNotFoundException
+     * @throws IntrospectionException
+     * @throws ParseException
+     * @throws IllegalAccessException
+     */
+    XSSFWorkbook exportExcelInfo() throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
+
+    /**
+     * 导入
+     *
+     * @param in
+     * @param file
+     * @throws Exception
+     */
+    void importExcelInfo(InputStream in, MultipartFile file) throws Exception;
+
+    /**
+     * 查找所有的教工编号
+     *
+     * @return
+     */
+    List<String> selectJggh();
 }

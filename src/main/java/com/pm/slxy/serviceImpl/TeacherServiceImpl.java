@@ -1,25 +1,28 @@
 package com.pm.slxy.serviceImpl;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.parser.deserializer.CollectionResolveFieldDeserializer;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.TeacherRentalStatusEnum;
+import com.pm.slxy.entity.ExcelBean;
 import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.TeacherService;
-import com.pm.slxy.utils.JodaTimeUtils;
+import com.pm.slxy.utils.ExcelUtil;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.beans.IntrospectionException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.util.*;
 
 /**
  * <p>
@@ -311,20 +314,84 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         return "error";
     }
 
-//    /**
-//     * 查找教师部门教师姓名
-//     *
-//     * @param szbm
-//     * @return
-//     */
-//    @Override
-//    public String selectTeacherXmByDept(String szbm) {
-//        List<String> xmList = teacherMapper.selectTeacherXmByDept(szbm);
-//        if (!CollectionUtils.isEmpty(xmList)) {
-//            return JSON.toJSONString(xmList);
-//        }
-//        return null;
-//    }
+    @Override
+    public XSSFWorkbook exportExcelInfo() throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
+        List<Teacher> teacherList = teacherMapper.selectList(new EntityWrapper<Teacher>());
+        List<ExcelBean> excel = new ArrayList<>();
+        Map<Integer, List<ExcelBean>> map = new LinkedHashMap<>();
+        XSSFWorkbook xssfWorkbook = null;
+        //设置标题栏
+        excel.add(new ExcelBean("序号", "id", 0));
+        excel.add(new ExcelBean("姓名", "xm", 0));
+        excel.add(new ExcelBean("教工编号", "jggh", 0));
+        excel.add(new ExcelBean("性别", "xb", 0));
+        excel.add(new ExcelBean("身份证号", "sfzh", 0));
+        excel.add(new ExcelBean("出生年月", "csrq", 0));
+        excel.add(new ExcelBean("学历", "xl", 0));
+        excel.add(new ExcelBean("参加工作时间", "cjgzrq", 0));
+        excel.add(new ExcelBean("申请住房日期", "sqzfrq", 0));
+        excel.add(new ExcelBean("所在部门", "szbm", 0));
+        excel.add(new ExcelBean("籍贯", "jg", 0));
+        excel.add(new ExcelBean("租房状态", "zfzt", 0));
+        map.put(0, excel);
+        String sheetName = "teacher";
+        //调用ExcelUtil的方法
+        xssfWorkbook = ExcelUtil.createExcelFile(Teacher.class, teacherList, map, sheetName);
+        return xssfWorkbook;
+    }
+
+    /**
+     * 导入教师信息
+     *
+     * @param in
+     * @param file
+     * @throws Exception
+     */
+    @Override
+    public void importExcelInfo(InputStream in, MultipartFile file) throws Exception {
+        List<List<Object>> listob = ExcelUtil.getBankListByExcel(in, file.getOriginalFilename());
+        List<Teacher> teacherList = new ArrayList<>();
+        List<String> jgghList = this.selectJggh();
+        for (int i = 0; i < listob.size(); i++) {
+            List<Object> ob = listob.get(i);
+            Teacher teacher = new Teacher();
+            teacher.setXm(String.valueOf(ob.get(1)));
+            teacher.setJggh(String.valueOf(ob.get(2)));
+            teacher.setXb(String.valueOf(ob.get(3)));
+            teacher.setSfzh(String.valueOf(ob.get(4)));
+            teacher.setCsrq(String.valueOf(ob.get(5)));
+            teacher.setXl(String.valueOf(ob.get(6)));
+            teacher.setCjgzrq(String.valueOf(ob.get(7)));
+            teacher.setSqzfrq(String.valueOf(ob.get(8)));
+            teacher.setSzbm(String.valueOf(ob.get(9)));
+            teacher.setJg(String.valueOf(ob.get(10)));
+            teacher.setZfzt(String.valueOf(ob.get(11)));
+            teacherList.add(teacher);
+            //判断如果有相同的编号则不导入
+            for(String jggh :jgghList) {
+                for(Teacher teacher1 : teacherList) {
+                    if (teacher1.getJggh().equals(jggh)) {
+                        teacherList.remove(teacher1);
+                        break;
+                    }
+                }
+            }
+        }
+        this.insertBatch(teacherList);
+    }
+
+    /**
+     * 查找所有的教工编号
+     * @return
+     */
+    @Override
+    public List<String> selectJggh() {
+        List<String> jgghList = teacherMapper.selectJggh();
+        if(!CollectionUtils.isEmpty(jgghList)) {
+            return jgghList;
+        }
+        return null;
+    }
 
     /**
      * 根据字段查找教师信息的方法
