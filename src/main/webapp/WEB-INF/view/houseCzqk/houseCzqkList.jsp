@@ -90,16 +90,16 @@
                                                         class="btn btn-sm"
                                                         onclick="applyCheckOutHouse(${houseCzqk.id})">审批退房
                                                 </button>
-                                                <button type="button" onclick=""
-                                                        class="btn btn-sm" onclick="">不审批
+                                                <button type="button"
+                                                        class="btn btn-sm" onclick="notApply(${houseCzqk.id})">不审批
                                                 </button>
                                             </c:if>
                                             <c:if test="${houseCzqk.zfxztfzt == '租房' || houseCzqk.zfxztfzt == '续租'}">
                                             <button type="button"
                                                     class="btn btn-sm" onclick="applyThrough(${houseCzqk.id})">审批
                                             </button>
-                                            <button type="button" onclick=""
-                                                    class="btn btn-sm" onclick="">不审批
+                                            <button type="button"
+                                                    class="btn btn-sm" onclick="notApply(${houseCzqk.id})">不审批
                                             </button>
                                             </c:if>
                                         </c:if>
@@ -117,6 +117,44 @@
         </div>
     </div>
 </div>
+
+<!-- 弹出窗内容 -->
+<div class="modal" id="content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">房屋详情</h4>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="false" role="form" class="form-horizontal" id="addForm" action="/notApply/addNotApply">
+                    <br>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">申请类型:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="status" class="form-control" id="status" value="" size="10" readonly>
+                            <span id="msg"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">不审批原因:</label>
+                        <div class="col-sm-7">
+                            <textarea cols="5" rows="5" name="reason" class="form-control" id="reason"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="addNotApply()">提交</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <!-- DataTables JavaScript -->
 <script src="/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
@@ -149,7 +187,7 @@
     <!--退房审批通过-->
     function applyCheckOutHouse(houseCzqkId) {
         $.ajax({
-            url: '/houseCzqk/applyCheckOutHouse',
+            url: '/houseCzqk/selectStatusById',
             data: {id: houseCzqkId},
             dataType: 'json',
             type: 'post',
@@ -163,5 +201,36 @@
         })
     }
 
+    <!--给input赋值-->
+    function notApply(houseCzqkId) {
+        var $content = $('#content');
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/notApply/selectStatusById",
+            data: {"id": houseCzqkId},
+            success: function (data) {
+                var object = $.parseJSON(data);
+                $("input[id=status]").val(object.zfxztfzt);
+            }
+        });
+        $content.modal({backdrop: 'static'});
+    }
+
+    function addNotApply() {
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: $('#addForm').attr('action'),
+            data: $('#addForm').serialize(),
+            success: function (data) {
+                if (data == "ok") {
+                    window.location.href = "/houseCzqk/houseCzqkList";
+                }else {
+                    alert("error");
+                }
+            }
+        });
+    }
 </script>
 </html>
