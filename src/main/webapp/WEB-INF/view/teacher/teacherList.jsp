@@ -190,7 +190,7 @@
                       enctype="multipart/form-data" action="/teacher/importExcelTeacher">
                     <div class="box-body">
                         <div class="form-group">
-                            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info">没有模板</button>
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<button type="button" class="btn btn-info" onclick="window.location.href ='../../resources/temp/teacher.xlsx'">没有模板</button>
                             <button type="button" class="btn btn-info" id="importExcelToTeacher">已有模板</button>
                         </div>
                     </div>
