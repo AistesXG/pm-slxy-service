@@ -11,6 +11,7 @@
             position: absolute;
             top: 2px;
         }
+
         .red {
             color: red;
         }
@@ -23,7 +24,8 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">续租房屋<label style="font-size:20px;color: red;">下拉列表中红色的表示未选择的，黑色的表示数据库中的数据</label></h1>
+                <h1 class="page-header">续租房屋<label
+                        style="font-size:20px;color: red;">下拉列表中红色的表示未选择的，黑色的表示数据库中的数据</label></h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="row">
@@ -42,13 +44,15 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">房间编号:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" name="fjbh" class="form-control" value="${houseCzqk.fjbh}" size="20" readonly>
+                                <input type="text" name="fjbh" class="form-control" value="${houseCzqk.fjbh}" size="20"
+                                       readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">申请租住日期:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" id="sqzzrq" name="sqzzrq" class="form-control laydate-icon" value="${houseCzqk.sqzzrq}"
+                                <input type="text" id="sqzzrq" name="sqzzrq" class="form-control laydate-icon"
+                                       value="${houseCzqk.sqzzrq}"
                                        size="10" readonly>
                             </div>
                         </div>
@@ -73,7 +77,8 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住到期日期:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" id="zzdqrq" name="zzdqrq" class="form-control laydate-icon" value="${houseCzqk.zzdqrq}"
+                                <input type="text" id="zzdqrq" name="zzdqrq" class="form-control laydate-icon"
+                                       value="${houseCzqk.zzdqrq}"
                                        readonly>
                             </div>
                         </div>
@@ -102,7 +107,8 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">特殊房间系数:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" id="tszzxs" name="tszzxs" class="form-control" value="${houseCzqk.tszzxs}" size="8">
+                                <input type="text" id="tszzxs" name="tszzxs" class="form-control"
+                                       value="${houseCzqk.tszzxs}" size="8">
                             </div>
                         </div>
                         <div class="form-group">
@@ -126,33 +132,37 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师所在部门:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" id="zzjsszbm" name="zzjsszbm" class="form-control" value="${houseCzqk.zzjsszbm}" size="30" readonly>
+                                <input type="text" id="zzjsszbm" name="zzjsszbm" class="form-control"
+                                       value="${houseCzqk.zzjsszbm}" size="30" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师编号:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" id="zzjsbh" name="zzjsbh" class="form-control" value="${houseCzqk.zzjsbh}" size="6" readonly >
+                                <input type="text" id="zzjsbh" name="zzjsbh" class="form-control"
+                                       value="${houseCzqk.zzjsbh}" size="6" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师姓名:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" id="zzjsxm" name="zzjsxm" class="form-control" value="${houseCzqk.zzjsxm}" size="10" readonly>
+                                <input type="text" id="zzjsxm" name="zzjsxm" class="form-control"
+                                       value="${houseCzqk.zzjsxm}" size="10" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">备注:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <textarea cols="5" rows="5" name="bzsm" class="form-control" id="bzsm">${houseCzqk.bzsm}</textarea>
+                                <textarea cols="5" rows="5" name="bzsm" class="form-control"
+                                          id="bzsm">${houseCzqk.bzsm}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                        <label class="col-sm-6 control-label">教师参加工作时间:<span class="must">*</span></label>
-                        <div class="col-sm-6">
-                        <input type="text" id="jscjgzrq" name="jscjgzrq" class="form-control  laydate-icon"
-                        value="${houseCzqk.jscjgzrq}" size="10" readonly>
-                        </div>
+                            <label class="col-sm-6 control-label">教师参加工作时间:<span class="must">*</span></label>
+                            <div class="col-sm-6">
+                                <input type="text" id="jscjgzrq" name="jscjgzrq" class="form-control  laydate-icon"
+                                       value="${houseCzqk.jscjgzrq}" size="10" readonly>
+                            </div>
                         </div>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input

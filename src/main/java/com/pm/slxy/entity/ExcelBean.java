@@ -4,7 +4,7 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 
 import java.io.Serializable;
 
-public class ExcelBean implements Serializable{
+public class ExcelBean implements Serializable {
     private String headTextName; //列头（标题）名
     private String propertyName; //对应字段名
     private Integer cols; //合并单元格数
@@ -42,12 +42,15 @@ public class ExcelBean implements Serializable{
     }
 
     private XSSFCellStyle cellStyle;
-    public ExcelBean(){
+
+    public ExcelBean() {
     }
-    public ExcelBean(String headTextName, String propertyName){
+
+    public ExcelBean(String headTextName, String propertyName) {
         this.headTextName = headTextName;
         this.propertyName = propertyName;
     }
+
     public ExcelBean(String headTextName, String propertyName, Integer cols) {
         super();
         this.headTextName = headTextName;

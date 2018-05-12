@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>公用房屋详情</title>
     <!-- DataTables CSS -->
@@ -56,14 +56,16 @@
                                     <c:choose>
                                         <c:when test="${housePub.fjsyzt == '空闲'}">
                                             <button class="btn btn-info housePubDetail"
-                                                    onclick="housePubDetail(${housePub.id})" ><img
-                                                    src="/resources/img/fwhb.jpg"></button><br>
+                                                    onclick="housePubDetail(${housePub.id})"><img
+                                                    src="/resources/img/fwhb.jpg"></button>
+                                            <br>
                                             ${housePub.fjbh}
                                         </c:when>
                                         <c:otherwise>
                                             <button class="btn btn-info housePubDetail"
                                                     onclick="housePubDetail(${housePub.id})"><img
-                                                    src="/resources/img/fw.jpg"></button><br>
+                                                    src="/resources/img/fw.jpg"></button>
+                                            <br>
                                             ${housePub.fjbh}
                                         </c:otherwise>
                                     </c:choose>

@@ -7,7 +7,7 @@
 <head>
     <title>SLXY HOUSE MANAGER SYSTEM LOGIN VIEW</title>
     <link rel="stylesheet" href="${ctx}/resources/css/style.css">
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords"

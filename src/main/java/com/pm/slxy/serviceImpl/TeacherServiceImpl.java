@@ -368,8 +368,8 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             teacher.setZfzt(String.valueOf(ob.get(11)));
             teacherList.add(teacher);
             //判断如果有相同的编号则不导入
-            for(String jggh :jgghList) {
-                for(Teacher teacher1 : teacherList) {
+            for (String jggh : jgghList) {
+                for (Teacher teacher1 : teacherList) {
                     if (teacher1.getJggh().equals(jggh)) {
                         teacherList.remove(teacher1);
                         break;
@@ -382,12 +382,13 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
 
     /**
      * 查找所有的教工编号
+     *
      * @return
      */
     @Override
     public List<String> selectJggh() {
         List<String> jgghList = teacherMapper.selectJggh();
-        if(!CollectionUtils.isEmpty(jgghList)) {
+        if (!CollectionUtils.isEmpty(jgghList)) {
             return jgghList;
         }
         return null;

@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>教师租房房屋详情</title>
     <!-- DataTables CSS -->
@@ -51,10 +51,10 @@
                     <div class="panel-heading">
                         已拥有的教师租房房屋
                         <select name="zzzt" class="form-control-static" id="zzzt">
-                        <option value="0"></option>
-                        <option value="未租">未租</option>
-                        <option value="已租">已租</option>
-                    </select>
+                            <option value="0"></option>
+                            <option value="未租">未租</option>
+                            <option value="已租">已租</option>
+                        </select>
                         <button type="button" id="selectHouseByStatus" onclick="selectHouseByStatus()"
                                 class="btn btn-primary">按租住状态搜索
                         </button>
@@ -104,15 +104,20 @@
                                     <td align="right">
                                         <c:if test="${house.zzzt == '未租'}">
                                             <c:if test="${house.apply == '未被申请'}">
-                                            <button type="button" class="btn btn-sm"
-                                                    onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
-                                                申请
-                                            </button>
+                                                <button type="button" class="btn btn-sm"
+                                                        onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
+                                                    申请
+                                                </button>
                                             </c:if>
                                         </c:if>
                                         <c:if test="${house.zzzt == '已租'}">
-                                            <button type="button" class="btn btn-sm" onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">续租</button>
-                                            <button type="button" class="btn btn-sm" onclick="checkOutHouse(${house.id})">退房</button>
+                                            <button type="button" class="btn btn-sm"
+                                                    onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">
+                                                续租
+                                            </button>
+                                            <button type="button" class="btn btn-sm"
+                                                    onclick="checkOutHouse(${house.id})">退房
+                                            </button>
                                         </c:if>
                                         <button type="button"
                                                 onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
@@ -211,12 +216,12 @@
     <!--退房-->
     function checkOutHouse(houseId) {
         $.ajax({
-            url:'/house/checkOutHouse',
-            data:{id:houseId},
-            dataType:'json',
-            type:'post',
+            url: '/house/checkOutHouse',
+            data: {id: houseId},
+            dataType: 'json',
+            type: 'post',
             success: function (data) {
-                if(data == "ok") {
+                if (data == "ok") {
                     window.location.href = "/houseCzqk/houseCzqkList";
                 } else {
                     alert(data);

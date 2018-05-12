@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>用户信息</title>
 </head>
@@ -56,12 +56,12 @@
                     <div class="panel-heading">
                         已注册的用户
                         <c:if test="${sessionScope.admins.type eq '系统管理员'}">
-                        <button type="button" id="deleteBtn" onclick="delAll()"
-                                class="btn btn-primary">批量删除
-                        </button>
-                        <button type="button" id="addAdminBtn" onclick="window.location.href = '/jump/jumpAddAdmin'"
-                                class="btn btn-primary">添加用户
-                        </button>
+                            <button type="button" id="deleteBtn" onclick="delAll()"
+                                    class="btn btn-primary">批量删除
+                            </button>
+                            <button type="button" id="addAdminBtn" onclick="window.location.href = '/jump/jumpAddAdmin'"
+                                    class="btn btn-primary">添加用户
+                            </button>
                         </c:if>
                     </div>
                     <!-- /.panel-heading -->
@@ -71,8 +71,9 @@
                             <thead>
                             <tr>
                                 <c:if test="${sessionScope.admins.type eq '系统管理员'}">
-                                <th><input type="checkbox" name="checkAll" id="checkAll" value="1" onclick="checkt()"/>
-                                </th>
+                                    <th><input type="checkbox" name="checkAll" id="checkAll" value="1"
+                                               onclick="checkt()"/>
+                                    </th>
                                 </c:if>
                                 <th>序号</th>
                                 <th>用户名</th>
@@ -80,7 +81,7 @@
                                 <th>电话号码</th>
                                 <th>角色</th>
                                 <c:if test="${sessionScope.admins.type eq '系统管理员'}">
-                                <th>操作</th>
+                                    <th>操作</th>
                                 </c:if>
                             </tr>
                             </thead>
@@ -89,8 +90,8 @@
                             <c:forEach items="${adminList}" var="admin" varStatus="status">
                                 <tr class="gradeU">
                                     <c:if test="${sessionScope.admins.type eq '系统管理员'}">
-                                    <td><input type="checkbox" name="uid" id="uid" value="${admin.id}"
-                                               style="margin-right: 8px;"></td>
+                                        <td><input type="checkbox" name="uid" id="uid" value="${admin.id}"
+                                                   style="margin-right: 8px;"></td>
                                     </c:if>
                                     <td>${status.count}</td>
                                     <td>${admin.user}</td>
@@ -98,13 +99,13 @@
                                     <td class="center">${admin.phone}</td>
                                     <td class="center">${admin.type}</td>
                                     <c:if test="${sessionScope.admins.type eq '系统管理员'}">
-                                    <td class="center">
-                                        <button type="button" id="updateAdminBtn"
-                                                onclick="window.location.href='/admin/selectAdmin?id='+${admin.id}"
-                                                class="btn btn-sm">编辑
-                                        </button>
+                                        <td class="center">
+                                            <button type="button" id="updateAdminBtn"
+                                                    onclick="window.location.href='/admin/selectAdmin?id='+${admin.id}"
+                                                    class="btn btn-sm">编辑
+                                            </button>
 
-                                    </td>
+                                        </td>
                                     </c:if>
                                 </tr>
                             </c:forEach>

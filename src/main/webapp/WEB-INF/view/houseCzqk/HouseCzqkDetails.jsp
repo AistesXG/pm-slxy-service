@@ -28,33 +28,38 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">房间编号:</label>
                             <div class="col-sm-6">
-                                <input type="text" name="fjbh" class="form-control" value="${houseCzqk.fjbh}" size="20"  readonly>
+                                <input type="text" name="fjbh" class="form-control" value="${houseCzqk.fjbh}" size="20"
+                                       readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">申请租住日期:</label>
                             <div class="col-sm-6">
-                                <input type="text" id="sqzzrq" name="sqzzrq" class="form-control" value="${houseCzqk.sqzzrq}""
-                                       size="10" readonly>
+                                <input type="text" id="sqzzrq" name="sqzzrq" class="form-control"
+                                       value="${houseCzqk.sqzzrq}""
+                                size="10" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住年限:</label>
                             <div class="col-sm-6">
-                                <input type="text" name="zznx" id="zznx" class="form-control" value="${houseCzqk.zznx}" readonly>
+                                <input type="text" name="zznx" id="zznx" class="form-control" value="${houseCzqk.zznx}"
+                                       readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住到期日期:</label>
                             <div class="col-sm-6">
-                                <input type="text" id="zzdqrq" name="zzdqrq" class="form-control" value="${houseCzqk.zzdqrq}"
+                                <input type="text" id="zzdqrq" name="zzdqrq" class="form-control"
+                                       value="${houseCzqk.zzdqrq}"
                                        readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">房间租住类型:</label>
                             <div class="col-sm-6">
-                                <input type="text" name="fjzzlx" id="fjzzlx" class="form-control" value="${houseCzqk.fjzzlx}" readonly>
+                                <input type="text" name="fjzzlx" id="fjzzlx" class="form-control"
+                                       value="${houseCzqk.fjzzlx}" readonly>
 
                             </div>
                         </div>
@@ -68,46 +73,53 @@
                         <div class="form-group">
                             <label class="col-sm-6 control-label">特殊房间系数:</label>
                             <div class="col-sm-6">
-                                <input type="text" id="tszzxs" name="tszzxs" class="form-control" value="${houseCzqk.tszzxs}" size="8" readonly>
+                                <input type="text" id="tszzxs" name="tszzxs" class="form-control"
+                                       value="${houseCzqk.tszzxs}" size="8" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">是否属于双职工租住一个房子:<span class="must">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" name="sfszg" id="sfszg" value="${houseCzqk.sfszg}" class="form-control" readonly>
+                                <input type="text" name="sfszg" id="sfszg" value="${houseCzqk.sfszg}"
+                                       class="form-control" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">是否带小孩:</label>
                             <div class="col-sm-6">
-                                <input type="text" name="sfcxqdxh"  id="sfcxqdxh" value="${houseCzqk.sfcxqdxh}" class="form-control" readonly/>
+                                <input type="text" name="sfcxqdxh" id="sfcxqdxh" value="${houseCzqk.sfcxqdxh}"
+                                       class="form-control" readonly/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师所在部门:</label>
                             <div class="col-sm-6">
-                                <input type="text" name="zzjsszbm" id="zzjsszbm" class="form-control" value="${houseCzqk.zzjsszbm}" readonly>
+                                <input type="text" name="zzjsszbm" id="zzjsszbm" class="form-control"
+                                       value="${houseCzqk.zzjsszbm}" readonly>
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师编号:</label>
                             <div class="col-sm-6">
-                                <input type="text" name="zzjsbh" id="zzjsbh" class="form-control" value="${houseCzqk.zzjsbh}" readonly>
+                                <input type="text" name="zzjsbh" id="zzjsbh" class="form-control"
+                                       value="${houseCzqk.zzjsbh}" readonly>
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">租住教师姓名:</label>
                             <div class="col-sm-6">
-                                <input type="text" name="zzjsxm" id="zzjsxm" class="form-control" value="${houseCzqk.zzjsxm}" readonly>
+                                <input type="text" name="zzjsxm" id="zzjsxm" class="form-control"
+                                       value="${houseCzqk.zzjsxm}" readonly>
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">备注:</label>
                             <div class="col-sm-6">
-                                <textarea  rows="2" name="bzsm" class="form-control" id="bzsm" readonly>${houseCzqk.bzsm}</textarea>
+                                <textarea rows="2" name="bzsm" class="form-control" id="bzsm"
+                                          readonly>${houseCzqk.bzsm}</textarea>
                             </div>
                         </div>
                         <div class="form-group">

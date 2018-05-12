@@ -8,9 +8,8 @@ import java.lang.annotation.*;
  */
 @Documented
 @Target(
-        { ElementType.METHOD, ElementType.TYPE })
+        {ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SysControllerFilter
-{
+public @interface SysControllerFilter {
     String name();
 }

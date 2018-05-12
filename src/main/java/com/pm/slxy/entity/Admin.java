@@ -2,11 +2,12 @@ package com.pm.slxy.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * <p>
  * </p>
  *
  * @author 付荣刚
@@ -91,12 +92,12 @@ public class Admin implements Serializable {
     @Override
     public String toString() {
         return "Admin{" +
-        ", id=" + id +
-        ", user=" + user +
-        ", pass=" + pass +
-        ", email=" + email +
-        ", phone=" + phone +
-        ", type=" + type +
-        "}";
+                ", id=" + id +
+                ", user=" + user +
+                ", pass=" + pass +
+                ", email=" + email +
+                ", phone=" + phone +
+                ", type=" + type +
+                "}";
     }
 }

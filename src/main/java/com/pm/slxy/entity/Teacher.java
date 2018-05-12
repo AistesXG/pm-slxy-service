@@ -2,11 +2,12 @@ package com.pm.slxy.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * <p>
  * </p>
  *
  * @author 付荣刚123
@@ -163,18 +164,18 @@ public class Teacher implements Serializable {
     @Override
     public String toString() {
         return "Teacher{" +
-        ", id=" + id +
-        ", xm=" + xm +
-        ", jggh=" + jggh +
-        ", xb=" + xb +
-        ", sfzh=" + sfzh +
-        ", csrq=" + csrq +
-        ", xl=" + xl +
-        ", cjgzrq=" + cjgzrq +
-        ", sqzfrq=" + sqzfrq +
-        ", szbm=" + szbm +
-        ", jg=" + jg +
-        ", zfzt=" + zfzt +
-        "}";
+                ", id=" + id +
+                ", xm=" + xm +
+                ", jggh=" + jggh +
+                ", xb=" + xb +
+                ", sfzh=" + sfzh +
+                ", csrq=" + csrq +
+                ", xl=" + xl +
+                ", cjgzrq=" + cjgzrq +
+                ", sqzfrq=" + sqzfrq +
+                ", szbm=" + szbm +
+                ", jg=" + jg +
+                ", zfzt=" + zfzt +
+                "}";
     }
 }

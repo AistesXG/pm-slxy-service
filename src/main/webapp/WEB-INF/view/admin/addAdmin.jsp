@@ -4,7 +4,7 @@
 <html>
 <head>
 
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>添加用户</title>
 </head>

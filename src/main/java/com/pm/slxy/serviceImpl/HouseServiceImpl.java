@@ -9,7 +9,6 @@ import com.pm.slxy.Enum.HouseCzqkZXTHouseStatusEnum;
 import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.House;
 import com.pm.slxy.entity.HouseCzqk;
-import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.HouseCzqkMapper;
 import com.pm.slxy.mapper.HouseMapper;
 import com.pm.slxy.mapper.TeacherMapper;
@@ -154,7 +153,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     public String deleteHouseByIds(String ids) {
         List<String> houses = Arrays.asList(ids.split(","));
         List<House> houseList = houseMapper.selectBatchIds(houses);
-        if (houseList.get(0).getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus()) ||  houseList.get(0).getZzzt().equals(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus())) {
+        if (houseList.get(0).getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus())) {
             return "您删除的房子已经租出去了,申请退房或者被续租了";
         }
 

@@ -2,11 +2,12 @@ package com.pm.slxy.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * <p>
  * </p>
  *
  * @author 付荣刚123
@@ -49,9 +50,9 @@ public class NotApply implements Serializable {
     @Override
     public String toString() {
         return "NotApply{" +
-        ", id=" + id +
-        ", status=" + status +
-        ", reason=" + reason +
-        "}";
+                ", id=" + id +
+                ", status=" + status +
+                ", reason=" + reason +
+                "}";
     }
 }

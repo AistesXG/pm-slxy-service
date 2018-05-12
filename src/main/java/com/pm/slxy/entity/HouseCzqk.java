@@ -99,6 +99,7 @@ public class HouseCzqk implements Serializable {
     public void setSfxz(String sfxz) {
         this.sfxz = sfxz;
     }
+
     public String getZfxztfzt() {
         return zfxztfzt;
     }
@@ -106,6 +107,7 @@ public class HouseCzqk implements Serializable {
     public void setZfxztfzt(String zfxztfzt) {
         this.zfxztfzt = zfxztfzt;
     }
+
     public Integer getId() {
         return id;
     }

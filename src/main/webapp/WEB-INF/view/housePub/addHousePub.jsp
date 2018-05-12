@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>添加公用房屋信息</title>
 </head>
@@ -51,26 +51,26 @@
                             </div>
                         </div>
                         <div class="form-group">
-                        <label class="col-sm-3 control-label">使用类型:<span class="must">*</span></label>
-                        <div class="col-sm-9">
-                            <select name="fjsylx" class="form-control">
-                                <option value="">---请选择房间类型---</option>
-                                <option value="普通教室">普通教室</option>
-                                <option value="办公室">办公室</option>
-                                <option value="库房">库房</option>
-                            </select>
+                            <label class="col-sm-3 control-label">使用类型:<span class="must">*</span></label>
+                            <div class="col-sm-9">
+                                <select name="fjsylx" class="form-control">
+                                    <option value="">---请选择房间类型---</option>
+                                    <option value="普通教室">普通教室</option>
+                                    <option value="办公室">办公室</option>
+                                    <option value="库房">库房</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<select name="fjsybm" class="form-control" id="fjsybm">--%>
-                                    <%--<option value="">---请选择部门---</option>--%>
-                                    <%--<c:forEach items="${departments}" var="dept">--%>
-                                        <%--<option value="${dept}">${dept}</option>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-3 control-label">使用部门:<span class="must">*</span></label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <%--<select name="fjsybm" class="form-control" id="fjsybm">--%>
+                        <%--<option value="">---请选择部门---</option>--%>
+                        <%--<c:forEach items="${departments}" var="dept">--%>
+                        <%--<option value="${dept}">${dept}</option>--%>
+                        <%--</c:forEach>--%>
+                        <%--</select>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">备注:<span class="must">*</span></label>
@@ -80,7 +80,9 @@
                         </div>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
+                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+                                type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回
+                        </button>
                         </div>
                     </form>
                 </div>

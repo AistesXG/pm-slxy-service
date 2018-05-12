@@ -2,11 +2,12 @@ package com.pm.slxy.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * <p>
  * </p>
  *
  * @author 付荣刚123
@@ -175,19 +176,19 @@ public class HouseHistory implements Serializable {
     @Override
     public String toString() {
         return "HouseHistory{" +
-        ", id=" + id +
-        ", fjlh=" + fjlh +
-        ", fjbh=" + fjbh +
-        ", fjzzlx=" + fjzzlx +
-        ", fjmj=" + fjmj +
-        ", sqzzrq=" + sqzzrq +
-        ", zzdqrq=" + zzdqrq +
-        ", sqtzrq=" + sqtzrq +
-        ", sfxz=" + sfxz +
-        ", sfcxqdxh=" + sfcxqdxh +
-        ", zzjsxm=" + zzjsxm +
-        ", zzjsbh=" + zzjsbh +
-        ", zzjsszbm=" + zzjsszbm +
-        "}";
+                ", id=" + id +
+                ", fjlh=" + fjlh +
+                ", fjbh=" + fjbh +
+                ", fjzzlx=" + fjzzlx +
+                ", fjmj=" + fjmj +
+                ", sqzzrq=" + sqzzrq +
+                ", zzdqrq=" + zzdqrq +
+                ", sqtzrq=" + sqtzrq +
+                ", sfxz=" + sfxz +
+                ", sfcxqdxh=" + sfcxqdxh +
+                ", zzjsxm=" + zzjsxm +
+                ", zzjsbh=" + zzjsbh +
+                ", zzjsszbm=" + zzjsszbm +
+                "}";
     }
 }

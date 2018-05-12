@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>修改教师房屋信息</title>
 </head>
@@ -35,37 +35,40 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">租住者姓名:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="zzzxm" class="form-control" id="zzzxm" value="${house.zzzxm}" size="10">
+                                <input type="text" name="zzzxm" class="form-control" id="zzzxm" value="${house.zzzxm}"
+                                       size="10">
                                 <span id="msg"></span>
                             </div>
                         </div>
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">租住者所在部门:<span class="must">*</span></label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<select name="zzzszbm" class="form-control" id="zzzszbm">--%>
-                                    <%--<c:set value="${house.zzzszbm}" var='deptName'/>--%>
-                                    <%--<c:forEach items="${departments}" var="dept">--%>
-                                        <%--<c:if test="${dept eq deptName}">--%>
-                                            <%--<option value="${dept}" selected>${dept}</option>--%>
-                                        <%--</c:if>--%>
-                                        <%--<c:if test="${dept != deptName}">--%>
-                                            <%--<option value="${dept}">${dept}</option>--%>
-                                        <%--</c:if>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
+                        <%--<label class="col-sm-3 control-label">租住者所在部门:<span class="must">*</span></label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <%--<select name="zzzszbm" class="form-control" id="zzzszbm">--%>
+                        <%--<c:set value="${house.zzzszbm}" var='deptName'/>--%>
+                        <%--<c:forEach items="${departments}" var="dept">--%>
+                        <%--<c:if test="${dept eq deptName}">--%>
+                        <%--<option value="${dept}" selected>${dept}</option>--%>
+                        <%--</c:if>--%>
+                        <%--<c:if test="${dept != deptName}">--%>
+                        <%--<option value="${dept}">${dept}</option>--%>
+                        <%--</c:if>--%>
+                        <%--</c:forEach>--%>
+                        <%--</select>--%>
 
-                            <%--</div>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">房间编号:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" id="fjbh" name="fjbh" class="form-control" value="${house.fjbh}" size="20">
+                                <input type="text" id="fjbh" name="fjbh" class="form-control" value="${house.fjbh}"
+                                       size="20">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">房间楼号:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" id="fjlh" name="fjlh" class="form-control" value="${house.fjlh}" size="20">
+                                <input type="text" id="fjlh" name="fjlh" class="form-control" value="${house.fjlh}"
+                                       size="20">
                             </div>
                         </div>
                         <div class="form-group">
@@ -77,24 +80,28 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">租住状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" id="zzzt" name="zzzt" class="form-control" value="${house.zzzt}" size="4" readonly>
+                                <input type="text" id="zzzt" name="zzzt" class="form-control" value="${house.zzzt}"
+                                       size="4" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">申请状态:<span class="must">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" id="apply" name="apply" class="form-control" value="${house.apply}" size="4" readonly>
+                                <input type="text" id="apply" name="apply" class="form-control" value="${house.apply}"
+                                       size="4" readonly>
                             </div>
                         </div>
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">房间备注:<span class="must">*</span></label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz">${house.fjbz}</textarea>--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-3 control-label">房间备注:<span class="must">*</span></label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <%--<textarea cols="5" rows="5" name="fjbz" class="form-control" id="fjbz">${house.fjbz}</textarea>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
                         <div class="form-group" style="text-align: center">
                             <input type="submit" value="提交" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
+                                type="reset" value="重置" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+                                type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回
+                        </button>
                         </div>
                     </form>
                 </div>

@@ -2,11 +2,12 @@ package com.pm.slxy.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * <p>
  * </p>
  *
  * @author 付荣刚123
@@ -115,14 +116,14 @@ public class HousePub implements Serializable {
     @Override
     public String toString() {
         return "HousePub{" +
-        ", id=" + id +
-        ", fjlh=" + fjlh +
-        ", fjbh=" + fjbh +
-        ", fjmj=" + fjmj +
-        ", fjsyzt=" + fjsyzt +
-        ", fjsylx=" + fjsylx +
-        ", fjsybm=" + fjsybm +
-        ", fjbz=" + fjbz +
-        "}";
+                ", id=" + id +
+                ", fjlh=" + fjlh +
+                ", fjbh=" + fjbh +
+                ", fjmj=" + fjmj +
+                ", fjsyzt=" + fjsyzt +
+                ", fjsylx=" + fjsylx +
+                ", fjsybm=" + fjsybm +
+                ", fjbz=" + fjbz +
+                "}";
     }
 }

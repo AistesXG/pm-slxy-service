@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * controller注解
+ *
  * @author furg@senthink.com
  * @date 2018/4/4
  */
@@ -20,13 +21,11 @@ public class AuthoritySys extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, javax.servlet.http.HttpServletResponse response, Object handler) throws Exception {
-        if (handler instanceof HandlerMethod)
-        {
+        if (handler instanceof HandlerMethod) {
             SysControllerFilter sysControllerFilter = ((HandlerMethod) handler).getMethodAnnotation(SysControllerFilter.class);
 
             //controller有添加SysControllerFilter注解
-            if (sysControllerFilter != null)
-            {
+            if (sysControllerFilter != null) {
                 Admin admin = (Admin) request.getSession().getAttribute("admins");
                 if (admin != null) {
                     return true;

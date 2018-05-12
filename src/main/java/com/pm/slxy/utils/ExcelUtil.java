@@ -26,16 +26,17 @@ import java.util.List;
 import java.util.Map;
 
 public class ExcelUtil {
-    private final static String excel2003L =".xls";    //2003- 版本的excel
-    private final static String excel2007U =".xlsx";   //2007+ 版本的excel
+    private final static String excel2003L = ".xls";    //2003- 版本的excel
+    private final static String excel2007U = ".xlsx";   //2007+ 版本的excel
+
     /**
      * Excel导入
      */
-    public static  List<List<Object>> getBankListByExcel(InputStream in, String fileName) throws Exception{
+    public static List<List<Object>> getBankListByExcel(InputStream in, String fileName) throws Exception {
         List<List<Object>> list = null;
         //创建Excel工作薄
-        Workbook work = getWorkbook(in,fileName);
-        if(null == work){
+        Workbook work = getWorkbook(in, fileName);
+        if (null == work) {
             throw new Exception("创建Excel工作薄为空！");
         }
         Sheet sheet = null;
@@ -45,14 +46,18 @@ public class ExcelUtil {
         //遍历Excel中所有的sheet
         for (int i = 0; i < work.getNumberOfSheets(); i++) {
             sheet = work.getSheetAt(i);
-            if(sheet==null){continue;}
+            if (sheet == null) {
+                continue;
+            }
             //遍历当前sheet中的所有行
             //包涵头部，所以要小于等于最后一列数,这里也可以在初始值加上头部行数，以便跳过头部
             for (int j = sheet.getFirstRowNum(); j <= sheet.getLastRowNum(); j++) {
                 //读取一行
                 row = sheet.getRow(j);
                 //去掉空行和表头
-                if(row==null||row.getFirstCellNum()==j){continue;}
+                if (row == null || row.getFirstCellNum() == j) {
+                    continue;
+                }
                 //遍历所有的列
                 List<Object> li = new ArrayList<Object>();
                 for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
@@ -64,25 +69,27 @@ public class ExcelUtil {
         }
         return list;
     }
+
     /**
      * 描述：根据文件后缀，自适应上传文件的版本
      */
-    public static  Workbook getWorkbook(InputStream inStr,String fileName) throws Exception{
+    public static Workbook getWorkbook(InputStream inStr, String fileName) throws Exception {
         Workbook wb = null;
         String fileType = fileName.substring(fileName.lastIndexOf("."));
-        if(excel2003L.equals(fileType)){
+        if (excel2003L.equals(fileType)) {
             wb = new HSSFWorkbook(inStr);  //2003-
-        }else if(excel2007U.equals(fileType)){
+        } else if (excel2007U.equals(fileType)) {
             wb = new XSSFWorkbook(inStr);  //2007+
-        }else{
+        } else {
             throw new Exception("解析的文件格式有误！");
         }
         return wb;
     }
+
     /**
      * 描述：对表格中数值进行格式化
      */
-    public static  Object getCellValue(Cell cell){
+    public static Object getCellValue(Cell cell) {
         Object value = null;
         DecimalFormat df = new DecimalFormat("0");  //格式化字符类型的数字
         SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");  //日期格式化
@@ -92,11 +99,11 @@ public class ExcelUtil {
                 value = cell.getRichStringCellValue().getString();
                 break;
             case Cell.CELL_TYPE_NUMERIC:
-                if("General".equals(cell.getCellStyle().getDataFormatString())){
+                if ("General".equals(cell.getCellStyle().getDataFormatString())) {
                     value = df.format(cell.getNumericCellValue());
-                }else if("m/d/yy".equals(cell.getCellStyle().getDataFormatString())){
+                } else if ("m/d/yy".equals(cell.getCellStyle().getDataFormatString())) {
                     value = sdf.format(cell.getDateCellValue());
-                }else{
+                } else {
                     value = df2.format(cell.getNumericCellValue());
                 }
                 break;
@@ -111,16 +118,18 @@ public class ExcelUtil {
         }
         return value;
     }
+
     /**
      * 导入Excel表结束
      * 导出Excel表开始
+     *
      * @param sheetName 工作簿名称
-     * @param clazz  数据源model类型
-     * @param objs   excel标题列以及对应model字段名
-     * @param map  标题列行数以及cell字体样式
+     * @param clazz     数据源model类型
+     * @param objs      excel标题列以及对应model字段名
+     * @param map       标题列行数以及cell字体样式
      */
     public static XSSFWorkbook createExcelFile(Class clazz, List objs, Map<Integer, List<ExcelBean>> map, String sheetName) throws
-            IllegalArgumentException,IllegalAccessException,InvocationTargetException,
+            IllegalArgumentException, IllegalAccessException, InvocationTargetException,
             ClassNotFoundException, IntrospectionException, ParseException {
         // 创建新的Excel工作簿
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -132,8 +141,10 @@ public class ExcelUtil {
         createTableRows(sheet, map, objs, clazz); //创建内容
         return workbook;
     }
+
     private static XSSFCellStyle fontStyle;
     private static XSSFCellStyle fontStyle2;
+
     public static void createFont(XSSFWorkbook workbook) {
         // 表头
         fontStyle = workbook.createCellStyle();
@@ -148,7 +159,7 @@ public class ExcelUtil {
         fontStyle.setBorderRight(XSSFCellStyle.BORDER_THIN);// 右边框
         fontStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER); // 居中
         // 内容
-        fontStyle2=workbook.createCellStyle();
+        fontStyle2 = workbook.createCellStyle();
         XSSFFont font2 = workbook.createFont();
         font2.setFontName("宋体");
         font2.setFontHeightInPoints((short) 10);// 设置字体大小
@@ -159,39 +170,40 @@ public class ExcelUtil {
         fontStyle2.setBorderRight(XSSFCellStyle.BORDER_THIN);// 右边框
         fontStyle2.setAlignment(XSSFCellStyle.ALIGN_CENTER); // 居中
     }
+
     /**
      * 根据ExcelMapping 生成列头（多行列头）
      *
      * @param sheet 工作簿
-     * @param map 每行每个单元格对应的列头信息
+     * @param map   每行每个单元格对应的列头信息
      */
     public static final void createTableHeader(XSSFSheet sheet, Map<Integer, List<ExcelBean>> map) {
-        int startIndex=0;//cell起始位置
-        int endIndex=0;//cell终止位置
+        int startIndex = 0;//cell起始位置
+        int endIndex = 0;//cell终止位置
         for (Map.Entry<Integer, List<ExcelBean>> entry : map.entrySet()) {
             XSSFRow row = sheet.createRow(entry.getKey());
             List<ExcelBean> excels = entry.getValue();
             for (int x = 0; x < excels.size(); x++) {
                 //合并单元格
-                if(excels.get(x).getCols()>1){
-                    if(x==0){
-                        endIndex+=excels.get(x).getCols()-1;
-                        CellRangeAddress range=new CellRangeAddress(0,0,startIndex,endIndex);
+                if (excels.get(x).getCols() > 1) {
+                    if (x == 0) {
+                        endIndex += excels.get(x).getCols() - 1;
+                        CellRangeAddress range = new CellRangeAddress(0, 0, startIndex, endIndex);
                         sheet.addMergedRegion(range);
-                        startIndex+=excels.get(x).getCols();
-                    }else{
-                        endIndex+=excels.get(x).getCols();
-                        CellRangeAddress range=new CellRangeAddress(0,0,startIndex,endIndex);
+                        startIndex += excels.get(x).getCols();
+                    } else {
+                        endIndex += excels.get(x).getCols();
+                        CellRangeAddress range = new CellRangeAddress(0, 0, startIndex, endIndex);
                         sheet.addMergedRegion(range);
-                        startIndex+=excels.get(x).getCols();
+                        startIndex += excels.get(x).getCols();
                     }
-                    XSSFCell cell = row.createCell(startIndex-excels.get(x).getCols());
+                    XSSFCell cell = row.createCell(startIndex - excels.get(x).getCols());
                     cell.setCellValue(excels.get(x).getHeadTextName());// 设置内容
                     if (excels.get(x).getCellStyle() != null) {
                         cell.setCellStyle(excels.get(x).getCellStyle());// 设置格式
                     }
                     cell.setCellStyle(fontStyle);
-                }else{
+                } else {
                     XSSFCell cell = row.createCell(x);
                     cell.setCellValue(excels.get(x).getHeadTextName());// 设置内容
                     if (excels.get(x).getCellStyle() != null) {
@@ -202,6 +214,7 @@ public class ExcelUtil {
             }
         }
     }
+
     public static void createTableRows(XSSFSheet sheet, Map<Integer, List<ExcelBean>> map, List objs, Class clazz)
             throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, IntrospectionException,
             ClassNotFoundException, ParseException {
@@ -227,13 +240,13 @@ public class ExcelUtil {
                 // 如果是日期类型进行转换
                 if (rtn != null) {
                     if (rtn instanceof Date) {
-                        value = DateUtils.formatDate((Date)rtn,"yyyy-MM-dd");
-                    } else if(rtn instanceof BigDecimal){
+                        value = DateUtils.formatDate((Date) rtn, "yyyy-MM-dd");
+                    } else if (rtn instanceof BigDecimal) {
                         NumberFormat nf = new DecimalFormat("#,##0.00");
-                        value=nf.format((BigDecimal)rtn).toString();
-                    } else if((rtn instanceof Integer) && (Integer.valueOf(rtn.toString())<0 )){
-                        value="--";
-                    }else {
+                        value = nf.format((BigDecimal) rtn).toString();
+                    } else if ((rtn instanceof Integer) && (Integer.valueOf(rtn.toString()) < 0)) {
+                        value = "--";
+                    } else {
                         value = rtn.toString();
                     }
                 }

@@ -94,14 +94,14 @@ public class TeacherController {
         return teacherService.selectTeacherByStatus(modelAndView, zfzt);
     }
 
-    @RequestMapping(value = "/selectTeacherZzjsbhByDept",produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/selectTeacherZzjsbhByDept", produces = "application/json;charset=utf-8")
     @SysControllerFilter(name = "selectTeacherZzjsbhByDept")
     @ResponseBody
     public String selectTeacherXmByDept(String szbm) throws Exception {
         return teacherService.selectTeacherZzjsbhByDept(szbm);
     }
 
-    @RequestMapping(value = "/selectTeacherXmByJggh",produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/selectTeacherXmByJggh", produces = "application/json;charset=utf-8")
     @SysControllerFilter(name = "selectTeacherXmByJggh")
     @ResponseBody
     public String selectTeacherXmByJggh(String jggh) throws Exception {
@@ -113,10 +113,10 @@ public class TeacherController {
     @ResponseBody
     public void exportTeacherToExcel(HttpServletResponse response) throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException {
         String ExcelName = "teacher";
-        if(ExcelName!=""){
+        if (ExcelName != "") {
             response.reset(); //清除buffer缓存
             // 指定下载的文件名
-            response.setHeader("Content-Disposition", "attachment;filename="+ExcelName+".xlsx");
+            response.setHeader("Content-Disposition", "attachment;filename=" + ExcelName + ".xlsx");
             response.setContentType("application/vnd.ms-excel;charset=UTF-8");
             response.setHeader("Pragma", "no-cache");
             response.setHeader("Cache-Control", "no-cache");
@@ -146,7 +146,7 @@ public class TeacherController {
         MultipartFile file = multipart.getFile("excelFile");
         InputStream in = file.getInputStream();
         //数据导入
-        teacherService.importExcelInfo(in,file);
+        teacherService.importExcelInfo(in, file);
         in.close();
         return JSON.toJSONString("导入成功");
     }

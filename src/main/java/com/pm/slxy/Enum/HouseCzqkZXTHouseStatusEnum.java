@@ -1,6 +1,6 @@
 package com.pm.slxy.Enum;
 
-public enum  HouseCzqkZXTHouseStatusEnum {
+public enum HouseCzqkZXTHouseStatusEnum {
     ZU_FANG("租房"),
     XUZU_FANG("续租"),
     TUI_FANG("退房");

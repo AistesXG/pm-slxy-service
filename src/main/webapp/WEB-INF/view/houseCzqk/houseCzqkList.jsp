@@ -95,12 +95,12 @@
                                                 </button>
                                             </c:if>
                                             <c:if test="${houseCzqk.zfxztfzt == '租房' || houseCzqk.zfxztfzt == '续租'}">
-                                            <button type="button"
-                                                    class="btn btn-sm" onclick="applyThrough(${houseCzqk.id})">审批
-                                            </button>
-                                            <button type="button"
-                                                    class="btn btn-sm" onclick="notApply(${houseCzqk.id})">不审批
-                                            </button>
+                                                <button type="button"
+                                                        class="btn btn-sm" onclick="applyThrough(${houseCzqk.id})">审批
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-sm" onclick="notApply(${houseCzqk.id})">不审批
+                                                </button>
                                             </c:if>
                                         </c:if>
                                     </td>
@@ -135,7 +135,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">申请类型:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="status" class="form-control" id="status" value="" size="10" readonly>
+                            <input type="text" name="status" class="form-control" id="status" value="" size="10"
+                                   readonly>
                             <span id="msg"></span>
                         </div>
                     </div>
@@ -226,7 +227,7 @@
             success: function (data) {
                 if (data == "ok") {
                     window.location.href = "/houseCzqk/houseCzqkList";
-                }else {
+                } else {
                     alert("error");
                 }
             }

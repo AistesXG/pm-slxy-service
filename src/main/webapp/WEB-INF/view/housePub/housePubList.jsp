@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>公用房屋详情</title>
     <!-- DataTables CSS -->
@@ -62,10 +62,13 @@
                         <button type="button" id="selectHousePubByStatus" onclick="selectHousePubByStatus()"
                                 class="btn btn-primary">按租住状态搜索
                         </button>
-                        <button type="button"  id="deleteBtn" onclick="delAll()"
-                                       class="btn btn-primary">批量删除</button>
-                        <button type="button"  id="addHousePubBtn" onclick="window.location.href = '/jump/jumpAddHousePub'"
-                                class="btn btn-primary">添加房屋</button>
+                        <button type="button" id="deleteBtn" onclick="delAll()"
+                                class="btn btn-primary">批量删除
+                        </button>
+                        <button type="button" id="addHousePubBtn"
+                                onclick="window.location.href = '/jump/jumpAddHousePub'"
+                                class="btn btn-primary">添加房屋
+                        </button>
 
                     </div>
                     <!-- /.panel-heading -->
@@ -102,8 +105,10 @@
                                     <td class="center">${housePub.fjsybm}</td>
                                     <td class="center">${housePub.fjbz}</td>
                                     <td align="center">
-                                        <button type="button"  onclick=" window.location.href = '/housePub/selectHousePubById?id=' + '${housePub.id}'"
-                                                class="btn btn-sm">编辑</button>
+                                        <button type="button"
+                                                onclick=" window.location.href = '/housePub/selectHousePubById?id=' + '${housePub.id}'"
+                                                class="btn btn-sm">编辑
+                                        </button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -184,6 +189,7 @@
             })
         }
     }
+
     <!--按照租房状态来查找教师租房的房屋信息-->
     function selectHousePubByStatus() {
         var fjsyzt = $('#fjsyzt').val();

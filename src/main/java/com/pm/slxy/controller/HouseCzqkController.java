@@ -46,8 +46,8 @@ public class HouseCzqkController {
 
     @RequestMapping(value = "/selectHouseCzqkById")
     @SysControllerFilter(name = "selectHouseCzqkById")
-    public ModelAndView selectHouseCzqkById(ModelAndView modelAndView, String id) throws Exception{
-        return houseCzqkService.selectHouseCzqkById(modelAndView,Integer.parseInt(id));
+    public ModelAndView selectHouseCzqkById(ModelAndView modelAndView, String id) throws Exception {
+        return houseCzqkService.selectHouseCzqkById(modelAndView, Integer.parseInt(id));
     }
 
     @RequestMapping(value = "/applyThrough")
@@ -59,7 +59,7 @@ public class HouseCzqkController {
 
     @RequestMapping(value = "/selectHouseCzqkReletById")
     @SysControllerFilter(name = "selectHouseCzqkReletById")
-    public ModelAndView selectHouseCzqkReletById(ModelAndView modelAndView, String id) throws Exception{
+    public ModelAndView selectHouseCzqkReletById(ModelAndView modelAndView, String id) throws Exception {
         return houseCzqkService.selectHouseCzqkReletById(modelAndView, Integer.parseInt(id));
     }
 
@@ -74,7 +74,7 @@ public class HouseCzqkController {
     @SysControllerFilter(name = "applyCheckOutHouse")
     @ResponseBody
     public String applyCheckOutHouse(String id) throws Exception {
-        return  houseCzqkService.applyCheckOutHouse(Integer.parseInt(id));
+        return houseCzqkService.applyCheckOutHouse(Integer.parseInt(id));
     }
 }
 

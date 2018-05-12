@@ -1,7 +1,6 @@
 package com.pm.slxy.Enum;
 
 
-
 /**
  * @author furg@senthink.com
  * @date 2018/4/12
