@@ -51,6 +51,7 @@
                                 onclick="exportPirceToExcel()"
                                 class="btn btn-primary">导出
                         </button>
+                        <span style="font-weight: bolder;color: red;font-size: 30px;float: right;margin-right: 50px">总和为${sum}元</span>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

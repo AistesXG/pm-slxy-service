@@ -158,7 +158,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     public String deleteHouseByIds(String ids) {
         List<String> houses = Arrays.asList(ids.split(","));
         List<House> houseList = houseMapper.selectBatchIds(houses);
-        for(House house :houseList) {
+        for (House house : houseList) {
             if (house.getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus())) {
                 return "您删除的房子已经租出去了,申请退房或者被续租了";
             }
@@ -266,8 +266,11 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
      */
     @Override
     public ModelAndView Calculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception {
-        List<Calculation> calculations = getCalculations(startTime, endTime);
+            List<Calculation> calculations = getCalculations(startTime, endTime);
         if (!CollectionUtils.isEmpty(calculations)) {
+            for(int i=0;i<calculations.size();i++){
+                modelAndView.addObject("sum",calculations.get(calculations.size()-1).getSum());
+            }
             modelAndView.addObject("calculations", calculations);
             modelAndView.setViewName("calculationPrice/CalculationPrice");
         } else {
@@ -278,6 +281,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
 
     /**
      * 获取费用数据
+     *
      * @param startTime
      * @param endTime
      * @return
@@ -287,8 +291,9 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         List<HouseCzqk> houseCzqks = houseCzqkMapper.selectList(new EntityWrapper<HouseCzqk>());
         List<Zjhsbz> prices = zjhsbzMapper.selectList(new EntityWrapper<Zjhsbz>());
         List<Calculation> calculations = new ArrayList<>();
+        float sum = 0;
         for (HouseCzqk houseCzqk : houseCzqks) {
-            if(houseCzqk.getSpzt().equals(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus())) {
+            if (houseCzqk.getSpzt().equals(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus())) {
                 Calculation calculation = new Calculation();
                 calculation.setFjlh(houseCzqk.getFjlh()); //房间楼号
                 calculation.setFjbh(houseCzqk.getFjbh()); //房间编号
@@ -324,7 +329,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
                 calculation.setJsxs(houseCzqk.getTszzxs());//计算系数
                 calculation.setSzbm(houseCzqk.getZzjsszbm());//所在部门
                 calculation.setJsxm(houseCzqk.getZzjsxm());//教师姓名
-                calculation.setYzf(calculation.getFjmj() * calculation.getZjbz()*calculation.getJsxs());//月租费
+                calculation.setYzf(calculation.getFjmj() * calculation.getZjbz() * calculation.getJsxs());//月租费
                 //格式化日期
                 SimpleDateFormat startDate = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat endDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -355,6 +360,8 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
                 calculation.setGzrq(houseCzqk.getJscjgzrq()); //工作日期
                 calculation.setSfcxqdxh(houseCzqk.getSfcxqdxh());//带小孩
                 calculation.setTszs(houseCzqk.getTszzxs());//特殊系数
+                sum += calculation.getJdzj();
+                calculation.setSum(sum);
                 calculations.add(calculation);
             }
         }
@@ -363,6 +370,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
 
     /**
      * 导出费用表
+     *
      * @param startTime
      * @param endTime
      * @return
@@ -403,4 +411,6 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         return xssfWorkbook;
 
     }
+
+
 }
