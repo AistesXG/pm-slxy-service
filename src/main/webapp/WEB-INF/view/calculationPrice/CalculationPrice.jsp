@@ -23,10 +23,6 @@
             text-align: center;
         }
 
-        #exportPrice {
-            float: right;
-            margin-top: -5px;
-        }
     </style>
 </head>
 <body>

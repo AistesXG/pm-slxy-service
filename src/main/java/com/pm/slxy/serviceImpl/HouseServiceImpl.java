@@ -324,7 +324,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
                 calculation.setJsxs(houseCzqk.getTszzxs());//计算系数
                 calculation.setSzbm(houseCzqk.getZzjsszbm());//所在部门
                 calculation.setJsxm(houseCzqk.getZzjsxm());//教师姓名
-                calculation.setYzf(calculation.getFjmj() * calculation.getZjbz());//月租费
+                calculation.setYzf(calculation.getFjmj() * calculation.getZjbz()*calculation.getJsxs());//月租费
                 //格式化日期
                 SimpleDateFormat startDate = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat endDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -344,7 +344,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
                 if (days < 30.5 && days > 1) {
                     month = (int) (days / 30.5) + 1;
                 } else if (days >= 30.5) {
-                    if (days % 30.5 == 0) {
+                    if (days % 30.5 < 1) {
                         month = (int) (days / 30.5);
                     } else {
                         month = (int) (days / 30.5) + 1;
