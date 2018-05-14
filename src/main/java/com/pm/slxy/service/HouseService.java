@@ -88,4 +88,13 @@ public interface HouseService extends IService<House> {
      * @return
      */
     String checkOutHouse(int id);
+
+    /**
+     * 计算费用
+     * @param modelAndView
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    ModelAndView Caculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception;
 }

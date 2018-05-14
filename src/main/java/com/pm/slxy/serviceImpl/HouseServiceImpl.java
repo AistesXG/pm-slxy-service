@@ -7,11 +7,14 @@ import com.pm.slxy.Enum.HouseApplyEnum;
 import com.pm.slxy.Enum.HouseCzqkStatusEnum;
 import com.pm.slxy.Enum.HouseCzqkZXTHouseStatusEnum;
 import com.pm.slxy.Enum.HouseStatusEnum;
+import com.pm.slxy.entity.Calculation;
 import com.pm.slxy.entity.House;
 import com.pm.slxy.entity.HouseCzqk;
+import com.pm.slxy.entity.Zjhsbz;
 import com.pm.slxy.mapper.HouseCzqkMapper;
 import com.pm.slxy.mapper.HouseMapper;
 import com.pm.slxy.mapper.TeacherMapper;
+import com.pm.slxy.mapper.ZjhsbzMapper;
 import com.pm.slxy.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +23,8 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * <p>
@@ -42,6 +43,8 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     private TeacherMapper teacherMapper;
     @Autowired
     private HouseCzqkMapper houseCzqkMapper;
+    @Autowired
+    private ZjhsbzMapper zjhsbzMapper;
 
     /**
      * 查找教师用房的房产信息
@@ -248,5 +251,96 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
             }
         }
         return "error";
+    }
+
+    /**
+     * 计算费用
+     *
+     * @param modelAndView
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @Override
+    public ModelAndView Caculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception {
+        List<HouseCzqk> houseCzqks = houseCzqkMapper.selectList(new EntityWrapper<HouseCzqk>());
+        List<Zjhsbz> prices = zjhsbzMapper.selectList(new EntityWrapper<Zjhsbz>());
+        List<Calculation> calculations = new ArrayList<>();
+        for (HouseCzqk houseCzqk : houseCzqks) {
+            Calculation calculation = new Calculation();
+            calculation.setFjlh(houseCzqk.getFjlh()); //房间楼号
+            calculation.setFjbh(houseCzqk.getFjbh()); //房间编号
+            calculation.setSfqr(houseCzqk.getSqzzrq()); //申请日期
+            calculation.setDqrq(houseCzqk.getZzdqrq());//到期日期
+            calculation.setZzlx(houseCzqk.getFjzzlx());//租住类型
+            calculation.setFjmj(houseCzqk.getFjmj());//房间面积
+            for (Zjhsbz zjhsbz : prices) { //原始租金标准
+                switch (calculation.getZzlx()) {
+                    case "保障期单间":
+                        calculation.setZjbz(zjhsbz.getBzqdj());
+                        break;
+                    case "保障期单元房":
+                        calculation.setZjbz(zjhsbz.getBzqdyf());
+                        break;
+                    case "延长期单间":
+                        calculation.setZjbz(zjhsbz.getYcqdj());
+                        break;
+                    case "延长期单元房":
+                        calculation.setZjbz(zjhsbz.getYcqdyf());
+                        break;
+                    case "超限期单间":
+                        calculation.setZjbz(zjhsbz.getCxqdj());
+                        break;
+                    case "超限期单元房":
+                        calculation.setZjbz(zjhsbz.getCxqdyf());
+                        break;
+                    default:
+                        break;
+                }
+            }
+            calculation.setSfszg(houseCzqk.getSfszg());//是否双职工
+            calculation.setJsxs(houseCzqk.getTszzxs());//计算系数
+            calculation.setSzbm(houseCzqk.getZzjsszbm());//所在部门
+            calculation.setJsxm(houseCzqk.getZzjsxm());//教师姓名
+            calculation.setYzf(calculation.getFjmj() * calculation.getZjbz());//月租费
+            //格式化日期
+            SimpleDateFormat startDate = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat endDate = new SimpleDateFormat("yyyy-MM-dd");
+            Date startDateS = startDate.parse(startTime);
+            Date endDateS = endDate.parse(endTime);
+            //计算毫秒数
+            long startDateSeconds = startDateS.getTime();
+            long endDateSeconds = endDateS.getTime();
+            //得到两者之差
+            long startAndEndSeconds = endDateSeconds - startDateSeconds;
+            //毫秒转为秒
+            int totalSeconds = (int) (startAndEndSeconds / 1000);
+            //得到总天数
+            int days = totalSeconds / (3600 * 24);
+            int month = 0;
+            //判断月数
+            if (days < 30.5 && days > 1) {
+                month = (int) (days / 30.5) + 1;
+            } else if (days >= 30.5) {
+                if (days % 30.5 == 0) {
+                    month = (int) (days / 30.5);
+                } else {
+                    month = (int) (days / 30.5) + 1;
+                }
+            }
+            calculation.setMonth(month);
+            calculation.setJdzj(calculation.getMonth() * calculation.getYzf()); //季度租金
+            calculation.setGzrq(houseCzqk.getJscjgzrq()); //工作日期
+            calculation.setSfcxqdxh(houseCzqk.getSfcxqdxh());//带小孩
+            calculation.setTszs(houseCzqk.getTszzxs());//特殊系数
+            calculations.add(calculation);
+        }
+        if (!CollectionUtils.isEmpty(calculations)) {
+            modelAndView.addObject("caculations", calculations);
+            modelAndView.setViewName("caculationPrice/CaculationPrice");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
     }
 }

@@ -159,4 +159,17 @@ public class ViewJumpController {
         return modelAndView;
     }
 
+    /**
+     * 调到计算价格页面
+     *
+     * @param modelAndView
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/jumpCaculation")
+    @SysControllerFilter(name = "jumpCaculation")
+    public ModelAndView jumpCaculation(ModelAndView modelAndView) throws Exception {
+        modelAndView.setViewName("caculationPrice/Caculation");
+        return modelAndView;
+    }
 }

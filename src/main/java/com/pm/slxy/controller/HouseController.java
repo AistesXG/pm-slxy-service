@@ -77,5 +77,10 @@ public class HouseController {
     public String checkOutHouse(String id) throws Exception {
         return houseService.checkOutHouse(Integer.parseInt(id));
     }
+    @RequestMapping(value = "/caculation")
+    @SysControllerFilter(name = "caculation")
+    public ModelAndView Caculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception {
+        return houseService.Caculation(modelAndView, startTime, endTime);
+    }
 }
 
