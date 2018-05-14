@@ -4,11 +4,20 @@ package com.pm.slxy.controller;
 import com.pm.slxy.entity.House;
 import com.pm.slxy.service.HouseService;
 import com.pm.slxy.utils.SysControllerFilter;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
+import java.beans.IntrospectionException;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 
 /**
  * <p>
@@ -77,10 +86,39 @@ public class HouseController {
     public String checkOutHouse(String id) throws Exception {
         return houseService.checkOutHouse(Integer.parseInt(id));
     }
-    @RequestMapping(value = "/caculation")
-    @SysControllerFilter(name = "caculation")
-    public ModelAndView Caculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception {
-        return houseService.Caculation(modelAndView, startTime, endTime);
+    @RequestMapping(value = "/calculation")
+    @SysControllerFilter(name = "calculation")
+    public ModelAndView Calculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception {
+        return houseService.Calculation(modelAndView, startTime, endTime);
+    }
+
+    @RequestMapping("/exportCalculationPriceToExcel")
+    @SysControllerFilter(name = "exportCalculationPriceToExcel")
+    @ResponseBody
+    public void exportCalculationPriceToExcel(HttpServletResponse response, String startTime, String endTime) throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException {
+        String ExcelName = "calculationPrice";
+        if (ExcelName != "") {
+            response.reset(); //清除buffer缓存
+            // 指定下载的文件名
+            response.setHeader("Content-Disposition", "attachment;filename=" + ExcelName + ".xlsx");
+            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+            response.setHeader("Pragma", "no-cache");
+            response.setHeader("Cache-Control", "no-cache");
+            response.setDateHeader("Expires", 0);
+            XSSFWorkbook workbook;
+            //导出Excel对象
+            workbook = houseService.exportPriceToExcel(startTime, endTime);
+            OutputStream output;
+            try {
+                output = response.getOutputStream();
+                BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+                bufferedOutPut.flush();
+                workbook.write(bufferedOutPut);
+                bufferedOutPut.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 

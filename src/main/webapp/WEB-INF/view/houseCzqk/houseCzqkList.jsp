@@ -84,7 +84,7 @@
                                                 onclick="window.location.href = '/houseCzqk/selectHouseCzqkById?id=' + '${houseCzqk.id}'">
                                             查看
                                         </button>
-                                        <c:if test="${houseCzqk.spzt == '审核不通过'}">
+                                        <c:if test="${houseCzqk.spzt == '审核退房不通过'}">
                                             <c:if test="${houseCzqk.zfxztfzt == '退房'}">
                                                 <button type="button"
                                                         class="btn btn-sm"
@@ -94,6 +94,8 @@
                                                         class="btn btn-sm" onclick="notApply(${houseCzqk.id})">不审批
                                                 </button>
                                             </c:if>
+                                        </c:if>
+                                        <c:if test="${houseCzqk.spzt == '审核不通过'}">
                                             <c:if test="${houseCzqk.zfxztfzt == '租房' || houseCzqk.zfxztfzt == '续租'}">
                                                 <button type="button"
                                                         class="btn btn-sm" onclick="applyThrough(${houseCzqk.id})">审批
@@ -188,7 +190,7 @@
     <!--退房审批通过-->
     function applyCheckOutHouse(houseCzqkId) {
         $.ajax({
-            url: '/houseCzqk/selectStatusById',
+            url: '/houseCzqk/applyCheckOutHouse',
             data: {id: houseCzqkId},
             dataType: 'json',
             type: 'post',

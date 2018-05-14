@@ -218,7 +218,7 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
     @Override
     public String applyCheckOutHouse(int id) {
         HouseCzqk houseCzqk = houseCzqkMapper.selectById(id);
-        houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus());
+        houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_CHECK_OUT_HOUSE_THROUGH.getStatus());
         houseCzqk.setZfxztfzt("");
         //更新房屋信息列表的信息
         House house = new House();

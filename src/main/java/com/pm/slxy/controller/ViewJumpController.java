@@ -169,7 +169,7 @@ public class ViewJumpController {
     @RequestMapping(value = "/jumpCaculation")
     @SysControllerFilter(name = "jumpCaculation")
     public ModelAndView jumpCaculation(ModelAndView modelAndView) throws Exception {
-        modelAndView.setViewName("caculationPrice/Caculation");
+        modelAndView.setViewName("calculationPrice/CalculationPrice");
         return modelAndView;
     }
 }

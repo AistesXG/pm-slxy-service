@@ -7,15 +7,14 @@ import com.pm.slxy.Enum.HouseApplyEnum;
 import com.pm.slxy.Enum.HouseCzqkStatusEnum;
 import com.pm.slxy.Enum.HouseCzqkZXTHouseStatusEnum;
 import com.pm.slxy.Enum.HouseStatusEnum;
-import com.pm.slxy.entity.Calculation;
-import com.pm.slxy.entity.House;
-import com.pm.slxy.entity.HouseCzqk;
-import com.pm.slxy.entity.Zjhsbz;
+import com.pm.slxy.entity.*;
 import com.pm.slxy.mapper.HouseCzqkMapper;
 import com.pm.slxy.mapper.HouseMapper;
 import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.mapper.ZjhsbzMapper;
 import com.pm.slxy.service.HouseService;
+import com.pm.slxy.utils.ExcelUtil;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -23,6 +22,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -243,7 +245,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         HouseCzqk houseCzqk = new HouseCzqk();
         houseCzqk.setFjbh(house.getFjbh());
         HouseCzqk houseCzqk1 = houseCzqkMapper.selectOne(houseCzqk);
-        houseCzqk1.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH_NOT_THROUGH.getStatus());
+        houseCzqk1.setSpzt(HouseCzqkStatusEnum.APPROVAL_CHECK_OUT_HOUSE_NOT_THROUGH.getStatus());
         houseCzqk1.setZfxztfzt(HouseCzqkZXTHouseStatusEnum.TUI_FANG.getStatus());
         if (houseMapper.updateById(house) != 0) {
             if (houseCzqkMapper.updateById(houseCzqk1) != 0) {
@@ -262,85 +264,142 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
      * @return
      */
     @Override
-    public ModelAndView Caculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception {
-        List<HouseCzqk> houseCzqks = houseCzqkMapper.selectList(new EntityWrapper<HouseCzqk>());
-        List<Zjhsbz> prices = zjhsbzMapper.selectList(new EntityWrapper<Zjhsbz>());
-        List<Calculation> calculations = new ArrayList<>();
-        for (HouseCzqk houseCzqk : houseCzqks) {
-            Calculation calculation = new Calculation();
-            calculation.setFjlh(houseCzqk.getFjlh()); //房间楼号
-            calculation.setFjbh(houseCzqk.getFjbh()); //房间编号
-            calculation.setSfqr(houseCzqk.getSqzzrq()); //申请日期
-            calculation.setDqrq(houseCzqk.getZzdqrq());//到期日期
-            calculation.setZzlx(houseCzqk.getFjzzlx());//租住类型
-            calculation.setFjmj(houseCzqk.getFjmj());//房间面积
-            for (Zjhsbz zjhsbz : prices) { //原始租金标准
-                switch (calculation.getZzlx()) {
-                    case "保障期单间":
-                        calculation.setZjbz(zjhsbz.getBzqdj());
-                        break;
-                    case "保障期单元房":
-                        calculation.setZjbz(zjhsbz.getBzqdyf());
-                        break;
-                    case "延长期单间":
-                        calculation.setZjbz(zjhsbz.getYcqdj());
-                        break;
-                    case "延长期单元房":
-                        calculation.setZjbz(zjhsbz.getYcqdyf());
-                        break;
-                    case "超限期单间":
-                        calculation.setZjbz(zjhsbz.getCxqdj());
-                        break;
-                    case "超限期单元房":
-                        calculation.setZjbz(zjhsbz.getCxqdyf());
-                        break;
-                    default:
-                        break;
-                }
-            }
-            calculation.setSfszg(houseCzqk.getSfszg());//是否双职工
-            calculation.setJsxs(houseCzqk.getTszzxs());//计算系数
-            calculation.setSzbm(houseCzqk.getZzjsszbm());//所在部门
-            calculation.setJsxm(houseCzqk.getZzjsxm());//教师姓名
-            calculation.setYzf(calculation.getFjmj() * calculation.getZjbz());//月租费
-            //格式化日期
-            SimpleDateFormat startDate = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat endDate = new SimpleDateFormat("yyyy-MM-dd");
-            Date startDateS = startDate.parse(startTime);
-            Date endDateS = endDate.parse(endTime);
-            //计算毫秒数
-            long startDateSeconds = startDateS.getTime();
-            long endDateSeconds = endDateS.getTime();
-            //得到两者之差
-            long startAndEndSeconds = endDateSeconds - startDateSeconds;
-            //毫秒转为秒
-            int totalSeconds = (int) (startAndEndSeconds / 1000);
-            //得到总天数
-            int days = totalSeconds / (3600 * 24);
-            int month = 0;
-            //判断月数
-            if (days < 30.5 && days > 1) {
-                month = (int) (days / 30.5) + 1;
-            } else if (days >= 30.5) {
-                if (days % 30.5 == 0) {
-                    month = (int) (days / 30.5);
-                } else {
-                    month = (int) (days / 30.5) + 1;
-                }
-            }
-            calculation.setMonth(month);
-            calculation.setJdzj(calculation.getMonth() * calculation.getYzf()); //季度租金
-            calculation.setGzrq(houseCzqk.getJscjgzrq()); //工作日期
-            calculation.setSfcxqdxh(houseCzqk.getSfcxqdxh());//带小孩
-            calculation.setTszs(houseCzqk.getTszzxs());//特殊系数
-            calculations.add(calculation);
-        }
+    public ModelAndView Calculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception {
+        List<Calculation> calculations = getCalculations(startTime, endTime);
         if (!CollectionUtils.isEmpty(calculations)) {
-            modelAndView.addObject("caculations", calculations);
-            modelAndView.setViewName("caculationPrice/CaculationPrice");
+            modelAndView.addObject("calculations", calculations);
+            modelAndView.setViewName("calculationPrice/CalculationPrice");
         } else {
             modelAndView.setViewName("404");
         }
         return modelAndView;
+    }
+
+    /**
+     * 获取费用数据
+     * @param startTime
+     * @param endTime
+     * @return
+     * @throws ParseException
+     */
+    private List<Calculation> getCalculations(String startTime, String endTime) throws ParseException {
+        List<HouseCzqk> houseCzqks = houseCzqkMapper.selectList(new EntityWrapper<HouseCzqk>());
+        List<Zjhsbz> prices = zjhsbzMapper.selectList(new EntityWrapper<Zjhsbz>());
+        List<Calculation> calculations = new ArrayList<>();
+        for (HouseCzqk houseCzqk : houseCzqks) {
+            if(houseCzqk.getSpzt().equals(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus())) {
+                Calculation calculation = new Calculation();
+                calculation.setFjlh(houseCzqk.getFjlh()); //房间楼号
+                calculation.setFjbh(houseCzqk.getFjbh()); //房间编号
+                calculation.setSfqr(houseCzqk.getSqzzrq()); //申请日期
+                calculation.setDqrq(houseCzqk.getZzdqrq());//到期日期
+                calculation.setZzlx(houseCzqk.getFjzzlx());//租住类型
+                calculation.setFjmj(houseCzqk.getFjmj());//房间面积
+                for (Zjhsbz zjhsbz : prices) { //原始租金标准
+                    switch (calculation.getZzlx()) {
+                        case "保障期单间":
+                            calculation.setZjbz(zjhsbz.getBzqdj());
+                            break;
+                        case "保障期单元房":
+                            calculation.setZjbz(zjhsbz.getBzqdyf());
+                            break;
+                        case "延长期单间":
+                            calculation.setZjbz(zjhsbz.getYcqdj());
+                            break;
+                        case "延长期单元房":
+                            calculation.setZjbz(zjhsbz.getYcqdyf());
+                            break;
+                        case "超限期单间":
+                            calculation.setZjbz(zjhsbz.getCxqdj());
+                            break;
+                        case "超限期单元房":
+                            calculation.setZjbz(zjhsbz.getCxqdyf());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                calculation.setSfszg(houseCzqk.getSfszg());//是否双职工
+                calculation.setJsxs(houseCzqk.getTszzxs());//计算系数
+                calculation.setSzbm(houseCzqk.getZzjsszbm());//所在部门
+                calculation.setJsxm(houseCzqk.getZzjsxm());//教师姓名
+                calculation.setYzf(calculation.getFjmj() * calculation.getZjbz());//月租费
+                //格式化日期
+                SimpleDateFormat startDate = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat endDate = new SimpleDateFormat("yyyy-MM-dd");
+                Date startDateS = startDate.parse(startTime);
+                Date endDateS = endDate.parse(endTime);
+                //计算毫秒数
+                long startDateSeconds = startDateS.getTime();
+                long endDateSeconds = endDateS.getTime();
+                //得到两者之差
+                long startAndEndSeconds = endDateSeconds - startDateSeconds;
+                //毫秒转为秒
+                int totalSeconds = (int) (startAndEndSeconds / 1000);
+                //得到总天数
+                int days = totalSeconds / (3600 * 24);
+                int month = 0;
+                //判断月数
+                if (days < 30.5 && days > 1) {
+                    month = (int) (days / 30.5) + 1;
+                } else if (days >= 30.5) {
+                    if (days % 30.5 == 0) {
+                        month = (int) (days / 30.5);
+                    } else {
+                        month = (int) (days / 30.5) + 1;
+                    }
+                }
+                calculation.setMonth(month);
+                calculation.setJdzj(calculation.getMonth() * calculation.getYzf()); //季度租金
+                calculation.setGzrq(houseCzqk.getJscjgzrq()); //工作日期
+                calculation.setSfcxqdxh(houseCzqk.getSfcxqdxh());//带小孩
+                calculation.setTszs(houseCzqk.getTszzxs());//特殊系数
+                calculations.add(calculation);
+            }
+        }
+        return calculations;
+    }
+
+    /**
+     * 导出费用表
+     * @param startTime
+     * @param endTime
+     * @return
+     * @throws InvocationTargetException
+     * @throws ClassNotFoundException
+     * @throws IntrospectionException
+     * @throws ParseException
+     * @throws IllegalAccessException
+     */
+    @Override
+    public XSSFWorkbook exportPriceToExcel(String startTime, String endTime) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException {
+        List<Calculation> calculations = getCalculations(startTime, endTime);
+        List<ExcelBean> excel = new ArrayList<>();
+        Map<Integer, List<ExcelBean>> map = new LinkedHashMap<>();
+        XSSFWorkbook xssfWorkbook = null;
+        //设置标题栏
+        excel.add(new ExcelBean("房间楼号", "fjlh", 0));
+        excel.add(new ExcelBean("房间编号", "fjbh", 0));
+        excel.add(new ExcelBean("申请日期", "sfqr", 0));
+        excel.add(new ExcelBean("到期日期", "dqrq", 0));
+        excel.add(new ExcelBean("租住类型", "zzlx", 0));
+        excel.add(new ExcelBean("房间面积", "fjmj", 0));
+        excel.add(new ExcelBean("原始租金标准", "zjbz", 0));
+        excel.add(new ExcelBean("是否双职工", "sfszg", 0));
+        excel.add(new ExcelBean("计算系数", "jsxs", 0));
+        excel.add(new ExcelBean("所在部门", "szbm", 0));
+        excel.add(new ExcelBean("教师姓名", "jsxm", 0));
+        excel.add(new ExcelBean("月租费", "yzf", 0));
+        excel.add(new ExcelBean("月数", "month", 0));
+        excel.add(new ExcelBean("季度租金", "jdzj", 0));
+        excel.add(new ExcelBean("工作日期", "gzrq", 0));
+        excel.add(new ExcelBean("是否带小孩", "sfcxqdxh", 0));
+        excel.add(new ExcelBean("特殊系数", "tszs", 0));
+        map.put(0, excel);
+        String sheetName = "calculationPrice";
+        //调用ExcelUtil的方法
+        xssfWorkbook = ExcelUtil.createExcelFile(Calculation.class, calculations, map, sheetName);
+        return xssfWorkbook;
+
     }
 }

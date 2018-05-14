@@ -22,6 +22,11 @@
         table thead th {
             text-align: center;
         }
+
+        #exportPrice {
+            float: right;
+            margin-top: -5px;
+        }
     </style>
 </head>
 <body>
@@ -41,6 +46,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         费用详细信息
+                        <input type="text" name="startTime" class=" form-control-static laydate-icon" value="" size="10"
+                               id="startTime" readonly>
+                        <input type="text" name="endTime" class=" form-control-static laydate-icon" value="" size="10"
+                               id="endTime" readonly>
+                        <button type="button" class="btn btn-primary" onclick="Calculation()">计算费用</button>
+                        <button type="button" id="exportPrice"
+                                onclick="exportPirceToExcel()"
+                                class="btn btn-primary">导出
+                        </button>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -69,26 +83,26 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${caculations}" var="caculation" varStatus="status">
+                            <c:forEach items="${calculations}" var="calculation" varStatus="status">
                                 <tr class="gradeU">
                                     <td>${status.count}</td>
-                                    <td>${caculation.fjlh}</td>
-                                    <td>${caculation.fjbh}</td>
-                                    <td>${caculation.sfqr}</td>
-                                    <td>${caculation.dqrq}</td>
-                                    <td>${caculation.zzlx}</td>
-                                    <td>${caculation.fjmj}</td>
-                                    <td>${caculation.zjbz}</td>
-                                    <td>${caculation.sfszg}</td>
-                                    <td>${caculation.jsxs}</td>
-                                    <td>${caculation.szbm}</td>
-                                    <td>${caculation.jsxm}</td>
-                                    <td>${caculation.yzf}</td>
-                                    <td>${caculation.month}</td>
-                                    <td>${caculation.jdzj}</td>
-                                    <td>${caculation.gzrq}</td>
-                                    <td>${caculation.sfcxqdxh}</td>
-                                    <td>${caculation.tszs}</td>
+                                    <td>${calculation.fjlh}</td>
+                                    <td>${calculation.fjbh}</td>
+                                    <td>${calculation.sfqr}</td>
+                                    <td>${calculation.dqrq}</td>
+                                    <td>${calculation.zzlx}</td>
+                                    <td>${calculation.fjmj}</td>
+                                    <td>${calculation.zjbz}</td>
+                                    <td>${calculation.sfszg}</td>
+                                    <td>${calculation.jsxs}</td>
+                                    <td>${calculation.szbm}</td>
+                                    <td>${calculation.jsxm}</td>
+                                    <td>${calculation.yzf}</td>
+                                    <td>${calculation.month}</td>
+                                    <td>${calculation.jdzj}</td>
+                                    <td>${calculation.gzrq}</td>
+                                    <td>${calculation.sfcxqdxh}</td>
+                                    <td>${calculation.tszs}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -113,6 +127,32 @@
             responsive: true
         });
     });
+
+    !function () {
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#startTime'});//绑定开始时间
+        laydate({elem: '#endTime'});//绑定结束时间
+    }();
+
+    function Calculation() {
+        var startTime = $('#startTime').val();
+        var endTime = $('#endTime').val();
+        if (startTime == "" || endTime == "") {
+            window.location.href = "/jump/jump404";
+        } else {
+            window.location.href = "/house/calculation?startTime=" + startTime + "&endTime=" + endTime;
+        }
+    }
+
+    function exportPirceToExcel() {
+        var startTime = $('#startTime').val();
+        var endTime = $('#endTime').val();
+        if (startTime == "" || endTime == "") {
+            window.location.href = "/jump/jump404";
+        } else {
+            window.location.href = "/house/exportCalculationPriceToExcel?startTime=" + startTime + "&endTime=" + endTime;
+        }
+    }
 
 </script>
 </html>

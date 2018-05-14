@@ -2,8 +2,12 @@ package com.pm.slxy.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.pm.slxy.entity.House;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.Map;
 
 /**
@@ -96,5 +100,17 @@ public interface HouseService extends IService<House> {
      * @param endTime
      * @return
      */
-    ModelAndView Caculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception;
+    ModelAndView Calculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception;
+
+    /**
+     * 导出教师信息
+     *
+     * @return
+     * @throws InvocationTargetException
+     * @throws ClassNotFoundException
+     * @throws IntrospectionException
+     * @throws ParseException
+     * @throws IllegalAccessException
+     */
+    XSSFWorkbook exportPriceToExcel(String startTime, String endTime) throws InvocationTargetException, ClassNotFoundException, IntrospectionException, ParseException, IllegalAccessException;
 }
