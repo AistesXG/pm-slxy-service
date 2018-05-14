@@ -158,10 +158,11 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     public String deleteHouseByIds(String ids) {
         List<String> houses = Arrays.asList(ids.split(","));
         List<House> houseList = houseMapper.selectBatchIds(houses);
-        if (houseList.get(0).getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus())) {
-            return "您删除的房子已经租出去了,申请退房或者被续租了";
+        for(House house :houseList) {
+            if (house.getZzzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.APPLY_RENTAL.getStatus()) || houseList.get(0).getZzzt().equals(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus())) {
+                return "您删除的房子已经租出去了,申请退房或者被续租了";
+            }
         }
-
         int deleteHousePub = houseMapper.deleteBatchIds(houses);
         if (deleteHousePub != 0) {
             return "ok";

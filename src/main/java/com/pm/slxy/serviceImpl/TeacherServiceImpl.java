@@ -65,8 +65,10 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     public String deleteTeacherByIds(String ids) {
         List<String> teacherIds = Arrays.asList(ids.split(","));
         List<Teacher> teacherList = teacherMapper.selectBatchIds(teacherIds);
-        if (teacherList.get(0).getZfzt().equals(TeacherRentalStatusEnum.ALREADY_RENTAL_HOUSE.getStatus())) {
-            return "该教师已经租房了，不能够直接删除";
+        for(Teacher teacher1 : teacherList) {
+            if (teacher1.getZfzt().equals(TeacherRentalStatusEnum.ALREADY_RENTAL_HOUSE.getStatus())) {
+                return "该教师已经租房了，不能够直接删除";
+            }
         }
         int deleteTeacher = teacherMapper.deleteBatchIds(teacherIds);
         if (deleteTeacher != 0) {
