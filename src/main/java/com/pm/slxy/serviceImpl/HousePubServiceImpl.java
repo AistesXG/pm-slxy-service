@@ -83,8 +83,10 @@ public class HousePubServiceImpl extends ServiceImpl<HousePubMapper, HousePub> i
     public String deleteHousePubByIds(String ids) {
         List<String> housePubs = Arrays.asList(ids.split(","));
         List<HousePub> housePubList = housePubMapper.selectBatchIds(housePubs);
-        if (housePubList.get(0).getFjsyzt().equals(HousePubStatusEnum.IN_USE.getStatus())) {
-            return "您删除的房子正在使用";
+        for(HousePub housePub :housePubList) {
+            if (housePub.getFjsyzt().equals(HousePubStatusEnum.IN_USE.getStatus())) {
+                return "您删除的房子正在使用";
+            }
         }
         int deleteHousePub = housePubMapper.deleteBatchIds(housePubs);
         if (deleteHousePub != 0) {
