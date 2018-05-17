@@ -136,6 +136,7 @@
                     <br>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">申请类型:</label>
+                        <input type="hidden" name="id" id="id">
                         <div class="col-sm-7">
                             <input type="text" name="status" class="form-control" id="status" value="" size="10"
                                    readonly>
@@ -214,6 +215,7 @@
             data: {"id": houseCzqkId},
             success: function (data) {
                 var object = $.parseJSON(data);
+                $("input[id=id]").val(object.id);
                 $("input[id=status]").val(object.zfxztfzt);
             }
         });

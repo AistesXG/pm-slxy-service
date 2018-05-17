@@ -59,11 +59,9 @@ public class NotApplyServiceImpl extends ServiceImpl<NotApplyMapper, NotApply> i
      * @return
      */
     @Override
-    public String addNotApply(NotApply notApply) {
+    public String addNotApply(NotApply notApply,int id) {
         //查找租房情况表更新对应的字段
-        HouseCzqk houseCzqk = new HouseCzqk();
-        houseCzqk.setZfxztfzt(notApply.getStatus());
-        HouseCzqk houseCzqk1 = houseCzqkMapper.selectOne(houseCzqk);
+        HouseCzqk houseCzqk1 = houseCzqkMapper.selectById(id);
         houseCzqk1.setZfxztfzt("");
         //查找教师用房表更新对应的字段
         House house = new House();

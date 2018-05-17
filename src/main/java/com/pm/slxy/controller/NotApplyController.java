@@ -36,8 +36,8 @@ public class NotApplyController {
     @RequestMapping(value = "/addNotApply")
     @SysControllerFilter(name = "addNotApply")
     @ResponseBody
-    public String addNotApply(NotApply notApply) throws Exception {
-        return notApplyService.addNotApply(notApply);
+    public String addNotApply(NotApply notApply,String id) throws Exception {
+        return notApplyService.addNotApply(notApply,Integer.parseInt(id));
     }
 }
 

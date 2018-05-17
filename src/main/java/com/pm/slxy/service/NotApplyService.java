@@ -27,5 +27,5 @@ public interface NotApplyService extends IService<NotApply> {
      * @param notApply
      * @return
      */
-    String addNotApply(NotApply notApply);
+    String addNotApply(NotApply notApply,int id);
 }

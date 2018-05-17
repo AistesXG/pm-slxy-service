@@ -245,6 +245,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         //根据房间编号查找房间租住情况表中对应的信息
         HouseCzqk houseCzqk = new HouseCzqk();
         houseCzqk.setFjbh(house.getFjbh());
+        houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus());
         HouseCzqk houseCzqk1 = houseCzqkMapper.selectOne(houseCzqk);
         houseCzqk1.setSpzt(HouseCzqkStatusEnum.APPROVAL_CHECK_OUT_HOUSE_NOT_THROUGH.getStatus());
         houseCzqk1.setZfxztfzt(HouseCzqkZXTHouseStatusEnum.TUI_FANG.getStatus());
