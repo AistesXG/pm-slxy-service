@@ -27,7 +27,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">添加用户</h1>
+                <h1 class="page-header">添加教师</h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="row">

@@ -40,7 +40,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        已拥有的公用房屋 <span style="color: red;">红色的表示已经租出的 灰色的表示未租出的 </span>
+                        已拥有的公用房屋 <span style="color: red;">红色的表示在用的 灰色的表示空闲的 </span>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="/resources/slxy.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="/resources/laydate/laydate.js"></script>
-    <title>添加用户</title>
+    <title>修改教师信息</title>
 </head>
 <style type="text/css">
     .must {
@@ -24,7 +24,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">修改用户</h1>
+                <h1 class="page-header">修改教师</h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="row">

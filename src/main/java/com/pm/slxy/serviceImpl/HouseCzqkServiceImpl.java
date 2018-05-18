@@ -176,6 +176,7 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
         House house = houseMapper.selectById(id);
         HouseCzqk houseCzqk1 = new HouseCzqk();
         houseCzqk1.setFjbh(house.getFjbh());
+        houseCzqk1.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus());
         HouseCzqk houseCzqk = houseCzqkMapper.selectOne(houseCzqk1);
         if (!ObjectUtils.isEmpty(houseCzqk)) {
             modelAndView.addObject("houseCzqk", houseCzqk);
