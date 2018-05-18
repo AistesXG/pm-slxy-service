@@ -27,12 +27,6 @@
     <form action="/login" method="post">
         <input type="text" name="user" class="name" placeholder="Username" required="">
         <input type="password" name="pass" class="password" placeholder="Password" required="">
-        <ul>
-            <li>
-                <input type="checkbox" id="remember-me" name="remember-me">
-                <label for="remember-me"><span></span>记得我</label>
-            </li>
-        </ul>
         <a href="#">忘记密码?
         </a><br>
         <div class="clear"></div>
