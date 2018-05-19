@@ -55,4 +55,10 @@ public class ControllerUtil {
     public Map<String, Boolean> checkHousePubBh(String fjbh) throws Exception {
         return housePubService.checkHousePubBh(fjbh);
     }
+
+    @RequestMapping(value = "/checkUserSFCZ")
+    @ResponseBody
+    public Map<String ,Boolean> checkUserSFCZ(String user) throws Exception {
+        return adminService.checkUserSFCZ(user);
+    }
 }

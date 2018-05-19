@@ -27,7 +27,7 @@
     <form action="/login" method="post">
         <input type="text" name="user" class="name" placeholder="Username" required="">
         <input type="password" name="pass" class="password" placeholder="Password" required="">
-        <a href="#">忘记密码?
+        <a href="/jump/jumpResetPass">忘记密码?
         </a><br>
         <div class="clear"></div>
         <input type="submit" value="Login">

@@ -1,5 +1,6 @@
 package com.pm.slxy.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.AdminEnum;
@@ -148,6 +149,26 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     /**
+     * 修改用户密码时检测用户名是否存在
+     * @param user
+     * @return
+     */
+    @Override
+    public Map<String, Boolean> checkUserSFCZ(String user) {
+        boolean result = false;
+        List<Admin> admins = adminMapper.selectList(new EntityWrapper<Admin>());
+        for (Admin admin1 : admins) {
+            if(admin1.getUser().equals(user)) {
+                result = true;
+                break;
+            }
+        }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        return map;
+    }
+
+    /**
      * 更新用户信息
      *
      * @param admin
@@ -200,5 +221,23 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             modelAndView.setViewName("404");
         }
         return modelAndView;
+    }
+
+    /**
+     * 修改密码
+     * @param user
+     * @param pass
+     * @return
+     */
+    @Override
+    public String updatePass(String user, String pass) {
+        Admin admin  = new Admin();
+        admin.setUser(user);
+        Admin admin1  = adminMapper.selectOne(admin);
+        admin1.setPass(pass);
+        if(this.updateById(admin1)){
+            return "ok";
+        }
+        return "error";
     }
 }

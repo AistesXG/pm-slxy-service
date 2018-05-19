@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * <p>
  * 前端控制器
@@ -56,6 +58,13 @@ public class AdminController {
     @SysControllerFilter(name = "selectAdmin")
     public ModelAndView selectAdmin(ModelAndView modelAndView, String id) throws Exception {
         return adminService.selectAdmin(modelAndView, Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "/updatePass")
+    @ResponseBody
+    public String updatePass(String user, String pass, HttpServletResponse response) throws Exception {
+        response.reset();
+        return adminService.updatePass(user, pass);
     }
 }
 

@@ -58,6 +58,13 @@ public interface AdminService extends IService<Admin> {
     Map<String, Boolean> checkUser(String user);
 
     /**
+     * 修改密码是检测用户名是否存在
+     * @param user
+     * @return
+     */
+    Map<String,Boolean> checkUserSFCZ(String user);
+
+    /**
      * 修改用户信息
      *
      * @param admin
@@ -73,5 +80,11 @@ public interface AdminService extends IService<Admin> {
      */
     ModelAndView selectAdmin(ModelAndView modelAndView, int id);
 
-
+    /**
+     * 修改密码
+     * @param user
+     * @param pass
+     * @return
+     */
+    String updatePass(String user,String pass);
 }

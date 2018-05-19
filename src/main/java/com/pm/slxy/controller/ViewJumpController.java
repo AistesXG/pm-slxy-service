@@ -172,4 +172,16 @@ public class ViewJumpController {
         modelAndView.setViewName("calculationPrice/CalculationPrice");
         return modelAndView;
     }
+
+    /**
+     * 调到修改密码页面
+     * @param modelAndView
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/jumpResetPass")
+    public ModelAndView jumpResetPass(ModelAndView modelAndView) throws Exception {
+        modelAndView.setViewName("resetPass");
+        return modelAndView;
+    }
 }
