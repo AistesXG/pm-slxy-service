@@ -163,7 +163,7 @@
                 data: $form.serialize(),
                 success: function (data) {
                     if (data == "ok") {
-                        window.location.href = "jump/jumpLogin";
+                        window.location.href = "/jump/jumpLogin";
                     } else {
                         alert(data);
                     }
