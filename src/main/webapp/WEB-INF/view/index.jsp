@@ -19,7 +19,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">主页</h2>
+                <h2 class="page-header">主页 <label style="float: right">欢迎您${sessionScope.admins.user}</label></h2>
             </div>
             <!-- /.col-lg-12 -->
         </div>

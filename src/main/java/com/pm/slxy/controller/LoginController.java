@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -42,6 +43,25 @@ public class LoginController {
                 modelAndView.setViewName("index");
             }
         }
+        return modelAndView;
+    }
+
+    /**
+     * 退出登录
+     *
+     * @param modelAndView
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/loginOut")
+    public ModelAndView loginOut(ModelAndView modelAndView, HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return null;
+        }
+        session.removeAttribute("admins");
+        modelAndView.setViewName("../../login");
         return modelAndView;
     }
 }
