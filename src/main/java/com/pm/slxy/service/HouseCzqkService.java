@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.service.IService;
 import com.pm.slxy.entity.HouseCzqk;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * <p>
  * 服务类
@@ -80,4 +82,15 @@ public interface HouseCzqkService extends IService<HouseCzqk> {
      * @return
      */
     String applyCheckOutHouse(int id);
+
+
+
+    /**
+     * 根据id查找教师用房房屋信息渲染到HouseCzqk页面
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    ModelAndView selectTeacherHouseToCzqkById(ModelAndView modelAndView, int id);
 }

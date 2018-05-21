@@ -1,11 +1,15 @@
 package com.pm.slxy.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.pm.slxy.entity.HouseCzqk;
+import com.pm.slxy.entity.Teacher;
+import com.pm.slxy.mapper.TeacherMapper;
 import com.pm.slxy.service.HouseCzqkService;
 import com.pm.slxy.utils.SysControllerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +28,8 @@ public class HouseCzqkController {
 
     @Autowired
     private HouseCzqkService houseCzqkService;
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     @RequestMapping(value = "/houseCzqkList")
     @SysControllerFilter(name = "houseCzqkList")
@@ -75,6 +81,26 @@ public class HouseCzqkController {
     @ResponseBody
     public String applyCheckOutHouse(String id) throws Exception {
         return houseCzqkService.applyCheckOutHouse(Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "/selectTeacherBySession")
+    @SysControllerFilter(name = "selectTeacherBySession")
+    @ResponseBody
+    public String selectTeacherBySession(String jggh) throws Exception {
+        Teacher teacher1 = new Teacher();
+        teacher1.setJggh(jggh);
+        Teacher teacher = teacherMapper.selectOne(teacher1);
+        if(!ObjectUtils.isEmpty(teacher)) {
+            return JSON.toJSONString(teacher);
+        }else {
+            return "error";
+        }
+    }
+
+    @RequestMapping(value = "/selectTeacherHouseToCzqkById")
+    @SysControllerFilter(name = "selectTeacherHouseToCzqkById")
+    public ModelAndView selectTeacherHouseToCzqkById(ModelAndView modelAndView, String id) throws Exception {
+        return houseCzqkService.selectTeacherHouseToCzqkById(modelAndView, Integer.parseInt(id));
     }
 }
 

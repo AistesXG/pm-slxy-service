@@ -6,10 +6,7 @@ import com.pm.slxy.Enum.HouseApplyEnum;
 import com.pm.slxy.Enum.HouseCzqkStatusEnum;
 import com.pm.slxy.Enum.HouseCzqkZXTHouseStatusEnum;
 import com.pm.slxy.Enum.HouseStatusEnum;
-import com.pm.slxy.entity.House;
-import com.pm.slxy.entity.HouseCzqk;
-import com.pm.slxy.entity.HouseHistory;
-import com.pm.slxy.entity.Teacher;
+import com.pm.slxy.entity.*;
 import com.pm.slxy.mapper.*;
 import com.pm.slxy.service.HouseCzqkService;
 import com.pm.slxy.utils.JodaTimeUtils;
@@ -18,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -258,5 +256,24 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
             }
         }
         return "error";
+    }
+
+
+    /**
+     * 查找房屋信息到教师申请租房的页面
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    @Override
+    public ModelAndView selectTeacherHouseToCzqkById(ModelAndView modelAndView, int id) {
+        House house = houseMapper.selectById(id);
+        if (!ObjectUtils.isEmpty(house)) {
+            modelAndView.addObject("house", house);
+            modelAndView.setViewName("houseCzqk/addTeacherHouseCzqk");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
     }
 }

@@ -20,23 +20,12 @@
             text-align: center;
         }
 
-        #deleteBtn {
-            float: right;
-            margin-top: -5px;
-            margin-left: 5px;
-        }
-
-        #addHouseBtn {
-            float: right;
-            margin-top: -5px;
-            margin-left: 5px;
-        }
 
     </style>
 <body>
 <div id="wrapper">
     <!--引入公共页面-->
-        <%@include file="../common.jsp"%>
+        <%@include file="../teacherCommon.jsp"%>
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -50,21 +39,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         已拥有的教师租房房屋
-                        <select name="zzzt" class="form-control-static" id="zzzt">
-                            <option value="0"></option>
-                            <option value="未租">未租</option>
-                            <option value="已租">已租</option>
-                        </select>
-                        <button type="button" id="selectHouseByStatus" onclick="selectHouseByStatus()"
-                                class="btn btn-primary">按租住状态搜索
-                        </button>
-                        <button type="button" id="deleteBtn" onclick="delAll()"
-                                class="btn btn-primary">批量删除
-                        </button>
-                        <button type="button" id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
-                                class="btn btn-primary">添加房屋
-                        </button>
-
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -105,7 +79,7 @@
                                         <c:if test="${house.zzzt == '未租'}">
                                             <c:if test="${house.apply == '未被申请'}">
                                                 <button type="button" class="btn btn-sm"
-                                                        onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
+                                                        onclick="window.location.href='/houseCzqk/selectTeacherHouseToCzqkById?id=' + '${house.id}'">
                                                     申请
                                                 </button>
                                             </c:if>

@@ -26,8 +26,15 @@
     </style>
 <body>
 <div id="wrapper">
-    <!--引入公共页面-->
-    <jsp:include page="../common.jsp"/>
+    <c:if test="${sessionScope.admins.type eq '教师'}">
+        <%@include file="../teacherCommon.jsp"%>
+    </c:if>
+    <c:if test="${sessionScope.admins.type eq '系统管理员'}">
+        <%@include file="../common.jsp"%>
+    </c:if>
+    <c:if test="${sessionScope.admins.type eq '普通管理员'}">
+        <%@include file="../common.jsp"%>
+    </c:if>
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">

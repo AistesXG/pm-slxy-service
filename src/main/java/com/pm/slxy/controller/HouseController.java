@@ -40,6 +40,11 @@ public class HouseController {
         return houseService.selectHouses(modelAndView);
     }
 
+    @RequestMapping(value = "/selectTeacherHouses")
+    @SysControllerFilter(name = "selectTeacherHouses")
+    public ModelAndView selectTeacherHouses(ModelAndView modelAndView) throws Exception {
+        return houseService.selectTeacherHouses(modelAndView);
+    }
     @RequestMapping(value = "/addHouse")
     @SysControllerFilter(name = "addHouse")
     @ResponseBody

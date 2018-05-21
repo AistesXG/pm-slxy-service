@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.pm.slxy.entity.House;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
@@ -27,6 +28,12 @@ public interface HouseService extends IService<House> {
      */
     ModelAndView selectHouses(ModelAndView modelAndView);
 
+    /**
+     *  教师登录进去申请租房的房屋信息
+     * @param modelAndView
+     * @return
+     */
+    ModelAndView selectTeacherHouses(ModelAndView modelAndView);
     /**
      * 添加教师用房
      *
