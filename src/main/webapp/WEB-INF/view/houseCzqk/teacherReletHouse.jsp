@@ -21,7 +21,7 @@
 <body>
 <div id="wrapper">
     <!--引入公共页面-->
-        <%@include file="../common.jsp"%>
+    <%@include file="../teacherCommon.jsp"%>
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-lg-4 ">
                     <form onsubmit="false" role="form" id="addForm" class="form-horizontal"
-                          action="/houseCzqk/reletHouse">
+                          action="/houseCzqk/teacherReletHouse">
                         <br>
                         <input type="hidden" name="id" value="${houseCzqk.id}">
                         <div class="form-group">
@@ -192,11 +192,12 @@
             e.preventDefault();
             var $form = $(e.target);
             var bv = $form.data('bootstrapValidator');
+            var data = $form.serialize();
             $.ajax({
                 type: 'post',
                 dataType: 'json',
                 url: $form.attr('action'),
-                data: $form.serialize(),
+                data: data,
                 success: function (data) {
                     if (data == "ok") {
                         alert("续租成功!")

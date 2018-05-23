@@ -142,10 +142,24 @@
                                             </c:if>
                                         </c:if>
                                         <c:if test="${house.zzzt == '已租'}">
+                                        <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                             <button type="button" class="btn btn-sm"
                                                     onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">
                                                 续租
                                             </button>
+                                        </c:if>
+                                            <c:if test="${sessionScope.admins.type eq '普通管理员'}">
+                                                <button type="button" class="btn btn-sm"
+                                                        onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">
+                                                    续租
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${sessionScope.admins.type eq '教师'}">
+                                                <button type="button" class="btn btn-sm"
+                                                        onclick="window.location.href='/houseCzqk/selectTeacherHouseCzqkReletById?id=' + '${house.id}'">
+                                                    续租
+                                                </button>
+                                            </c:if>
                                             <button type="button" class="btn btn-sm"
                                                     onclick="checkOutHouse(${house.id})">退房
                                             </button>

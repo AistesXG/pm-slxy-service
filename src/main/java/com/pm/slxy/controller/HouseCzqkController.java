@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * <p>
  * 前端控制器
@@ -69,6 +71,12 @@ public class HouseCzqkController {
         return houseCzqkService.selectHouseCzqkReletById(modelAndView, Integer.parseInt(id));
     }
 
+    @RequestMapping(value = "/selectTeacherHouseCzqkReletById")
+    @SysControllerFilter(name = "selectTeacherHouseCzqkReletById")
+    public ModelAndView selectTeacherHouseCzqkReletById(ModelAndView modelAndView, String id) throws Exception {
+        return houseCzqkService.selectTeacherHouseCzqkReletById(modelAndView, Integer.parseInt(id));
+    }
+
     @RequestMapping(value = "/reletHouse")
     @SysControllerFilter(name = "reletHouse")
     @ResponseBody
@@ -90,9 +98,9 @@ public class HouseCzqkController {
         Teacher teacher1 = new Teacher();
         teacher1.setJggh(jggh);
         Teacher teacher = teacherMapper.selectOne(teacher1);
-        if(!ObjectUtils.isEmpty(teacher)) {
+        if (!ObjectUtils.isEmpty(teacher)) {
             return JSON.toJSONString(teacher);
-        }else {
+        } else {
             return "error";
         }
     }
@@ -108,6 +116,13 @@ public class HouseCzqkController {
     @ResponseBody
     public String addTeacherHouseCzqk(HouseCzqk houseCzqk) throws Exception {
         return houseCzqkService.addTeacherHouseCzqk(houseCzqk);
+    }
+
+    @RequestMapping(value = "/teacherReletHouse")
+    @SysControllerFilter(name = "teacherReletHouse")
+    @ResponseBody
+    public String teacherReletHouse(HouseCzqk houseCzqk,HttpSession session) throws Exception {
+        return houseCzqkService.teacherReletHouse(houseCzqk, session);
     }
 }
 

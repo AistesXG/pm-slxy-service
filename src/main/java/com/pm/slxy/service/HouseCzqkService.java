@@ -74,12 +74,29 @@ public interface HouseCzqkService extends IService<HouseCzqk> {
     ModelAndView selectHouseCzqkReletById(ModelAndView modelAndView, int id);
 
     /**
-     * 续租房屋
+     * 根据房间编号查找出来租住情况中的对应的房间编号的信息
+     *
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    ModelAndView selectTeacherHouseCzqkReletById(ModelAndView modelAndView, int id);
+    /**
+     * 管理员续租房屋
      *
      * @param houseCzqk
      * @return
      */
     String reletHouse(HouseCzqk houseCzqk);
+
+
+    /**
+     * 教师续租房屋
+     * @param houseCzqk
+     * @param session
+     * @return
+     */
+    String teacherReletHouse(HouseCzqk houseCzqk, HttpSession session);
 
     /**
      * 审批退房通过

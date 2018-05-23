@@ -203,6 +203,28 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
     }
 
     /**
+     * 教师续租房屋
+     * @param modelAndView
+     * @param id
+     * @return
+     */
+    @Override
+    public ModelAndView selectTeacherHouseCzqkReletById(ModelAndView modelAndView, int id) {
+        House house = houseMapper.selectById(id);
+        HouseCzqk houseCzqk1 = new HouseCzqk();
+        houseCzqk1.setFjbh(house.getFjbh());
+        houseCzqk1.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus());
+        HouseCzqk houseCzqk = houseCzqkMapper.selectOne(houseCzqk1);
+        if (!ObjectUtils.isEmpty(houseCzqk)) {
+            modelAndView.addObject("houseCzqk", houseCzqk);
+            modelAndView.setViewName("/houseCzqk/teacherReletHouse");
+        } else {
+            modelAndView.setViewName("404");
+        }
+        return modelAndView;
+    }
+
+    /**
      * 续租房屋
      *
      * @param houseCzqk
@@ -221,6 +243,35 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
             if (houseCzqkMapper.updateById(houseCzqk) != 0) {
                 return "ok";
             }
+        }
+        return "error";
+    }
+
+    /**
+     * 教师续租房屋
+     * @param houseCzqk
+     * @param session
+     * @return
+     */
+    @Override
+    public String teacherReletHouse(HouseCzqk houseCzqk,HttpSession session) {
+        Admin admin = (Admin)session.getAttribute("admins");
+        String jggh = admin.getUser();
+        if(houseCzqk.getZzjsbh().equals(jggh)) {
+            houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH_NOT_THROUGH.getStatus());
+            houseCzqk.setZfxztfzt(HouseCzqkZXTHouseStatusEnum.XUZU_FANG.getStatus());
+            houseCzqk.setSfxz("是");
+            House house = new House();
+            house.setFjbh(houseCzqk.getFjbh());
+            House house1 = houseMapper.selectOne(house);
+            house1.setZzzt(HouseStatusEnum.APPLY_RENTAL.getStatus());
+            if (houseMapper.updateById(house1) != 0) {
+                if (houseCzqkMapper.updateById(houseCzqk) != 0) {
+                    return "ok";
+                }
+            }
+        }else {
+            return  "您不是这个房屋原始租住人，不能续租!";
         }
         return "error";
     }
