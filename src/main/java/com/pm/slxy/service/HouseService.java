@@ -29,12 +29,6 @@ public interface HouseService extends IService<House> {
     ModelAndView selectHouses(ModelAndView modelAndView);
 
     /**
-     *  教师登录进去申请租房的房屋信息
-     * @param modelAndView
-     * @return
-     */
-    ModelAndView selectTeacherHouses(ModelAndView modelAndView);
-    /**
      * 添加教师用房
      *
      * @param house

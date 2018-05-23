@@ -42,6 +42,12 @@ public interface HouseCzqkService extends IService<HouseCzqk> {
     String addHouseCzqk(HouseCzqk houseCzqk);
 
     /**
+     * 教师申请租房的时候提交
+     * @param houseCzqk
+     * @return
+     */
+    String addTeacherHouseCzqk(HouseCzqk houseCzqk);
+    /**
      * 根据id来查找房屋租住情况的详细信息
      *
      * @param modelAndView

@@ -36,7 +36,15 @@
 <body>
 <div id="wrapper">
     <!--引入公共页面-->
+    <c:if test="${sessionScope.admins.type eq '教师'}">
+        <%@include file="../teacherCommon.jsp"%>
+    </c:if>
+    <c:if test="${sessionScope.admins.type eq '系统管理员'}">
+    <%@include file="../common.jsp"%>
+    </c:if>
+    <c:if test="${sessionScope.admins.type eq '普通管理员'}">
         <%@include file="../common.jsp"%>
+    </c:if>
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -58,13 +66,22 @@
                         <button type="button" id="selectHouseByStatus" onclick="selectHouseByStatus()"
                                 class="btn btn-primary">按租住状态搜索
                         </button>
+                        <c:if test="${sessionScope.admins.type eq '普通管理员'}">
                         <button type="button" id="deleteBtn" onclick="delAll()"
                                 class="btn btn-primary">批量删除
                         </button>
                         <button type="button" id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
                                 class="btn btn-primary">添加房屋
                         </button>
-
+                        </c:if>
+                        <c:if test="${sessionScope.admins.type eq '系统管理员'}">
+                            <button type="button" id="deleteBtn" onclick="delAll()"
+                                    class="btn btn-primary">批量删除
+                            </button>
+                            <button type="button" id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
+                                    class="btn btn-primary">添加房屋
+                            </button>
+                        </c:if>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -104,10 +121,24 @@
                                     <td align="right">
                                         <c:if test="${house.zzzt == '未租'}">
                                             <c:if test="${house.apply == '未被申请'}">
+                                                <c:if test="${sessionScope.admins.type eq '教师'}">
+                                                    <button type="button" class="btn btn-sm"
+                                                            onclick="window.location.href='/houseCzqk/selectTeacherHouseToCzqkById?id=' + '${house.id}'">
+                                                        申请
+                                                    </button>
+                                                </c:if>
+                                                <c:if test="${sessionScope.admins.type eq '普通管理员'}">
                                                 <button type="button" class="btn btn-sm"
                                                         onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
                                                     申请
                                                 </button>
+                                                </c:if>
+                                                <c:if test="${sessionScope.admins.type eq '系统管理员'}">
+                                                    <button type="button" class="btn btn-sm"
+                                                            onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
+                                                        申请
+                                                    </button>
+                                                </c:if>
                                             </c:if>
                                         </c:if>
                                         <c:if test="${house.zzzt == '已租'}">
@@ -119,10 +150,18 @@
                                                     onclick="checkOutHouse(${house.id})">退房
                                             </button>
                                         </c:if>
+                                        <c:if test="${sessionScope.admins.type eq '普通管理员'}">
                                         <button type="button"
                                                 onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
                                                 class="btn btn-sm">编辑
                                         </button>
+                                        </c:if>
+                                        <c:if test="${sessionScope.admins.type eq '系统管理员'}">
+                                            <button type="button"
+                                                    onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
+                                                    class="btn btn-sm">编辑
+                                            </button>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -222,7 +261,8 @@
             type: 'post',
             success: function (data) {
                 if (data == "ok") {
-                    window.location.href = "/houseCzqk/houseCzqkList";
+                    alert("申请退房成功!")
+                    window.location.href = "/house/houseList";
                 } else {
                     alert(data);
                 }

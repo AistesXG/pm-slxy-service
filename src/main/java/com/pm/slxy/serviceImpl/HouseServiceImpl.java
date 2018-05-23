@@ -62,24 +62,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
         return modelAndView;
     }
 
-    /**
-     * 教师租房的时候显示的房间列表
-     * @param modelAndView
-     * @return
-     */
-    @Override
-    public ModelAndView selectTeacherHouses(ModelAndView modelAndView) {
-        List<House> houses = houseMapper.selectList(new EntityWrapper<House>());
-        List<House> houseList = new ArrayList<>();
-        for(House house : houses) {
-            if(house.getApply().equals(HouseApplyEnum.NOT_APPLY_ENUM.getStatus())) {
-                houseList.add(house);
-            }
-        }
-        modelAndView.addObject("houseList",houseList);
-        modelAndView.setViewName("house/teacherHouseList");
-        return modelAndView;
-    }
+
 
     /**
      * 添加教师用房信息

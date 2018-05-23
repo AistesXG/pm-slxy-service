@@ -2,6 +2,7 @@ package com.pm.slxy.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.HouseCzqk;
 import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.TeacherMapper;
@@ -101,6 +102,13 @@ public class HouseCzqkController {
     @SysControllerFilter(name = "selectTeacherHouseToCzqkById")
     public ModelAndView selectTeacherHouseToCzqkById(ModelAndView modelAndView, String id) throws Exception {
         return houseCzqkService.selectTeacherHouseToCzqkById(modelAndView, Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "/addTeacherHouseCzqk")
+    @SysControllerFilter(name = "addTeacherHouseCzqk")
+    @ResponseBody
+    public String addTeacherHouseCzqk(HouseCzqk houseCzqk) throws Exception {
+        return houseCzqkService.addTeacherHouseCzqk(houseCzqk);
     }
 }
 

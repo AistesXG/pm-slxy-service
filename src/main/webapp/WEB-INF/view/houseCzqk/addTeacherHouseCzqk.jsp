@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-lg-4 ">
                     <form onsubmit="false" role="form" id="addForm" class="form-horizontal"
-                          action="/houseCzqk/addHouseCzqk">
+                          action="/houseCzqk/addTeacherHouseCzqk">
                         <br>
                         <div class="form-group">
                             <label class="col-sm-6 control-label">房间楼号:<span class="must">*</span></label>
@@ -190,7 +190,7 @@
                 success: function (data) {
                     if (data == "ok") {
                         alert("申请成功!")
-                        window.location.href = "/house/selectTeacherHouses";
+                        window.location.href = "/house/houseList";
                     } else {
                         alert(data);
                     }

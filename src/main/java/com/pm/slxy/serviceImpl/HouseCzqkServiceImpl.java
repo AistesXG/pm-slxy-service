@@ -88,26 +88,42 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
         house.setFjbh(houseCzqk.getFjbh());
         House house1 = houseMapper.selectOne(house);
         house1.setApply(HouseApplyEnum.APPLY_ENUM.getStatus());
-//        //改变教师的申请住房日期和状态
-//        Teacher teacher = new Teacher();
-//        teacher.setXm(houseCzqk.getZzjsxm());
-//        Teacher teacher1 = teacherMapper.selectOne(teacher);
-//        teacher1.setSqzfrq(houseCzqk.getSqzzrq());
-//        teacher1.setZfzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
-//        //改变房屋的租住者所在部门和状态
-//        House house = new House();
-//        house.setFjbh(houseCzqk.getFjbh());
-//        House house1 = houseMapper.selectOne(house);
-//        house1.setZzzszbm(houseCzqk.getZzjsszbm());
-//        house1.setZzzt(HouseStatusEnum.ALREADY_RENTAL.getStatus());
-//        house1.setFjbz(houseCzqk.getBzsm());
-//      if (teacherMapper.updateById(teacher1) != 0 && houseMapper.updateById(house1) != 0) {
         if (houseMapper.updateById(house1) != 0) {
             if (houseCzqkMapper.insert(houseCzqk) != 0) {
                 return "ok";
             }
         }
-//     }
+        return "error";
+    }
+
+    /**
+     * 教师申请租房的时候提交
+     * @param houseCzqk
+     * @return
+     */
+    @Override
+    public String addTeacherHouseCzqk(HouseCzqk houseCzqk) {
+        houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH_NOT_THROUGH.getStatus());
+        houseCzqk.setZfxztfzt(HouseCzqkZXTHouseStatusEnum.ZU_FANG.getStatus());
+        houseCzqk.setSfxz("否");
+        Teacher teacher = new Teacher();
+        teacher.setJggh(houseCzqk.getZzjsbh());
+        Teacher teacher1 = teacherMapper.selectOne(teacher);
+        //将教师信息中的教师的参加工作时间添加到租住情况表中的教师参加工作时间
+        houseCzqk.setJscjgzrq(teacher1.getCjgzrq());
+        House house = new House();
+        house.setFjbh(houseCzqk.getFjbh());
+        House house1 = houseMapper.selectOne(house);
+        house1.setApply(HouseApplyEnum.APPLY_ENUM.getStatus());
+        if(teacher1.getZfzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus())) {
+            return "您已经租房了!";
+        }else {
+            if (houseMapper.updateById(house1) != 0) {
+                if (houseCzqkMapper.insert(houseCzqk) != 0) {
+                    return "ok";
+                }
+            }
+        }
         return "error";
     }
 
