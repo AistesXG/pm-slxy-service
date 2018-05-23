@@ -36,7 +36,7 @@
                             <label class="col-sm-6 control-label">申请租住日期:</label>
                             <div class="col-sm-6">
                                 <input type="text" id="sqzzrq" name="sqzzrq" class="form-control"
-                                       value="${houseCzqk.sqzzrq}""
+                                       value="${houseCzqk.sqzzrq}"
                                 size="10" readonly>
                             </div>
                         </div>

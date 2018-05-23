@@ -1,5 +1,6 @@
 package com.pm.slxy.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pm.slxy.Enum.HouseApplyEnum;

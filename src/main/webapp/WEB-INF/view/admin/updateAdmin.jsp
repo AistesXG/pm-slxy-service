@@ -61,16 +61,22 @@
                             <label class="col-sm-3 control-label">角色:<span class="must">*</span></label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="type">
-                                    <c:choose>
-                                        <c:when test="${admin.type == '普通管理员'}">
+
+                                        <c:if test="${admin.type == '普通管理员'}">
                                             <option value="普通管理员" selected>普通管理员</option>
                                             <option value="系统管理员">系统管理员</option>
-                                        </c:when>
-                                        <c:otherwise>
+                                            <option value="教师">教师</option>
+                                        </c:if>
+                                        <c:if test="${admin.type == '系统管理员'}">
                                             <option value="普通管理员">普通管理员</option>
                                             <option value="系统管理员" selected>系统管理员</option>
-                                        </c:otherwise>
-                                    </c:choose>
+                                            <option value="教师">教师</option>
+                                        </c:if>
+                                    <c:if test="${admin.type == '教师'}">
+                                        <option value="普通管理员">普通管理员</option>
+                                        <option value="系统管理员">系统管理员</option>
+                                        <option value="教师" selected>教师</option>
+                                    </c:if>
                                 </select>
                             </div>
                         </div>

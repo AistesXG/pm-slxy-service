@@ -75,8 +75,9 @@
                         </li>
                     </ul>
                 </li>
-        </div>
         <!-- /.sidebar-collapse -->
+            </ul>
+        </div>
     </div>
     <!-- /.navbar-static-side -->
 </nav>

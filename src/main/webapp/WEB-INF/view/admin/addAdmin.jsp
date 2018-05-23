@@ -111,10 +111,6 @@
                                 url: '/checkUser',
                                 message: '用户已存在',
                                 delay: 1000
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z0-9_]+$/,
-                                message: '用户名只能包含大写、小写、数字和下划线'
                             }
                         }
                     },

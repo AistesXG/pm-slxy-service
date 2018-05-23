@@ -2,7 +2,6 @@ package com.pm.slxy.controller;
 
 
 import com.alibaba.fastjson.JSON;
-import com.pm.slxy.Enum.HouseStatusEnum;
 import com.pm.slxy.entity.HouseCzqk;
 import com.pm.slxy.entity.Teacher;
 import com.pm.slxy.mapper.TeacherMapper;
