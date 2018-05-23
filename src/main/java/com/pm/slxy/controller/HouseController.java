@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.beans.IntrospectionException;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -86,6 +87,14 @@ public class HouseController {
     public String checkOutHouse(String id) throws Exception {
         return houseService.checkOutHouse(Integer.parseInt(id));
     }
+
+    @RequestMapping(value = "/teacherCheckOutHouse")
+    @SysControllerFilter(name = "teacherCheckOutHouse")
+    @ResponseBody
+    public String teacherCheckOutHouse(String  id, HttpSession session) throws Exception{
+        return houseService.teacherCheckOutHouse(Integer.parseInt(id),session);
+    }
+
     @RequestMapping(value = "/calculation")
     @SysControllerFilter(name = "calculation")
     public ModelAndView Calculation(ModelAndView modelAndView, String startTime, String endTime) throws Exception {

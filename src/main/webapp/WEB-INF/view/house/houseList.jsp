@@ -37,13 +37,13 @@
 <div id="wrapper">
     <!--引入公共页面-->
     <c:if test="${sessionScope.admins.type eq '教师'}">
-        <%@include file="../teacherCommon.jsp"%>
+        <%@include file="../teacherCommon.jsp" %>
     </c:if>
     <c:if test="${sessionScope.admins.type eq '系统管理员'}">
-    <%@include file="../common.jsp"%>
+        <%@include file="../common.jsp" %>
     </c:if>
     <c:if test="${sessionScope.admins.type eq '普通管理员'}">
-        <%@include file="../common.jsp"%>
+        <%@include file="../common.jsp" %>
     </c:if>
     <div id="page-wrapper">
         <div class="row">
@@ -67,18 +67,20 @@
                                 class="btn btn-primary">按租住状态搜索
                         </button>
                         <c:if test="${sessionScope.admins.type eq '普通管理员'}">
-                        <button type="button" id="deleteBtn" onclick="delAll()"
-                                class="btn btn-primary">批量删除
-                        </button>
-                        <button type="button" id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
-                                class="btn btn-primary">添加房屋
-                        </button>
+                            <button type="button" id="deleteBtn" onclick="delAll()"
+                                    class="btn btn-primary">批量删除
+                            </button>
+                            <button type="button" id="addHouseBtn"
+                                    onclick=" window.location.href = '/jump/jumpAddHouse'"
+                                    class="btn btn-primary">添加房屋
+                            </button>
                         </c:if>
                         <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                             <button type="button" id="deleteBtn" onclick="delAll()"
                                     class="btn btn-primary">批量删除
                             </button>
-                            <button type="button" id="addHouseBtn" onclick=" window.location.href = '/jump/jumpAddHouse'"
+                            <button type="button" id="addHouseBtn"
+                                    onclick=" window.location.href = '/jump/jumpAddHouse'"
                                     class="btn btn-primary">添加房屋
                             </button>
                         </c:if>
@@ -128,10 +130,10 @@
                                                     </button>
                                                 </c:if>
                                                 <c:if test="${sessionScope.admins.type eq '普通管理员'}">
-                                                <button type="button" class="btn btn-sm"
-                                                        onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
-                                                    申请
-                                                </button>
+                                                    <button type="button" class="btn btn-sm"
+                                                            onclick="window.location.href='/houseCzqk/selectHouseToCzqkById?id=' + '${house.id}'">
+                                                        申请
+                                                    </button>
                                                 </c:if>
                                                 <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                                     <button type="button" class="btn btn-sm"
@@ -142,12 +144,12 @@
                                             </c:if>
                                         </c:if>
                                         <c:if test="${house.zzzt == '已租'}">
-                                        <c:if test="${sessionScope.admins.type eq '系统管理员'}">
-                                            <button type="button" class="btn btn-sm"
-                                                    onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">
-                                                续租
-                                            </button>
-                                        </c:if>
+                                            <c:if test="${sessionScope.admins.type eq '系统管理员'}">
+                                                <button type="button" class="btn btn-sm"
+                                                        onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">
+                                                    续租
+                                                </button>
+                                            </c:if>
                                             <c:if test="${sessionScope.admins.type eq '普通管理员'}">
                                                 <button type="button" class="btn btn-sm"
                                                         onclick="window.location.href='/houseCzqk/selectHouseCzqkReletById?id=' + '${house.id}'">
@@ -160,15 +162,27 @@
                                                     续租
                                                 </button>
                                             </c:if>
-                                            <button type="button" class="btn btn-sm"
-                                                    onclick="checkOutHouse(${house.id})">退房
-                                            </button>
+                                            <c:if test="${sessionScope.admins.type eq '普通管理员'}">
+                                                <button type="button" class="btn btn-sm"
+                                                        onclick="checkOutHouse(${house.id})">退房
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${sessionScope.admins.type eq '系统管理员'}">
+                                                <button type="button" class="btn btn-sm"
+                                                        onclick="checkOutHouse(${house.id})">退房
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${sessionScope.admins.type eq '教师'}">
+                                                <button type="button" class="btn btn-sm"
+                                                        onclick="teacherCheckOutHouse(${house.id})">退房
+                                                </button>
+                                            </c:if>
                                         </c:if>
                                         <c:if test="${sessionScope.admins.type eq '普通管理员'}">
-                                        <button type="button"
-                                                onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
-                                                class="btn btn-sm">编辑
-                                        </button>
+                                            <button type="button"
+                                                    onclick="window.location.href = '/house/selectHouseById?id=' + ${house.id}"
+                                                    class="btn btn-sm">编辑
+                                            </button>
                                         </c:if>
                                         <c:if test="${sessionScope.admins.type eq '系统管理员'}">
                                             <button type="button"
@@ -266,10 +280,28 @@
         }
     }
 
-    <!--退房-->
+    <!--管理员退房-->
     function checkOutHouse(houseId) {
         $.ajax({
             url: '/house/checkOutHouse',
+            data: {id: houseId},
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                if (data == "ok") {
+                    alert("申请退房成功!")
+                    window.location.href = "/house/houseList";
+                } else {
+                    alert(data);
+                }
+            }
+        })
+    }
+
+    <!--教师退房-->
+    function teacherCheckOutHouse(houseId) {
+        $.ajax({
+            url: '/house/teacherCheckOutHouse',
             data: {id: houseId},
             dataType: 'json',
             type: 'post',

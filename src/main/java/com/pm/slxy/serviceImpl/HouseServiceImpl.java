@@ -22,6 +22,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
@@ -257,6 +258,35 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
             }
         }
         return "error";
+    }
+
+    /**
+     * 教师退房
+     * @param id
+     * @param session
+     * @return
+     */
+    @Override
+    public String teacherCheckOutHouse(int id, HttpSession session) {
+        Admin admin = (Admin)session.getAttribute("admins");
+        String jggh = admin.getUser();
+        House house = houseMapper.selectById(id);
+        house.setZzzt(HouseStatusEnum.CHECK_OUT_HOUSE.getStatus());
+        //根据房间编号查找房间租住情况表中对应的信息
+        HouseCzqk houseCzqk = new HouseCzqk();
+        houseCzqk.setFjbh(house.getFjbh());
+        houseCzqk.setSpzt(HouseCzqkStatusEnum.APPROVAL_THROUGH.getStatus());
+        HouseCzqk houseCzqk1 = houseCzqkMapper.selectOne(houseCzqk);
+        houseCzqk1.setSpzt(HouseCzqkStatusEnum.APPROVAL_CHECK_OUT_HOUSE_NOT_THROUGH.getStatus());
+        houseCzqk1.setZfxztfzt(HouseCzqkZXTHouseStatusEnum.TUI_FANG.getStatus());
+        if(houseCzqk1.getZzjsbh().equals(jggh)) {
+            if (houseMapper.updateById(house) != 0) {
+                if (houseCzqkMapper.updateById(houseCzqk1) != 0) {
+                    return "ok";
+                }
+            }
+        }
+        return "您不是本房间租住人，不能申请退房!";
     }
 
     /**

@@ -6,6 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
+import javax.servlet.http.HttpSession;
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
@@ -94,8 +95,19 @@ public interface HouseService extends IService<House> {
      */
     String checkOutHouse(int id);
 
+
+    /**
+     * 教师退房
+     *
+     * @param id
+     * @param session
+     * @return
+     */
+    String teacherCheckOutHouse(int id, HttpSession session);
+
     /**
      * 计算费用
+     *
      * @param modelAndView
      * @param startTime
      * @param endTime
