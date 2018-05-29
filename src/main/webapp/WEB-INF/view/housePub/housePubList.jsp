@@ -60,7 +60,7 @@
                             <option value="在用">在用</option>
                         </select>
                         <button type="button" id="selectHousePubByStatus" onclick="selectHousePubByStatus()"
-                                class="btn btn-primary">按租住状态搜索
+                                class="btn btn-primary">按使用状态搜索
                         </button>
                         <button type="button" id="deleteBtn" onclick="delAll()"
                                 class="btn btn-primary">批量删除

@@ -40,8 +40,8 @@
     <!-- Custom Theme JavaScript -->
     <script src="/resources/js/sb-admin-2.js"></script>
 </head>
-<body background="/resources/img/03-6-a18.jpg" style="overflow: hidden">
-
+<body  style="overflow: hidden;background-color: #00C1B3">
+<h1 align="center" style="font-weight: bolder">修改密码</h1>
 <form onsubmit="false" role="form" id="updatePassForm" class="form-horizontal"
       action="/admin/updatePass" style="margin-left: 300px;margin-top: 200px">
     <br>
@@ -98,10 +98,6 @@
                                 url: '/checkUserSFCZ',
                                 message: '该用户名不存在',
                                 delay: 1000
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z0-9_]+$/,
-                                message: '用户名只能包含大写、小写、数字和下划线'
                             }
                         }
                     },
