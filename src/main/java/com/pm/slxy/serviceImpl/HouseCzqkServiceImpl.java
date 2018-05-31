@@ -116,12 +116,19 @@ public class HouseCzqkServiceImpl extends ServiceImpl<HouseCzqkMapper, HouseCzqk
         house.setFjbh(houseCzqk.getFjbh());
         House house1 = houseMapper.selectOne(house);
         house1.setApply(HouseApplyEnum.APPLY_ENUM.getStatus());
-        if(teacher1.getZfzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus())) {
+        if(teacher1.getZfzt().equals(HouseStatusEnum.ALREADY_RENTAL.getStatus())  ) {
             return "您已经租房了!";
-        }else {
+        }
+        if(teacher1.getSfsq().equals("是")) {
+            return "您已经申请过了!";
+        }
+        else {
             if (houseMapper.updateById(house1) != 0) {
                 if (houseCzqkMapper.insert(houseCzqk) != 0) {
-                    return "ok";
+                    teacher1.setSfsq("是");
+                    if(teacherMapper.updateById(teacher1) != 0) {
+                        return "ok";
+                    }
                 }
             }
         }

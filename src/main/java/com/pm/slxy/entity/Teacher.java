@@ -2,16 +2,15 @@ package com.pm.slxy.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
-
 import java.io.Serializable;
 
 /**
  * <p>
- * <p>
+ * 
  * </p>
  *
  * @author 付荣刚123
- * @since 2018-04-16
+ * @since 2018-05-31
  */
 public class Teacher implements Serializable {
 
@@ -63,6 +62,10 @@ public class Teacher implements Serializable {
      * 租房状态
      */
     private String zfzt;
+    /**
+     * 是否申请住房
+     */
+    private String sfsq;
 
 
     public Integer getId() {
@@ -161,21 +164,30 @@ public class Teacher implements Serializable {
         this.zfzt = zfzt;
     }
 
+    public String getSfsq() {
+        return sfsq;
+    }
+
+    public void setSfsq(String sfsq) {
+        this.sfsq = sfsq;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
-                ", id=" + id +
-                ", xm=" + xm +
-                ", jggh=" + jggh +
-                ", xb=" + xb +
-                ", sfzh=" + sfzh +
-                ", csrq=" + csrq +
-                ", xl=" + xl +
-                ", cjgzrq=" + cjgzrq +
-                ", sqzfrq=" + sqzfrq +
-                ", szbm=" + szbm +
-                ", jg=" + jg +
-                ", zfzt=" + zfzt +
-                "}";
+        ", id=" + id +
+        ", xm=" + xm +
+        ", jggh=" + jggh +
+        ", xb=" + xb +
+        ", sfzh=" + sfzh +
+        ", csrq=" + csrq +
+        ", xl=" + xl +
+        ", cjgzrq=" + cjgzrq +
+        ", sqzfrq=" + sqzfrq +
+        ", szbm=" + szbm +
+        ", jg=" + jg +
+        ", zfzt=" + zfzt +
+        ", sfsq=" + sfsq +
+        "}";
     }
 }

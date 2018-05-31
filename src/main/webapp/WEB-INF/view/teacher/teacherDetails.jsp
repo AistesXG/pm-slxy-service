@@ -95,6 +95,13 @@
                                 <input type="text" name="zfzt" class="form-control"
                                        value="${teacher.zfzt}" size="4" readonly="readonly"></div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否申请:</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="sfsq" class="form-control"
+                                       value="${teacher.sfsq}" size="4" readonly="readonly"></div>
+                        </div>
+
                         <div class="form-group" style="text-align: center">
                             <button type="button" class="btn btn-primary" onclick="window.history.go(-1)">返回</button>
                         </div>
